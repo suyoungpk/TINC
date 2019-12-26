@@ -1,0 +1,47 @@
+div.bottombutton {
+   min-width: 320px;
+   display: flex;
+   background: rgb(255, 255, 255);
+}
+
+.btnAlign {
+   position: relative;
+   width: 100%;
+}
+
+.btnBackGround {
+   width: 100%;
+   position: fixed;
+   height: 50px;
+   /* border: 1px solid; */
+   background: rgb(150, 150, 150);
+   bottom: 0;
+}
+
+.btn {
+   width: 33%;
+   position: fixed;
+   text-align: center;
+   height: 50px;
+   /* border: 1px solid; */
+   background: rgb(236, 234, 255);
+   bottom: 0;
+}
+
+.btn:before {
+   content: "";
+   display: inline-block;
+   width: 1px;
+   height: 100%;
+   vertical-align: middle;
+}
+
+.btn .fas {
+   /* vertical-align: middle; */
+   display: inline-block;
+   vertical-align: middle;
+}
+
+.targetBtn {
+   background: rgb(115, 103, 241);
+}
