@@ -1,0 +1,30 @@
+@charset "utf-8";
+/* fontawsome icon*/
+@import url(../fontawsome/css/all.min.css);
+/* font */
+@import url(https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap);
+/* reset */
+*{margin:0;padding:0;border:0;font-family:'Noto Sans KR',dotum,'돋움',gulim,'굴림', sans-serif;font-size:1rem;background:none}
+a,
+a:hover{text-decoration:none}
+body,html{position:relative;font-size:16px;height:100%;background:#7367f1}
+ul,ol{list-style:none}
+table {border-collapse:collapse;border-spacing: 0}
+textarea{resize:none}
+
+/* common */
+.wrapper{width:100%;min-width:320px;max-width:1000px;height:100%;margin:0 auto}
+.wrapper .gnb{width:100%}
+.wrapper .gnb a{display:block;padding:0 0.53125rem 0.625rem;line-height:1.640625rem;font-size:0.8125rem;font-weight:300;color:#fff/* ;background:#7367f1 */}
+.wrapper .container{height:calc(100% - 1.640625rem);background:#ebeafd;/* background:linear-gradient( 135deg, #7367F0 10%, #CE9FFC 100%); */border-radius:0.625rem 0.625rem 0 0;margin-top:-0.625rem;box-shadow:0 -2px 6px 1px rgba(0,0,0,.3);overflow-y:auto}
+
+/* popup */
+.mask{display:none;position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8)}
+.popup{display:none;position:absolute;top:0;left:0;width:100%;height:1px;z-index:1}
+.popup .popup-wrap{position:fixed;top:50%;left:10%;margin:-5.234375rem 0 0; width:80%;/* max-width:36rem; */min-height:10.46875rem;background:#b1b1e5;}
+.popup .popup-container {position:relative;padding:0.8125rem}
+.popup .popup-container .context{text-align:center;margin:2.1875rem 0 1.25rem;color:#1d1e2c;font-size:0.9375rem}
+.popup .popup-container .btn-area{text-align:center}
+.popup .popup-container .btn-area .btn{display:inline-block;margin:0 0.59375rem;width:6.625rem;height:1.9375rem;line-height:1.9375rem;background:#fff;border-radius:2.25px;color:#1d1e2c;font-size:0.9375rem}
+.popup .popup-container .btn-close{position:absolute;top:1.375rem;right:0.8125rem;width:0.78125rem;height:0.78125rem;color:#999;font-size:0.78125rem;overflow:hidden}
+
