@@ -1,94 +1,165 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-<title>메모와 채팅을 동시에, TINC</title>
-<meta charset="utf-8" >
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<link rel="stylesheet" href="css/sample.css" >
-</head>
-<body>
-	<section class="wrapper"> 
-		<nav class="gnb"> 
-			<a href="#" title="메모장 이동">MEMO</a>
-		</nav><!-- gnb end -->
-		<main class="container">
-			<!-- sample -->
-		 	<h1>fontawesome icon design</h1>
-		 	<style> 
-		 		.container > *{padding: 0 10px}
-		 		li{padding:10px;border-bottom:1px solid #ddd;font-size:1.2em}
-		 		li i{display:inline-block;margin-left:10px;font-size:1.2em}
-		 		li xmp{display:inline-block;margin-left:10px}
-			 </style>
-			 <h2>[form]</h2>
-			 <ul>
-				 <!-- <li>radio/checkbox
+   <head>
+      <title>메모와 채팅을 동시에, TINC</title>
+      <meta charset="utf-8" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1, user-scalable=no"
+      />
+      <link rel="stylesheet" href="resource/css/sample.css" />
+   </head>
+   <body>
+      <section class="wrapper">
+         <nav class="gnb">
+            <a href="#" title="메모장 이동">MEMO</a>
+         </nav>
+         <!-- gnb end -->
+         <main class="container">
+            <!-- sample -->
+            <h1>fontawesome icon design</h1>
+            <style>
+               .container > * {
+                  padding: 0 10px;
+               }
+               li {
+                  padding: 10px;
+                  border-bottom: 1px solid #ddd;
+                  font-size: 1.2em;
+               }
+               li i {
+                  display: inline-block;
+                  margin-left: 10px;
+                  font-size: 1.2em;
+               }
+               li xmp {
+                  display: inline-block;
+                  margin-left: 10px;
+               }
+            </style>
+            <h2>[form]</h2>
+            <ul>
+               <!-- <li>radio/checkbox
 					on<i class="fas fa-check-square"></i><xmp><i class="fas fa-check-square"></i></xmp><br>
 					off <i class="far fa-check-circle"></i><xmp><i class="far fa-check-circle"></i></xmp>		
 				 </li> -->
-				  <li>친구추가/메모 체크리스트 <br>
-					on<i class="far fa-check-square"></i><xmp><i class="far fa-check-square"></i></xmp><br>
-					off <i class="far fa-square"></i><xmp><i class="far fa-square"></i></xmp>		
-				 </li>
-			 </ul>
-			 <h2>[icon]</h2>
-			<ul>
-				<li>"회원" <i class="fas fa-user"></i><xmp><i class="fas fa-user"></i></xmp></li>
-				<li>"그룹" <i class="fas fa-users"></i><xmp><i class="fas fa-users"></i></xmp></li>
-				<li>"채팅초대"/"친구추가" <i class="fas fa-user-plus"></i><xmp><i class="fas fa-user-plus"></i></xmp></li>
-				<li>"채팅방목록" <i class="fas fa-comments"></i><xmp><i class="fas fa-comments"></i></xmp><br>
-					<i class="far fa-comments"></i><xmp><i class="far fa-comments"></i></xmp>
-				</li>
-				<li>"채팅방추가" <i class="fas fa-plus"></i><i class="fas fa-comments"></i><xmp><i class="fas fa-plus"></i><i class="fas fa-comments"></i></xmp><br>
-					<i class="fas fa-plus"></i><i class="far fa-comments"></i><xmp><i class="fas fa-plus"></i><i class="far fa-comments"></i></xmp></li>
-				<li>"파일전송" <i class="fas fa-folder-open"></i><xmp><i class="fas fa-folder-open"></i></xmp><br>
-				 <i class="far fa-folder-open"></i><xmp><i class="far fa-folder-open"></i></xmp>
-				</li>
-				<!-- <li>"메모공유" <i class="fas fa-sticky-note"></i><xmp><i class="fas fa-sticky-note"></i></xmp><br>
+               <li>
+                  친구추가/메모 체크리스트 <br />
+                  on<i class="far fa-check-square"></i>
+                  <xmp><i class="far fa-check-square"></i></xmp>
+                  <br />
+                  off <i class="far fa-square"></i>
+                  <xmp><i class="far fa-square"></i></xmp>
+               </li>
+            </ul>
+            <h2>[icon]</h2>
+            <ul>
+               <li>
+                  "회원" <i class="fas fa-user"></i>
+                  <xmp><i class="fas fa-user"></i></xmp>
+               </li>
+               <li>
+                  "그룹" <i class="fas fa-users"></i>
+                  <xmp><i class="fas fa-users"></i></xmp>
+               </li>
+               <li>
+                  "채팅초대"/"친구추가" <i class="fas fa-user-plus"></i>
+                  <xmp><i class="fas fa-user-plus"></i></xmp>
+               </li>
+               <li>
+                  "채팅방목록" <i class="fas fa-comments"></i>
+                  <xmp><i class="fas fa-comments"></i></xmp>
+                  <br />
+                  <i class="far fa-comments"></i>
+                  <xmp><i class="far fa-comments"></i></xmp>
+               </li>
+               <li>
+                  "채팅방추가" <i class="fas fa-plus"></i
+                  ><i class="fas fa-comments"></i>
+                  <xmp><i class="fas fa-plus"></i><i class="fas fa-comments"></i></xmp>
+                  <br />
+                  <i class="fas fa-plus"></i><i class="far fa-comments"></i>
+                  <xmp><i class="fas fa-plus"></i><i class="far fa-comments"></i></xmp>
+               </li>
+               <li>
+                  "파일전송" <i class="fas fa-folder-open"></i>
+                  <xmp><i class="fas fa-folder-open"></i></xmp>
+                  <br />
+                  <i class="far fa-folder-open"></i>
+                  <xmp><i class="far fa-folder-open"></i></xmp>
+               </li>
+               <!-- <li>"메모공유" <i class="fas fa-sticky-note"></i><xmp><i class="fas fa-sticky-note"></i></xmp><br>
 					<i class="far fa-sticky-note"></i><xmp><i class="far fa-sticky-note"></i></xmp>
 				</li> -->
-				<li>"메모공유" <i class="far fa-file-alt"></i><xmp><i class="far fa-file-alt"></i></xmp></li>
-				<li>"닫기" <i class="fas fa-times"></i><xmp><i class="fas fa-times"></i></xmp></li>
-				<li>"on" > 이미지로<i class="fas fa-toggle-on"></i></li>
-				<li>"off" > 이미지로 <i class="fas fa-toggle-off"></i></li>
-				<li>"채팅방메뉴 +"<i class="far fa-plus-square"></i> 
-					<xmp><i class="far fa-plus-square"></i></xmp>
-				</li>
-				<li>"뒤로가기" <i class="fas fa-chevron-left"></i><xmp><i class="fas fa-chevron-left"></i></xmp></li>
-				<li>"환경설정" <i class="fas fa-cog"></i><xmp><i class="fas fa-cog"></i></xmp>
-				</li>
-				<li>"메뉴" <i class="fas fa-bars"></i><xmp><i class="fas fa-bars"></i></xmp></li>
-				<li>"검색" <i class="fas fa-search"></i><xmp><i class="fas fa-search"></i></xmp></li>
-				<li>"채팅전송버튼" <i class="fas fa-paper-plane"></i><xmp><i class="fas fa-paper-plane"></i></xmp></li>
-				<!-- <li>화살표<i class="fas fa-arrow-circle-up"></i><xmp><i class="fas fa-arrow-circle-up"></i></xmp></li> -->
-				<li>
-					채팅방 공유하기버튼 <i class="fas fa-external-link-alt"></i><xmp><i class="fas fa-external-link-alt"></i></xmp>
-				</li>
-				<li>
-					체크리스트 설정 메뉴<i class="fas fa-ellipsis-h"></i><xmp><i class="fas fa-ellipsis-h"></i></xmp>
-				</li>
-				<li>
-					채팅방 검색 위아래버튼/체크리스트탭<br>
-					up <i class="fas fa-chevron-up"></i> <xmp><i class="fas fa-chevron-up"></i></xmp><br>
-					down<i class="fas fa-chevron-down"></i> <xmp><i class="fas fa-chevron-down"></i></xmp>
-				</li>
-			</ul>
-			<!--// sample -->
-			
-		</main><!-- container end -->
-	</section><!-- wrapper end -->
-	<div class="popup alert">
-		<div class="popup-wrap">
-			<div class="context">
-				<p>일반 팝업창입니다.</p>
-			</div>
-			<div class="btn-area">
-				<a href="#" class="btn">취소</a>
-				<a href="#" class="btn">확인</a>
-			</div>
-			<a href="#" class="btn-close">닫기</a>
-		</div>
-	</div>
-	<div class="mask"></div>
-</body>
+               <li>
+                  "메모공유" <i class="far fa-file-alt"></i>
+                  <xmp><i class="far fa-file-alt"></i></xmp>
+               </li>
+               <li>
+                  "닫기" <i class="fas fa-times"></i>
+                  <xmp><i class="fas fa-times"></i></xmp>
+               </li>
+               <li>"on" > 이미지로<i class="fas fa-toggle-on"></i></li>
+               <li>"off" > 이미지로 <i class="fas fa-toggle-off"></i></li>
+               <li>
+                  "채팅방메뉴 +"<i class="far fa-plus-square"></i>
+                  <xmp><i class="far fa-plus-square"></i></xmp>
+               </li>
+               <li>
+                  "뒤로가기" <i class="fas fa-chevron-left"></i>
+                  <xmp><i class="fas fa-chevron-left"></i></xmp>
+               </li>
+               <li>
+                  "환경설정" <i class="fas fa-cog"></i>
+                  <xmp><i class="fas fa-cog"></i></xmp>
+               </li>
+               <li>
+                  "메뉴" <i class="fas fa-bars"></i>
+                  <xmp><i class="fas fa-bars"></i></xmp>
+               </li>
+               <li>
+                  "검색" <i class="fas fa-search"></i>
+                  <xmp><i class="fas fa-search"></i></xmp>
+               </li>
+               <li>
+                  "채팅전송버튼" <i class="fas fa-paper-plane"></i>
+                  <xmp><i class="fas fa-paper-plane"></i></xmp>
+               </li>
+               <!-- <li>화살표<i class="fas fa-arrow-circle-up"></i><xmp><i class="fas fa-arrow-circle-up"></i></xmp></li> -->
+               <li>
+                  채팅방 공유하기버튼 <i class="fas fa-external-link-alt"></i>
+                  <xmp><i class="fas fa-external-link-alt"></i></xmp>
+               </li>
+               <li>
+                  체크리스트 설정 메뉴<i class="fas fa-ellipsis-h"></i>
+                  <xmp><i class="fas fa-ellipsis-h"></i></xmp>
+               </li>
+               <li>
+                  채팅방 검색 위아래버튼/체크리스트탭<br />
+                  up <i class="fas fa-chevron-up"></i>
+                  <xmp><i class="fas fa-chevron-up"></i></xmp>
+                  <br />
+                  down<i class="fas fa-chevron-down"></i>
+                  <xmp><i class="fas fa-chevron-down"></i></xmp>
+               </li>
+            </ul>
+            <!--// sample -->
+         </main>
+         <!-- container end -->
+      </section>
+      <!-- wrapper end -->
+      <div class="popup alert">
+         <div class="popup-wrap">
+            <div class="context">
+               <p>일반 팝업창입니다.</p>
+            </div>
+            <div class="btn-area">
+               <a href="#" class="btn">취소</a>
+               <a href="#" class="btn">확인</a>
+            </div>
+            <a href="#" class="btn-close">닫기</a>
+         </div>
+      </div>
+      <div class="mask"></div>
+   </body>
 </html>
