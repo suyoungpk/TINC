@@ -1,4 +1,4 @@
-@import url(common.css);
+@import url(../common.css);
 
 .topBox{position:fixed;top:1.640625rem;left:0;display:flex;flex-direction: row;padding:0.875rem 0.8125rem;width:100%;box-sizing: border-box;background:#ebeafd;border-radius:0.625rem 0.625rem 0 0;z-index:0}
 .topBox button{color:#b2b2b2;overflow:hidden;width:1rem;height:1rem;text-align:center;line-height:1rem;cursor:pointer}
@@ -20,7 +20,7 @@
 .btn-top{position:fixed;bottom:3.3125rem;right:1rem;border-radius:1.03125rem;width:2.0625rem;height:2.0625rem;text-align:center;background:rgba(255,255,255,.6);z-index:5} 
 .btn-top i{font-size:1rem;color:#a0a0a0;width:0.9rem;height:1rem;overflow:hidden}
 
-.chatList {padding:0.8125rem;}
+.chatList {padding:3.6rem 0.8125rem 0;}
 .chatList > li{border-top:1px solid #b2b2b2;padding:0.734375rem 0}
 .chatList > li:first-child{border:0}
 .chatList > li a {display:flex;flex-direction:row;text-align:left}
@@ -37,9 +37,9 @@
 .chattingBox .chatting{height:100%;overflow-y:auto}
 .chattingBox .chatting > li{display:flex;flex-direction:row;margin-top:1.171875rem;width:100%;}
 .chattingBox .chatting > li:first-child{margin:0}
-.chattingBox .chatting figure{width:2.0625rem;height:2.0625rem;margin-right:1rem;border-radius:1.03126rem;overflow:hidden;text-align:center;background:#b2b2b2}
+.chattingBox .chatting figure{width:2.0625rem;height:2.0625rem;margin-right:1rem;border-radius:50%;overflow:hidden;text-align:center;background:#b2b2b2;font-size:0;line-height:0}
 .chattingBox .chatting figure img{display:block;max-width:100%}
-.chattingBox .chatting .megBox{width:calc(100% - 3.03125rem);max-width:70%}
+.chattingBox .chatting .megBox{width:calc(100% - 5.9375rem);max-width:80%}
 .chattingBox .chatting .me .megBox{width:100%;text-align:right;max-width:100%}
 .chattingBox .chatting .megBox .name{width:100%;}
 .chattingBox .chatting .megBox ul,
@@ -54,7 +54,7 @@
 .chattingBox .chatting .member{text-align:left}
 .chattingBox .chatting .me{text-align:right}
 .chattingBox .chatting .focus{display:inline-block;background:yellow;color:#000}
-.chattingBox .btnBox{width:calc(30% - 2.84375rem);padding-left:0.8125rem;align-self:center;text-align:center}/*3.03125*/
+.chattingBox .btnBox{width:calc(20% - 2.84375rem);padding-left:0.8125rem;align-self:center;text-align:center}/*3.03125*/
 .chattingBox .btn-share {display:inline-block;background:#dfdee8;border-radius:1.03125rem;width:2.0625rem;height:2.0625rem;text-align:center;vertical-align:middle;}
 .chattingBox .btn-share i{font-size:0.84375rem;color:#818181;width:0.84375rem;height:0.84375rem;line-height:100%;overflow:hidden}
 .chattingBox .chatting .megBox .message.imgBox{width:100%;border-radius:1.015625rem;overflow:hidden;padding:0}
