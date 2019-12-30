@@ -4,12 +4,12 @@ div.bottombutton {
    background: rgb(255, 255, 255);
 }
 
-.btnAlign {
+.bottombutton .btnAlign {
    position: relative;
    width: 100%;
 }
 
-.btnBackGround {
+.bottombutton .btnBackGround {
    width: 100%;
    position: fixed;
    height: 50px;
@@ -18,8 +18,8 @@ div.bottombutton {
    bottom: 0;
 }
 
-.btn {
-   width: 33%;
+.bottombutton .btn {
+   width: 33.33333%;
    position: fixed;
    text-align: center;
    height: 50px;
@@ -28,7 +28,7 @@ div.bottombutton {
    bottom: 0;
 }
 
-.btn:before {
+.bottombutton .btn:before {
    content: "";
    display: inline-block;
    width: 1px;
@@ -36,12 +36,25 @@ div.bottombutton {
    vertical-align: middle;
 }
 
-.btn .fas {
+.bottombutton .btn:hover {
+   cursor: pointer;
+}
+
+.bottombutton .btn:active {
+   border-left: 1px;
+   border-color: rgba(0, 0, 0, 0);
+   border-style: solid;
+   bottom: -2px;
+   height: 52px;
+}
+
+.bottombutton .btn .fas {
    /* vertical-align: middle; */
    display: inline-block;
    vertical-align: middle;
+   transform: scale(1.4);
 }
 
-.targetBtn {
+.bottombutton .targetBtn {
    background: rgb(115, 103, 241);
 }
