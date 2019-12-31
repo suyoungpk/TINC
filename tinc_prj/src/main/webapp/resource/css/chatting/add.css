@@ -6,7 +6,15 @@
    margin: 0 0.6rem 0 0.3rem;
 }
 
-li a .selectFriend {
+.chatList li a {
+   cursor: pointer;
+}
+
+.chatList li a:hover {
+   background-color: #d7d6eb;
+}
+
+.chatList li a .selectFriend {
    transform: scale(2);
 }
 
@@ -27,6 +35,7 @@ li a .selectFriend {
    padding-left: 2%;
    padding-right: 2%;
 }
+
 .search label {
    color: rgb(100, 100, 100);
 }
