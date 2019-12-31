@@ -4,7 +4,7 @@
 
 .wrapper .container .settingList {
    color: rgb(129, 129, 129);
-   padding: 4.5rem 5.2rem 0;
+   padding: 4.5rem 5rem 0;
    position: absolute;
    transform: scale(1.5);
 }
@@ -19,6 +19,14 @@
 
 .wrapper .container .settingList li {
    padding-top: 1rem;
+}
+
+.wrapper .container .settingList .miniFont {
+   font-size: 0.9rem;
+}
+
+.wrapper .container .settingList .miniFont {
+   font-size: 0.8rem;
 }
 
 .wrapper .container .settingList .cursor {
