@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+   <head>
+      <title>메모와 채팅을 동시에, TINC</title>
+      <meta charset="utf-8" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1, user-scalable=no"
+      />
+   </head>
+
+   <body>
+      <link rel="stylesheet" href="../../../resource/css/chatting/chat.css" />
+      <link
+         rel="stylesheet"
+         href="../../../resource/css/chatting/setting.css"
+      />
+      <section class="wrapper">
+         <nav class="gnb">
+            <a href="#" title="메모장 이동">MEMO</a>
+         </nav>
+         <!-- gnb end -->
+         <main class="container">
+            <div class="topBox">
+               <div class="left">
+                  <button class="btn-back fas fa-chevron-left">뒤로가기</button>
+               </div>
+               <h1 class="title">설정</h1>
+               <div class="right">
+                  <!-- <button class="btn-srch fas fa-search">검색하기</button
+						>&nbsp;&nbsp; -->
+                  <!-- <button class="btn-bar fas fa-bars">메뉴</button> -->
+                  <!-- <button class="btn-close fas fa-times">닫기</button> -->
+               </div>
+            </div>
+            <!-- chatlist -->
+            <ul class="settingList">
+               <li class="chattingRoomSetting cursor">
+                  <i class="fas fa-cog"></i>
+                  <span>채팅방 설정</span>
+               </li>
+               <div class="line"></div>
+               <li class="inviteFriend cursor">
+                  <i class="fas fa-user"></i>
+                  <span>친구 초대</span>
+               </li>
+               <div class="line"></div>
+               <li class="groupMemo cursor">
+                  <i class="far fa-file-alt"></i>
+                  <span>그룹메모 바로가기</span>
+               </li>
+               <div class="line"></div>
+               <li class="chattingMember">
+                  <i class="fas fa-users"></i>
+                  <span>대화 상대</span>
+
+                  <div class="chattingMemberList">
+                     <!-- 프로필사진이 없을때 -->
+                     <span>
+                        <figure>
+                           <i class="fas fa-user"></i>
+                        </figure>
+                        <ul>
+                           <li class="title">
+                              칭구칭구
+                           </li>
+                        </ul>
+                     </span>
+
+                     <!-- 프로필사진이 있을때 -->
+                     <span>
+                        <figure>
+                           <img src="http://placehold.it/100x100" alt="" />
+                        </figure>
+                        <ul>
+                           <li class="title">
+                              st기
+                           </li>
+                        </ul>
+                     </span>
+                  </div>
+               </li>
+            </ul>
+            <button class="btn-top"><i class="fas fa-arrow-up">TOP</i></button>
+         </main>
+         <!-- container end -->
+      </section>
+      <!-- wrapper end -->
+      <!-- 완료버튼 누를시 채팅방 생성 팝업 -->
+      <div class="popup alert">
+         <div class="popup-wrap">
+            <div class="context">
+               <input type="text" placeholder="채팅방 이름을 설정해 주세요" />
+            </div>
+            <div class="btn-area">
+               <a href="#" class="btn">확인</a>
+            </div>
+            <a href="#" class="btn-close">닫기</a>
+         </div>
+      </div>
+      <div class="mask"></div>
+   </body>
+</html>

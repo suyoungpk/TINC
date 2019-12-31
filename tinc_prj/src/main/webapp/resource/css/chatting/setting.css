@@ -1,0 +1,75 @@
+.wrapper .container {
+   overflow: hidden auto;
+}
+
+.wrapper .container .settingList {
+   color: rgb(129, 129, 129);
+   padding: 4.5rem 5.2rem 0;
+   position: absolute;
+   transform: scale(1.5);
+}
+
+.wrapper .container .settingList .line {
+   position: absolute;
+   width: 2000%;
+   left: 0;
+   border-bottom: 1px solid #b2b2b2;
+   padding: 0.3rem 0;
+}
+
+.wrapper .container .settingList li {
+   padding-top: 1rem;
+}
+
+.wrapper .container .settingList .cursor {
+   cursor: pointer;
+}
+
+.wrapper .container .settingList .cursor:active {
+   transform: translate(1px, 1px);
+}
+
+.wrapper .container .settingList li i {
+   width: 20px;
+}
+
+.wrapper .container .settingList li span {
+   padding-left: 1rem;
+   color: rgb(0, 0, 0);
+}
+
+.chattingMemberList {
+   padding-top: 0.5rem;
+}
+.chattingMemberList span {
+   display: flex;
+   position: relative;
+   cursor: pointer;
+}
+.chattingMemberList span:active {
+   transform: translate(1px, 1px);
+}
+.chattingMemberList figure {
+   margin: 0 0.5rem 0 0;
+   width: 2.5rem;
+   height: 2.5rem;
+   border-radius: 50%;
+   overflow: hidden;
+   text-align: center;
+   transform: scale(0.7);
+}
+.chattingMemberList figure i {
+   font-size: 1.59375rem;
+   color: #000;
+   line-height: 2.5rem;
+}
+.chattingMemberList figure img {
+   display: block;
+   max-width: 100%;
+}
+.chattingMemberList li.title {
+   position: absolute;
+   top: -0.45rem;
+   font-size: 0.85rem;
+   color: #000;
+}

@@ -16,6 +16,12 @@
 
 .chatList li a .selectFriend {
    transform: scale(2);
+   color: rgb(178, 178, 178);
+}
+
+.chatList li a .selectFriendChecked {
+   transform: scale(2);
+   color: rgb(115, 103, 241);
 }
 
 .search {
