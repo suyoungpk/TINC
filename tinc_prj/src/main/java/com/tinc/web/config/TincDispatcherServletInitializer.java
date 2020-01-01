@@ -5,6 +5,7 @@ import javax.servlet.Filter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+
 public class TincDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 	@Override
@@ -22,7 +23,8 @@ public class TincDispatcherServletInitializer extends AbstractAnnotationConfigDi
 		// TODO Auto-generated method stub
 		return new Class[] {
 				ServletContextConfig.class,
-				TincMvcConfigurer.class
+				TincMvcConfigurer.class,
+				TincWebSocketConfig.class
 		};
 	}
 
