@@ -1,0 +1,114 @@
+section.wrapper {
+  padding: 0 5.55% !important;
+  width: 82% !important;
+}
+
+main.memo-list-container {
+  height: 90.73% !important;
+  width: 100% !important;
+  background: #7367f0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow-x: auto;
+  display: flex;
+}
+
+div.memo-list-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  margin-right: 3rem;
+  flex-shrink: 0;
+}
+
+div.memo-list-wrapper > div.memo-list-title {
+  width: 100%;
+  height: 6.44%;
+}
+
+div.memo-list-wrapper > div.memo-list-title input {
+  color: #ffffff;
+  font-size: 1rem;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+div.memo-card-list-wrapper {
+  width: 92%;
+  height: 82.69%;
+  background: #ebeafd;
+  padding: 4% 4%;
+  overflow-y: auto;
+}
+
+div.memo-card {
+  width: 100%;
+  height: 27%;
+  margin-bottom: 5%;
+}
+
+div.memo-card-title {
+  padding: 0 2%;
+  height: 22.92%;
+}
+
+div.memo-card-title > input {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+div.memo-card-content {
+  height: 77.08%;
+  background: #ffffff;
+  overflow-y: hidden;
+  padding: 2% 2%;
+}
+
+div.memo-card-content > textarea {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+}
+
+div.memo-list-add-wrapper {
+  height: 6%;
+  width: 92%;
+  background: #ebeafd;
+  padding: 0 4%;
+  text-align: center;
+}
+
+div.memo-list-add-wrapper > div:active {
+  transition: 800ms linear;
+  transform: scale(0.8);
+}
+
+div.memo-list-add-wrapper > div > i {
+  margin-right: 2%;
+}
+
+div.memo-list-bottom-wrapper {
+  height: 9.27%;
+  width: 100% !important;
+  position: relative;
+  bottom: 0;
+}
+
+div.memo-list-bottom-wrapper > input {
+  display: inline-block;
+  width: 33%;
+  height: 63.94%;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  background: #ebeafd;
+}
+
+div.memo-list-bottom-wrapper > input:active {
+  transition: 800ms linear;
+  transform: scale(0.8);
+}

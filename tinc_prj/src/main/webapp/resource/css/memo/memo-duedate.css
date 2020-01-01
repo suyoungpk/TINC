@@ -1,0 +1,60 @@
+.memo-duedate-popup {
+    width: 290px !important;
+    height: 232.25px;
+    left: 50% !important;
+    transform: translate(-50%, 0);
+}
+
+.memo-duedate-popup>div.popup-container {
+    height: 206.25px;
+}
+
+.memo-duedate-popup>div.popup-container>div.context {
+    margin-top: 0;
+}
+
+.memo-duedate-btn-area {
+    position: absolute;
+    bottom: 6.3%;
+}
+
+.memo-duedate-container {
+    height: 59.63%;
+    display: flex;
+}
+
+.memo-duedate-container>div:nth-child(1) {
+    width: 10%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.memo-duedate-container>div:nth-child(2) {
+    width: 35%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.memo-duedate-container>div:nth-child(3) {
+    width: 35%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.memo-duedate-container>div:nth-child(4) {
+    width: 10%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.memo-duedate-container>div:nth-child(5) {
+    width: 10%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.memo-duedate-container>div span {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}

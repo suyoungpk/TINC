@@ -1,0 +1,164 @@
+.memo-share-visual {
+    height: 4.44%;
+    position: relative;
+}
+
+.memo-share-visual>div {
+    width: 6.47%;
+    position: absolute;
+    right: 1%;
+}
+
+.memo-share-visual>div>i {
+    color: #ffffff;
+}
+
+ul.memo-share-list {
+    overflow-y: auto;
+}
+
+.memo-share-content {
+    height: 80.59%;
+    background: rgb(235, 234, 253);
+    border-radius: 0.625rem 0.625rem 0 0;
+    padding: 4.21% 2.77%;
+
+}
+
+ul.memo-share-list {
+    width: 100%;
+    height: 100%;
+}
+
+ul.memo-share-list>li {
+    height: 12%;
+    border-bottom: 1px solid rgb(139, 139, 139);
+    padding: 1% 0;
+    display: flex;
+}
+
+div.memo-share-list-pic-wrapper {
+    width: 13.301%;
+    height: 100%;
+    position: relative;
+    margin: 0 2%;
+}
+
+
+div.memo-share-list-pic {
+    width: 90%;
+    height: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+div.memo-share-list-pic>img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+}
+
+div.memo-share-list-pic>i.fa-users {
+    font-size: 1.5em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+div.memo-share-list-content {
+    width: 73.397%;
+    height: 100%;
+    padding: 0 2%;
+    overflow-y: hidden;
+}
+
+div.memo-share-list-content>div:first-child {
+    width: 100%;
+    height: 40%;
+    padding: 0.4% 0;
+}
+
+div.memo-share-list-content>div:first-child>input {
+    color: #3a3a3f;
+    font-weight: 1000;
+    width: 100%;
+}
+
+div.memo-share-list-content>div:last-child {
+    width: 100%;
+    height: 40%;
+    padding: 0.4% 0;
+}
+
+div.memo-share-list-content>div:last-child>input {
+    color: #515151;
+    width: 100%;
+}
+
+div.memo-share-list-check-wrapper {
+    width: 13.301%;
+    height: 100%;
+    position: relative;
+}
+
+input#memo-share-list-checkbox {
+    width: 70%;
+    height: 70%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.memo-share-button-wrapper {
+    height: 9.3%;
+    background: rgb(235, 234, 253);
+    display: flex;
+    padding: 0 2.77%;
+}
+
+.memo-share-button-wrapper>div:first-child {
+    width: 50%;
+    position: relative;
+}
+
+.memo-share-button-wrapper>div:first-child:active {
+    transition: 800ms linear;
+    transform: scale(0.8);
+}
+
+.memo-share-button-wrapper>div:first-child>i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+}
+
+.memo-share-button-wrapper>div:last-child {
+    width: 50%;
+    position: relative;
+}
+
+.memo-share-button-wrapper>div:last-child:active {
+    transition: 800ms linear;
+    transform: scale(0.8);
+}
+
+.memo-share-button-wrapper>div:last-child>i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+}

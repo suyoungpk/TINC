@@ -1,0 +1,82 @@
+.memo-checklist-wrapper {
+    width: 93.26%;
+    height: 29.57%;
+    margin: 0 3.37% 4.88% 3.37%;
+    overflow-y: auto;
+    text-align: left;
+    background: #ffffff;
+}
+
+.memo-checklist {
+    width: 94.7%;
+    margin: 2.64% auto;
+    border-bottom: 1px solid rgb(139, 139, 139);
+}
+
+.memo-checklist-title {
+    background: #7367f1;
+    border: 2px solid #7367f1;
+    border-radius: 0.625rem 0.625rem;
+    padding: 0 2.82%;
+    display: flex;
+}
+
+.memo-checklist-title>div:nth-child(1) {
+    width: 50%;
+}
+
+.memo-checklist-title>div:nth-child(1)>i {
+    margin-right: 3.17%;
+
+}
+
+.memo-checklist-title>div:nth-child(2) {
+    width: 50%;
+    position: relative;
+    padding: 1.8% 0;
+}
+
+.memo-checklist-title>div:nth-child(2)>i {
+    display: inline-block;
+    width: 18.18%;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    text-align: right;
+}
+
+.memo-checklist-title>div:nth-child(2)>i:active {
+    transition: 800ms linear;
+    transform: scale(0.7);
+}
+
+.memo-checklist-title>div:nth-child(2)>i:nth-child(1) {
+    right: 0;
+}
+
+.memo-checklist-title>div:nth-child(2)>i:nth-child(2) {
+    right: 18.18%;
+}
+
+.memo-checklist>li:nth-child(2) {
+    padding: 0 2.82%;
+    clear: both;
+}
+
+.memo-checklist-item-list {
+    width: 100%;
+
+}
+
+.memo-checklist-item-list>li i {
+    margin-right: 3.17%;
+}
+
+.memo-checklist-item-list>li i:active {
+    transition: 800ms linear;
+    transform: scale(0.7);
+}
+
+.checklist-item-add {
+    color: rgb(139, 139, 139);
+}
