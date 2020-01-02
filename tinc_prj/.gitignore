@@ -82,5 +82,7 @@ local.properties
 # Ignore all local history of files
 .history
 
+# maven project files
+target/
 
 # End of https://www.gitignore.io/api/eclipse
