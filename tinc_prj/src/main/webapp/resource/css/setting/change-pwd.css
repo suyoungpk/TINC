@@ -1,0 +1,27 @@
+@import url(../common.css);
+@import url(setting.css);
+
+#popup-change-pwd{
+    margin-top: 95px;
+    top:0% !important;
+}
+
+.edit-pwd{
+    background-color: white;
+    border-radius: 17px;
+    -moz-border-radius: 17px;
+    -webkit-border-radius: 17px;
+    width: 261px;
+    height: 35px;
+}
+.context div p {
+    text-align: left;
+    height: 35.5px;
+    margin-left: 10px;
+    margin-top: 11px;
+}
+
+#cancle-edit-pwd, #ok-edit-pwd{
+    margin-top: 12px;
+    margin-bottom: 18.5px;
+}

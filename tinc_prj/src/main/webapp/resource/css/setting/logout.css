@@ -1,0 +1,7 @@
+@import url(../common.css);
+@import url(setting.css);
+
+#logout-cancle, #logout-ok{
+    margin-top : 10px;
+    /* margin-bottom: 19px; */
+}

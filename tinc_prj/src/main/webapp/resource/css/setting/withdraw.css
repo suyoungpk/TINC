@@ -1,0 +1,17 @@
+@import url(../common.css);
+@import url(setting.css);
+
+#withdraw-cancle, #withdraw-ok{
+    margin-top : 10px;
+    margin-bottom: 19px;
+}
+
+.withdraw-pwd{
+    background-color: white;
+    border-radius: 17px;
+    -moz-border-radius: 17px;
+    -webkit-border-radius: 17px;
+    width: 261px;
+    height: 35px;
+    margin-top: 18px;
+}
