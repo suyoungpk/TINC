@@ -34,6 +34,12 @@
    min-width: 10%;
 }
 
+.search .searchSpan span {
+   padding: 0 0.5rem 0 0.5rem;
+   border-radius: 2px;
+   background-color: rgb(115, 103, 241);
+}
+
 .search input[type="text"] {
    width: 72%;
    border: solid 1px rgb(184, 184, 184);

@@ -1,0 +1,117 @@
+.userList {
+   padding: 3.6rem 0.8125rem 0;
+}
+.userList > li {
+   border-top: 1px solid #b2b2b2;
+   padding: 0.734375rem 0;
+}
+.userList > li:first-child {
+   border: 0;
+}
+.userList > li a {
+   display: flex;
+   flex-direction: row;
+   text-align: left;
+}
+.userList > li a > * {
+   vertical-align: middle;
+   line-height: 2.5rem;
+}
+.userList figure {
+   margin: 0 1.25rem 0 1.046875rem;
+   width: 2.5rem;
+   height: 2.5rem;
+   border-radius: 50%;
+   overflow: hidden;
+   text-align: center;
+}
+.userList figure i {
+   font-size: 1.59375rem;
+   color: #000;
+   line-height: 2.5rem;
+}
+.userList figure img {
+   display: block;
+   max-width: 100%;
+}
+.userList > li ul {
+   width: calc(100% - 4.796875rem);
+}
+.userList > li ul li {
+   width: 100%;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   white-space: nowrap;
+   font-size: 0.8125rem;
+   color: #515151;
+   line-height: 138%;
+}
+.userList > li ul li.title {
+   font-size: 0.9375rem;
+   color: #000;
+}
+.userList .nolist {
+   position: absolute;
+   width: 100%;
+   top: 50%;
+   left: 0;
+   color: #000;
+   font-size: 0.9375rem;
+   text-align: center;
+   padding: 0;
+   margin-top: -2.109375rem;
+}
+
+.userList > li {
+   border-top: 0px solid #b2b2b2;
+}
+
+.userList figure {
+   margin: 0 0.6rem 0 0.3rem;
+}
+
+.userList li a {
+   cursor: pointer;
+}
+
+.userList li a:hover {
+   background-color: #d7d6eb;
+}
+
+.userList li a .selectFriend {
+   transform: scale(2);
+   color: rgb(178, 178, 178);
+}
+
+.userList li a .selectFriendChecked {
+   transform: scale(2);
+   color: rgb(115, 103, 241);
+}
+
+.search {
+   position: relative;
+}
+.search .searchSpan {
+   text-align: right;
+   position: absolute;
+   right: 0;
+   min-width: 10%;
+}
+
+.search .searchSpan span {
+   padding: 0 0.5rem 0 0.5rem;
+   border-radius: 2px;
+   background-color: rgb(115, 103, 241);
+}
+
+.search input[type="text"] {
+   width: 72%;
+   border: solid 1px rgb(184, 184, 184);
+   border-radius: 0.7rem;
+   padding-left: 2%;
+   padding-right: 2%;
+}
+
+.search label {
+   color: rgb(100, 100, 100);
+}

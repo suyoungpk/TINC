@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+   <head>
+      <title>메모와 채팅을 동시에, TINC</title>
+      <meta charset="utf-8" />
+      <meta
+         name="viewport"
+         content="width=device-width, initial-scale=1, user-scalable=no"
+      />
+   </head>
+
+   <body>
+      <link rel="stylesheet" href="../../../resource/css/chatting/chat.css" />
+      <link
+         rel="stylesheet"
+         href="../../../resource/css/chatting/user-invite.css"
+      />
+      <section class="wrapper">
+         <nav class="gnb">
+            <a href="#" title="메모장 이동">MEMO</a>
+         </nav>
+         <!-- gnb end -->
+         <main class="container">
+            <div class="topBox">
+               <div class="left">
+                  <button class="btn-back fas fa-chevron-left">뒤로가기</button>
+               </div>
+               <h1 class="title">채팅 추가</h1>
+               <div class="right">
+                  <!-- <button class="btn-srch fas fa-search">검색하기</button
+						>&nbsp;&nbsp; -->
+                  <!-- <button class="btn-bar fas fa-bars">메뉴</button> -->
+                  <!-- <button class="btn-close fas fa-times">닫기</button> -->
+               </div>
+            </div>
+            <!-- userlist -->
+            <ul class="userList">
+               <!--  친구가 없을 시 (불쌍해)  -->
+               <!-- <li class="nolist">
+						채팅할 친구가 없습니다.<br />
+						친구를 추가해주세요
+					</li> -->
+               <!--  검색결과가 없을시  -->
+               <!-- <li class="nolist">
+						검색 결과가 없습니다.
+					</li> -->
+               <!-- search -->
+               <div class="search">
+                  <input type="text" placeholder=" 검색" />
+                  <span class="searchSpan">
+                     <label>1 명</label>
+                     <span>초대</span>
+                  </span>
+               </div>
+               <!--  친구 프로필사진 미설정 시 -->
+               <li>
+                  <a>
+                     <figure>
+                        <i class="fas fa-user"></i>
+                     </figure>
+                     <ul>
+                        <li class="title">
+                           칭구칭구
+                        </li>
+                        <li>
+                           퀭모드우울
+                        </li>
+                     </ul>
+                     <!-- <i class="far fa-square selectFriend"></i> -->
+                     <i
+                        class="far fa-check-square selectFriend selectFriendChecked"
+                     ></i>
+                  </a>
+               </li>
+               <!--  친구 프로필사진 설정 시 -->
+               <li>
+                  <a>
+                     <figure>
+                        <img src="http://placehold.it/100x100" alt="" />
+                     </figure>
+                     <ul>
+                        <li class="title">st기</li>
+                        <li>아 힘들다</li>
+                     </ul>
+                     <i class="far fa-square selectFriend"></i>
+                     <!-- <i class="far fa-check-square selectFriend"></i> -->
+                  </a>
+               </li>
+            </ul>
+            <button class="btn-top"><i class="fas fa-arrow-up">TOP</i></button>
+         </main>
+         <!-- container end -->
+      </section>
+      <!-- wrapper end -->
+      <!-- 완료버튼 누를시 채팅방 생성 팝업 -->
+      <div class="popup alert">
+         <div class="popup-wrap">
+            <div class="context">
+               <input type="text" placeholder="채팅방 이름을 설정해 주세요" />
+            </div>
+            <div class="btn-area">
+               <a href="#" class="btn">확인</a>
+            </div>
+            <a href="#" class="btn-close">닫기</a>
+         </div>
+      </div>
+      <div class="mask"></div>
+   </body>
+</html>
