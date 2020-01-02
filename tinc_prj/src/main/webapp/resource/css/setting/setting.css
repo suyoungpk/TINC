@@ -1,0 +1,134 @@
+@import url(../common.css);
+
+#setting-head{
+    display: flex;
+    margin-top: 16.5px;
+}
+
+#return {
+    margin-left: 12px;
+    color: #b2b2b2;
+    flex:1;
+}
+
+#setting-title{
+    text-align: center;
+    size: 15px;
+    flex:1;
+    padding: 0;
+    margin-top: -3px;
+}
+#setting-menu {
+    margin-right: 11.5px;
+    text-align: right;
+    color: #b2b2b2;
+    flex:1;
+}
+
+#myImage {
+    width: 110px;
+    height: 110px;
+    background-color: blueviolet; 
+    border-radius: 50%;
+    margin-top: 26px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#myId{
+    margin-top: 27px;
+    text-align: center;
+    size: 16px;
+    width: 360px;
+    color: #000000;
+}
+#myStatusMessage{
+    size: 13px;
+    margin-top: 15px;
+    text-align: center;
+    color: #b2b2b2;
+    width: 360px;
+}
+#setting-edit-form{
+   size: 15px; 
+   margin-top: 31px;
+   margin-left: 31px;
+}
+#setting-edit-form .set-line{
+    height: 34px;
+    border-bottom: 1.2px solid #bcbcbc;
+    width: 284px;
+    line-height: 34px;
+}
+
+#setting-edit-form div.onOff-button{
+    width: 240px;
+    size: 15px; 
+    margin-left: 45px;
+}
+#setting-edit-pwd, #setting-secession{
+    text-align: left;
+}
+
+#setting-edit-email, #setting-edit-phone{
+    text-align: right;
+    vertical-align: middle; /*세로 가운데 정렬*/
+}
+
+#logout-color{
+    color: rgb(255, 060, 047) !important;
+    line-height: 34px;
+}
+
+/*----------checkbox 설정-------------------------*/
+input[type="checkbox"] {
+    display: none;
+}
+input[type="checkbox"] + label {
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    position: relative;
+    transition: 0.3s;
+    box-sizing: border-box;
+    vertical-align: middle;
+    margin-bottom: 5px; 
+}
+input[type="checkbox"] + label:after, input[type="checkbox"] + label:before {
+    content: '';
+    /* display: block; */
+    position: absolute;
+    transition: 0.3s;
+    cursor: pointer;
+}
+.set-checkbox:checked + label.set-check {
+    background: rgb(002, 210, 081);
+    /* -moz-box-shadow:inset 0px 0px 10px rgb(136, 136, 136);
+    -webkit-box-shadow:inset 0px 0px 10px rgb(136, 136, 136);
+    box-shadow:inset 0px 0px 10px rgb(136, 136, 136);  내부 그림자 */
+}
+.set-checkbox:checked + label.set-check:after {
+    background: #ffff;
+}
+.set-checkbox:checked + label:after {
+    left: calc(100% - 18px);
+}
+.set-checkbox + label {
+    background: #ddd;
+    border-radius: 20px;
+}
+.set-checkbox + label:after {
+    background: #fff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    left: 2px;
+}
+div.open-set-checkbox{
+    display: inline;
+    float: right;
+}
+/*-----------------------------------------------*/
+
+a { text-decoration:none ; color:#000000}
