@@ -32,17 +32,21 @@
    position: absolute;
    right: 0;
    min-width: 10%;
+   /* padding: 0 0 0 0.5rem; */
 }
 
 .search .searchSpan span {
    padding: 0 0.5rem 0 0.5rem;
    border-radius: 2px;
    background-color: rgb(115, 103, 241);
+   color: white;
 }
 
 .search input[type="text"] {
-   width: 72%;
+   min-width: 68%;
+   max-width: 100%;
    border: solid 1px rgb(184, 184, 184);
+   background-color: white;
    border-radius: 0.7rem;
    padding-left: 2%;
    padding-right: 2%;
@@ -50,4 +54,39 @@
 
 .search label {
    color: rgb(100, 100, 100);
+}
+
+.popup .popup-wrap {
+   top: 40%;
+   left: 11%;
+   width: 78%;
+   min-height: 7rem;
+   text-align: right;
+}
+
+.popup .popup-wrap .btn-close {
+   margin: 0.8rem;
+   color: rgb(153, 153, 153);
+}
+
+.popup .popup-wrap .context {
+   text-align: center;
+}
+.popup .popup-wrap .context input[type="text"] {
+   width: 15rem;
+   border: solid 1px rgb(184, 184, 184);
+   background-color: white;
+   border-radius: 0.7rem;
+   padding-left: 2%;
+   padding-right: 2%;
+}
+.popup .popup-wrap .btn-area {
+   text-align: center;
+   margin-top: 1rem;
+   margin-bottom: 1rem;
+}
+.popup .popup-wrap .btn-area .btn {
+   border-radius: 0.2rem;
+   background-color: white;
+   padding: 0.2rem 2rem 0.2rem 2rem;
 }

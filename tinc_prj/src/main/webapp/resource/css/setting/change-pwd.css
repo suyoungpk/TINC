@@ -2,26 +2,26 @@
 @import url(setting.css);
 
 #popup-change-pwd{
-    margin-top: 95px;
+    margin-top: 5.938rem;
     top:0% !important;
 }
 
 .edit-pwd{
     background-color: white;
-    border-radius: 17px;
-    -moz-border-radius: 17px;
-    -webkit-border-radius: 17px;
-    width: 261px;
-    height: 35px;
+    border-radius: 1.063rem;
+    -moz-border-radius: 1.063rem;
+    -webkit-border-radius: 1.063rem;
+    width: 16.31rem;
+    height: 2.188rem;
 }
 .context div p {
     text-align: left;
-    height: 35.5px;
-    margin-left: 10px;
-    margin-top: 11px;
+    height: 2.188rem;
+    margin-left: 0.625rem;
+    margin-top: 0.6875rem;
 }
 
 #cancle-edit-pwd, #ok-edit-pwd{
-    margin-top: 12px;
-    margin-bottom: 18.5px;
+    margin-top: 0.75rem;
+    margin-bottom: 1.125rem;
 }
