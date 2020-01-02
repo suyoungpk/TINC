@@ -2,16 +2,16 @@
 @import url(setting.css);
 
 #withdraw-cancle, #withdraw-ok{
-    margin-top : 10px;
-    margin-bottom: 19px;
+    margin-top : 0.625rem;
+    margin-bottom: 1.188rem;
 }
 
 .withdraw-pwd{
     background-color: white;
-    border-radius: 17px;
-    -moz-border-radius: 17px;
-    -webkit-border-radius: 17px;
-    width: 261px;
-    height: 35px;
-    margin-top: 18px;
+    border-radius: 1.063rem;
+    -moz-border-radius: 1.063rem;
+    -webkit-border-radius: 1.063rem;
+    width: 16.31rem;
+    height: 2.188rem;
+    margin-top: 1.125rem;
 }

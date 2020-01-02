@@ -2,69 +2,69 @@
 
 #setting-head{
     display: flex;
-    margin-top: 16.5px;
+    margin-top: 1rem;
 }
 
 #return {
-    margin-left: 12px;
+    margin-left: 0.75rem;
     color: #b2b2b2;
     flex:1;
 }
 
 #setting-title{
     text-align: center;
-    size: 15px;
+    size: 0.9375rem;
     flex:1;
     padding: 0;
-    margin-top: -3px;
+    margin-top: -0.1875rem;
 }
 #setting-menu {
-    margin-right: 11.5px;
+    margin-right: 0.6875rem;
     text-align: right;
     color: #b2b2b2;
     flex:1;
 }
 
 #myImage {
-    width: 110px;
-    height: 110px;
+    width: 6.875rem;
+    height: 6.875rem;
     background-color: blueviolet; 
     border-radius: 50%;
-    margin-top: 26px;
+    margin-top: 1.625rem;
     margin-left: auto;
     margin-right: auto;
 }
 
 #myId{
-    margin-top: 27px;
+    margin-top: 1.688rem;
     text-align: center;
-    size: 16px;
-    width: 360px;
+    size: 1rem;
+    width: 22.5rem;
     color: #000000;
 }
 #myStatusMessage{
-    size: 13px;
-    margin-top: 15px;
+    size: 0.8125rem;
+    margin-top: 0.9375rem;
     text-align: center;
     color: #b2b2b2;
-    width: 360px;
+    width: 22.5rem;
 }
 #setting-edit-form{
-   size: 15px; 
-   margin-top: 31px;
-   margin-left: 31px;
+   size: 0.9375rem; 
+   margin-top: 1.938rem;
+   margin-left: 1.938rem;
 }
 #setting-edit-form .set-line{
-    height: 34px;
-    border-bottom: 1.2px solid #bcbcbc;
-    width: 284px;
-    line-height: 34px;
+    height: 2.125rem;
+    border-bottom: 0.0625rem solid #bcbcbc;
+    width: 17.75rem;
+    line-height: 2.125rem;
 }
 
 #setting-edit-form div.onOff-button{
-    width: 240px;
-    size: 15px; 
-    margin-left: 45px;
+    width: 15rem;
+    size: 0.9375rem; 
+    margin-left: 2.813rem;
 }
 #setting-edit-pwd, #setting-secession{
     text-align: left;
@@ -77,7 +77,7 @@
 
 #logout-color{
     color: rgb(255, 060, 047) !important;
-    line-height: 34px;
+    line-height: 2.125rem;
 }
 
 /*----------checkbox 설정-------------------------*/
@@ -86,13 +86,13 @@ input[type="checkbox"] {
 }
 input[type="checkbox"] + label {
     display: inline-block;
-    width: 40px;
-    height: 20px;
+    width: 2.5rem;
+    height: 1.25rem;
     position: relative;
     transition: 0.3s;
     box-sizing: border-box;
     vertical-align: middle;
-    margin-bottom: 5px; 
+    margin-bottom: 0.3125rem; 
 }
 input[type="checkbox"] + label:after, input[type="checkbox"] + label:before {
     content: '';
@@ -111,19 +111,19 @@ input[type="checkbox"] + label:after, input[type="checkbox"] + label:before {
     background: #ffff;
 }
 .set-checkbox:checked + label:after {
-    left: calc(100% - 18px);
+    left: calc(100% - 1.125rem);
 }
 .set-checkbox + label {
     background: #ddd;
-    border-radius: 20px;
+    border-radius:  1.25rem;
 }
 .set-checkbox + label:after {
     background: #fff;
     border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    top: 2px;
-    left: 2px;
+    width: 1rem;
+    height: 1rem;
+    top: 0.125rem;
+    left: 0.125rem;
 }
 div.open-set-checkbox{
     display: inline;
