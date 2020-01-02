@@ -22,7 +22,7 @@ public class TincWebSocketConfig implements WebSocketConfigurer
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry)
 	{
 		// TODO Auto-generated method stub
-		registry.addHandler(chatSocketHandler, "tinc/chat");
+		registry.addHandler(chatSocketHandler, "/chat");
 	}
 
 }

@@ -23,7 +23,7 @@ public class ServiceContextConfig {
 		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql/dev.notepubs.com/tinc?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf8");
+		dataSource.setUrl("jdbc:mysql://dev.notepubs.com/lecture?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf8");
 		dataSource.setUsername("tinc");
 		dataSource.setPassword("33333");
 		

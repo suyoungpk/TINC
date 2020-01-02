@@ -19,8 +19,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 public class SecurityContextConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	private DataSource dataSource;
-	
+	private DataSource dataSource;	
 	
 	
 	@Override
