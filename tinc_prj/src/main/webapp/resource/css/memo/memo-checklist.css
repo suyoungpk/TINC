@@ -2,7 +2,6 @@
     width: 93.26%;
     height: 29.57%;
     margin: 0 3.37% 4.88% 3.37%;
-    overflow-y: auto;
     text-align: left;
     background: #ffffff;
 }
@@ -59,13 +58,17 @@
 }
 
 .memo-checklist>li:nth-child(2) {
-    padding: 0 2.82%;
+    padding: 2.82% 2.82%;
     clear: both;
 }
 
 .memo-checklist-item-list {
     width: 100%;
 
+}
+
+.memo-checklist-item-list>li>input[type="checkbox"] {
+    display: none;
 }
 
 .memo-checklist-item-list>li i {

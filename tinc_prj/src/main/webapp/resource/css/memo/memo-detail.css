@@ -57,7 +57,7 @@
   border: 2px solid rgb(95, 92, 162);
   border-radius: 0.625rem 0.625rem;
   background: #ffffff;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
 }
 
@@ -65,9 +65,10 @@
   width: 93.26%;
   height: 53.18%;
   margin: 3% 3.37% 0 3.37%;
-  overflow-y: auto;
   text-align: left;
   background: #ffffff;
+  resize: none;
+  overflow-y: hidden;
 }
 
 .memo-detail-share {
@@ -92,7 +93,7 @@
   transform: translate(0, -50%);
 }
 
-.memo-detail-share:active {
+.memo-detail-share-button:active {
   transition: 800ms linear;
   transform: scale(0.9);
 }
@@ -119,7 +120,7 @@
   transform: translate(0, -50%);
 }
 
-.memo-detail-checklist:active {
+.memo-detail-checklist-button:active {
   transition: 800ms linear;
   transform: scale(0.9);
 }
@@ -159,7 +160,7 @@
   background: #FE2E2E;
 }
 
-.memo-detail-duedate:active {
+.memo-detail-duedate-button:active {
   transition: 800ms linear;
   transform: scale(0.9);
 }
@@ -186,7 +187,7 @@
   transform: translate(0, -50%);
 }
 
-.memo-detail-delete:active {
+.memo-detail-delete-button:active {
   transition: 800ms linear;
   transform: scale(0.9);
 }
