@@ -8,4 +8,8 @@ public class mysqlFunction {
 	public String insertId(String table, String val1, String val2, int whereId) {
 		return "SELECT COALESCE(MAX(" + val1 + "), 0)+1 FROM " + table + " t1 WHERE " + val2 + "=" + whereId + ")";
 	}
+	
+	public String insertId(String table, String val1, String val2, String whereId) {
+		return "SELECT COALESCE(MAX(" + val1 + "), 0)+1 FROM " + table + " t1 WHERE " + val2 + "=" + whereId + ")";
+	}
 }
