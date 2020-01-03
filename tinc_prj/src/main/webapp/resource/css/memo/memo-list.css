@@ -21,25 +21,35 @@ div.memo-list-wrapper {
   flex-shrink: 0;
 }
 
-div.memo-list-wrapper > div.memo-list-title {
+div.memo-list-wrapper>div.memo-list-title {
   width: 100%;
-  height: 6.44%;
+  /* height: 6.44%; */
+  height: 10.37%;
+  margin-bottom: 1.875%;
 }
 
-div.memo-list-wrapper > div.memo-list-title input {
+div.memo-list-wrapper>div.memo-list-title div:first-child {
+  height: 56.69%;
+  width: 100%;
+}
+
+div.memo-list-wrapper>div.memo-list-title input {
   color: #ffffff;
   font-size: 1rem;
   display: block;
-  height: 100%;
+  /* height: 100%; */
+  height: 43.31%;
   width: 100%;
 }
 
 div.memo-card-list-wrapper {
   width: 92%;
-  height: 82.69%;
+  /* height: 82.69%; */
+  height: 78.40%;
   background: #ebeafd;
   padding: 4% 4%;
   overflow-y: auto;
+  border-radius: 0.625rem 0.625rem 0 0;
 }
 
 div.memo-card {
@@ -50,27 +60,30 @@ div.memo-card {
 
 div.memo-card-title {
   padding: 0 2%;
-  height: 22.92%;
+  height: 20.25%;
+  margin-bottom: 1.41%;
 }
 
-div.memo-card-title > input {
+div.memo-card-title>input {
   display: inline-block;
   width: 100%;
   height: 100%;
 }
 
 div.memo-card-content {
-  height: 77.08%;
+  /* height: 77.08%; */
+  height: 68.39%;
   background: #ffffff;
   overflow-y: hidden;
   padding: 2% 2%;
 }
 
-div.memo-card-content > textarea {
+div.memo-card-content>textarea {
   display: inline-block;
   height: 100%;
   width: 100%;
   overflow-y: auto;
+  color: #5e5e5e;
 }
 
 div.memo-list-add-wrapper {
@@ -79,14 +92,15 @@ div.memo-list-add-wrapper {
   background: #ebeafd;
   padding: 0 4%;
   text-align: center;
+  border-radius: 0 0 0.625rem 0.625rem;
 }
 
-div.memo-list-add-wrapper > div:active {
+div.memo-list-add-wrapper>div:active {
   transition: 800ms linear;
   transform: scale(0.8);
 }
 
-div.memo-list-add-wrapper > div > i {
+div.memo-list-add-wrapper>div>i {
   margin-right: 2%;
 }
 
@@ -97,7 +111,7 @@ div.memo-list-bottom-wrapper {
   bottom: 0;
 }
 
-div.memo-list-bottom-wrapper > input {
+div.memo-list-bottom-wrapper>input {
   display: inline-block;
   width: 33%;
   height: 63.94%;
@@ -108,7 +122,7 @@ div.memo-list-bottom-wrapper > input {
   background: #ebeafd;
 }
 
-div.memo-list-bottom-wrapper > input:active {
+div.memo-list-bottom-wrapper>input:active {
   transition: 800ms linear;
   transform: scale(0.8);
 }

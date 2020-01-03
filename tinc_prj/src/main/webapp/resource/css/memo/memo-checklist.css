@@ -18,6 +18,7 @@
     border-radius: 0.625rem 0.625rem;
     padding: 0 2.82%;
     display: flex;
+    color: #ffffff;
 }
 
 .memo-checklist-title>div:nth-child(1) {

@@ -41,7 +41,7 @@
 .memo-detail-title-text {
   width: 93%;
   height: 69.13%;
-  text-align: center;
+  text-align: left;
   background: #ffffff;
   margin: 0 3.22%;
   position: absolute;
@@ -51,7 +51,7 @@
 
 .memo-detail-content {
   width: 93%;
-  height: 36.25%;
+  height: 38.25%;
   margin: 0 3.61%;
   margin-top: 1.06%;
   border: 2px solid rgb(95, 92, 162);
@@ -69,11 +69,12 @@
   background: #ffffff;
   resize: none;
   overflow-y: hidden;
+  color: #5e5e5e;
 }
 
 .memo-detail-share {
   width: 93%;
-  height: 9%;
+  height: 8.5%;
   margin: 0 3.61%;
   margin-top: 1.06%;
   padding: 0.3% 0;
@@ -91,6 +92,7 @@
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
+  text-align: left;
 }
 
 .memo-detail-share-button:active {
@@ -100,7 +102,7 @@
 
 .memo-detail-checklist {
   width: 93%;
-  height: 9%;
+  height: 8.5%;
   margin: 0 3.61%;
   margin-top: 1.06%;
   padding: 0.3% 0;
@@ -118,6 +120,7 @@
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
+  text-align: left;
 }
 
 .memo-detail-checklist-button:active {
@@ -127,7 +130,7 @@
 
 .memo-detail-duedate {
   width: 93%;
-  height: 9%;
+  height: 8.5%;
   margin: 0 3.61%;
   margin-top: 1.06%;
   padding: 0.3% 0;
@@ -145,12 +148,13 @@
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
+  text-align: left;
 }
 
 .memo-detail-duedate>span {
   display: inline-block;
-  color: #E6E6E6;
-  font-size: 0.7rem;
+  color: #ffffff;
+  font-size: 0.8rem;
   position: absolute;
   top: 50%;
   right: 3%;
@@ -158,6 +162,7 @@
   border-radius: 0.325rem 0.325rem;
   border: 1px solid #FE2E2E;
   background: #FE2E2E;
+
 }
 
 .memo-detail-duedate-button:active {
@@ -165,9 +170,14 @@
   transform: scale(0.9);
 }
 
+.memo-detail-duedate>span:active {
+  transition: 800ms linear;
+  transform: scale(0.9);
+}
+
 .memo-detail-delete {
   width: 93%;
-  height: 9%;
+  height: 8.5%;
   margin: 0 3.61%;
   margin-top: 1.06%;
   padding: 0.3% 0;
@@ -185,6 +195,7 @@
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);
+  text-align: left;
 }
 
 .memo-detail-delete-button:active {
