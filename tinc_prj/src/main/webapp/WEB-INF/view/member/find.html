@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html lang="ko">
+<head>
+<title>메모와 채팅을 동시에, TINC</title>
+<meta charset="utf-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+<link rel="stylesheet" href="../../../resource/css/common.css" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css" >
+</head>
+<body>
+   <section class="wrapper"> 
+      <nav class="gnb"> 
+         <a href="#" title="메모장 이동">MEMO</a>
+      </nav><!-- gnb end -->
+      <main class="container">
+         <form>
+	         <div class="menu">
+	         	<span class="left"><i class="fas fa-chevron-left"></i></span>
+	            <span class="center">아이디/비밀번호 찾기</span>
+	            <span class="right"></span>
+	         </div>
+	             
+	         <div class="find">
+	         	<div>
+                  <span>아이디 찾기</span>
+               </div>
+               <div class="text-center"> 
+	               <input type="text" value="" placeholder="이메일 입력"/>
+	               <input type="button" class="find-btn" value="아이디 찾기"/>
+	            </div>
+	            <div>
+                  <span>비밀번호 찾기</span>
+               </div>
+               <div  class="text-center">
+	               <input type="text" value="" placeholder="아이디 입력"/>
+	               <input type="text" value="" placeholder="이메일 입력"/>
+	               <input type="button" class="find-btn" value="비밀번호 찾기"/>
+	            </div>
+	         </div>
+	         
+	         <div class="agree-btn">
+	         	<input type="button" class="left-btn" value="취소"/>
+	            <input type="button" class="right-btn" value="로그인"/>
+	         </div>
+         </form>      
+      </main><!-- container end -->
+   </section><!-- wrapper end -->
+   <div class="popup alert">
+      <div class="popup-wrap">
+         <div class="context">
+            <p>회원님의 아이디는 <b>aaaa</b>입니다.</p>
+         </div>
+         <div class="btn-area">
+            <a href="#" class="btn">취소</a>
+            <a href="#" class="btn">확인</a>
+         </div>
+         <a href="#" class="btn-close">닫기</a>
+      </div>
+   </div>
+   <div class="mask"></div>
+</body>
+</html>
