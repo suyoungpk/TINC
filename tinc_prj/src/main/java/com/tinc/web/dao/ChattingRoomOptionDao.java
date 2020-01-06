@@ -1,5 +1,6 @@
 package com.tinc.web.dao;
 
-public class ChattingRoomOptionDao {
+public interface ChattingRoomOptionDao
+{
 
 }
