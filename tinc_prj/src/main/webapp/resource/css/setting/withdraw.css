@@ -11,7 +11,7 @@
     border-radius: 1.063rem;
     -moz-border-radius: 1.063rem;
     -webkit-border-radius: 1.063rem;
-    width: 16.31rem;
+    width: calc(100% - 0.921875rem);
     height: 2.188rem;
     margin-top: 1.125rem;
 }
