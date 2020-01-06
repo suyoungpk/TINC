@@ -27,9 +27,9 @@ public class ServiceContextConfig {
 		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://dev.notepubs.com/lecture?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf8");
-		dataSource.setUsername("tinc");
-		dataSource.setPassword("33333");
+		dataSource.setUrl("jdbc:mysql://dev.notepubs.com/lecture?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf8"); // SSL은 https인듯?
+		dataSource.setUsername("tinc"); // MySql db접속 아이디
+		dataSource.setPassword("33333"); // MySql db접속 비밀번호
 		
 		return dataSource;
 	}

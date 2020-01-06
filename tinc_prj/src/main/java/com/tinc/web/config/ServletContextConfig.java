@@ -10,10 +10,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 public class ServletContextConfig {
 	
 	@Bean
-	public InternalResourceViewResolver internalResourceViewResolver() {
+	public InternalResourceViewResolver internalResourceViewResolver() { // 컨트롤러 return의 기본값 설정
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/view/");
-		resolver.setSuffix(".jsp");
+		resolver.setPrefix("/WEB-INF/view/"); // 앞
+		resolver.setSuffix(".jsp"); // 뒤
 		
 		return resolver;
 	}
