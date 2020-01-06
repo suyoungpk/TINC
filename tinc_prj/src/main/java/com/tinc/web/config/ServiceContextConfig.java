@@ -9,9 +9,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableTransactionManagement
 @ComponentScan(basePackages= {"com.tinc.web.service","com.tinc.web.dao"})
 public class ServiceContextConfig {
 	
@@ -28,6 +32,15 @@ public class ServiceContextConfig {
 		dataSource.setPassword("33333"); // MySql db접속 비밀번호
 		
 		return dataSource;
+	}
+	
+	@Bean
+	public PlatformTransactionManager transactionManager()
+	{
+		DataSourceTransactionManager tm = new DataSourceTransactionManager();
+		tm.setDataSource(dataSource());
+		
+		return tm;
 	}
 	
 	@Bean

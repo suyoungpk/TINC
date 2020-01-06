@@ -16,11 +16,19 @@
 .memo-duedate-btn-area {
     position: absolute;
     bottom: 6.3%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
 }
+
 
 .memo-duedate-container {
     height: 59.63%;
     display: flex;
+}
+
+.memo-duedate-container div::-webkit-scrollbar {
+    display: none;
 }
 
 .memo-duedate-container>div:nth-child(1) {
