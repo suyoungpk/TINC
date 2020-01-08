@@ -18,10 +18,12 @@
 			<div id="setting-head">
 				<span class="fas fa-chevron-left" id="return"><a href="javascript:history.go(-1)"></a></span>
 				<span id="setting-title">설정</span>
-				<span class="fas fa-bars" id="setting-menu"></span>
+				
 			</div>
 
-			<div id ="myImage"></div>
+			<div id ="myImage" onclick="onclick=document.all.image.click()"></div>
+			<input id="profile-img" type="file" name="image" accept="image/gif, image/jpeg, image/png"/>
+
 			<div><input id="myId" type="text" value="정윤띠"></div>
 			<div><input id="myStatusMessage" type="text" placeholder="상태메시지이이이이이ㅣ" value=""></div>
 			<form id="setting-edit-form">
@@ -33,11 +35,11 @@
 					<input id="setting-edit-phone" type="text" placeholder="010-0101-0101" value="">
 				</div>
 
-				<div>
-					<button class="set-line" id="setting-edit-pwd"><a href="change-pwd.html">비밀번호 변경</a></button>
+				<div class="set-line">
+					<button id="setting-edit-pwd"><a href="change-pwd.html">비밀번호 변경</a></button>
 				</div>
-				<div>
-					<button class="set-line" id="setting-secession"><a href="withdraw.html">탈퇴하기</a></button>
+				<div class="set-line">
+					<button id="setting-secession"><a href="withdraw.html">탈퇴하기</a></button>
 				</div>
 
 				<div class="set-line">공개설정</div>
