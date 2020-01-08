@@ -1,4 +1,8 @@
-window.addEventListener("load", function () {
+let selectedYear;
+let selectedMonth;
+
+/* due-date 생성 함수 */
+function createDueDateContainer() {
     var duedatePopup = document.querySelector(".memo-duedate-popup");
     var duedateContainer = duedatePopup.querySelector(".memo-duedate-container");
 
@@ -25,8 +29,7 @@ window.addEventListener("load", function () {
     let hours = [];
     let mins = [];
 
-    let selectedYear;
-    let selectedMonth;
+
 
     function isLeapYear(year) {
         if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
@@ -219,13 +222,40 @@ window.addEventListener("load", function () {
             }
         }
     });
+};
 
-    /* cancel, ok, close button events */
+
+/* due-date 체크 버튼 이벤트 */
+window.addEventListener("load", function () {
+
+    $(".memo-detail-duedate span")
+        .click(function () {
+            console.log(selectedMonth + "," + selectedYear);
+            var memoDueDateChecked = document.querySelector(".memo-detail-duedate span i");
+
+            if (memoDueDateChecked.classList[1] === "fa-check-square") {
+                memoDueDateChecked.className = "far fa-square";
+
+                return;
+            }
+
+            if (memoDueDateChecked.classList[1] === "fa-square") {
+                memoDueDateChecked.className = "far fa-check-square";
+
+                return;
+            }
+        });
+});
+
+/* cancel, ok, close button events */
+$(function () {
+
     $(".memo-duedate-popup .memo-duedate-btn-area .cancel-btn")
         .click(function () {
             $(".memo-duedate-popup").fadeOut();
             $(".popup").fadeOut();
             $(".mask").fadeOut();
+
         });
 
     $(".memo-duedate-popup .memo-duedate-btn-area .ok-btn")
@@ -233,17 +263,20 @@ window.addEventListener("load", function () {
             $(".memo-duedate-popup").fadeOut();
             $(".popup").fadeOut();
             $(".mask").fadeOut();
+
         });
 
     $(".popup a.btn-close").click(function () {
         $(".popup").fadeOut();
         $(".mask").fadeOut();
+
     });
 
     $(".memo-detail-duedate > input.memo-detail-duedate-button")
         .click(function () {
-            $(".memo-duedate-popup").fadeIn();
             $(".popup").fadeIn();
             $(".mask").fadeIn();
+            $(".memo-duedate-popup").fadeIn();
+            createDueDateContainer();
         });
 });

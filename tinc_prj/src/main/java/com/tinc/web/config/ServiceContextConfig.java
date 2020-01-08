@@ -26,14 +26,15 @@ public class ServiceContextConfig {
 	public DriverManagerDataSource dataSource() {
 		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://dev.notepubs.com/lecture?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf8"); // SSL은 https인듯?
-		dataSource.setUsername("tinc"); // MySql db접속 아이디
-		dataSource.setPassword("33333"); // MySql db접속 비밀번호
+		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql://dev.notepubs.com/tinc?autoReconnect=true&useSSL=false&useUnicode=true&characterEncoding=utf8"); 
+		dataSource.setUsername("tinc"); 
+		dataSource.setPassword("33333"); 
 		
 		return dataSource;
 	}
 	
+	// @Transactional annotation 사용을 위한 설정
 	@Bean
 	public PlatformTransactionManager transactionManager()
 	{

@@ -11,9 +11,9 @@ public class TincDispatcherServletInitializer extends AbstractAnnotationConfigDi
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		
-		return new Class[] {
-				ServiceContextConfig.class
-				,SecurityContextConfig.class
+		return new Class[] {		
+				SecurityContextConfig.class
+				,ServiceContextConfig.class				
 				,SMTPConfig.class
 		};
 	}

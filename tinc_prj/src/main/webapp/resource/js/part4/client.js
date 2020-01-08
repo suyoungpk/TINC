@@ -5,7 +5,7 @@ window.addEventListener("load", function () {
     var socket = null;
 
     connBtn.onclick = function () {
-        socket = new WebSocket("ws://localhost:8080/tinc/chat");
+        socket = new WebSocket("ws://localhost:8080/chat");
 
         socket.onopen = function () {
             console.log("connection success");

@@ -81,6 +81,15 @@
     transform: scale(0.7);
 }
 
+.memo-checklist-item-list>li button.fa-trash {
+    display: none;
+}
+
 .checklist-item-add {
     color: rgb(139, 139, 139);
+}
+
+.checklist-item-add-wrapper:active {
+    transition: 800ms linear;
+    transform: scale(0.9);
 }

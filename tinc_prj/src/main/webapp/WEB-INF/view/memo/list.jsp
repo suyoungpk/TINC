@@ -1,0 +1,126 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+<title>메모와 채팅을 동시에, TINC</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../../../resource/css/common.css" />
+<link rel="stylesheet" href="../../../resource/css/memo/memo-list.css" />
+</head>
+
+<body>
+	<section class="wrapper">
+		<main class="memo-list-container">
+			<div class="memo-list-wrapper">
+				<div class="memo-list-title">
+					<div></div>
+					<input type="text" name="memo-list-title" value="개인제목">
+				</div>
+				<div class="memo-card-list-wrapper">
+					<div class="memo-card">
+						<div class="memo-card-title">
+							<input type="text" name="memo-card-title" value="청춘예찬">
+						</div>
+						<div class="memo-card-content">
+							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
+                            </textarea>
+						</div>
+					</div>
+					<div class="memo-card">
+						<div class="memo-card-title">
+							<input type="text" name="memo-card-title" value="청춘예찬">
+						</div>
+						<div class="memo-card-content">
+							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
+                            </textarea>
+						</div>
+					</div>
+					<div class="memo-card">
+						<div class="memo-card-title">
+							<input type="text" name="memo-card-title" value="청춘예찬">
+						</div>
+						<div class="memo-card-content">
+							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
+                            </textarea>
+						</div>
+					</div>
+					<div class="memo-card">
+						<div class="memo-card-title">
+							<input type="text" name="memo-card-title" value="청춘예찬">
+						</div>
+						<div class="memo-card-content">
+							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
+                            </textarea>
+						</div>
+					</div>
+				</div>
+				<div class="memo-list-add-wrapper">
+					<div>
+						<i class="fas fa-plus"></i><input type="button" name="memo-list-add-button" value="add">
+					</div>
+				</div>
+			</div>
+			<div class="memo-list-wrapper">
+				<div class="memo-list-title">
+					<input type="text" name="memo-list-title" value="개인제목">
+				</div>
+				<div class="memo-card-list-wrapper">
+					<div class="memo-card">
+						<div class="memo-card-title">
+							<input type="text" name="memo-card-title" value="청춘예찬">
+						</div>
+						<div class="memo-card-content">
+							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
+                            </textarea>
+						</div>
+					</div>
+					<div class="memo-card">
+						<div class="memo-card-title">
+							<input type="text" name="memo-card-title" value="청춘예찬">
+						</div>
+						<div class="memo-card-content">
+							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
+                            </textarea>
+						</div>
+					</div>
+					<div class="memo-card">
+						<div class="memo-card-title">
+							<input type="text" name="memo-card-title" value="청춘예찬">
+						</div>
+						<div class="memo-card-content">
+							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
+                            </textarea>
+						</div>
+					</div>
+					<div class="memo-card">
+						<div class="memo-card-title">
+							<input type="text" name="memo-card-title" value="청춘예찬">
+						</div>
+						<div class="memo-card-content">
+							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
+                            </textarea>
+						</div>
+					</div>
+				</div>
+				<div class="memo-list-add-wrapper">
+					<div>
+						<i class="fas fa-plus"></i><input type="button" name="memo-list-add-button" value="add">
+					</div>
+				</div>
+			</div>
+
+		</main>
+		<!-- container end -->
+		<div class="memo-list-bottom-wrapper">
+			<input type="button" name="memo-list" value="닫기">
+		</div>
+	</section>
+	<!-- wrapper end -->
+
+</body>
+
+</html>

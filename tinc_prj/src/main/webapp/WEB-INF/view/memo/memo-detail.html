@@ -24,7 +24,7 @@
             <input readonly class="memo-detail-title-text" type="text" value="제목">
         </div>
         <div class="memo-detail-content">
-            <textarea readonly class="memo-detail-content-textarea" name="memo-detail-content-textarea">
+            <textarea class="memo-detail-content-textarea" name="memo-detail-content-textarea">
                 이 마음 한편 호젓한 그늘에
                 장미가 핀다.
 
@@ -33,6 +33,47 @@
                 장미는 밤에도 자지 않는다.
             </textarea>
             <div class="memo-checklist-wrapper">
+                <template id="checklist-wrapper-template">
+                    <ul class="memo-checklist">
+                        <li class="memo-checklist-title">
+                            <div>
+                                <i class="far fa-check-square"></i><span>checklist</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-ellipsis-h"></i><i class="fas fa-chevron-up"></i>
+                            </div>
+                        </li>
+                        <li class="memo-checklist-item-list-wrapper">
+                            <ul class="memo-checklist-item-list">
+                                <li>
+                                    <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
+                                        value="">
+                                    <label for="checklist-item-checkbox">
+                                        <i class="far fa-square"></i>
+                                    </label>
+                                    <input type="text" name="checklist-item-content" value="..." maxlength="16">
+                                    <button class="fas fa-trash"></button>
+                                </li>
+                                <li class="checklist-item-add-wrapper">
+                                    <label>
+                                        <i class="fas fa-plus"></i>
+                                    </label>
+                                    <label class="checklist-item-add"><span>add</span></label>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </template>
+                <template id="checklist-item-template">
+                    <li>
+                        <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox" value="">
+                        <label for="checklist-item-checkbox">
+                            <i class="far fa-square"></i>
+                        </label>
+                        <input type="text" name="checklist-item-content" value="..." maxlength="16">
+                        <button class="fas fa-trash"></button>
+                    </li>
+                </template>
                 <ul class="memo-checklist">
                     <li class="memo-checklist-title">
                         <div>
@@ -42,7 +83,7 @@
                             <i class="fas fa-ellipsis-h"></i><i class="fas fa-chevron-up"></i>
                         </div>
                     </li>
-                    <li>
+                    <li class="memo-checklist-item-list-wrapper">
                         <ul class="memo-checklist-item-list">
                             <li>
                                 <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
@@ -50,7 +91,8 @@
                                 <label for="checklist-item-checkbox">
                                     <i class="far fa-check-square"></i>
                                 </label>
-                                <input type="text" name="checklist-item-content" value="1. 치킨 먹는날">
+                                <input type="text" name="checklist-item-content" value="1. 치킨 먹는날" maxlength="16">
+                                <button class="fas fa-trash"></button>
                             </li>
                             <li>
                                 <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
@@ -58,7 +100,8 @@
                                 <label for="checklist-item-checkbox">
                                     <i class="far fa-check-square"></i>
                                 </label>
-                                <input type="text" name="checklist-item-content" value="2.">
+                                <input type="text" name="checklist-item-content" value="2." maxlength="16">
+                                <button class="fas fa-trash"></button>
                             </li>
                             <li>
                                 <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
@@ -66,7 +109,8 @@
                                 <label for="checklist-item-checkbox">
                                     <i class="far fa-square"></i>
                                 </label>
-                                <input type="text" name="checklist-item-content" value="3.">
+                                <input type="text" name="checklist-item-content" value="3." maxlength="16">
+                                <button class="fas fa-trash"></button>
                             </li>
                             <li>
                                 <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
@@ -74,7 +118,8 @@
                                 <label for="checklist-item-checkbox">
                                     <i class="far fa-square"></i>
                                 </label>
-                                <input type="text" name="checklist-item-content" value="4.">
+                                <input type="text" name="checklist-item-content" value="4." maxlength="16">
+                                <button class="fas fa-trash"></button>
                             </li>
                             <li>
                                 <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
@@ -82,7 +127,71 @@
                                 <label for="checklist-item-checkbox">
                                     <i class="far fa-square"></i>
                                 </label>
-                                <input type="text" name="checklist-item-content" value="5.">
+                                <input type="text" name="checklist-item-content" value="5." maxlength="16">
+                                <button class="fas fa-trash"></button>
+                            </li>
+                            <li class="checklist-item-add-wrapper">
+                                <label>
+                                    <i class="fas fa-plus"></i>
+                                </label>
+                                <label class="checklist-item-add"><span>add</span></label>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="memo-checklist">
+                    <li class="memo-checklist-title">
+                        <div>
+                            <i class="far fa-check-square"></i><span>checklist</span>
+                        </div>
+                        <div>
+                            <i class="fas fa-ellipsis-h"></i><i class="fas fa-chevron-up"></i>
+                        </div>
+                    </li>
+                    <li class="memo-checklist-item-list-wrapper">
+                        <ul class="memo-checklist-item-list">
+                            <li>
+                                <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
+                                    value="">
+                                <label for="checklist-item-checkbox">
+                                    <i class="far fa-check-square"></i>
+                                </label>
+                                <input type="text" name="checklist-item-content" value="1." maxlength="16">
+                                <button class="fas fa-trash"></button>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
+                                    value="">
+                                <label for="checklist-item-checkbox">
+                                    <i class="far fa-check-square"></i>
+                                </label>
+                                <input type="text" name="checklist-item-content" value="2." maxlength="16">
+                                <button class="fas fa-trash"></button>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
+                                    value="">
+                                <label for="checklist-item-checkbox">
+                                    <i class="far fa-square"></i>
+                                </label>
+                                <input type="text" name="checklist-item-content" value="3." maxlength="16">
+                                <button class="fas fa-trash"></button>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
+                                    value="">
+                                <label for="checklist-item-checkbox">
+                                    <i class="far fa-square"></i>
+                                </label>
+                                <input type="text" name="checklist-item-content" value="4." maxlength="16">
+                                <button class="fas fa-trash"></button>
+                            </li>
+                            <li class="checklist-item-add-wrapper">
+                                <label>
+                                    <i class="fas fa-plus"></i>
+                                </label>
+                                <label class="checklist-item-add"><span>add</span></label>
                             </li>
                         </ul>
                     </li>
@@ -96,7 +205,7 @@
                             <i class="fas fa-ellipsis-h"></i><i class="fas fa-chevron-up"></i>
                         </div>
                     </li>
-                    <li>
+                    <li class="memo-checklist-item-list-wrapper">
                         <ul class="memo-checklist-item-list">
                             <li>
                                 <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
@@ -104,7 +213,8 @@
                                 <label for="checklist-item-checkbox">
                                     <i class="far fa-check-square"></i>
                                 </label>
-                                <input type="text" name="checklist-item-content" value="1.">
+                                <input type="text" name="checklist-item-content" value="1." maxlength="16">
+                                <button class="fas fa-trash"></button>
                             </li>
                             <li>
                                 <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
@@ -112,7 +222,8 @@
                                 <label for="checklist-item-checkbox">
                                     <i class="far fa-check-square"></i>
                                 </label>
-                                <input type="text" name="checklist-item-content" value="2.">
+                                <input type="text" name="checklist-item-content" value="2." maxlength="16">
+                                <button class="fas fa-trash"></button>
                             </li>
                             <li>
                                 <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
@@ -120,7 +231,8 @@
                                 <label for="checklist-item-checkbox">
                                     <i class="far fa-square"></i>
                                 </label>
-                                <input type="text" name="checklist-item-content" value="3.">
+                                <input type="text" name="checklist-item-content" value="3." maxlength="16">
+                                <button class="fas fa-trash"></button>
                             </li>
                             <li>
                                 <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
@@ -128,7 +240,8 @@
                                 <label for="checklist-item-checkbox">
                                     <i class="far fa-square"></i>
                                 </label>
-                                <input type="text" name="checklist-item-content" value="4.">
+                                <input type="text" name="checklist-item-content" value="4." maxlength="16">
+                                <button class="fas fa-trash"></button>
                             </li>
                             <li>
                                 <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
@@ -136,61 +249,14 @@
                                 <label for="checklist-item-checkbox">
                                     <i class="far fa-square"></i>
                                 </label>
-                                <label class="checklist-item-add"><i class="fas fa-plus"></i><span>add</span></label>
+                                <input type="text" name="checklist-item-content" value="5." maxlength="16">
+                                <button class="fas fa-trash"></button>
                             </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="memo-checklist">
-                    <li class="memo-checklist-title">
-                        <div>
-                            <i class="far fa-check-square"></i><span>checklist</span>
-                        </div>
-                        <div>
-                            <i class="fas fa-ellipsis-h"></i><i class="fas fa-chevron-down"></i>
-                        </div>
-                    </li>
-                    <li style="display:none; height:0;">
-                        <ul class="memo-checklist-item-list">
-                            <li>
-                                <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
-                                    value="">
-                                <label for="checklist-item-checkbox">
-                                    <i class="far fa-check-square"></i>
+                            <li class="checklist-item-add-wrapper">
+                                <label>
+                                    <i class="fas fa-plus"></i>
                                 </label>
-                                <input type="text" name="checklist-item-content" value="1.">
-                            </li>
-                            <li>
-                                <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
-                                    value="">
-                                <label for="checklist-item-checkbox">
-                                    <i class="far fa-check-square"></i>
-                                </label>
-                                <input type="text" name="checklist-item-content" value="2.">
-                            </li>
-                            <li>
-                                <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
-                                    value="">
-                                <label for="checklist-item-checkbox">
-                                    <i class="far fa-square"></i>
-                                </label>
-                                <input type="text" name="checklist-item-content" value="3.">
-                            </li>
-                            <li>
-                                <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
-                                    value="">
-                                <label for="checklist-item-checkbox">
-                                    <i class="far fa-square"></i>
-                                </label>
-                                <input type="text" name="checklist-item-content" value="4.">
-                            </li>
-                            <li>
-                                <input type="checkbox" id="checklist-item-checkbox" name="checklist-item-checkbox"
-                                    value="">
-                                <label for="checklist-item-checkbox">
-                                    <i class="far fa-square"></i>
-                                </label>
-                                <input type="text" name="checklist-item-content" value="5.">
+                                <label class="checklist-item-add"><span>add</span></label>
                             </li>
                         </ul>
                     </li>
@@ -198,23 +264,23 @@
             </div>
         </div>
         <div class="memo-detail-share">
-            <input type="button" class="memo-detail-share-button" value="공유하기">
+            <input type="button" class="memo-detail-share-button" name="memo-share-button" value="공유하기">
         </div>
         <div class="memo-detail-checklist">
-            <input type="button" class="memo-detail-checklist-button" value="체크리스트">
+            <input type="button" class="memo-detail-checklist-button" name="memo-checklist-button" value="체크리스트">
         </div>
         <div class="memo-detail-duedate">
-            <input type="button" class="memo-detail-duedate-button" value="DueDate">
+            <input type="button" class="memo-detail-duedate-button" name="memo-duedate-button" value="DueDate">
             <span>&nbsp;<i class="far fa-check-square"></i>&nbsp;&nbsp;2019/12/31 12:53&nbsp;</span>
         </div>
         <div class="memo-detail-delete">
-            <input type="button" class="memo-detail-delete-button" value="삭제하기">
+            <input type="button" class="memo-detail-delete-button" name="memo-del-button" value="삭제하기">
         </div>
 
     </section>
     <!-- wrapper end -->
 
-    <div class="popup" style="display:block">
+    <div class="popup" style="display:none">
         <div class="memo-delete-popup popup-wrap"
             style="width: 290px; left: 50%; transform: translate(-50%, 0); display: none;">
             <div class="popup-container">
@@ -229,7 +295,7 @@
             </div><!-- popup-container -->
         </div><!-- popup-wrap -->
 
-        <div class="memo-duedate-popup popup-wrap" style="display: block;">
+        <div class="memo-duedate-popup popup-wrap" style="display: none;">
             <div class="popup-container">
                 <div class="context">
                     <p>Due Date</p>
@@ -268,6 +334,6 @@
         </div><!-- popup-wrap -->
     </div><!-- popup -->
 
-    <div class="mask" style="display:block; position: fixed;"></div>
+    <div class="mask" style="display:none; position: fixed;"></div>
 
 </html>

@@ -31,8 +31,7 @@ public class TincMvcConfigurer
 
 		StringHttpMessageConverter converter = new StringHttpMessageConverter();
 		converter.setDefaultCharset(Charset.forName("UTF-8"));
-		converter.setWriteAcceptCharset(false);
-		
+		converter.setWriteAcceptCharset(false);		
 		converters.add(converter);
 		
 		WebMvcConfigurer.super.configureMessageConverters(converters);
