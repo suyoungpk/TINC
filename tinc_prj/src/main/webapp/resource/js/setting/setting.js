@@ -24,6 +24,12 @@ $(function() {
 
 // ------ setting ------
 $(function(){
+    $(".go-memo").click(function (e) { 
+        location.href = '../memo/memo-list.html';
+        e.preventDefault();
+        e.stopPropagation();
+    });
+
     $("#setting-edit-pwd").click(function(e){
         location.href='change-pwd.html';
         e.preventDefault();
@@ -90,7 +96,4 @@ $(function(){
     $("#cancle-edit-pwd, #ok-edit-pwd").click(function () { 
         location.href = 'setting.html';
     });
-    // $("").click(function () { 
-    //     location.href = 'setting.html';
-    // });
 });
