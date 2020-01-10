@@ -163,11 +163,16 @@
 			<artifactId>spf4j-logback</artifactId>
 			<version>1.2.7</version>
 		</dependency>
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
 	</dependencies>
 
 	<properties>
 		<springframework.version>5.2.2.RELEASE</springframework.version>
-		<springsecurity.version>5.2.1.RELEASE</springsecurity.version>
+		<springsecurity.version>5.0.3.RELEASE</springsecurity.version>
 		<tomcat.version>9.0.7</tomcat.version>
 
 		<maven.compiler.source>1.8</maven.compiler.source>
