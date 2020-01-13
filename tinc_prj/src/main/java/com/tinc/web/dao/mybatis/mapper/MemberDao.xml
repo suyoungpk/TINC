@@ -4,6 +4,89 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tinc.web.dao.MemberDao">
 	
+	<insert id="joinMember" parameterType="com.tinc.web.entity.Member">
+		insert into Member(id, nickName, password, phoneNum, email) 
+		values(#{id}, #{nickName}, #{password}, #{phoneNum}, #{email})
+	</insert>
+	
+	<update id="editMember" parameterType="com.tinc.web.entity.Member">
+		update Member 
+		set nickname = #{nickName}, password=#{password}, phoneNum=#{phoneNum}, email=#{email} 
+		where id = #{id}
+	</update>
+	
+	<delete id="withdrawalMember" parameterType="com.tinc.web.entity.Member">
+		delete from Member where id = #{id}
+	</delete>
+	
+	<insert id="addFriend" parameterType="com.tinc.web.entity.FriendsList">
+		insert into FriendsList(memberId, friendsId) 
+			values(#{memberId}, #{friendsId})
+	</insert>
+	
+	<delete id="deleteFriend" parameterType="com.tinc.web.entity.FriendsList">
+		delete from FriendsList where memberId=#{memberId} and FriendsId=#{friendsId}
+	</delete>
+	
+	<insert id="blockUser" parameterType="com.tinc.web.entity.FriendsList">
+		insert into BlackList(memberId, blackId) 
+			values(#{memberId}, #{blackId})
+	</insert>
+	
+	<delete id="unblockUser" parameterType="com.tinc.web.entity.FriendsList">
+		delete from BlackList where memberId=#{memberId} and blackId=#{blackId}
+	</delete>
+	
+	<select id="getFriendsListCount" resultType="java.lang.Integer">
+		select count(friendsId) from FriendsList where memberId=#{memberId}
+	</select>
+	
+	<select id="get" resultType="com.tinc.web.entity.Member">
+		select * from Member where id=#{id}
+	</select>
+	
+	<select id="getFriend" resultType="com.tinc.web.entity.Member">
+		select nickName, statusMsg, profileImg from Member where id=#{memberId}
+	</select>
+	
+	<select id="getMyProfile" resultType="com.tinc.web.entity.Member">
+		select nickName, statusMsg, profileImg from Member where id=#{memberId}
+	</select>
+	
+	<select id="getFriendsProfile" resultType="com.tinc.web.entity.Member">
+		select nickName, statusMsg, profileImg from Member where id in 
+		(
+			select friendsId from FriendsList where memberId=#{memberId}
+		) 
+	</select>
+	
+	<!-- <select id="searchFriendforAdding" resultType="com.tinc.web.entity.FriendSearchResults">
+		select * from FriendSearchResults where id like '%%'
+	</select> -->
+	
+	<select id="getListOfUserWhoHaveAddedMe" resultType="com.tinc.web.entity.Member">
+		select nickName, statusMsg, profileImg from Member where id in 
+		(
+			select memberId from FriendsList where friendsId=#{friendsId}
+		) 
+	</select>
+	
+	<select id="getListOfUserWhoBlockedMe" resultType="com.tinc.web.entity.Member">
+		select memberId from BlackList where blackId=#{blackId}
+	</select>
+	
+	<select id="getListOfUserIhaveblocked" resultType="com.tinc.web.entity.Member">
+		select nickName, statusMsg, profileImg from Member where id in
+		(
+			select blackId from BlackList where memberId=#{memberId}
+		) 
+	</select>
+	
+	<select id="findId" resultType="com.tinc.web.entity.Member">
+		select id from Member where email like '%${param2}%'; 
+	</select>
+	
+	
 </mapper>
 
 
