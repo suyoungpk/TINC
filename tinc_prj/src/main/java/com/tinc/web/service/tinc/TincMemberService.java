@@ -24,37 +24,37 @@ public class TincMemberService implements MemberService{
 	@Override
 	public int editMember(Member member) {
 		// TODO Auto-generated method stub
-		return 0;
+		return memberDao.editMember(member);
 	}
 
 	@Override
 	public int withdrawalMember(String id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return memberDao.withdrawalMember(id);
 	}
 
 	@Override
 	public int addFriend(String memberId, String friendsId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return memberDao.addFriend(memberId, friendsId);
 	}
 
 	@Override
 	public int deleteFriend(String memberId, String friendsId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return memberDao.deleteFriend(memberId, friendsId);
 	}
 
 	@Override
 	public int blockUser(String memberId, String blackId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return memberDao.blockUser(memberId, blackId);
 	}
 
 	@Override
 	public int unblockUser(String memberId, String blackId) {
 		// TODO Auto-generated method stub
-		return 0;
+		return memberDao.unblockUser(memberId, blackId);
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class TincMemberService implements MemberService{
 	@Override
 	public Member getFriend(String memberId) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.getFriend(memberId);
 	}
 
 	@Override
@@ -84,37 +84,37 @@ public class TincMemberService implements MemberService{
 	@Override
 	public List<Member> searchFriendforAdding(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.searchFriendforAdding(id);
 	}
 
 	@Override
 	public List<Member> getListOfUserWhoHaveAddedMe(String friendsId) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.getListOfUserWhoHaveAddedMe(friendsId);
 	}
 
 	@Override
 	public List<Member> getListOfUserWhoBlockedMe(String blackId) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.getListOfUserWhoBlockedMe(blackId);
 	}
 
 	@Override
 	public List<Member> getListOfUserIhaveblocked(String memberId) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.getListOfUserIhaveblocked(memberId);
 	}
 
 	@Override
 	public Member findId(String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.findId(email);
 	}
 
 	@Override
 	public String sendTemporaryPassword(String id, String email) {
 		// TODO Auto-generated method stub
-		return null;
+		return memberDao.sendTemporaryPassword(id, email);
 	}
 
 	@Override
@@ -126,11 +126,8 @@ public class TincMemberService implements MemberService{
 
 	@Override
 	public boolean isValidMember(String id, String password) {
-		System.out.println("ㅎㅇㅎㅇㅎ");
-		String iid = "user1";
-		Member member = memberDao.get(iid);
+		Member member = memberDao.get(id);
 		if(member.getPassword().equals(password)) {
-			System.out.println("if"+member);
 			return true;
 		}
 		return false;
@@ -141,6 +138,8 @@ public class TincMemberService implements MemberService{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
 
 
 	

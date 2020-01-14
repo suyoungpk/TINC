@@ -15,11 +15,11 @@ public class SMTPConfig
 	{
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 		mailSender.setDefaultEncoding("UTF-8");
-		//mailSender.setHost("smtp.gmail.com");
-		mailSender.setHost("smtp.naver.com");
+		mailSender.setHost("smtp.gmail.com");
+		//mailSender.setHost("smtp.naver.com");
 		mailSender.setPort(587);
-		mailSender.setUsername("kimho314@naver.com");
-		mailSender.setPassword("890314k");
+		mailSender.setUsername("yupddok@gmail.com");
+		mailSender.setPassword("ac6164ac");
 
 		Properties properties = new Properties();
 		properties.put("mail.transport.protocol", "smtp");

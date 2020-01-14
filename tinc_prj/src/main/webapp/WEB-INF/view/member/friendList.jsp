@@ -23,7 +23,7 @@
             <span class="center">친구</span>
             <span class="right"><i class="fas fa-bars"></i></span>
          </div>
-         
+         <input type="hidden" value="${id}"/> 
          <div class="friend">
 	         <div class="box inline">  
 	         	<img src="${imgs}" alt="image" class="profile">

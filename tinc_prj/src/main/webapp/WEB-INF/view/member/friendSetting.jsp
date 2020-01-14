@@ -8,7 +8,7 @@
 <meta charset="utf-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/common.css" >
-<link rel="stylesheet" href="../../../resource/css/bottombutton.css">
+<link rel="stylesheet" href="../../../resource/css/bottomButton.css">
 <link rel="stylesheet" href="../../../resource/css/member/member.css" >
 </head>
 <body>
@@ -17,7 +17,7 @@
          <a href="#" title="메모장 이동">MEMO</a>
       </nav><!-- gnb end -->
       <main class="container friend-setting">
-         <form method="post" action="friendSetting">
+         <form action="friendSetting" method="post">
          <div class="menu">
          	<span class="left"><i class="fas fa-chevron-left"></i></span>
             <span class="center">친구 설정</span>
@@ -25,7 +25,9 @@
          </div>
          
          <p class="block-friend">차단한 친구</p>
+         
          <hr>
+          <c:forEach var="userIhaveblocked" items="${userIhaveblocked}">
          <div class="flex friend">
 	         <div class="box">  
 	         	<img src="../../../resource/images/5.png" alt="image1" class="profile">
@@ -35,13 +37,17 @@
 	         	<p>${userIhaveblocked.statusMsg}</p>
          	</div>
          	<div class="child-flex">
-	         	<input type="button" class="find-btn" value="추가"/>
-	         	<input type="button" class="find-btn" value="해제"/>
+	         	<input type="button" class="find-btn" value="추가" name="addFriend" />
+	         	<input type="hidden" value="${userIhaveblocked.id}"/>
+	         	<input type="button" class="find-btn" value="해제" name="unBlock"/>
+	         	
          	</div>
          </div>
+         </c:forEach>
          <p class="add-friend">나를 추가한 친구</p>
-        <%--  <c:forEach var="userWhoHaveAddedMe" items="${userWhoHaveAddedMe}"> --%>
+         
          <hr>
+         <c:forEach var="userWhoHaveAddedMe" items="${userWhoHaveAddedMe}">
          <div class="flex friend">
 	         <div class="box">  
 	         	<img src="../../../resource/images/8.png" alt="image1" class="profile">
@@ -55,25 +61,25 @@
 	         	<input type="button" class="find-btn" value="차단"/>
          	</div>
          </div>
-       <%--   </c:forEach> --%>
+         </c:forEach>
          
-	     <!-- <div class="bottombutton">
+	     <div class="bottombutton">
 			<button class="btn on">
-				<i class="fas fa-user">친구목록</i> 
+				<!-- <i class="fas fa-user">친구목록</i>  -->
 				<i class="fas fa-user-plus">친구추가</i>
 			</button>
 			<button class="btn">
 				<i class="fas fa-comments">채팅목록</i> 
-				<span class="btn-chatadd">
+				<!-- <span class="btn-chatadd">
 					<span class="hidden">채팅추가</span>
 					<i class="fas fa-comments"></i>
 					<i class="fas fa-plus"></i>
-				</span>
+				</span> -->
 			</button>
 			<button class="btn">
 				<i class="fas fa-cog">설정</i>
 			</button>
-		</div> -->
+		</div>
          </form>
          
       </main><!-- container end -->
@@ -91,5 +97,35 @@
       </div>
    </div>
    <div class="mask"></div>
+   
+   <!-- <script>
+   window.addEventListener("load",function(){
+	   var addFriend = document.querySelectorAll("#addFriend");
+       var unBlock = document.querySelectorAll("#unBlock");
+       for (var i = 0; i < addFriend.length; i++) 
+    	   addFriend[i].onclick=function(e){
+             cid.value = e.target.nextElementSibling.value;
+             cmd.value = "삭제";
+             alert(cmd.value);
+             //alert(e.target);
+             document.frm.submit();
+          }
+	   
+	   
+	   
+	   
+   });
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   </script> -->
 </body>
 </html>
