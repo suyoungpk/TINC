@@ -83,7 +83,7 @@
 	</select>
 	
 	<select id="findId" resultType="com.tinc.web.entity.Member">
-		select id from Member where email like '%${param2}%'; 
+		select id from Member where email=#{email}; 
 	</select>
 	
 	

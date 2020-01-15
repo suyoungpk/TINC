@@ -125,9 +125,6 @@ public class MybatisMemberDao implements MemberDao{
 
 	@Override
 	public Member get(String id) {
-		System.out.println(id);
-		
-		System.out.println(mapperDao.get("user1"));
 		return mapperDao.get(id);
 		
 	}
