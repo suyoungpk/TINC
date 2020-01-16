@@ -1,3 +1,4 @@
+.chatList.add {padding-top:0;}
 .chatList > li {
    border-top: 0px solid #b2b2b2;
 }
@@ -26,6 +27,7 @@
 
 .search {
    position: relative;
+   margin:3.6rem 0.8125rem 0;
 }
 .search .searchSpan {
    text-align: right;
@@ -35,7 +37,7 @@
    /* padding: 0 0 0 0.5rem; */
 }
 
-.search .searchSpan span {
+.search .searchSpan button{
    padding: 0 0.5rem 0 0.5rem;
    border-radius: 2px;
    background-color: rgb(115, 103, 241);

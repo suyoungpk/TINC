@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
-	<link rel="stylesheet" href="../../../resource/css/chatting/chat.css" >
+	<link rel="stylesheet" href="../../../../resource/css/chatting/chat.css" >
 	<section class="wrapper"> 
 		<nav class="gnb"> 
 			<a href="#" title="메모장 이동">MEMO</a>
 		</nav><!-- gnb end -->
-		<main class="container">
+		<main class="container"  style="overflow-y:hidden">
 			<div class="topBox">
 				<div class="left">
 					<button class="btn-back fas fa-chevron-left">뒤로가기</button>
@@ -30,12 +30,63 @@
 					<button class="btn-bar fas fa-bars">메뉴</button>
 					<!-- <button class="btn-close fas fa-times">닫기</button> -->
 				</div>
-				
 			</div>
 			<!-- chat-->			
 			<div class="chattingBox">
 				<ul class="chatting">
+					<li class="member">
+						<figure>
+							<img src="http://placehold.it/100x100" alt="">
+						</figure>
+						<div class="megBox">
+							<div class="name">Jessica</div>
+							<ul>
+								<li>
+									<div class="message">
+										안녕
+										<span class="date">13:50</span>							
+									</div>
+								</li>
+							</ul>
+							
+						</div>
+						<!-- <div class="btnBox">
+							<button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button>	
+						</div> -->
+					</li>
 					<li class="info"><div>2019년 12월 12일</div></li>
+					<li class="info"><div><i class="fas fa-user-plus"></i> 회원님이 은선띠님을 초대했습니다</div></li>
+					<li class="me">
+						<div class="megBox">
+							<ul>
+								<li>
+									<div class="message">
+										ㅎㅇ
+										<span class="date">14:50</span>
+									</div>
+								</li>
+							</ul>							
+						</div>
+					</li>
+					<li class="member">
+						<figure>
+							<img src="http://placehold.it/100x100" alt="">
+						</figure>
+						<div class="megBox">
+							<div class="name">Jessica</div>
+							<ul>
+								<li>
+									<div class="message imgBox">
+										<img src="https://cafeptthumb-phinf.pstatic.net/20151221_149/ry2225_1450659220988LylbB_JPEG/51.jpg?type=w740" alt="">
+										<span class="date">13:50</span>							
+									</div>
+								</li>
+							</ul>							
+						</div>
+						<div class="btnBox">
+							<button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button>	
+						</div>
+					</li>
 					<li class="member">
 						<figure>
 							<img src="http://placehold.it/100x100" alt="">
@@ -69,18 +120,56 @@
 						</div>
 					</li>
 				</ul>
+				<!-- share 팝업 -->
+				<div class="popup pop-share" >
+					<nav>
+						<h1 class="hidden">채팅창 선택하기</h1>
+						<div class="topBox">
+							<div class="left">
+								<button class="btn-back fas fa-chevron-left">뒤로가기</button>
+							</div>
+							<div class="right">
+								<button class="btn-close fas fa-times">닫기</button>
+							</div>
+						</div>
+						<ul>
+							<li><a href="">3조</a></li>
+							<li><a href="">학원</a></li>
+							<li><a href="">밥</a></li>
+							<li><a href="">스터디</a></li>
+							<li><a href="">회사</a></li>
+						</ul>
+					</nav>
+				</div>
+				<div class="popup pop-share memo" style="display:block">
+					<nav>
+						<h1 class="hidden">메모 선택하기</h1>
+						<div class="topBox">
+							<div class="left">
+								<button class="btn-back fas fa-chevron-left">뒤로가기</button>
+							</div>
+							<div class="right">
+								<button class="btn-close fas fa-times">닫기</button>
+							</div>
+						</div>
+						<ul>
+							<li><a href="">Lorem ipsum</a></li>
+							<li><a href="">별헤는밤</a></li>
+							<li><a href="">밥</a></li>
+							<li><a href="">스터디</a></li>
+							<li><a href="">회사</a></li>
+						</ul>
+					</nav>
+				</div>
+				<div class="mask" style="display:block"></div>
 				<div class="chatInput">
-					<button class="btn-top"><i class="fas fa-arrow-up">TOP</i></button>
 					<form action="">
 						<button class="btn-add"><i class="fas fa-plus">채팅메뉴</i></button>
 						<input type="text" class="chatInputBox">
 						<button type="submit" class="btn-send fas fa-paper-plane">보내기</button>
 					</form>
 				</div>
-				<div class="downProcess">
-					<p>파일 전송 중 (32%)</p>
-					<div class="bar"><span style="width:32%"></span></div>
-				</div>
+				<!-- <button class="btn-top"><i class="fas fa-arrow-up">TOP</i></button> -->
 			</div>
 		</main><!-- container end -->
 	</section><!-- wrapper end -->

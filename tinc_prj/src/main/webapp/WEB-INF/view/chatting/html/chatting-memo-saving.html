@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
-	<link rel="stylesheet" href="../../../resource/css/chatting/chat.css" >
+	<link rel="stylesheet" href="../../../../resource/css/chatting/chat.css" >
 	<section class="wrapper"> 
 		<nav class="gnb"> 
 			<a href="#" title="메모장 이동">MEMO</a>
@@ -35,59 +35,7 @@
 			<!-- chat-->			
 			<div class="chattingBox">
 				<ul class="chatting">
-					<li class="member">
-						<figure>
-							<img src="http://placehold.it/100x100" alt="">
-						</figure>
-						<div class="megBox">
-							<div class="name">Jessica</div>
-							<ul>
-								<li>
-									<div class="message">
-										안녕
-										<span class="date">13:50</span>							
-									</div>
-								</li>
-							</ul>
-							
-						</div>
-						<!-- <div class="btnBox">
-							<button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button>	
-						</div> -->
-					</li>
 					<li class="info"><div>2019년 12월 12일</div></li>
-					<li class="info"><div><i class="fas fa-user-plus"></i> 회원님이 은선띠님을 초대했습니다</div></li>
-					<li class="me">
-						<div class="megBox">
-							<ul>
-								<li>
-									<div class="message">
-										ㅎㅇ
-										<span class="date">14:50</span>
-									</div>
-								</li>
-							</ul>							
-						</div>
-					</li>
-					<li class="member">
-						<figure>
-							<img src="http://placehold.it/100x100" alt="">
-						</figure>
-						<div class="megBox">
-							<div class="name">Jessica</div>
-							<ul>
-								<li>
-									<div class="message imgBox">
-										<img src="https://cafeptthumb-phinf.pstatic.net/20151221_149/ry2225_1450659220988LylbB_JPEG/51.jpg?type=w740" alt="">
-										<span class="date">13:50</span>							
-									</div>
-								</li>
-							</ul>							
-						</div>
-						<div class="btnBox">
-							<button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button>	
-						</div>
-					</li>
 					<li class="member">
 						<figure>
 							<img src="http://placehold.it/100x100" alt="">
@@ -129,56 +77,43 @@
 						<button type="submit" class="btn-send fas fa-paper-plane">보내기</button>
 					</form>
 				</div>
+				<nav class="shareMenu">
+					<h1 class="hidden">공유메뉴</h1>
+					<ul>
+						<li>
+							<a href="">
+								<span><i class="fas fa-user"></i></span>
+								개인메모
+							</a>							
+						</li>
+						<li>
+							<a href="">
+								<span><i class="fas fa-users"></i></span>
+								그룹메모
+							</a>						
+						</li>
+					</ul>
+					<a href="" class="btn-cancel">취소</a>
+				</nav>
+				<!-- <div class="downProcess">
+					<p>파일 전송 중 (32%)</p>
+					<div class="bar"><span style="width:32%"></span></div>
+				</div> -->
 			</div>
 		</main><!-- container end -->
 	</section><!-- wrapper end -->
-	<div class="popup friendSetting" style="display:block">
+	<div class="popup alert">
 		<div class="popup-wrap">
-			<div class="popup-container">				
-				<div class="profile">
-					<figure>
-						 <!-- default -->
-						<!-- <i class="fas fa-user"></i> -->
-						<img src="http://placehold.it/100x100" alt="">
-					</figure>
-					<ul>
-						<li class="title">Jessica/dfdfdfdfdfddddddddddddddddddddddddddddd</li>
-						<li>In a professional context it often happensIn a professional context it often happensIn a professional context it often happensIn a professional context it often happensIn a professional context it often happens</li>
-					</ul>
-				</div>
-				<nav class="btn-area">
-					<ul>
-						<li>
-							<a href="#" class="btn">1:1채팅</a>
-							<!-- <a href="#" class="btn">친구추가</a> -->
-							<a href="#" class="btn">차단</a>
-						</li>
-						<!--방장메뉴-->
-						<li>
-							<a href="#" class="btn">권한</a>
-							<a href="#" class="btn">추방</a>
-						</li>
-					</ul>
-				</nav>
-				<!--방장 권한 메뉴-->
-				<div class="head">
-					<p class="title">권한 위임, 박탈하기</p>
-					<nav class="btn-area">
-						<ul>
-							<li>
-								<a href="#" class="btn">초대 권한</a>
-								<a href="#" class="btn">방장 위임</a>
-							</li>
-						</ul>
-					</nav>
-					<a href="#" class="btn-back fas fa-chevron-left">뒤로가기</a>
-					<a href="#" class="btn-close fas fa-times">닫기</a>
-				</div>
-				<!--// 방장 권한 메뉴-->
-				<a href="#" class="btn-close fas fa-times">닫기</a>
+			<div class="context">
+				<p>일반 팝업창입니다.</p>
 			</div>
+			<div class="btn-area">
+				<a href="#" class="btn">취소</a>
+				<a href="#" class="btn">확인</a>
+			</div>
+			<a href="#" class="btn-close">닫기</a>
 		</div>
 	</div>
-	<div class="mask" style="display:block"></div>
+	<div class="mask"></div>
 </body>
 </html>

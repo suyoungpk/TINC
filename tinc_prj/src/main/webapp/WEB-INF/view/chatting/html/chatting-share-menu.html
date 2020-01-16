@@ -6,12 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
-	<link rel="stylesheet" href="../../../resource/css/chatting/chat.css" >
+	<link rel="stylesheet" href="../../../../resource/css/chatting/chat.css" >
 	<section class="wrapper"> 
 		<nav class="gnb"> 
 			<a href="#" title="메모장 이동">MEMO</a>
 		</nav><!-- gnb end -->
-		<main class="container"  style="overflow-y:hidden">
+		<main class="container">
 			<div class="topBox">
 				<div class="left">
 					<button class="btn-back fas fa-chevron-left">뒤로가기</button>
@@ -30,6 +30,7 @@
 					<button class="btn-bar fas fa-bars">메뉴</button>
 					<!-- <button class="btn-close fas fa-times">닫기</button> -->
 				</div>
+				
 			</div>
 			<!-- chat-->			
 			<div class="chattingBox">
@@ -120,58 +121,34 @@
 						</div>
 					</li>
 				</ul>
-				<!-- share 팝업 -->
-				<div class="popup pop-share" >
-					<nav>
-						<h1 class="hidden">채팅창 선택하기</h1>
-						<div class="topBox">
-							<div class="left">
-								<button class="btn-back fas fa-chevron-left">뒤로가기</button>
-							</div>
-							<div class="right">
-								<button class="btn-close fas fa-times">닫기</button>
-							</div>
-						</div>
-						<ul>
-							<li><a href="">3조</a></li>
-							<li><a href="">학원</a></li>
-							<li><a href="">밥</a></li>
-							<li><a href="">스터디</a></li>
-							<li><a href="">회사</a></li>
-						</ul>
-					</nav>
-				</div>
-				<div class="popup pop-share memo" style="display:block">
-					<nav>
-						<h1 class="hidden">메모 선택하기</h1>
-						<div class="topBox">
-							<div class="left">
-								<button class="btn-back fas fa-chevron-left">뒤로가기</button>
-							</div>
-							<div class="right">
-								<button class="btn-close fas fa-times">닫기</button>
-							</div>
-						</div>
-						<ul>
-							<li><a href="">Lorem ipsum</a></li>
-							<li><a href="">별헤는밤</a></li>
-							<li><a href="">밥</a></li>
-							<li><a href="">스터디</a></li>
-							<li><a href="">회사</a></li>
-						</ul>
-					</nav>
-				</div>
-				<div class="mask" style="display:block"></div>
 				<div class="chatInput">
+					<button class="btn-top"><i class="fas fa-arrow-up">TOP</i></button>
 					<form action="">
 						<button class="btn-add"><i class="fas fa-plus">채팅메뉴</i></button>
 						<input type="text" class="chatInputBox">
 						<button type="submit" class="btn-send fas fa-paper-plane">보내기</button>
 					</form>
+					<nav class="sendMenu">
+						<ul>
+							<li>
+								<a href="">
+									<span><i class="far fa-folder-open"></i></span>
+									파일전송
+								</a>							
+							</li>
+							<li>
+								<a href="">
+									<span><i class="far fa-file-alt"></i></span>
+									메모공유
+								</a>						
+							</li>
+						</ul>
+					</nav>
 				</div>
-				<!-- <button class="btn-top"><i class="fas fa-arrow-up">TOP</i></button> -->
+				
 			</div>
 		</main><!-- container end -->
+		<aside id="setting"></aside>
 	</section><!-- wrapper end -->
 	<div class="popup alert">
 		<div class="popup-wrap">

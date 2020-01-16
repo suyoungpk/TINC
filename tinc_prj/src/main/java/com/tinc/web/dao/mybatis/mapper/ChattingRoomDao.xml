@@ -3,5 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tinc.web.dao.ChattingRoomDao">
-	
+ <select id="get" resultType="com.tinc.web.entity.ChattingRoom">
+ 	SELECT * FROM ChattingRoom WHERE memberId = #{memberId}
+ </select>
+ <select id="getChattingRoomId" resultType="int"> <!-- for createRoom -->
+ 	SELECT id FROM ChattingRoom WHERE memberId=#{ownerId} AND owner=1 ORDER BY id DESC limit 1
+ </select>
+ <select id="getMembers" resultType="com.tinc.web.entity.Member">
+ 	SELECT * FROM Member WHERE id IN (SELECT memberId FROM ChattingRoom WHERE id=#{chatId})
+ </select>
+ <select id="getByMember" resultType="com.tinc.web.entity.ChattingRoom">
+ 	SELECT * FROM ChattingRoom WHERE memberId=#{memberId} AND id=#{chatId}
+ </select>
+ <select id="getByOwner" resultType="com.tinc.web.entity.ChattingRoom">
+ 	SELECT * FROM ChattingRoom WHERE owner = 1 AND id=#{chatId}
+ </select>
+ <insert id="inviteRoom" parameterType="com.tinc.web.entity.ChattingRoom">
+ 	INSERT INTO ChattingRoom VALUES (#{id},#{memberId},#{title},#{owner},#{authority},#{notice},#{chatfile})
+ </insert>
+ <insert id="createRoom" parameterType="com.tinc.web.entity.ChattingRoom">
+ 	INSERT INTO ChattingRoom VALUES ((SELECT id FROM (SELECT COALESCE(MAX(id), 0)+1 id FROM ChattingRoom) as temp),#{memberId},#{title},1,"초대","","")
+ </insert>
+  <update id="update" parameterType="com.tinc.web.entity.ChattingRoom">
+ 	UPDATE ChattingRoom SET title=#{title},owner=#{owner},authority=#{authority} WHERE memberId=#{memberId} and id=#{id}
+ </update>
+ <delete id="delete" >
+ 	DELETE FROM ChattingRoom WHERE memberId=#{memberId} AND id=#{chatId}
+ </delete>
 </mapper>
