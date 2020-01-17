@@ -159,6 +159,8 @@ a { text-decoration:none ; color:#000000}
     width: calc(100% - 0.921875rem);
     height: 2.188rem;
     margin-top: 1.125rem;
+    box-sizing: border-box;
+    padding: 0 0.625rem;
 }
 #withdraw-ask2{
     display: none;
@@ -183,6 +185,8 @@ a { text-decoration:none ; color:#000000}
     -webkit-border-radius: 1.063rem;
     width: calc(100% - 0.765625rem);
     height: 2.188rem;
+    box-sizing: border-box;
+    padding: 0 0.625rem;
 }
 .context div p {
     text-align: left;

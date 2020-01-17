@@ -1,9 +1,9 @@
 // --- popup 뒤 내용 보이기
 $(function(){ 
-    $("#setting-wrapper").load("setting.html");
+    $("#setting-wrapper").load("setting.jsp");
     
     $(".setting-close").click(function(){
-        location.href = 'setting.html';
+        location.href = 'setting.jsp';
     })
 });
 
@@ -25,38 +25,38 @@ $(function() {
 // ------ setting ------
 $(function(){
     $(".go-memo").click(function (e) { 
-        location.href = '../memo/memo-list.html';
+        location.href = '../memo/memo-list.jsp';
         e.preventDefault();
         e.stopPropagation();
     });
 
     $("#setting-edit-pwd").click(function(e){
-        location.href='change-pwd.html';
+        location.href='change-pwd.jsp';
         e.preventDefault();
         e.stopPropagation();
     });
 
     $("#ok-edit-pwd").click(function(e){
-        location.href = 'setting.html';
+        location.href = 'setting.jsp';
         e.preventDefault();
         e.stopPropagation();
     });
 
     $("#close-change-pwd").click(function(e){
-        location.href = 'setting.html';
+        location.href = 'setting.jsp';
         e.preventDefault();
         e.stopPropagation();
     });
 
     $("#setting-secession").click(function (e) { 
-        location.href='withdraw.html';
+        location.href='withdraw.jsp';
         e.preventDefault();
         e.stopPropagation();
     });
 
     $("#set-logout").click(function(){
         console.log("로그아웃");
-        location.href = 'logout.html';
+        location.href = 'logout.jsp';
     });
 });
 // ------ withdraw ------
@@ -67,13 +67,13 @@ $(function(){
     });
 
     $("#withdraw-cancle1, #withdraw-cancle2").click(function(e){
-        location.href = 'setting.html';
+        location.href = 'setting.jsp';
         e.preventDefault();
         e.stopPropagation();
     });
 
     $("#withdraw-ok2").click(function(e){
-        location.href = '../member/main.html';
+        location.href = '../member/main.jsp';
         e.preventDefault();
         e.stopPropagation();
     });
