@@ -28,12 +28,12 @@
 		delete from FriendsList where memberId=#{memberId} and FriendsId=#{friendsId}
 	</delete>
 	
-	<insert id="blockUser" parameterType="com.tinc.web.entity.FriendsList">
+	<insert id="blockUser" parameterType="com.tinc.web.entity.BlackList">
 		insert into BlackList(memberId, blackId) 
 			values(#{memberId}, #{blackId})
 	</insert>
 	
-	<delete id="unblockUser" parameterType="com.tinc.web.entity.FriendsList">
+	<delete id="unblockUser" parameterType="com.tinc.web.entity.BlackList">
 		delete from BlackList where memberId=#{memberId} and blackId=#{blackId}
 	</delete>
 	
@@ -65,18 +65,18 @@
 	</select> -->
 	
 	<select id="getListOfUserWhoHaveAddedMe" resultType="com.tinc.web.entity.Member">
-		select nickName, statusMsg, profileImg from Member where id in 
+		select id, nickName, statusMsg, profileImg from Member where id in 
 		(
 			select memberId from FriendsList where friendsId=#{friendsId}
 		) 
 	</select>
 	
 	<select id="getListOfUserWhoBlockedMe" resultType="com.tinc.web.entity.Member">
-		select memberId from BlackList where blackId=#{blackId}
+		select id, memberId from BlackList where blackId=#{blackId}
 	</select>
 	
 	<select id="getListOfUserIhaveblocked" resultType="com.tinc.web.entity.Member">
-		select nickName, statusMsg, profileImg from Member where id in
+		select id, nickName, statusMsg, profileImg from Member where id in
 		(
 			select blackId from BlackList where memberId=#{memberId}
 		) 

@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tinc.web.entity.BlackList;
+import com.tinc.web.entity.FriendsList;
 import com.tinc.web.entity.Member;
 import com.tinc.web.service.MemberService;
 
@@ -84,14 +86,42 @@ public class MemberController {
 	}
 	
 	@PostMapping("friendSetting")
-	public String friendSetting(@RequestParam(value = "addFriend") String addBtn) {
-		System.out.println("dd");
-		System.out.println(addBtn);
-		String memberId = "user1";
-		String blackId = "user1";
-//		service.unblockUser(memberId, blackId);
-		return "redirect:friendList";
-	}
+	public String friendSetting(
+			@RequestParam(name = "memberId" , required = false) String memberId, 
+			@RequestParam(name = "friendsId" , required = false) String friendsId,
+			@RequestParam(name = "cmd" , required = false) String cmd,
+			FriendsList friendList, 
+			BlackList blackList) 
+		{
+		System.out.println(memberId+","+friendsId);
+		String blackId = friendsId;
+		System.out.println(blackId);
+		
+		friendList.setMemberId(memberId);
+		friendList.setFriendsId(friendsId);
+		blackList.setMemberId(memberId);
+		blackList.setBlackId(blackId);
+		
+		System.out.println(cmd);
+		switch (cmd) {
+		case "userIhaveblocked-add":
+			service.unblockUser(blackList);
+			service.addFriend(friendList);
+			break;
+		case "userIhaveblocked-unblock":
+			
+			service.unblockUser(blackList);
+			break;
+		case "userWhoHaveAddedMe-add":
+			service.addFriend(friendList);
+			break;
+		case "userWhoHaveAddedMe-block":
+			service.unblockUser(blackList);
+			break;
+		}
+		
+		return "member/friendSetting";
+		}
 	
 	@GetMapping("join")
 	public String join() {
@@ -101,15 +131,9 @@ public class MemberController {
 	@PostMapping("join")
 	public String join(Member member) {
 		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
-		String id = "user1";
-		System.out.println("암호화전"+service.toString());
-		String encPassword = scpwd.encode(service.get(id).getPassword());
-		service.get(id).setPassword(encPassword);
-		System.out.println("암호화후"+service.toString());
-		
-		
-		service.joinMember(member);
-		
+		String encPassword = scpwd.encode(member.getPassword());
+		member.setPassword(encPassword);
+		service.joinMember(member);   
 		return "redirect:friendList";
 	}
 	

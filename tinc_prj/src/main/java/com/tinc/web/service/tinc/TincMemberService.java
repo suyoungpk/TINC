@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tinc.web.dao.MemberDao;
+import com.tinc.web.entity.BlackList;
+import com.tinc.web.entity.FriendsList;
 import com.tinc.web.entity.Member;
 import com.tinc.web.service.MemberService;
 
@@ -34,27 +36,27 @@ public class TincMemberService implements MemberService{
 	}
 
 	@Override
-	public int addFriend(String memberId, String friendsId) {
+	public int addFriend(FriendsList friendsList) {
 		// TODO Auto-generated method stub
-		return memberDao.addFriend(memberId, friendsId);
+		return memberDao.addFriend(friendsList);
 	}
 
 	@Override
-	public int deleteFriend(String memberId, String friendsId) {
+	public int deleteFriend(FriendsList friendsList) {
 		// TODO Auto-generated method stub
-		return memberDao.deleteFriend(memberId, friendsId);
+		return memberDao.deleteFriend(friendsList);
 	}
 
 	@Override
-	public int blockUser(String memberId, String blackId) {
+	public int blockUser(BlackList blackList) {
 		// TODO Auto-generated method stub
-		return memberDao.blockUser(memberId, blackId);
+		return memberDao.blockUser(blackList);
 	}
 
 	@Override
-	public int unblockUser(String memberId, String blackId) {
+	public int unblockUser(BlackList blackList) {
 		// TODO Auto-generated method stub
-		return memberDao.unblockUser(memberId, blackId);
+		return memberDao.unblockUser(blackList);
 	}
 
 	@Override
@@ -139,10 +141,36 @@ public class TincMemberService implements MemberService{
 		return false;
 	}
 
-
-
-
 	
+	// 응또니 //
+	@Override
+	public boolean emailOpen(String emailOpen) {
+		// TODO Auto-generated method stub
+		return memberDao.emailOpen(emailOpen);
+	}
 
+	@Override
+	public boolean phoneNumOpen(String phoneNumOpen) {
+		// TODO Auto-generated method stub
+		return memberDao.phoneNumOpen(phoneNumOpen);
+	}
+
+	@Override
+	public boolean idOpen(String idOpen) {
+		// TODO Auto-generated method stub
+		return memberDao.idOpen(idOpen);
+	}
+
+	@Override
+	public boolean chattingAlarm(String chattingAlarm) {
+		// TODO Auto-generated method stub
+		return memberDao.chattingAlarm(chattingAlarm);
+	}
+
+	@Override
+	public boolean memoAlarm(String memoAlarm) {
+		// TODO Auto-generated method stub
+		return memberDao.memoAlarm(memoAlarm);
+	}
 
 }

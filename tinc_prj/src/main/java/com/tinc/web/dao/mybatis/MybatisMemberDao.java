@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tinc.web.dao.MemberDao;
+import com.tinc.web.entity.BlackList;
+import com.tinc.web.entity.FriendsList;
 import com.tinc.web.entity.Member;
 
 @Repository
@@ -40,27 +42,27 @@ public class MybatisMemberDao implements MemberDao{
 	}
 	
 	@Override
-	public int addFriend(String memberId, String friendsId) {
+	public int addFriend(FriendsList friendsList) {
 		// TODO Auto-generated method stub
-		return mapperDao.addFriend(memberId, friendsId);
+		return mapperDao.addFriend(friendsList);
 	}
 	
 	@Override
-	public int deleteFriend(String memberId, String friendsId) {
+	public int deleteFriend(FriendsList friendsList) {
 		// TODO Auto-generated method stub
-		return mapperDao.deleteFriend(memberId, friendsId);
+		return mapperDao.deleteFriend(friendsList);
 	}
 	
 	@Override
-	public int blockUser(String memberId, String blackId) {
+	public int blockUser(BlackList blackList) {
 		// TODO Auto-generated method stub
-		return mapperDao.blockUser(memberId, blackId);
+		return mapperDao.blockUser(blackList);
 	}
 	
 	@Override
-	public int unblockUser(String memberId, String blackId) {
+	public int unblockUser(BlackList blackList) {
 		// TODO Auto-generated method stub
-		return mapperDao.unblockUser(memberId, blackId);
+		return mapperDao.unblockUser(blackList);
 	}
 	
 	@Override
@@ -128,5 +130,40 @@ public class MybatisMemberDao implements MemberDao{
 		return mapperDao.get(id);
 		
 	}
+	
+	
+	// 응또니 //
+	@Override
+	public boolean emailOpen(String emailOpen) {
+		// TODO Auto-generated method stub
+		return mapperDao.emailOpen(emailOpen);
+	}
+
+	@Override
+	public boolean phoneNumOpen(String phoneNumOpen) {
+		// TODO Auto-generated method stub
+		return mapperDao.phoneNumOpen(phoneNumOpen);
+	}
+
+	@Override
+	public boolean idOpen(String idOpen) {
+		// TODO Auto-generated method stub
+		return mapperDao.idOpen(idOpen);
+	}
+
+	@Override
+	public boolean chattingAlarm(String chattingAlarm) {
+		// TODO Auto-generated method stub
+		return mapperDao.chattingAlarm(chattingAlarm);
+	}
+
+	@Override
+	public boolean memoAlarm(String memoAlarm) {
+		// TODO Auto-generated method stub
+		return mapperDao.memoAlarm(memoAlarm);
+	}
+	
+	   
+	   
 
 }
