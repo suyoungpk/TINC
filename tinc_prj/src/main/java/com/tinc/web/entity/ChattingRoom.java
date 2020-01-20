@@ -7,28 +7,28 @@ public class ChattingRoom {
 	private boolean owner;
 	private String authority;
 	private String notice;
-	private String chatfile;
+	private String meg;
 	
 	public ChattingRoom(String memberId, String title) {// for create room by owner
 		this.memberId = memberId;
 		this.title = title;
 	}
-	public ChattingRoom(int id, String memberId, String title, boolean owner, String chatfile) {
+	public ChattingRoom(int id, String memberId, String title, boolean owner, String meg) {
 		this.id = id;
 		this.memberId = memberId;
 		this.title = title;
 		this.owner = owner;
-		this.chatfile = chatfile;
+		this.meg = meg;
 	}
 	public ChattingRoom(int id, String memberId, String title, boolean owner, String authority, String notice,
-			String chatfile) {
+			String meg) {
 		this.id = id;
 		this.memberId = memberId;
 		this.title = title;
 		this.owner = owner;
 		this.authority = authority;
 		this.notice = notice;
-		this.chatfile = chatfile;
+		this.meg = meg;
 	}
 	public int getId() {
 		return id;
@@ -66,10 +66,10 @@ public class ChattingRoom {
 	public void setNotice(String notice) {
 		this.notice = notice;
 	}
-	public String getChatfile() {
-		return chatfile;
+	public String getMeg() {
+		return meg;
 	}
-	public void setChatfile(String chatfile) {
-		this.chatfile = chatfile;
+	public void setMeg(String meg) {
+		this.meg = meg;
 	}
 }

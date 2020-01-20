@@ -68,4 +68,9 @@ public class MybatisChattingRoomDao implements ChattingRoomDao{
 		return mapperDao.getChattingRoomId(ownerId);
 	}
 
+	@Override
+	public int updateLast(int chatId, String memberId, String meg) {
+		return mapperDao.updateLast(chatId,memberId,meg);
+	}
+
 }

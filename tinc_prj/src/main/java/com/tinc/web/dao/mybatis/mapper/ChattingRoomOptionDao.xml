@@ -4,9 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tinc.web.dao.ChattingRoomOptionDao">
   <select id="get" resultType="boolean">
- 	SELECT * FROM tinc.chattingRoomOption WHERE chattingRoomId=#{chatId} AND memberId=#{memberId}
+ 	SELECT * FROM ChattingRoomOption WHERE chattingRoomId=#{id} AND memberId=#{memberId}
  </select>
  <insert id="insert">
- 	INSERT INTO tinc.chattingRoomOption VALUES (#{chatId},#{memberId})
+ 	INSERT INTO ChattingRoomOption VALUES (#{id},#{memberId})
  </insert>
 </mapper>

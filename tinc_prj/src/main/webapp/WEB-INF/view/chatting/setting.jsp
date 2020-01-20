@@ -35,7 +35,7 @@
            	<!--  1:1채팅 사진 미설정 시 -->
 				 <c:forEach items="${list}" var="list">
 					<div>
-					 <a href="">
+					 <a>
 					 	<figure>
 					 		<c:if test="${empty list.profileImg}">
 								<i class="fas fa-user"></i>
@@ -54,13 +54,4 @@
 				</c:forEach>
            </div>
         </li> 
-
-        <!-- 채팅방설정 클릭시(뒷부분) -->
-        <!-- <li class="cursor"><span class="settingFont">채팅방 이름 설정</span></li>
-        <div class="line"></div>
-        <li class="cursor"><span class="settingFont">대화내용 모두 삭제</span></li>
-        <div class="line"></div>
-        <li class="cursor"><span class="settingFont">채팅방 나가기</span></li>
-        <div class="line"></div>
-        <li class="cursor"><span class="miniFont">초대거부 후 채팅방나가기</span class="cursor"></li> -->
      </ul>

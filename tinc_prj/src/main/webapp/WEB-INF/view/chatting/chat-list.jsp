@@ -52,7 +52,14 @@
 								</figure>								
 								<ul>
 									<li class="title">${list.title}</li>
-									<li>In a professional context it often happensIn a professional context it often happensIn a professional context it often happensIn a professional context it often happensIn a professional context it often happens</li>
+									<li>
+										<c:if test="${empty list.meg}">
+											메시지가 없습니다.
+										</c:if>
+										<c:if test="${not empty list.meg}">
+											${list.meg}
+										</c:if>
+									</li>
 								</ul>
 							</a>					
 						</li> 
@@ -80,19 +87,6 @@
 	     </div><!-- bottombutton -->
 	</section><!-- wrapper end -->
 	<aside id="menu"> </aside>
-	<div class="popup alert">
-		<div class="popup-wrap">
-			<div class="context">
-				<p>일반 팝업창입니다.</p>
-			</div>
-			<div class="btn-area">
-				<a href="#" class="btn">취소</a>
-				<a href="#" class="btn">확인</a>
-			</div>
-			<a href="#" class="btn-close">닫기</a>
-		</div>
-	</div>
-	<div class="mask"></div>
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="

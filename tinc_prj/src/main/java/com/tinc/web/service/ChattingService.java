@@ -18,7 +18,9 @@ public interface ChattingService {
 	int getChattingRoomId(String ownerId); // 방장이 만든 채팅방 정보 가져오기
 	int inviteMember(int chatId,String memberId);//채팅방 회원 추가 (초대 수락)
 	int exit(int chatId,String memberId); // 채팅방 나가기 
+	int rejectandexit(int chatId,String memberId); // 채팅방 나가기 
 	int chgTitle(int chatId,String memberId,String title);//방제 수정
+	int saveLast(int chatId,String memberId,String meg);// 마지막 메시지 저장
 	
 	boolean isRejectList(int chatId,String memberId);// 거부 리스트 조회
 	int insertRejectList(int chatId,String memberId);// 채팅방 설정 추가(초대 거부)	

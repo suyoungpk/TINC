@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html lang="ko">
 <head>
@@ -34,7 +35,6 @@
 			</div>
 			<!-- chat-->			
 			<div class="chattingBox">
-			<%-- ${id},${memberId} --%>
 				<ul class="chatting">
 					<!-- <li class="member">
 						<figure>
@@ -168,16 +168,73 @@
 		     </div>
 		     <ul class="settingList">
 		        <!-- 채팅방설정 클릭시(뒷부분) -->
-		        <li class="cursor" onclick="popupOpen('.alert')"><span class="settingFont">채팅방 이름 설정</span></li>
+		        <li class="cursor" onclick="popupOpen('.popup-title')"><span class="settingFont">채팅방 이름 설정</span></li>
 		        <div class="line"></div>
-		        <li class="cursor"><span class="settingFont">대화내용 모두 삭제</span></li>
+		        <li class="cursor" onclick="exeChat.clear()"><span class="settingFont">대화내용 모두 삭제</span></li>
 		        <div class="line"></div>
-		        <li class="cursor"><span class="settingFont">채팅방 나가기</span></li>
-		        <div class="line"></div>
-		        <li class="cursor"><span class="settingFont">초대거부 후 채팅방나가기</span></li>
+		        <li class="cursor" onclick="exit(0)"><span class="settingFont">채팅방 나가기</span></li>
+		      	<c:if test="${isOwner eq false}">
+		        	<div class="line"></div>
+		        	<li class="cursor" onclick="exit(1)"><span class="settingFont">초대거부 후 채팅방나가기</span></li>
+		        </c:if>
 		     </ul>
 		</aside>
 	</section><!-- wrapper end -->
+	<div class="popup alert megDetail" id="megDetail">
+		<div class="popup-wrap alert">
+			<div class="popup-container">
+				<div class="context"></div>
+				<a href="#" class="btn-close fas fa-times">닫기</a>
+			</div>
+		</div>
+	</div>
+	<div class="popup friendSetting">
+		<div class="popup-wrap">
+			<div class="popup-container">				
+				<div class="profile">
+					<figure>
+						 <!-- default -->
+						<!-- <i class="fas fa-user"></i> -->
+						<img src="http://placehold.it/100x100" alt="">
+					</figure>
+					<ul>
+						<li class="title">Jessica/dfdfdfdfdfddddddddddddddddddddddddddddd</li>
+						<li>In a professional context it often happensIn a professional context it often happensIn a professional context it often happensIn a professional context it often happensIn a professional context it often happens</li>
+					</ul>
+				</div>
+				<nav class="btn-area">
+					<ul>
+						<li>
+							<a href="#" class="btn">1:1채팅</a>
+							<!-- <a href="#" class="btn">친구추가</a> -->
+							<a href="#" class="btn">차단</a>
+						</li>
+						<!--방장메뉴-->
+						<!-- <li>
+							<a href="#" class="btn">권한</a>
+							<a href="#" class="btn">추방</a>
+						</li> -->
+					</ul>
+				</nav>
+				<!--방장 권한 메뉴-->
+				<!-- <div class="head">
+					<p class="title">권한 위임, 박탈하기</p>
+					<nav class="btn-area">
+						<ul>
+							<li>
+								<a href="#" class="btn">초대 권한</a>
+								<a href="#" class="btn">방장 위임</a>
+							</li>
+						</ul>
+					</nav>
+					<a href="#" class="btn-back fas fa-chevron-left">뒤로가기</a>
+					<a href="#" class="btn-close fas fa-times">닫기</a>
+				</div> -->
+				<!--// 방장 권한 메뉴-->
+				<a href="#" class="btn-close fas fa-times">닫기</a>
+			</div>
+		</div>
+	</div>
 	<div class="mask"></div>
 	<script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -186,8 +243,9 @@
    <script src="/resource/js/chatting/uiUtil.js"></script>
    <script src="/resource/js/chatting/chat.js"></script>
 <script>
+	let socket = null;
 	$(function(){
-		let socket = new WebSocket("ws://192.168.0.47:8080/chat");//192.168.0.47
+		socket = new WebSocket("ws://localhost:8080/chat");//192.168.0.47
 		socket.onopen = function () {
 			console.log("connection success");
 			exeChat.setConfig('${id}','${member.id}','${member.nickName}','${member.profileImg}','${isOwner}');
@@ -200,16 +258,14 @@
 		socket.onmessage = function (e) {
 			//console.log(e.data);
 			var obj = JSON.parse(e.data);
-			console.log(obj);
-		/* 	if(obj.chatId == exeChat.chatId){ */
-				chatParser.parseData(obj);
-				exeChat.saveChat(e.data);
-			/* } */
+			chatParser.parseData(obj);
+			exeChat.saveChat(e.data);
 		};
 		$("#send-meg").click(function(){
  			socket.send(exeChat.textMeg());
  			$("#sendChat").val("");
- 		});		
+ 		});	
+		
 		$(".chatInput .btn-add").click(function(){
   			$(".sendMenu").toggle();
   		});
@@ -218,9 +274,26 @@
   		});
   		$(".topBox .btn-bar").click(function(){
   			exeChat.getMenu();
-   		});  		
+   		});    		
 	});
-	//util
+	function viewAll(e){
+  			var orgData = e.parentNode.dataset.content;
+  			$("#megDetail .context").html(orgData);
+  			popupOpen('#megDetail');
+	}
+	function exit(type){
+			switch (type) {
+		case 0:
+			socket.send(exeChat.exitMeg());
+			location.href=exeChat.getDataUrl(2);				
+			break;
+
+		case 1:
+			socket.send(exeChat.exitMeg());
+			location.href=exeChat.getDataUrl(3);				
+			break;
+		}
+		}
    function rename(){
   		var input = $("#chatTitle");
   		if(!input.val()){
@@ -231,7 +304,8 @@
   		exeChat.rename();
   		popupClose();	  				  	
    }
-   function closeAside(){
+ //util
+   	function closeAside(){
 		$("#setting").animate({width:"0",opacity:0},500,function(){$(this).hide().html("");});
     }
 	 function openSubAside(){
@@ -241,164 +315,5 @@
 		$("#subSetting").animate({width:"0",opacity:0},500,function(){$(this).hide()});
     }
    </script> 
-<!-- <script>
-	  
-  	$(function(){
-  		let url = ['${id}'+"/get",'${id}'+"/save",'${id}'+"/setting"];
-  		$(".chatInput .btn-add").click(function(){
-  			$(".sendMenu").toggle();
-  		});
-  		$(".topBox .btn-srch").click(function(){
-  			$(".topBox .title,.searchBox").toggle();
-  		});
-  		
-  		$(".topBox .btn-bar").click(function(){
-  			$.get(url[2],function(data){
-				//console.log(data);
-				$("#setting").append(data);
-				$("#setting").show().animate({width:"100%",opacity:1},500);
-			}).fail(function() {
-   		    alert( "error" );
-   	  		});
-   		 });
-        $("#send-meg").click(function(){sendMeg();});
-        
-        initChat();
-       
-       	function initChat(){
-       		$.getJSON(url[0], function( data ) {
-      			if(data.length < 1){
-      				$(".chatting").append('<li class="info"><div>채팅 기록이 없습니다.</div></li>');
-      			}else{
-      				for (var i = 0; i < data.length; i++){
-      					let obj = data[i];
-      					parseJson(obj);
-      					if(i != data.length-1){
-      						let nextObj = data[i+1];
-      		    			if(nextObj.date != obj.date)
-      		    				$(".chatting").append('<li class="info"><div>'+nextObj.date+'</div></li>');
-      		    		}	
-      				}
-      			}   			
-       		}).fail(function() {
-       		    alert( "error" );
-       	  	});
-      		socket = new WebSocket("ws://localhost:8080/chat");
-            socket.onopen = function () {
-                console.log("connection success");
-            };
-            socket.onclose = function () {
-                console.log("connecton closes");
-            };
-            socket.onmessage = function (e) {
-                /* console.log("A message arrived");*/
-               console.log(e.data); 
-               /*  parseMeg(e.data);
-                $.post(url[1],{data:e.data},function(){},"json").fail(function() {
-           		    alert( "post error" );
-           	  	}); */
-            };
-       	}
-       	function sendInfo(){
-       		let message ={};
-      		message.chatId='${id}';
-      		message.userId='${memberId}';
-      		message.content=$("#sendChat").val();
-      		message.date=getTime("year")+"년 "+getTime("month")+"월 "+getTime("date")+"일";
-      		message.time=getTime("hour")+":"+getTime("min");
-      		socket.send(JSON.stringify(message));
-       	}
-        function parseMeg(data){
-        	let obj = JSON.parse(data);
-    		let meg = obj.content;
-    		let userId = obj.userId;
-    		let userName = obj.userName;
-    		let userImg = obj.userImg;
-    		let time = obj.time;
-    		let img = "";
-    		
-    		if(userImg == "") img = '<i class="fas fa-user"></i>';
-    		else img = '<img src="'+userImg+'" alt="">';
-    		var html ='';
-    		if(userId == '${memberId}'){
-        		html ='<li class="me"><div class="megBox"><ul><li><div class="message">'
-        			+meg+
-    				'<span class="date">'+time+'</span></div></li></ul></div></li>';
-    		}else{
-    			html ='<li class="member"><figure>'+img+'</figure><div class="megBox"><div class="name">'
-    			+userName+
-    			'</div><ul><li><div class="message">'+meg+				
-    						'<span class="date">'+time+'</span></div></li></ul></div></li>';
-    		}
-    		$(".chatting").append(html);
-    		$(".container").animate({scrollTop:$(".container").height()},500);
-    	}
-        function parseJson(data){
-    		let meg = data.content;
-    		let userId = data.userId;
-    		let userName = data.userName;
-    		let userImg = data.userImg;
-    		let time = data.time;
-    		let img = "";
-    		if(userImg == "") img = '<i class="fas fa-user"></i>';
-    		else img = '<img src="'+userImg+'" alt="">';
-    		var html ='';
-    		if(userId == '${memberId}'){
-        		html ='<li class="me"><div class="megBox"><ul><li><div class="message">'
-        			+meg+
-    				'<span class="date">'+time+'</span></div></li></ul></div></li>';
-    		}else{
-    			html ='<li class="member"><figure>'+img+'</figure><div class="megBox"><div class="name">'
-    			+userName+
-    			'</div><ul><li><div class="message">'+meg+				
-    						'<span class="date">'+time+'</span></div></li></ul></div></li>';
-    		}
-    		$(".chatting").append(html);
-    		$(".container").animate({scrollTop:$(".container").height()},500);
-    	}
-      	function sendMeg(){
-      		let message ={};
-      		message.chatId='${id}';
-      		message.userId='${memberId}';
-      		message.content=$("#sendChat").val();
-      		message.date=getTime("year")+"년 "+getTime("month")+"월 "+getTime("date")+"일";
-      		message.time=getTime("hour")+":"+getTime("min");
-      		socket.send(JSON.stringify(message));
-      		$("#sendChat").val("");
-      	}
-      	function getTime(type){
-      		d = new Date(Date.now());
-      		//console.log(d);
-      		switch (type) {
-    		case "year": return d.getFullYear() ;break;
-    		case "month": return d.getMonth()+1; break;
-    		case "date": return  d.getDate(); break;
-    		case "hour": return d.getHours(); break;
-    		case "min": return  d.getMinutes(); break;
-    		default: return d;
-    			break;
-    		}
-      	}
-  	});
-  	function rename(){
-  		var input = $("#chatTitle");
-  		if(!input.val()){
-  			alert("채팅방 이름을 입력해주세요.");
-  			input.focus();
-  			return ;
-  		}
-  		$.post('${id}'+"/rename",{title:input.val()});
-  		popupClose();	  				  	
-  }
- function closeAside(){
-	$("#setting").animate({width:"0",opacity:0},500,function(){$(this).hide().html("");});
-  }
- function openSubAside(){
-	 $("#subSetting").show().animate({width:"100%",opacity:1},500);
-}
- function closeSubAside(){
-	$("#subSetting").animate({width:"0",opacity:0},500,function(){$(this).hide()});
-  }
-  </script> -->
 </body>
 </html>

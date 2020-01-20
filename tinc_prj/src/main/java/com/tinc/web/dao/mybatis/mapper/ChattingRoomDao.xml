@@ -16,7 +16,7 @@
  	SELECT * FROM ChattingRoom WHERE memberId=#{memberId} AND id=#{chatId}
  </select>
  <select id="getByOwner" resultType="com.tinc.web.entity.ChattingRoom">
- 	SELECT * FROM ChattingRoom WHERE owner = 1 AND id=#{chatId}
+ 	SELECT * FROM ChattingRoom WHERE owner = true AND id=#{id}
  </select>
  <insert id="inviteRoom" parameterType="com.tinc.web.entity.ChattingRoom">
  	INSERT INTO ChattingRoom VALUES (#{id},#{memberId},#{title},#{owner},#{authority},#{notice},#{chatfile})
@@ -27,7 +27,10 @@
   <update id="update" parameterType="com.tinc.web.entity.ChattingRoom">
  	UPDATE ChattingRoom SET title=#{title},owner=#{owner},authority=#{authority} WHERE memberId=#{memberId} and id=#{id}
  </update>
+ <update id="updateLast">
+ 	UPDATE ChattingRoom SET meg=#{meg} WHERE memberId=#{memberId} and id=#{id}
+ </update>
  <delete id="delete" >
- 	DELETE FROM ChattingRoom WHERE memberId=#{memberId} AND id=#{chatId}
+ 	DELETE FROM ChattingRoom WHERE memberId=#{memberId} AND id=#{id}
  </delete>
 </mapper>

@@ -69,47 +69,32 @@ public class Chatting {
 		model.addAttribute("type", type); // 채팅타입 전달 
 		return "chatting/chat-list";
 	}
+	
 	@GetMapping("add")
 	public String chatAdd() {
 		return "chatting/chat-add";
 	}
+	
 	@PostMapping("add")
 	public String chatAdd(Principal principal, String memberIds, String title,HttpServletRequest request) {
 		//String userId = principal.getName();
 		String userId = "user2";
 		String[] members = memberIds.split(",");
 		//System.out.println(title);
-		int result = ChattingService.createChattingRoom(new ChattingRoom(userId,title));// 방장 먼저 개설
-		
+		int result = ChattingService.createChattingRoom(new ChattingRoom(userId,title));// 방장 먼저 개설		
 		if(result == 1) {
 			int chatId = ChattingService.getChattingRoomId(userId); // 개설한 채팅 아이디가져오기
-			mkfiles(userId,chatId,request);
+			mkFile(userId,chatId,request);
 			//System.out.println(chatId);
 			for (int i = 0; i < members.length; i++) { 
 				ChattingService.inviteMember(chatId, members[i]); // 초대 완료 
-				mkfiles(members[i],chatId,request);
+				mkFile(members[i],chatId,request);
 			}
 		}
 		
-		
 		return "redirect:list";
 	}
-	public void mkfiles(String userId,int chatId,HttpServletRequest request) {
-		//파일 만들기 
-		String filePath = "/WEB-INF/storage/chat";
-		String fileName = userId+chatId+".json";
-		ServletContext application = request.getServletContext();
-		String realPath = application.getRealPath(filePath);		
-		try {
-			File file = new File(realPath);
-			
-			if(!file.exists())
-				file.mkdirs();
-			
-			FileWriter fos = new FileWriter(realPath+File.separator+fileName);
-			//System.out.println(realPath+File.separator+fileName);
-		} catch (IOException e) {}
-	}
+	
 	@GetMapping("{id}")
 	public String chat(@PathVariable("id") Integer id, Principal principal,Model model) {
 		//String userId = principal.getName();
@@ -125,12 +110,14 @@ public class Chatting {
 		
 		return "chatting/chatting";
 	}
+	
 	@GetMapping("{id}/setting")	
 	public String chatSetting(@PathVariable Integer id, Principal principal,Model model) {
 		List<Member> list = ChattingService.getMembers(id);
 		model.addAttribute("list",list);
 		return "chatting/setting";
 	}
+	
 	@GetMapping("{id}/get")
 	@ResponseBody
 	public String getChat(@PathVariable Integer id, Principal principal,HttpServletRequest request) throws FileNotFoundException, IOException, ParseException { // 파일 데이터 가져오기
@@ -158,7 +145,7 @@ public class Chatting {
 	@ResponseBody
 	public void saveChat(@PathVariable Integer id, Principal principal,HttpServletRequest request,String data) throws FileNotFoundException, IOException, ParseException { // 파일 데이터 가져오기
 		//String userId = principal.getName();        
-		String userId = "user2";		
+		String userId = "user2";
 		String filePath = "/WEB-INF/storage/chat";
 		String fileName = userId+id+".json";
 		ServletContext context = request.getServletContext();
@@ -166,39 +153,65 @@ public class Chatting {
 		String fileRealLink = realPath+File.separator+fileName;
 		//System.out.println(data);
 		
-		JSONParser parser = new JSONParser();
-		
+		JSONParser parser = new JSONParser();		
 		Object obj = parser.parse(data);
 		JSONObject jobj = (JSONObject) obj;
-		System.out.println(jobj);
+		//System.out.println(jobj);
 		
-		 obj = parser.parse(new FileReader(fileRealLink));
-		 JSONArray jo = (JSONArray) obj;
+		ChattingService.saveLast(id,userId,jobj.get("content").toString());
+		
+		JSONArray jo = null;
+		 if(new FileReader(fileRealLink).ready()) {
+			 obj = parser.parse(new FileReader(fileRealLink));
+			 jo = (JSONArray) obj;
+		 } else {
+			 jo = new JSONArray();
+		 }
 		 jo.add(jobj);
 		 FileWriter writer =  null;
-		try {
-			 writer = new FileWriter(fileRealLink,false);
-			 writer.write(jo.toJSONString());		
-       } catch (IOException e) {
-           e.printStackTrace();
-       } finally {
-			if (writer != null)
-				writer.close();
-       }	
+		   try {
+				 writer = new FileWriter(fileRealLink);
+				 writer.write(jo.toJSONString());		
+	       } catch (IOException e) {
+	           e.printStackTrace();
+	       } finally {
+				if (writer != null)
+					writer.close();
+				writer = null;
+	       }	
 	}
+	
 	@PostMapping("{id}/rename")
 	public void rename(@PathVariable Integer id, Principal principal,String title) {
 		//String userId = principal.getName();
 		String userId = "user2";		
 		ChattingService.chgTitle(id, userId, title);
 	}
-	@PostMapping("del")
-	public String exit(Principal principal,Integer chatId) {
+	
+	@PostMapping("{id}/clear")
+	public void clear(@PathVariable Integer id, Principal principal,HttpServletRequest request) {
 		//String userId = principal.getName();
 		String userId = "user2";		
-		ChattingService.exit(chatId, userId);		
-		return "redirect:list";
+		clearFile(userId,id,request);
 	}
+	
+	@GetMapping("{id}/exit")
+	public String exit(@PathVariable Integer id, Principal principal,HttpServletRequest request) {
+		//String userId = principal.getName();
+		String userId = "user2";		
+		ChattingService.exit(id, userId);
+		delFile(userId,id,request);
+		return "redirect:../list";
+	}
+	
+	@GetMapping("{id}/rejectandexit")
+	public String rejectandexit(@PathVariable Integer id, Principal principal,HttpServletRequest request) {
+		//String userId = principal.getName();
+		String userId = "user7";		
+		ChattingService.rejectandexit(id, userId);	
+		delFile(userId,id,request);
+		return "redirect:../list";
+	}	
 	
 	@PostMapping("searchFriend")
 	@ResponseBody
@@ -216,5 +229,44 @@ public class Chatting {
 		list.add(b);		
 		String json = new Gson().toJson(list);
 		return json;
+	}
+	public void mkFile(String userId,int chatId,HttpServletRequest request) {
+		//파일 만들기 
+		String filePath = "/WEB-INF/storage/chat";
+		String fileName = userId+chatId+".json";
+		ServletContext application = request.getServletContext();
+		String realPath = application.getRealPath(filePath);		
+		try {
+			File file = new File(realPath);
+			
+			if(!file.exists())
+				file.mkdirs();
+			
+			FileWriter fos = new FileWriter(realPath+File.separator+fileName);
+			fos.close();
+			//System.out.println(realPath+File.separator+fileName);
+		} catch (IOException e) {}
+	}
+	
+	public void clearFile(String userId,int chatId,HttpServletRequest request) {
+		//파일 만들기 
+		String filePath = "/WEB-INF/storage/chat";
+		String fileName = userId+chatId+".json";
+		ServletContext application = request.getServletContext();
+		String realPath = application.getRealPath(filePath);		
+		try {
+			FileWriter fos = new FileWriter(realPath+File.separator+fileName);
+			fos.close();
+		} catch (IOException e) {}
+	}
+	public void delFile(String userId,int chatId,HttpServletRequest request) {
+		//파일 만들기 
+		String filePath = "/WEB-INF/storage/chat";
+		String fileName = userId+chatId+".json";
+		ServletContext application = request.getServletContext();
+		String realPath = application.getRealPath(filePath);		
+		File file = new File(realPath);
+		if(file.exists())
+			file.delete();
 	}
 }
