@@ -3,5 +3,29 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tinc.web.dao.PrivateMemoListDao">
+	<select id="getList" resultType="com.tinc.web.entity.PrivateMemoList">
+		select * from PrivateMemoList where memberId = #{mId}
+	</select>
 	
+	<select id="get" resultType="com.tinc.web.entity.PrivateMemoList">
+		select * from PrivateMemoList where id=#{id} and memberId = #{mId}
+	</select>
+	
+	<select id="getByMemberId" resultType="com.tinc.web.entity.PrivateMemoList">
+		select * from PrivateMemoList where memberId = #{mId}
+	</select>
+	
+	<insert id="insert" parameterType="com.tinc.web.entity.PrivateMemoList">
+		inesrt into PrivateMemoList(id, title, memberId)
+		values((select coalesce(max(id),0)+1 from PrivateMemoList), #{title}, #{memberId})
+	</insert>
+	
+	<update id="update" parameterType="com.tinc.web.entity.PrivateMemoList">
+		update PrivateMemoList
+		set title = #{title} where id = #{id} and memberId = #{memberId}
+	</update>
+	
+	<delete id="delete">
+		delete from PrivateMemoList where id = #{id} and memberId = #{memberId}
+	</delete>
 </mapper>

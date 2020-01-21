@@ -6,6 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="../../../resource/js/memo/memo-list.js"></script>
     <link rel="stylesheet" href="../../../resource/css/common.css" />
     <link rel="stylesheet" href="../../../resource/css/memo/memo-list.css" />
 </head>
@@ -64,6 +65,7 @@
             </div>
             <div class="memo-list-wrapper">
                 <div class="memo-list-title">
+                    <div></div>
                     <input type="text" name="memo-list-title" value="개인제목">
                 </div>
                 <div class="memo-card-list-wrapper">
@@ -110,13 +112,26 @@
                     </div>
                 </div>
             </div>
-
+            <template id="memo-card-template">
+                <div class="memo-card">
+                    <div class="memo-card-title">
+                        <input type="text" name="memo-card-title" value="추가">
+                    </div>
+                    <div class="memo-card-content">
+                        <textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
+                            </textarea>
+                    </div>
+                </div>
+            </template>
         </main>
         <!-- container end -->
         <div class="memo-list-bottom-wrapper">
             <input type="button" name="memo-list" value="닫기">
         </div>
     </section> <!-- wrapper end -->
+    <section class="wrapper" id="loaded-wrapper" style="display:none">
+
+    </section>
 
 </body>
 

@@ -3,5 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tinc.web.dao.DueDateDao">
+	<select id="getByCardId" resultType="com.tinc.web.entity.DueDate">
+		select * from DueDate where cardId = #{cardId}
+	</select>
 	
+	<select id="getById" resultType="com.tinc.web.entity.DueDate">
+		select * from DueDate where id = #{id}
+	</select>
+	
+		
+	<insert id="insert" parameterType="com.tinc.web.entity.DueDate">
+		insert into DueDate(id, date, time, isComplete, cardId)
+		value((select id from (select coalesce(max(id),0)+1 id from DueDate) as tmp),
+		#{date}, #{time}, #{isComplete}, #{cardId})
+	</insert>
+	
+	<update id="update" parameterType="com.tinc.web.entity.DueDate">
+		update DueDate
+		set date = #{date}, time = #{time}, isComplete = #{isComplete} where cardId = #{cardId}
+	</update>
+	
+	<delete id="delete">
+		delete from DueDate where id = #{id}
+	</delete>
+	
+	<delete id="deleteByCardId">
+		delete from DueDate where cardId = #{cardId}
+	</delete>
 </mapper>

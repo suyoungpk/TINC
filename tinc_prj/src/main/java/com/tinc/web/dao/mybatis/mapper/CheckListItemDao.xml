@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tinc.web.dao.CheckListItemDao">
+	<select id="getList" resultType="com.tinc.web.entity.CheckListItem">
+		select * from CheckListItem order by id
+	</select>
+	
+	<select id="getListByCheckListId" resultType="com.tinc.web.entity.CheckListItem">
+		select * from CheckListItem where checkListId = #{clId} order by id
+	</select>
+	
+	<select id="getById" resultType="com.tinc.web.entity.CheckListItem">
+		select * from CheckListItem where id = #{id}
+	</select>
+	
+	<select id="getNewItemId" resultType="int">
+		select MAX(id) from CheckListItem where checkListId = #{checkListId}
+	</select>
+	
+	<insert id="insert" parameterType="com.tinc.web.entity.CheckListItem">
+		insert into CheckListItem(id, title, checkStatus, checkListId)
+		values((select id from (select coalesce(max(id),0)+1 id from CheckListItem) as tmp), #{title}, #{checkStatus}, #{checkListId})
+	</insert>
+	
+	<update id="update" parameterType="com.tinc.web.entity.CheckListItem">
+		update CheckListItem
+		set title = #{title}, checkStatus = #{checkStatus}, checkListId = #{checkListId}
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from CheckListItem where id = #{id}
+	</delete>
+</mapper>
