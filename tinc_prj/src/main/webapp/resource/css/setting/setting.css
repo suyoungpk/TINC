@@ -22,7 +22,7 @@
 #myImage {
     width: 6.875rem;
     height: 6.875rem;
-    background: url("/src/main/webapp/resource/images/profile.jpg") no-repeat; 
+    background: white /* url("/src/main/webapp/resource/images/profile.jpg") no-repeat */; 
     background-size: cover;
     border-radius: 50%;
     margin-top: 1.625rem;
@@ -60,7 +60,7 @@
    margin-left: 1.938rem;
    margin-right: 1.938rem;
 }
-#setting-edit-form .set-line{
+.set-line{
     height: 2.125rem;
     border-bottom: 0.0625rem solid #bcbcbc;
     width: inherit;
@@ -79,16 +79,16 @@
 #setting-edit-email, #setting-edit-phone{
     float: right;
     text-align: right;
-    vertical-align: middle; /*세로 가운데 정렬*/
+    vertical-align: middle;
     width: 12rem;
 }
 
-#logout-color{
+#set-logout{
     color: rgb(255, 060, 047) !important;
     line-height: 2.125rem;
 }
 
-/*----------checkbox 설정-------------------------*/
+/*----------checkbox �꽕�젙-------------------------*/
 input[type="checkbox"] {
     display: none;
 }
@@ -113,7 +113,7 @@ input[type="checkbox"] + label:after, input[type="checkbox"] + label:before {
     background: rgb(002, 210, 081);
     /* -moz-box-shadow:inset 0px 0px 10px rgb(136, 136, 136);
     -webkit-box-shadow:inset 0px 0px 10px rgb(136, 136, 136);
-    box-shadow:inset 0px 0px 10px rgb(136, 136, 136);  내부 그림자 */
+    box-shadow:inset 0px 0px 10px rgb(136, 136, 136);  �궡遺� 洹몃┝�옄 */
 }
 .set-checkbox:checked + label.set-check:after {
     background: #ffff;

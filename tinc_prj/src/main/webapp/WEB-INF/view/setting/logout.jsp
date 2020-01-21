@@ -6,14 +6,14 @@
 <title>메모와 채팅을 동시에, TINC</title>
 <meta charset="utf-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<link rel="stylesheet" href="/resource/css/setting/logout.css" >
+<link rel="stylesheet" href="../../../resource/css/setting/setting.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="/resource/js/setting/setting.js"></script>
+<!-- <script src="/resource/js/setting/setting.js"></script> -->
 </head>
 <body>
 	<section class="wrapper" id="setting-wrapper"> 
 		<nav class="gnb"> 
-			<a href="#" title="메모장 이동">MEMO</a>
+			<a title="메모장 이동">MEMO</a>
 		</nav><!-- gnb end -->
 		<main class="container">
 
@@ -32,11 +32,11 @@
 				</div><!-- context -->
 
 				<div class="btn-area">
-					<a href="javascript:history.go(-1)" class="btn" id="logout-cancle">취소</a>
-					<a href="index.html" class="btn" id="logout-ok">확인</a>
+					<button class="btn" id="logout-cancle">취소</button>
+					<button class="btn" id="logout-ok">확인</button>
 				</div>
 
-				<a href="javascript:history.go(-1)" class="btn-close fas fa-times">닫기</a>
+				<a class="btn-close fas fa-times">닫기</a>
 			</div><!-- popup-container -->
 		</div><!-- popup-wrap -->
 	</div><!-- popup -->

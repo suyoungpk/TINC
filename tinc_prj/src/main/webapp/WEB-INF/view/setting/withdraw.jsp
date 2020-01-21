@@ -6,9 +6,9 @@
 <title>메모와 채팅을 동시에, TINC</title>
 <meta charset="utf-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<link rel="stylesheet" href="/resource/css/setting/withdraw.css" >
+<link rel="stylesheet" href="../../../resource/css/setting/setting.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="/resource/js/setting/setting.js"></script>
+<!-- <script src="/resource/js/setting/setting.js"></script> -->
 </head>
 <body>
 	<section class="wrapper" id="setting-wrapper"> 
@@ -26,33 +26,33 @@
 	<div class="popup" style="display:block">
 		<div class="popup-wrap">
 
-			<div class="popup-container" >
+			<form class="popup-container" style="display: none;">
 				<div class="context">
 					<p>탈퇴 하시겠습니까?</p>
 				</div>
 				<!-- context -->
 				<div class="btn-area">
-					<a href="javascript:history.go(-1)" class="btn" id="withdraw-cancle">취소</a>
-					<a href="#" class="btn" id="withdraw-ok">확인</a>
+					<input type="button" class="btn" id="withdraw-cancle1" value="취소"/>
+					<input type="button" class="btn" id="withdraw-ok1" value="확인"/>
 				</div>
 				<a href="javascript:history.go(-1)" class="btn-close fas fa-times">닫기</a>
-			</div>
+			</form>
 			<!-- popup-container -->
 
-			<div class="popup-container" style="display: none;">
+			<form class="popup-container" style="display:block">
 				<div class="context">
 					<p>비밀번호를 한 번 더<br>입력해 주세요.</p>
 					<div>
-						<input class="withdraw-pwd" type="text" value="" placeholder="&nbsp;&nbsp;&nbsp;비밀번호 입력">
+						<input class="withdraw-pwd" name="checkPwd" type="text" value="" placeholder="비밀번호 입력">
 					</div>
 				</div>
 				<!-- context -->
 				<div class="btn-area">
-					<a href="javascript:history.go(-1)" class="btn" id="withdraw-cancle">취소</a>
-					<a href="index.html" class="btn" id="withdraw-ok">확인</a>
+					<input type="button" class="btn" id="withdraw-cancle2" value="취소"/>
+					<input type="submit" class="btn" id="withdraw-ok2" value="확인"/>
 				</div>
 				<a href="javascript:history.go(-1)" class="btn-close fas fa-times">닫기</a>
-			</div>
+			</form>
 
 		</div><!-- popup-wrap -->
 	</div><!-- popup -->
