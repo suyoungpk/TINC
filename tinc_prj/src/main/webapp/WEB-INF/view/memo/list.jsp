@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -8,55 +12,36 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="../../../resource/js/memo/memo-list.js"></script>
 <link rel="stylesheet" href="../../../resource/css/common.css" />
 <link rel="stylesheet" href="../../../resource/css/memo/memo-list.css" />
+
 </head>
 
 <body>
 	<section class="wrapper">
 		<main class="memo-list-container">
+			<c:forEach var="pml" items="${privateMemoList }">
 			<div class="memo-list-wrapper">
 				<div class="memo-list-title">
 					<div></div>
-					<input type="text" name="memo-list-title" value="개인제목">
+					<input readonly type="text" name="memo-list-title" value="${pml.title }">
+					<input type="hidden" id="private-memo-list-id" name="private-memo-list-id" value="${pml.id }">
 				</div>
 				<div class="memo-card-list-wrapper">
+					<c:forEach var="mc" items="${memoCardList}">
+					<c:if test="${mc.privateListId == pml.id && not empty mc.privateListId }">
 					<div class="memo-card">
 						<div class="memo-card-title">
-							<input type="text" name="memo-card-title" value="청춘예찬">
+							<input readonly type="text" name="memo-card-title" value="${mc.title }">
+							<input type="hidden" name="memo-card-id" value="${mc.id }">
 						</div>
 						<div class="memo-card-content">
-							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
-                            </textarea>
+							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">${mc.content}</textarea>
 						</div>
 					</div>
-					<div class="memo-card">
-						<div class="memo-card-title">
-							<input type="text" name="memo-card-title" value="청춘예찬">
-						</div>
-						<div class="memo-card-content">
-							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
-                            </textarea>
-						</div>
-					</div>
-					<div class="memo-card">
-						<div class="memo-card-title">
-							<input type="text" name="memo-card-title" value="청춘예찬">
-						</div>
-						<div class="memo-card-content">
-							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
-                            </textarea>
-						</div>
-					</div>
-					<div class="memo-card">
-						<div class="memo-card-title">
-							<input type="text" name="memo-card-title" value="청춘예찬">
-						</div>
-						<div class="memo-card-content">
-							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
-                            </textarea>
-						</div>
-					</div>
+					</c:if>
+					</c:forEach>					
 				</div>
 				<div class="memo-list-add-wrapper">
 					<div>
@@ -64,54 +49,46 @@
 					</div>
 				</div>
 			</div>
-			<div class="memo-list-wrapper">
+			</c:forEach>
+			<c:forEach var="gml" items="${groupMemoList }">
+			<div class="memo-list-wrapper">				
 				<div class="memo-list-title">
-					<input type="text" name="memo-list-title" value="개인제목">
+					<div></div>
+					<input readonly type="text" name="memo-list-title" value="${gml.title }">
+					<input type="hidden" id="group-memo-list-id" name="group-memo-list-id" value="${gml.id }">
 				</div>
 				<div class="memo-card-list-wrapper">
+					<c:forEach var="mc" items="${memoCardList}">
+					<c:if test="${mc.groupListId == gml.id && not empty mc.groupListId }">
 					<div class="memo-card">
 						<div class="memo-card-title">
-							<input type="text" name="memo-card-title" value="청춘예찬">
+							<input readonly type="text" name="memo-card-title" value="${mc.title }">
+							<input type="hidden" name="memo-card-id" value="${mc.id }">
 						</div>
 						<div class="memo-card-content">
-							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
-                            </textarea>
+							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">${mc.content}</textarea>
 						</div>
 					</div>
-					<div class="memo-card">
-						<div class="memo-card-title">
-							<input type="text" name="memo-card-title" value="청춘예찬">
-						</div>
-						<div class="memo-card-content">
-							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
-                            </textarea>
-						</div>
-					</div>
-					<div class="memo-card">
-						<div class="memo-card-title">
-							<input type="text" name="memo-card-title" value="청춘예찬">
-						</div>
-						<div class="memo-card-content">
-							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
-                            </textarea>
-						</div>
-					</div>
-					<div class="memo-card">
-						<div class="memo-card-title">
-							<input type="text" name="memo-card-title" value="청춘예찬">
-						</div>
-						<div class="memo-card-content">
-							<textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea">인류의 타오르는 청춘 보는 간지라 장식하는 봄바람을 소담스러운 광야에서 이것이다. 없으면 인생을 싹 이 희망의 그것을 내려온 교향악이다. 피가 미인을 가는 아니더면, 아름다우냐? 없으면 인간에 열락의 천지는 심장은 위하여...
-                            </textarea>
-						</div>
-					</div>
+					</c:if>
+					</c:forEach>					
 				</div>
 				<div class="memo-list-add-wrapper">
 					<div>
 						<i class="fas fa-plus"></i><input type="button" name="memo-list-add-button" value="add">
 					</div>
-				</div>
+				</div>				
 			</div>
+			</c:forEach>
+			 <template id="memo-card-template">
+                <div class="memo-card">
+                    <div class="memo-card-title">
+                        <input type="text" name="memo-card-title" value="">
+                    </div>
+                    <div class="memo-card-content">
+                        <textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea"></textarea>
+                    </div>
+                </div>
+            </template>
 
 		</main>
 		<!-- container end -->
@@ -120,7 +97,6 @@
 		</div>
 	</section>
 	<!-- wrapper end -->
-
 </body>
 
 </html>

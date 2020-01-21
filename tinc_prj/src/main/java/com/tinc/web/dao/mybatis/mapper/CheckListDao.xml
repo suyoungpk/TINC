@@ -3,5 +3,38 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tinc.web.dao.CheckListDao">
+	<select id="getList" resultType="com.tinc.web.entity.CheckList">
+		select * from CheckList order by id
+	</select>
 	
+	<select id="getListByCardId" resultType="com.tinc.web.entity.CheckList">
+		select * from CheckList where cardId = #{cardId} order by id
+	</select>
+	
+	<select id="get" resultType="com.tinc.web.entity.CheckList">
+		select * from CheckList where id = #{id}	
+	</select>
+	
+	<select id="getNewCheckListByCardId" resultType="com.tinc.web.entity.CheckList">
+		select * from CheckList, (select MAX(id) maxId from CheckList where cardId = #{cardId}) tmp where id = maxId
+	</select>
+	
+	<select id="getNewClIdByCardId" resultType="int">
+		select MAX(id) from CheckList where cardId = #{cardId}
+	</select>
+	
+	<insert id="insert" parameterType="com.tinc.web.entity.CheckList">
+		insert into CheckList(id, title, hideStatus, cardId)
+		values((select id from (select coalesce(max(id),0)+1 id from CheckList) as tmp), #{title}, #{hideStatus}, #{cardId})
+	</insert>
+	
+	<update id="update" parameterType="com.tinc.web.entity.CheckList">
+		update CheckList
+		set title = #{title}, hideStatus = #{hideStatus}, cardId = #{cardId}
+		where id = #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from CheckList where id = #{id}
+	</delete>
 </mapper>

@@ -16,6 +16,12 @@
     font-size: 1.1rem;
 }
 
+.memo-share-visual>div>i:active {
+    transition: 800ms linear;
+    transform: scale(0.8);
+}
+
+
 ul.memo-share-list {
     overflow-y: auto;
 }
@@ -49,8 +55,7 @@ div.memo-share-list-pic-wrapper {
 
 
 div.memo-share-list-pic {
-    /* width: 90%;
-    height: 80%; */
+
     width: 2.5rem;
     height: 2.5rem;
     position: absolute;
@@ -69,6 +74,14 @@ div.memo-share-list-pic>img {
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
+}
+
+div.memo-share-list-pic>i.fa-user {
+    font-size: 2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 div.memo-share-list-pic>i.fa-users {
@@ -115,7 +128,7 @@ div.memo-share-list-check-wrapper {
     position: relative;
 }
 
-input#memo-share-list-checkbox {
+input.memo-share-list-checkbox {
     width: 70%;
     height: 70%;
     position: absolute;

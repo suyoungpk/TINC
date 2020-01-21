@@ -153,15 +153,15 @@
 
 .memo-detail-duedate>span {
   display: inline-block;
-  color: #ffffff;
+  color: #000000;
   font-size: 0.8rem;
   position: absolute;
   top: 50%;
   right: 3%;
   transform: translate(0, -50%);
   border-radius: 0.325rem 0.325rem;
-  border: 1px solid #FE2E2E;
-  background: #FE2E2E;
+  border: 1px solid #FFFFFF;
+  background: #FFFFFF;
 
 }
 
