@@ -86,7 +86,27 @@
 		select id from Member where email=#{email}; 
 	</select>
 	
-	
+	<!-- 응썬 -->
+   <select id="emailOpen" resultType="com.tinc.web.entity.Member">
+      select id from Member where emailOpen=#{emailOpen}; 
+   </select>
+   
+   <select id="phoneNumOpen" resultType="com.tinc.web.entity.Member">
+      select id from Member where phoneNumOpen=#{phoneNumOpen}; 
+   </select>
+   
+   <select id="idOpen" resultType="com.tinc.web.entity.Member">
+      select id from Member where idOpen=#{idOpen}; 
+   </select>
+   
+   <select id="chattingAlarm" resultType="com.tinc.web.entity.Member">
+      select id from Member where chattingAlarm=#{chattingAlarm}; 
+   </select>
+   
+   <select id="memoAlarm" resultType="com.tinc.web.entity.Member">
+      select id from Member where memoAlarm=#{memoAlarm}; 
+   </select>
+   
 </mapper>
 
 

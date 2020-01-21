@@ -7,7 +7,7 @@ import com.tinc.web.entity.FriendsList;
 import com.tinc.web.entity.Member;
 
 public interface MemberService{
-
+	public String getDefaultRole(String id);
 	int joinMember(Member member); // 회원가입
 	int editMember(Member member); // 회원정보수정 
 	int withdrawalMember(String id); // 회원탈퇴 
@@ -32,7 +32,7 @@ public interface MemberService{
 	
 	Member get(String id); 
 	boolean isValidMember(String id, String password);
-	boolean isDuplicatedId(String id);
+	String isDuplicatedId(String id);
 	
 	
 	// 응또니 //

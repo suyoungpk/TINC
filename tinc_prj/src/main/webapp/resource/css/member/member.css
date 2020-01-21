@@ -16,6 +16,7 @@ hr {border:0.0625rem solid #b2b2b2; width: calc(100% - 1.25rem); margin-left: 0.
 .child-flex {flex:1;}
 input[type="text"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing:border-box; color:#5e5e5e; height: 3.313rem; background: #fff; border-radius: 1.25rem;}
 input[type="password"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing:border-box; color:#5e5e5e; height: 3.313rem; background: #fff; border-radius: 1.25rem;}
+input[type="tel"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing:border-box; color:#5e5e5e; height: 3.313rem; background: #fff; border-radius: 1.25rem;}
 
 .join {text-align: center;}
 .join input[type="text"] {margin-top:0.9375rem;}
@@ -33,6 +34,7 @@ input[type="password"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-s
 
 .find input[type="text"] {margin-top: 1rem;}
 .find input[type="password"] {margin-top: 1rem;}
+.find input[type="tel"] {margin-top: 1rem;}
 .find-btn {width: 8.25rem; height: 1.813rem; font-size:0.9375rem; color:#fff; background-color: #7367f0; border-radius: 0.3125rem;}
 .find .find-btn {margin: 0.625rem 0.8125rem 0.875rem 13.13rem;}
 .find>div:first-child {margin-top: 2.063rem;}

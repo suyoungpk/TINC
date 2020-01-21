@@ -5,19 +5,25 @@ import java.security.Principal;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tinc.web.entity.BlackList;
 import com.tinc.web.entity.FriendsList;
@@ -34,54 +40,26 @@ public class MemberController {
 	private MemberService service;
 	
 	@GetMapping("friendList")
-	public String friendList(Model model) {
-		//String id = principal.getName();
-		String id = "user1";
+	public String friendList(Principal principal, Model model) {
+
+		String id = principal.getName();
+		System.out.println(id);
+
 		model.addAttribute("myprofile", service.getMyProfile(id));
 		model.addAttribute("friendsProfile", service.getFriendsProfile(id));
 		model.addAttribute("friendListCount", service.getFriendsListCount(id));
-		String tmpStr = null;
-		if (service.getMyProfile(id).getProfileImg() != null) {
-			tmpStr = service.getMyProfile(id).getProfileImg();
-			StringBuilder sb = new StringBuilder("http://localhost:8080/resource/upload/member/");
-			sb.append(tmpStr);
-			model.addAttribute("imgs", sb);
-		}
-//		String tmpStr = null;
-//		if (tradeViewService.getTrade(id).getImg() != null) {
-//			tmpStr = tradeViewService.getTrade(id).getImg().replace("\\", "/");
-//			String[] imgs = new String[] { "" };
-//			if (tmpStr != null && !tmpStr.equals("")) {
-//				if (tmpStr.indexOf(",") != -1) {
-//					imgs = tmpStr.split(",");
-//				} else {
-//					imgs[0] = tmpStr;
-//				}
-//
-//				for (String img : imgs) {
-//					ServletContext application = request.getServletContext();
-//					String realPath = application.getRealPath(img);
-//					img = realPath;
-//					System.out.println("img" + img);
-//				}
-//			}
-//			request.setAttribute("imgs", imgs);
-//		}
-		
-		return "member/friendList";
-	}
 	
-	@PostMapping("friendList")
-	public String friendList(String id) {
-		
 		return "member/friendList";
 	}
 	
 	@GetMapping("friendSetting")
-	public String friendSetting(Model model) {
-		String memberId = "user1";
+	public String friendSetting(Principal principal, Model model) {
+		
+		String memberId = principal.getName();
+		System.out.println(memberId);
 		model.addAttribute("userIhaveblocked", service.getListOfUserIhaveblocked(memberId));
 		model.addAttribute("userWhoHaveAddedMe", service.getListOfUserWhoHaveAddedMe(memberId));
+		
 		return "member/friendSetting";
 	}
 	
@@ -109,7 +87,6 @@ public class MemberController {
 			service.addFriend(friendList);
 			break;
 		case "userIhaveblocked-unblock":
-			
 			service.unblockUser(blackList);
 			break;
 		case "userWhoHaveAddedMe-add":
@@ -125,6 +102,7 @@ public class MemberController {
 	
 	@GetMapping("join")
 	public String join() {
+		
 		return "member/join";
 	}
 	
@@ -137,17 +115,24 @@ public class MemberController {
 		return "redirect:friendList";
 	}
 	
-	@GetMapping("login")
-	public String login() {
-		System.out.println("dd");
-		return "member/login";
+	@GetMapping("idCheck")
+	@ResponseBody
+	public String idCheck(@RequestParam(name = "id") String id) {
+		System.out.println(id);
+		System.out.println(service.isDuplicatedId(id));
+		return service.isDuplicatedId(id);
 	}
 	
-	@PostMapping("login")
-	public String login(@RequestParam(name = "id") String id, @RequestParam(name = "password")String password) {
-		service.isValidMember(id, password);
-		System.out.println(id);
-		return "redirect:friendList";
+	@GetMapping("login")
+	public String login() {
+		
+		return "member/login";
+	}
+
+	@GetMapping("logout")
+	public String logout() {
+		
+		return "member/logout";
 	}
 	
 	@GetMapping("agree")
@@ -155,19 +140,13 @@ public class MemberController {
 		return "member/agree";
 	}
 
-	@PostMapping("agree")
-	public String agree(Boolean agree, HttpServletResponse response) {
-		Cookie agreeCookie = new Cookie("agree", agree.toString());
-		response.addCookie(agreeCookie);
-		return "redirect:join"; 
-	}
-	
-	@GetMapping("logout")
-	public String logout() {
-		
-		return "member/main";
-	}
-	
+//	@PostMapping("agree")
+//	public String agree(Boolean agree, HttpServletResponse response) {
+//		//Cookie agreeCookie = new Cookie("agree", agree.toString());
+//		response.addCookie(agreeCookie);
+//		return "redirect:join"; 
+//	}
+
 	@GetMapping("find")
 	public String find() {
 		return "member/find";
@@ -175,7 +154,6 @@ public class MemberController {
 	
 	@PostMapping("find")
 	public String find(@RequestParam(name="email")String email, @RequestParam(name="id")String id, Model model)  throws MailException, MessagingException {
-		service.findId(email);
 		System.out.println(service.findId(email));
 		model.addAttribute("user", service.findId(email));
 		

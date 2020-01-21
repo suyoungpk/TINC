@@ -20,9 +20,9 @@
             </div>
 
 	         <div>
-	         	 <input type="text" name="id" value=""  placeholder="아이디"/> 
+	         	 <input type="text" name="username" value=""  placeholder="아이디"/> 
 	             <input type="password" name="password" value=""  placeholder="비밀번호"/>
-	             <%-- <input type="hidden" value="${id}"/>  --%>
+	            <%--  <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token}" />    --%>
 	             <input type="submit" value="로그인"/>
 	         </div>
 	         

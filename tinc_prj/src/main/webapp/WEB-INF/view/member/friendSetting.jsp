@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../../../resource/css/common.css" >
 <link rel="stylesheet" href="../../../resource/css/bottomButton.css">
 <link rel="stylesheet" href="../../../resource/css/member/member.css" >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
    <section class="wrapper"> 
@@ -24,8 +25,10 @@
             <span class="right"></span>
          </div>
          
+
+         <input type="hidden" name="friendsId" value=""/>
+         <input type="hidden" name="cmd" value=""/>
          <p class="block-friend">차단한 친구</p>
-         
          <hr>
           <c:forEach var="userIhaveblocked" items="${userIhaveblocked}">
          <div class="flex friend">
@@ -37,9 +40,8 @@
 	         	<p>${userIhaveblocked.statusMsg}</p>
          	</div>
          	<div class="child-flex">
-	         	<input type="button" class="find-btn" value="추가" name="addFriend" />
-	         	<input type="hidden" value="${userIhaveblocked.id}"/>
-	         	<input type="button" class="find-btn" value="해제" name="unBlock"/>
+	         	<input type="button" class="find-btn" value="추가" name="userIhaveblocked_addBtn_${var.index }" data-id="${userIhaveblocked.id}" />
+	         	<input type="button" class="find-btn" value="해제" name="userIhaveblocked_unBlockBtn_${var.index }" data-id="${userIhaveblocked.id}"/>
 	         	
          	</div>
          </div>
@@ -57,8 +59,8 @@
 	         	<p>${userWhoHaveAddedMe.statusMsg}</p>
          	</div>
          	<div class="child-flex">
-	         	<input type="button" class="find-btn" value="추가"/>
-	         	<input type="button" class="find-btn" value="차단"/>
+	         	<input type="button" class="find-btn" value="추가" name="userWhoHaveAddedMe_addBtn_${var.index }" data-id="${userWhoHaveAddedMe.id}"/>
+	         	<input type="button" class="find-btn" value="차단" name="userWhoHaveAddedMe_blockBtn_${var.index }" data-id="${userWhoHaveAddedMe.id}"/>
          	</div>
          </div>
          </c:forEach>
@@ -98,34 +100,31 @@
    </div>
    <div class="mask"></div>
    
-   <!-- <script>
-   window.addEventListener("load",function(){
-	   var addFriend = document.querySelectorAll("#addFriend");
-       var unBlock = document.querySelectorAll("#unBlock");
-       for (var i = 0; i < addFriend.length; i++) 
-    	   addFriend[i].onclick=function(e){
-             cid.value = e.target.nextElementSibling.value;
-             cmd.value = "삭제";
-             alert(cmd.value);
-             //alert(e.target);
-             document.frm.submit();
-          }
-	   
-	   
-	   
-	   
-   });
+   <script>
    
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   </script> -->
+   $(function(){
+      $("input[name^='userWhoHaveAddedMe_addBtn']").on('click',function(e){ 
+          $("input[name='friendsId']").val($(e.target).data('id'));
+          console.log($(e.target).data('id'));
+          $('#frm').submit();
+      });
+	$("input[name^='userWhoHaveAddedMe_blockBtn']").on('click',function(e){ 
+           $("input[name='friendsId']").val($(e.target).data('id'));
+           console.log($(e.target).data('id'));
+           $('#frm').submit();
+    }); 
+	$("input[name^='userIhaveblocked_addBtn']").on('click',function(e){ 
+           $("input[name='friendsId']").val($(e.target).data('id'));
+           console.log($(e.target).data('id'));
+           $('#frm').submit();
+    }); 
+	$("input[name^='userIhaveblocked_unBlockBtn']").on('click',function(e){ 
+           $("input[name='friendsId']").val($(e.target).data('id'));
+           console.log($(e.target).data('id'));
+           $('#frm').submit();
+    }); 
+   }); 
+
+   </script>
 </body>
 </html>

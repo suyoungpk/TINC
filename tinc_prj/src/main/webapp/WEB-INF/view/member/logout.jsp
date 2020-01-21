@@ -10,31 +10,14 @@
 <link rel="stylesheet" href="../../../resource/css/member/member.css" >
 </head>
 <body>
-	<main>
-		<form action="/member/login" method="post">
-	        <div>
-               <p>TINC</p>
-            </div>
-            <div>
-               <p>메모와 채팅을 동시에</p>
-            </div>
-
-			<div>
-				<input type="text" name="id" value=""  placeholder="아이디"/> 
-			    <input type="password" name="password" value=""  placeholder="비밀번호"/>
-			    <input type="submit" value="로그인"/>
-			</div>
-	         
-	        <div>
-            	<p>아이디/비밀번호 찾기</p>
-            </div>
-	         
-	        <div>
-	            <span><i class="fas fa-chevron-up"></i></span><br>
-		        <span><a href="#">회원가입</a></span> 		
-	        </div>
+         <form action="logout">
+      <main>
+	         <div>
+	         <input type="submit" value="로그아웃" class="find-btn"/>
+	         <button ></button>
+               </div>
+      </main><!-- container end -->
          </form>
-	</main><!-- container end -->
    <div class="popup alert">
       <div class="popup-wrap">
          <div class="context">

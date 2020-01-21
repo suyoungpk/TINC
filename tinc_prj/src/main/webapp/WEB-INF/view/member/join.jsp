@@ -8,6 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/common.css" >
 <link rel="stylesheet" href="../../../resource/css/member/member.css" >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js"></script>  -->
 
 </head>
 <body>
@@ -16,46 +18,53 @@
          <a href="#" title="메모장 이동">MEMO</a>
       </nav><!-- gnb end -->
       <main class="container">
-         <form method="post">
-	         <div class="menu">
-	            <span class="left"><i class="fas fa-chevron-left"></i></span>
-	            <span class="center">회원가입</span>
-	            <span class="right"></span>
-	         </div>
-	         
-	         <!-- <div class="join">
-	         	 <input type="text" value=""  placeholder="아이디"/>               
-	         	 <input type="text" value=""  placeholder="닉네임"/>
-	             <input type="password" value=""  placeholder="비밀번호"/>
-	             <input type="password" value=""  placeholder="비밀번호 확인"/>
-	             <input type="text" value=""  placeholder="이름"/>
-	             <input type="text" value=""  placeholder="전화번호"/>
-	             <input type="text" value=""  placeholder="이메일"/>
-	         </div> -->
-	         <div class="join center">
-	         	<div class="usable">
-	         		<div><input type="text" value="" name="id" placeholder="아이디"/></div>
-	         		
-	         	</div>   
-	         	<div class="unusable">
-	         		<div><input type="text" value="" name="nickName" placeholder="닉네임"/></div>
-	         		<div><p><b>필수 입력란입니다.</b></p></div>
-				 </div>
-				 <div>
-	             <input type="password" id="pwd1-input" value="" name="password" placeholder="비밀번호"/>
-				 <div>
-		             <input type="password" id="pwd2-input" value="" name="password2" placeholder="비밀번호 확인"/>
-		             <div><p><b id="duplicated-state"></b></p></div>
-	             </div>
-	             <input type="text" value="" name="phoneNum" placeholder="전화번호"/>
-	             <input type="text" value="" name="email" placeholder="이메일"/>
-	         </div>
-	         </div>
-	         
-	         <div class="agree-btn">
-	             <input type="button" class="left-btn" value="취소"/>
-	             <input type="submit" class="right-btn" value="가입"/>
-	         </div>
+         <form method="post" id="frm">
+            <div class="menu">
+               <span class="left"><i class="fas fa-chevron-left"></i></span>
+               <span class="center">회원가입</span>
+               <span class="right"></span>
+            </div>
+            
+            <!-- <div class="join">
+                <input type="text" value=""  placeholder="아이디"/>               
+                <input type="text" value=""  placeholder="닉네임"/>
+                <input type="password" value=""  placeholder="비밀번호"/>
+                <input type="password" value=""  placeholder="비밀번호 확인"/>
+                <input type="text" value=""  placeholder="이름"/>
+                <input type="text" value=""  placeholder="전화번호"/>
+                <input type="text" value=""  placeholder="이메일"/>
+            </div> -->
+            <div class="join center">
+         <div class="usable">
+            <div><input type="text" id="id-input" value="" name="id" placeholder="아이디"/></div>
+            <div><p><b id="validate-id"></b></p></div>
+         </div>   
+         <div class="usable">
+            <div><input type="text" value="" id="name" name="nickName" placeholder="닉네임"/></div>
+            <div><p><b id="validate-nickName"></b></p></div>
+         </div>
+         <div class="usable">
+            <input type="password" id="pwd1-input" value="" name="password" placeholder="비밀번호"/>
+            <div><p><b id="validate-pwd1"></b></p></div>
+         </div>
+         <div class="usable">
+            <input type="password" id="pwd2-input" value="" name="password2" placeholder="비밀번호 확인"/>
+            <div><p><b id="validate-pwd2"></b></p></div>
+         </div>
+         <div class="usable">
+            <input type="tel" id="phoneNum-input" value="" name="phoneNum" placeholder="전화번호"/>
+            <div><p><b id="validate-phone"></b></p></div>
+         </div>
+         <div class="usable"> 
+            <input type="text" value="" id="email-input" name="email" placeholder="이메일"/>
+            <div><p><b id="validate-email"></b></p></div>
+         </div>
+         </div>
+            
+            <div class="agree-btn">
+                <input type="button" class="left-btn" value="취소"/>
+                <input type="submit" id="subimit" class="right-btn" value="가입"/>
+            </div>
          </form>
       </main><!-- container end -->
    </section><!-- wrapper end -->
@@ -73,7 +82,162 @@
    </div>
    <div class="mask"></div>
    
+   <script>
+   $("#id-input").blur(function() {
+		// id = "id_reg" / name = "userId"
+		var id = $('#id-input').val();
+		var idJ = /^[a-z0-9]{4,12}$/;
+		$.ajax({
+			url : '${pageContext.request.contextPath}/member/idCheck?id='+ id,
+			type : 'get',
+			dataType : "json",
+			success : function(data) {
+				console.log("true = 중복o / false = 중복x : "+ data);							
+				if (data == true) {
+						// 1 : 아이디가 중복되는 문구
+						$("#validate-id").text("사용중인 아이디입니다");
+						$("#validate-id").css("color", "#f0679e");
+						$("#id-input").css("border", "0.0625rem solid #f0679e");
+						$("#submit").attr("disabled", true);
+					 } else {
+						
+						if(idJ.test(this.id)){
+							// 0 : 아이디 길이 / 문자열 검사
+							$("#validate-id").text("영문 + 숫자 4~12자로 입력하세요");
+							$("#validate-id").css("color", "#f0679e");
+							$("#id-input").css("border", "0.0625rem solid #f0679e");
+							$("#submit").attr("disabled", false);
+				
+						} else if(id == ""){
+							
+							$('#validate-id').text('아이디를 입력해주세요 :)');
+							$('#validate-id').css('color', '#f0679e');
+							$("#id-input").css("border", "0.0625rem solid #f0679e");
+							$("#submit").attr("disabled", true);				
+							
+						} /* else {
+							$('#validate-id').text("");
+							$('#validate-id').css('color', '#f0679e');
+							$("#id-input").css("border", "0.0625rem solid #f0679e");
+							$("#submit").attr("disabled", true);
+						}  */
+						
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+
    
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+  /*  window.addEventListener("load",function(){
+       var div = document.querySelector(".join");
+       var tid = null;
+       
+       var pwd1Input = document.querySelector("#pwd1-input");
+       var pwd2Input = document.querySelector("#pwd2-input");
+       var idInput = document.querySelector("#id-input");
+       var emailInput = document.querySelector("#email-input");
+       var phoneNumInput = document.querySelector("#phoneNum-input");
+       
+
+       var validatePwd2 = document.querySelector("#validate-pwd2");
+       var validateId = document.querySelector("#validate-id");
+       var validatePwd1 = document.querySelector("#validate-pwd1");
+       var validateEmail = document.querySelector("#validate-email");
+       var validatePhone = document.querySelector("#validate-phone");
+
+       var regExpPwd = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
+       var regExpPhone = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
+       var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+       
+       pwd1Input.oninput = function(e){
+           if(!regExpPwd.exec(pwd1Input.value)){
+               pwd1Input.style.border =  "0.0625rem solid #f0679e";
+               validatePwd.style.color = "#f0679e";
+               validatePwd.innerText = "비밀번호가 유효하지 않습니다.";
+           }else{ 
+               pwd1Input.style.border =  "0.0625rem solid #7367f0";
+               validatePwd.style.color = "#7367f0";
+               validatePwd.innerText = "";
+           }
+               
+       };
+
+       pwd2Input.oninput = function(e){
+            if(pwd1Input.value != pwd2Input.value){
+                pwd2Input.style.border =  "0.0625rem solid #f0679e";
+                mismatchedState.style.color = "#f0679e";
+                mismatchedState.innerText = "비밀번호가 일치하지 않습니다.";
+            }else{ 
+                pwd2Input.style.border =  "0.0625rem solid #7367f0";
+                mismatchedState.style.color = "#7367f0";
+                mismatchedState.innerText = "";
+            }
+                
+        };
+
+       idInput.oninput = function(){
+           if(idInput.value != "ss"){
+               idInput.style.border  =  "0.0625rem solid #f0679e";
+               duplicatedState.style.color = "#f0679e";
+               duplicatedState.innerText = "사용불가능한 아이디입니다."
+           }else{
+               idInput.style.border =  "0.0625rem solid #7367f0";
+               duplicatedState.style.color = "#7367f0";
+               duplicatedState.innerText = "사용가능한 아이디입니다.";
+           }
+       };
+
+       emailInput.oninput = function(){
+           if(!regExpEmail.exec(emailInput.value)) {
+               emailInput.style.border  =  "0.0625rem solid #f0679e";
+               validateEmail.style.color = "#f0679e";
+               validateEmail.innerText = "적합하지 않은 이메일 형식입니다."
+           }else{
+               emailInput.style.border  =  "0.0625rem solid #7367f0";
+               validateEmail.style.color = "#7367f0";
+               validateEmail.innerText = "";
+           }
+        };
+
+        phoneNumInput.oninput = function(){
+           if(!regExpPhone.exec(phoneNumInput.value)) {
+               phoneNumInput.style.border  =  "0.0625rem solid #f0679e";
+               validatePhone.style.color = "#f0679e";
+               validatePhone.innerText = "적합하지 않은 전화번호 형식입니다."
+           }else{
+               phoneNumInput.style.border  =  "0.0625rem solid #7367f0";
+               validatePhone.style.color = "#7367f0";
+               validatePhone.innerText = "";
+           }
+        };
+       
+   });
+          var validateNickName = document.querySelector("#validate-nickName");
+          var name = document.querySelector("#name");
+        var frm = document.getElementById('frm');
+        frm.addEventListener("submit", function(e){
+          if(document.getElementById('name').value.length === 0){
+               e.preventDefault();
+               //name.focus();
+             name.style.border  =  "0.0625rem solid #f0679e";
+             validateNickName.style.color = "#f0679e";
+             validateNickName.innerText = "닉네임을 입력하세요."
+          } 
+        });
+    */
+   </script>
    
    
 </body>

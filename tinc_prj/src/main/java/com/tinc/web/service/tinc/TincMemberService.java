@@ -18,6 +18,11 @@ public class TincMemberService implements MemberService{
 	private MemberDao memberDao;
 
 	@Override
+	public String getDefaultRole(String id)
+	{
+		return "member";
+	}
+	@Override
 	public int joinMember(Member member) {
 		// TODO Auto-generated method stub
 		return memberDao.joinMember(member);
@@ -136,9 +141,12 @@ public class TincMemberService implements MemberService{
 	}
 
 	@Override
-	public boolean isDuplicatedId(String id) {
-		// TODO Auto-generated method stub
-		return false;
+	public String isDuplicatedId(String id) {
+		Member member = memberDao.get(id);
+		if(member != null) {
+			return "true";
+		}
+		return "false";
 	}
 
 	

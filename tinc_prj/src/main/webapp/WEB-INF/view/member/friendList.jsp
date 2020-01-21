@@ -62,7 +62,7 @@
 				</span> -->
 			</button>
 			<button class="btn">
-				<i class="fas fa-cog">설정</i>
+				<i class="fas fa-cog" onclick="location.href='../setting/'setting">설정</i>
 			</button>
 		</div>
 	     
