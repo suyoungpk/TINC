@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tinc.web.dao.UploadFilesDao">
+	<insert id="uploadFiles"
+		parameterType="com.tinc.web.entity.UploadFiles">
+		INSERT INTO UploadFiles(id, chattingRoomId, memberId,
+		files)
+		VALUES ((SELECT COALESCE(MAX(id),
+		0)+1 id FROM
+		UploadFiles id), #{id}, #{memberId},
+		#{files});
+	</insert>
+</mapper>

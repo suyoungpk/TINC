@@ -1,13 +1,19 @@
 package com.tinc.web.entity;
 
+import java.util.Date;
+
 public class UploadFiles {
 	private int id;
 	private int chattingRoomId;
 	private String memberId;
 	private String files;
+	private Date regdate;
+	
+	public UploadFiles() {
+		// TODO Auto-generated constructor stub
+	}
 
-	public UploadFiles(int id, int chattingRoomId, String memberId, String files) {
-		this.id = id;
+	public UploadFiles(int chattingRoomId, String memberId, String files) {
 		this.chattingRoomId = chattingRoomId;
 		this.memberId = memberId;
 		this.files = files;
@@ -45,9 +51,18 @@ public class UploadFiles {
 		this.files = files;
 	}
 
+	public Date getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+
 	@Override
 	public String toString() {
 		return "UploadFiles [id=" + id + ", chattingRoomId=" + chattingRoomId + ", memberId=" + memberId + ", files="
-				+ files + "]";
+				+ files + ", regdate=" + regdate + "]";
 	}
+
 }
