@@ -133,7 +133,6 @@ public class Chatting {
 			Principal principal, HttpServletRequest request) {
 //		@RequestParam(required=false) 
 		String fileNames = "";
-		System.out.println(file + " 테스트중ㅁㄴㅇㄻㄴㅇㄹ");
 		String fileName = file.getOriginalFilename();
 		fileNames += (fileName + ",");
 
@@ -147,8 +146,6 @@ public class Chatting {
 		} else {
 			System.out.println("경로존재함");
 		}
-
-		System.out.println("realPath : " + realPath);
 
 		InputStream fis;
 		try {
@@ -180,12 +177,7 @@ public class Chatting {
 	public String upload(int id, String memberId, UploadFiles uploadFiles,
 			@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 
-		System.out.println("\nid : " + id + "\nmemberId : " + memberId + "\nuploadFiles : " + uploadFiles + "\nfile : "
-				+ file + "\nrequest : " + request);
-
 		String fileName = file.getOriginalFilename();
-
-		System.out.println("파일명 : " + file.isEmpty());
 
 		ServletContext application = request.getServletContext();
 		String urlPath = "/resource/upload";
@@ -198,14 +190,11 @@ public class Chatting {
 			System.out.println("경로존재함");
 		}
 
-		System.out.println("realPath : " + realPath);
-
 		InputStream fis;
-		System.out.println(realPath + File.separator + fileName);
 		try {
 			fis = file.getInputStream();
 
-			FileOutputStream fos = new FileOutputStream(realPath + File.separator + fileName); // ??
+			FileOutputStream fos = new FileOutputStream(realPath + File.separator + fileName);
 
 			byte[] buf = new byte[1024];
 			int size = 0;

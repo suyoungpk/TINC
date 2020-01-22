@@ -1,5 +1,6 @@
 let id = $("#chattingFileForm").data("id");
 let memberId = $("#chattingFileForm").data("member");
+let fileLink, fileExtension;
 
 $(document).ready(function() {
   $("body").on("dragenter dragover", function(event) {
@@ -14,7 +15,12 @@ $(document).ready(function() {
     // 첫번째 파일
     let file = files[0];
     // 콘솔에서 파일정보 확인
-    console.log(file);
+    fileExtension = file.type.substring(0, file.type.indexOf("/", 0));
+
+    fileLink = "http://localhost:8080/resource/upload/" + file.name;
+
+    $("#chattingFileForm").data("fileLink", fileLink);
+    $("#chattingFileForm").data("fileExtension", fileExtension);
 
     // ajax로 전달할 폼 객체
     let formData = new FormData();
