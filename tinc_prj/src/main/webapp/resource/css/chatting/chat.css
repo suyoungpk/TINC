@@ -9,7 +9,8 @@
 .topBox .searchBox{width:70%;padding:0 0.8125rem;box-sizing:border-box;font-size:0.9375rem;color:#1d1e2c;text-align:left}
 .topBox .title{text-align:center}
 .topBox .searchBox {margin-top:-0.46875rem;background:#fff;border:1px solid #bababa; border-radius:1.0703125rem}
-.topBox .searchBox input{width:calc(100% - 2.5rem);font-size:0.9375rem;color:#5f5f5f;line-height:2.140625rem;height:2.140625rem}
+.topBox .searchBox input{width:calc(100% - 4rem);font-size:0.9375rem;color:#5f5f5f;line-height:2.140625rem;height:2.140625rem}
+.topBox .searchBox button:disabled{opacity:0.6}
 .topBox .right{width:15%;text-align:right}
 .topBox .btn-back{font-size:1rem;}
 .topBox .btn-srch{font-size:0.84375rem}
@@ -59,8 +60,8 @@
 .chattingBox .btnBox{width:calc(20% - 2.84375rem);padding-left:0.8125rem;align-self:center;text-align:center}/*3.03125*/
 .chattingBox .btn-share {display:inline-block;background:#dfdee8;border-radius:1.03125rem;width:2.0625rem;height:2.0625rem;text-align:center;vertical-align:middle;}
 .chattingBox .btn-share i{font-size:0.84375rem;color:#818181;width:0.84375rem;height:0.84375rem;line-height:100%;overflow:hidden}
-.chattingBox .chatting .megBox .message.imgBox{width:100%;border-radius:1.015625rem;overflow:hidden;padding:0}
-.chattingBox .imgBox img{display:block;width:100%}
+.chattingBox .chatting .megBox .message.imgBox{width:100%;/* border-radius:1.015625rem;overflow:hidden; */padding:0}
+.chattingBox .imgBox img{display:block;width:100%;border-radius:1.015625rem}
 .chattingBox .btn-all{background:#7367f0;color:#cdcdcd;width:100%;text-align:left;font-size:0.8125rem;overflow:hidden;line-height:100%}
 .chattingBox .btn-all span{float:right;display:inline-block;font-size:2rem}
 .chattingBox .me .btn-all{background:#fff;text-align:right}
@@ -106,6 +107,7 @@
 
 .pop-share.memo nav ul a{border:none;background:#7367f0;color:#fff}
 
+/* #friendSetting.popup .popup-container .btn-area .btn {width:4.8rem;margin:0 0.3rem} */
 .popup.friendSetting .popup-wrap{top:unset;bottom:0;left:0;width:100%}
 .popup.friendSetting .popup-wrap .popup-container{padding:1.5625rem 3.40625rem 0.9375rem}
 .popup.friendSetting .popup-wrap .profile{display:flex;align-items: center;flex-direction:row;text-align:left;line-height:5.140625rem}
@@ -235,6 +237,102 @@
    margin-bottom: 1rem;
 }
 .popup-title .popup-wrap .btn-area .btn {
+   border-radius: 0.2rem;
+   background-color: white;
+   padding: 0.2rem 2rem 0.2rem 2rem;
+}
+
+/* add style */
+.chatList.add {padding-top:0;}
+.chatList.add > li {
+   border-top: 0px solid #b2b2b2;
+}
+
+.chatList.add figure {
+   margin: 0 0.6rem 0 0.3rem;
+}
+
+.chatList.add li a {
+   cursor: pointer;
+}
+
+.chatList.add li a:hover {
+   background-color: #d7d6eb;
+}
+
+.chatList.add li a .selectFriend {
+   transform: scale(2);
+   color: rgb(178, 178, 178);
+}
+
+.chatList.add li a .selectFriendChecked {
+   transform: scale(2);
+   color: rgb(115, 103, 241);
+}
+
+.search.add {
+   position: relative;
+   margin:3.6rem 0.8125rem 0;
+}
+.search.add .searchSpan {
+   text-align: right;
+   position: absolute;
+   right: 0;
+   min-width: 10%;
+   /* padding: 0 0 0 0.5rem; */
+}
+
+.search.add .searchSpan button{
+   padding: 0 0.5rem 0 0.5rem;
+   border-radius: 2px;
+   background-color: rgb(115, 103, 241);
+   color: white;
+}
+
+.search.add input[type="text"] {
+   min-width: 68%;
+   max-width: 100%;
+   border: solid 1px rgb(184, 184, 184);
+   background-color: white;
+   border-radius: 0.7rem;
+   padding-left: 2%;
+   padding-right: 2%;
+}
+
+.search.add label {
+   color: rgb(100, 100, 100);
+}
+
+#add.popup .popup-wrap {
+   top: 40%;
+   left: 11%;
+   width: 78%;
+   min-height: 7rem;
+   text-align: right;
+}
+
+#add.popup .popup-wrap .btn-close {
+   margin: 0.8rem;
+   color: rgb(153, 153, 153);
+}
+
+.popup .popup-wrap .context {
+   text-align: center;
+}
+#add.popup .popup-wrap .context input[type="text"] {
+   width: 15rem;
+   border: solid 1px rgb(184, 184, 184);
+   background-color: white;
+   border-radius: 0.7rem;
+   padding-left: 2%;
+   padding-right: 2%;
+}
+#add.popup .popup-wrap .btn-area {
+   text-align: center;
+   margin-top: 1rem;
+   margin-bottom: 1rem;
+}
+#add.popup .popup-wrap .btn-area .btn {
    border-radius: 0.2rem;
    background-color: white;
    padding: 0.2rem 2rem 0.2rem 2rem;
