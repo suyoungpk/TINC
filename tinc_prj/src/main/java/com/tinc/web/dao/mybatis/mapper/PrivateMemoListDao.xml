@@ -17,7 +17,7 @@
 	
 	<insert id="insert" parameterType="com.tinc.web.entity.PrivateMemoList">
 		inesrt into PrivateMemoList(id, title, memberId)
-		values((select coalesce(max(id),0)+1 from PrivateMemoList), #{title}, #{memberId})
+		values((select id from (select coalesce(max(id),0)+1 id from PrivateMemoList) as tmp), #{title}, #{memberId})
 	</insert>
 	
 	<update id="update" parameterType="com.tinc.web.entity.PrivateMemoList">

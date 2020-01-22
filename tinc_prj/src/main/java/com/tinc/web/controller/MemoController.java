@@ -1,12 +1,17 @@
 package com.tinc.web.controller;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +27,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tinc.web.dao.MemberDao;
+import com.tinc.web.entity.ChattingRoom;
 import com.tinc.web.entity.CheckList;
 import com.tinc.web.entity.CheckListItem;
 import com.tinc.web.entity.DueDate;
+import com.tinc.web.entity.FriendsShareFullView;
 import com.tinc.web.entity.FriendsShareView;
 import com.tinc.web.entity.GroupMemoList;
 import com.tinc.web.entity.GroupShareFullView;
@@ -32,6 +39,7 @@ import com.tinc.web.entity.GroupShareMemberView;
 import com.tinc.web.entity.GroupShareView;
 import com.tinc.web.entity.MemoCard;
 import com.tinc.web.entity.PrivateMemoList;
+import com.tinc.web.service.ChattingService;
 import com.tinc.web.service.CheckListItemService;
 import com.tinc.web.service.CheckListService;
 import com.tinc.web.service.DueDateService;
@@ -61,6 +69,8 @@ public class MemoController
 	private MemoShareService memoShareService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ChattingService chattingService;
 	
 
 	@GetMapping("list")
@@ -382,7 +392,7 @@ public class MemoController
 		Gson gson = new Gson();
 		Type paramMapType = new TypeToken<Map<String, String>>() {}.getType();
 		Map<String, String> paramMap = gson.fromJson(delDeuDateParam, paramMapType);
-		System.out.println("del-duedate" + paramMap);
+		//System.out.println("del-duedate" + paramMap);
 		
 		int ret = dueDateService.deleteByCardId(Integer.parseInt(paramMap.get("cardId")));
 		if(ret <= 0)
@@ -431,7 +441,7 @@ public class MemoController
 	
 	@ResponseBody
 	@PostMapping("share")
-	public String share(@RequestBody String shareParam, Principal principal)
+	public String share(@RequestBody String shareParam, Principal principal, HttpServletRequest req)
 	{
 		String mId = "";
 		mId = "user2";
@@ -444,35 +454,113 @@ public class MemoController
 	
 		Integer mcId = Integer.parseInt((String) paramMap.get("mcId"));
 		
-		
 		List<String> gsIdList = (List<String>) paramMap.get("gsIdList"); 
 		if(!gsIdList.isEmpty())
 		{
 			for(String gsId : gsIdList)
 			{
-				System.out.println(mId + "," + gsId);
+				//System.out.println(mId + "," + gsId);
 				memoShareService.shareMemoToChattingRoom(mId, Integer.parseInt(gsId), mcId);
+			}
+		}
+		
+		List<String> fsIdList = (List<String>) paramMap.get("fsIdList");
+		if(!fsIdList.isEmpty())
+		{
+			// fsIdList에 있는 memberId들은 나와의 채팅방이 개설안됨 친구들
+			for(String fsId : fsIdList)
+			{
+				int crId = 0;
+				int cnt = 0;
+				cnt = memoShareService.hasPrivateChatRoom(mId, fsId);
+				System.out.println("cnt: " + cnt);
+				if(cnt < 1)
+				{
+					// 1. 1:1 채팅방 개설
+					String title = mId.toString() + "," + fsId.toString();
+					ChattingRoom newChattingRoom = new ChattingRoom(0, mId.toString(), title, true, "");
+					chattingService.createChattingRoom(newChattingRoom);//채팅 방 만들기
+					crId = chattingService.getChattingRoomId(mId); // 방장이 만든 채팅방 정보 가져오기			
+					System.out.println("crId: " + crId);
+					chattingService.inviteMember(crId, fsId);
+					mkFile(mId, crId, req);
+					mkFile(fsId, crId, req);
+					
+					// 2. groupMemoList 새로 생성
+					GroupMemoList groupMemoList = new GroupMemoList(title, crId, mId);
+					groupMemoListService.insert(groupMemoList);
+					groupMemoList = new GroupMemoList(title, crId, fsId);
+					groupMemoListService.insert(groupMemoList);				
+					
+					
+				}
+				else
+				{
+					crId = chattingService.getChattingRoomId(mId);
+					System.out.println(mId + " and " + fsId + " have already chatroom");
+				}
+				
+				// 3. 메모 공유			
+				memoShareService.shareMemoToChattingRoom(mId, crId, mcId);
+				memoShareService.shareMemoToChattingRoom(fsId, crId, mcId);
 			}
 		}
 		
 		return "memo-share success";
 	}
 	
+	public void mkFile(String userId, int chatId, HttpServletRequest req)
+	{
+		  //파일 만들기 
+	      String filePath = "/WEB-INF/storage/chat";
+	      String fileName = userId+chatId+".json";
+	      ServletContext application = req.getServletContext();
+	      String realPath = application.getRealPath(filePath);      
+	      try {
+	         File file = new File(realPath);
+	         
+	         if(!file.exists())
+	            file.mkdirs();
+	         
+	         FileWriter fos = new FileWriter(realPath+File.separator+fileName);
+	         fos.close();	         
+	      } catch (IOException e) {
+	    	  
+	      }
+
+	}
+	
 	@ResponseBody
-	@PostMapping("show-private-share")
-	public String showPrivateShare(@RequestParam String mdId, Principal principal)
+	@GetMapping("show-private-share")
+	public String showPrivateShare(Principal principal)
 	{
 		String mId = "";
 		mId = "user2";
 		//mId = principal.getName();
 		
 		Gson gson = new Gson();
-		Type paramMapType = new TypeToken<Map<String, String>>() {}.getType();
-		Map<String, String> paramMap = gson.fromJson(mdId, paramMapType);
 		
-		List<FriendsShareView> fsViewList = memoShareService.getFriendsShareViewList(mId);
-		String fsList = gson.toJson(fsViewList);
-		
+		List<FriendsShareFullView> fsfViewList = 
+				memoShareService.getFriendsShareFullViewList(mId);
+		String fsList = gson.toJson(fsfViewList);
+		System.out.println(fsList);
 		return fsList;
+	}
+	
+	@ResponseBody
+	@GetMapping("show-group-share")
+	public String showGroupShare(Principal principal)
+	{
+		String mId = "";
+		mId = "user2";
+		//mId = principal.getName();
+		
+		List<GroupShareFullView> gsfViewList = 
+				memoShareService.getGroupShareFullViewList(mId);
+		
+		Gson gson = new Gson();
+		String gsfViewData = gson.toJson(gsfViewList);
+		
+		return gsfViewData;
 	}
 }

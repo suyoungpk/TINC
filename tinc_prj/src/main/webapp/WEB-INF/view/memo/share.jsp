@@ -78,7 +78,7 @@
 			</ul>
 		</div>
 		<template id="memo-share-template">
-			<input type="hidden"/>
+			<input type="hidden" name="share-chatting-room-id"/>
 			<li>
 				<div class="memo-share-list-pic-wrapper">
 					<div class="memo-share-list-pic">

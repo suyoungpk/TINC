@@ -14,29 +14,30 @@ function showPrivateShareList() {
     let mcId = $(".memo-share-content > input[name=\"memo-card-id\"]").val();
 
     $(".memo-share-button-wrapper > div:first-child > i").off("click").click((e) => {
-        let sendDate = JSON.stringify({ mcId: mcId });
+        gsIdList = [];
+        fsIdList = [];
 
         let request = new XMLHttpRequest();
-        request.open("POST", "../../../../memo/show-private-share");
+        request.open("GET", "../../../../memo/show-private-share");
         request.setRequestHeader("Content-Type", "application/json");
         request.onload = function () {
 
             console.log(request.reponseText);
-            let fsList = JSON.parse(request.responseText);
+            let receivedData = JSON.parse(request.responseText);
             let memoShareTemplate = document.querySelector("#memo-share-template");
-            let memoShareContent = document.querySelector(".memo-share-content");
+            let memoShareContent = document.querySelector(".memo-share-list");
             memoShareContent.innerHTML = "";
 
-            for (let i = 0; i < fsList.length; i++) {
+            for (let i = 0; i < receivedData.length; i++) {
                 let cloneMemoShare = document.importNode(memoShareTemplate.content, true);
 
-                let idInput = cloneMemoShare.queyrSelector("input[type=\"hidden\"]");
+                let idInput = cloneMemoShare.querySelector("input[type=\"hidden\"]");
                 idInput.name = "share-friends-id";
-                idInput.value = fsList[i].friendsId;
+                idInput.value = receivedData[i].friendsId;
 
                 let sharePic = cloneMemoShare.querySelector("div.memo-share-list-pic");
                 let newPic;
-                if (fsList[i].profileImg != null) {
+                if (receivedData[i].profileImg != null) {
                     newPic = document.createElement("img");
                     newPic.src = "../../../resource/images/" + fsList[i].profileImg;
                 }
@@ -47,28 +48,93 @@ function showPrivateShareList() {
                 sharePic.append(newPic);
 
                 let nickNameInput = cloneMemoShare.querySelector("input[name=\"memo-share-list-content-top\"]");
-                nickNameInput.value = fsList[i].nickName;
+                nickNameInput.value = receivedData[i].nickName;
                 let statusMsgInput = cloneMemoShare.querySelector("input[name=\"memo-share-list-content-bottom\"]");
-                statusMsgInput.value = fsList[i].statusMsg;
+                statusMsgInput.value = receivedData[i].statusMsg;
 
                 memoShareContent.append(cloneMemoShare);
+
             }
 
+            getShareIds();
             shareMemo();
         };
-        request.send(sendDate);
+        request.send();
+
+
     });
 }
 
 function showGroupShareList() {
+    let mcId = $(".memo-share-content > input[name=\"memo-card-id\"]").val();
 
+    $(".memo-share-button-wrapper > div:last-child > i").off("click").click(function (e) {
+        gsIdList = [];
+        fsIdList = [];
+
+        let request = new XMLHttpRequest();
+        request.open("GET", "../../../../memo/show-group-share");
+        request.setRequestHeader("Content-Type", "application/json");
+        request.onload = function () {
+            let receivedData = JSON.parse(request.responseText);
+            let memoShareTemplate = document.querySelector("#memo-share-template");
+            let memoShareContent = document.querySelector(".memo-share-list");
+            memoShareContent.innerHTML = "";
+
+            for (let i = 0; i < receivedData.length; i++) {
+                let cloneMemoShare = document.importNode(memoShareTemplate.content, true);
+
+                let idInput = cloneMemoShare.querySelector("input[type=\"hidden\"]");
+                idInput.name = "share-chatting-room-id";
+                idInput.value = receivedData[i].chattingRoomId;
+
+                let sharePic = cloneMemoShare.querySelector("div.memo-share-list-pic");
+                let newPic = document.createElement("i");
+                newPic.className = "fas fa-users";
+                sharePic.append(newPic);
+
+                let nickNameInput = cloneMemoShare.querySelector("input[name=\"memo-share-list-content-top\"]");
+                nickNameInput.value = receivedData[i].chattingRoomTitle;
+                let statusMsgInput = cloneMemoShare.querySelector("input[name=\"memo-share-list-content-bottom\"]");
+                statusMsgInput.value = "";
+
+                memoShareContent.append(cloneMemoShare);
+
+            }
+
+            shareMemo();
+            getShareIds();
+        };
+        request.send();
+
+
+    });
 }
 
 function getShareIds() {
     $(".memo-share-list-checkbox").off("click").click(function (e) {
+        console.log(e.target.checked);
 
-        if (e.target.parentNode.parentNode.previousElementSibling.name === "share-chatting-room-id") {
-            gsIdList.push($(e.target.parentNode.parentNode.previousElementSibling).val());
+        if (e.target.checked === true) {
+
+            if (e.target.parentNode.parentNode.previousElementSibling.name === "share-chatting-room-id") {
+                gsIdList.push($(e.target.parentNode.parentNode.previousElementSibling).val());
+            }
+
+            if (e.target.parentNode.parentNode.previousElementSibling.name === "share-friends-id") {
+                fsIdList.push($(e.target.parentNode.parentNode.previousElementSibling).val());
+            }
+        }
+        else {
+            let tmpIndex;
+            if (e.target.parentNode.parentNode.previousElementSibling.name === "share-friends-id") {
+                tmpIndex = fsIdList.indexOf($(e.target.parentNode.parentNode.previousElementSibling).val());
+                fsIdList.splice(tmpIndex, 1);
+            }
+            else {
+                tmpIndex = gsIdList.indexOf($(e.target.parentNode.parentNode.previousElementSibling).val());
+                gsIdList.splice(tmpIndex, 1);
+            }
         }
 
         console.log(gsIdList);

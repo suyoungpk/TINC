@@ -13,7 +13,7 @@
 	
 	<insert id="insert" parameterType="com.tinc.web.entity.GroupMemoList">
 		insert into GroupMemoList(id, title, chattingRoomId, memberId)
-		values((select coalesce(max(id),0)+1 from GroupMemoList), #{title}, #{chattingRoomId}, #{memberId})
+		values ((select id from (select coalesce(max(id),0)+1 id from GroupMemoList) as tmp), #{title}, #{chattingRoomId}, #{memberId})
 	</insert>
 	
 	<update id="update" parameterType="com.tinc.web.entity.GroupMemoList">

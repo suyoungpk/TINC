@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tinc.web.dao.CheckListDao;
 import com.tinc.web.dao.CheckListItemDao;
 import com.tinc.web.dao.DueDateDao;
+import com.tinc.web.dao.FriendsShareFullViewDao;
 import com.tinc.web.dao.FriendsShareViewDao;
 import com.tinc.web.dao.GroupMemoListDao;
 import com.tinc.web.dao.GroupShareFullViewDao;
@@ -20,6 +21,7 @@ import com.tinc.web.dao.PrivateMemoListDao;
 import com.tinc.web.entity.CheckList;
 import com.tinc.web.entity.CheckListItem;
 import com.tinc.web.entity.DueDate;
+import com.tinc.web.entity.FriendsShareFullView;
 import com.tinc.web.entity.FriendsShareView;
 import com.tinc.web.entity.GroupMemoList;
 import com.tinc.web.entity.GroupShareFullView;
@@ -54,6 +56,8 @@ public class TincMemoShareService implements MemoShareService
 	private DueDateDao dueDateDao;
 	@Autowired
 	private GroupShareMemberViewDao gsMemberViewDao;
+	@Autowired
+	private FriendsShareFullViewDao friendsShareFullViewDao;
 	
 	@Override
 	public List<FriendsShareView> getFriendsShareViewList(String id)
@@ -94,8 +98,7 @@ public class TincMemoShareService implements MemoShareService
 			{
 				cli.setCheckListId(newClId);
 				checkListItemDao.insert(cli);
-			}
-			
+			}			
 		}
 		
 		DueDate duedate = dueDateDao.getByCardId(mcId);
@@ -117,7 +120,7 @@ public class TincMemoShareService implements MemoShareService
 		memoCard.setPrivateListId(null);
 		memoCardDao.insert(memoCard);
 		int newMcId = memoCardDao.getNewMcId();
-		System.out.println(newMcId);
+		System.out.println("newMcId: " + newMcId);
 		
 		List<CheckList> clList = checkListDao.getListByCardId(mcId);
 		for(CheckList cl : clList)
@@ -156,6 +159,29 @@ public class TincMemoShareService implements MemoShareService
 		return gsMemberViewDao.getList();
 	}
 
-
+	@Override
+	public List<FriendsShareFullView> getFriendsShareFullViewList(String id)
+	{
+		// TODO Auto-generated method stub
+		return friendsShareFullViewDao.getList(id);
+	}
+	
+	// id1과 id2가 동시에 존재하는 채팅룸 갯수 반환
+	@Override
+	public int hasPrivateChatRoom(String id1, String id2)
+	{
+		// TODO Auto-generated method stub
+		int count = 0;
+		List<FriendsShareFullView> list = friendsShareFullViewDao.getList(id1);
+		for(FriendsShareFullView fsf : list)
+		{
+			if(fsf.getFriendsId().equals(id2))
+			{
+				count++;
+			}
+		}		
+		
+		return count;
+	}
 
 }
