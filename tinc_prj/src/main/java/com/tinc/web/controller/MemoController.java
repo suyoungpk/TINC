@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -72,23 +73,35 @@ public class MemoController
 	@Autowired
 	private ChattingService chattingService;
 	
-
+	
 	@GetMapping("list")
-	public String list(Model model, Principal principal)
+	public String list(Model model, Principal principal, @RequestParam(name="crId", defaultValue="0") String crId)
 	{
 
 		String mId = "";
 		//mId = principal.getName();
 		mId = "user2";
-
-		List<PrivateMemoList> privateMemoList = PrivateMemoListService.getPrivateMemoList(mId);
-		List<GroupMemoList> groupMemoList = groupMemoListService.getGroupMemoList(mId);
-		List<MemoCard> memoCardList = memoCardService.getList();
 		
+		if(Integer.parseInt(crId) == 0)
+		{
+			List<PrivateMemoList> privateMemoList = PrivateMemoListService.getPrivateMemoList(mId);
+			List<GroupMemoList> groupMemoList = groupMemoListService.getGroupMemoList(mId);
+			List<MemoCard> memoCardList = memoCardService.getList();
 		
-		model.addAttribute("privateMemoList", privateMemoList);
-		model.addAttribute("groupMemoList", groupMemoList);
-		model.addAttribute("memoCardList", memoCardList);
+			
+			model.addAttribute("privateMemoList", privateMemoList);
+			model.addAttribute("groupMemoList", groupMemoList);
+			model.addAttribute("memoCardList", memoCardList);
+		}
+		else
+		{
+			List<GroupMemoList> groupMemoList = new ArrayList<>();
+			groupMemoList.add(groupMemoListService.get(Integer.parseInt(crId), mId));
+			List<MemoCard> memoCardList = memoCardService.getList();
+			
+			model.addAttribute("groupMemoList", groupMemoList);
+			model.addAttribute("memoCardList", memoCardList);
+		}
 
 		return "memo/list";
 	}
