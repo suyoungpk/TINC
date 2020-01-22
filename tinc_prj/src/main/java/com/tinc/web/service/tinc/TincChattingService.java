@@ -1,8 +1,6 @@
 package com.tinc.web.service.tinc;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +108,22 @@ public class TincChattingService implements ChattingService{
 		return chattingRoomDao.updateLast(chatId,memberId,meg);
 	}
 	@Override
+	public int isDuplicatedRoom(String userId, String memberId) {
+		List<Integer> roomList = chattingRoomDao.getPersonalRooms();
+		
+		for (Integer roomId : roomList) {
+			List<Member> memberList = chattingRoomDao.getMembers(roomId);
+			List<String> list = new ArrayList<>();
+			for (Member m : memberList) 
+				if(m.getId().equals(userId) || m.getId().equals(memberId))
+					list.add(m.getId());
+			
+			if(list.size() == 2)
+				return roomId;
+		}
+		return 0;
+	}
+	@Override
 	public boolean isRejectList(int chatId, String memberId) { // 거부한 이력조회
 		return chattingRoomOptionDao.isonList(chatId, memberId);
 	}
@@ -118,4 +132,6 @@ public class TincChattingService implements ChattingService{
 	public int insertRejectList(int chatId, String memberId) { // 초대거부
 		return chattingRoomOptionDao.insert(chatId, memberId);
 	}
+
+	
 }

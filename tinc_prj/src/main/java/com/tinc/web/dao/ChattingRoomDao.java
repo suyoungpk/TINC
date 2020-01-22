@@ -14,6 +14,7 @@ public interface ChattingRoomDao
 	ChattingRoom getByMember(@Param("chatId") int chatId,@Param("memberId") String memberId);//나의 채팅방 정보
 	ChattingRoom getByOwner(@Param("id") int chatId); // 방장의 채팅방 정보 for getting title
 	//일단 방장의 초대로 들어오면 방장의 제목을 따르고, 방장이 아니면 초대한 사람 아이디 붙여서 "??가 초대한 그룹"을 제목으로
+	List<Integer> getPersonalRooms();// 일대일 채팅방 리스트 
 	
 	int getChattingRoomId(@Param("memberId") String ownerId); // 방장이 만든 채팅방 정보 가져오기
 	int createRoom(ChattingRoom chatroom);//방장 채팅 방 만들기

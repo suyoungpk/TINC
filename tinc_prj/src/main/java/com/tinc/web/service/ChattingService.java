@@ -23,5 +23,6 @@ public interface ChattingService {
 	int saveLast(int chatId,String memberId,String meg);// 마지막 메시지 저장
 	
 	boolean isRejectList(int chatId,String memberId);// 거부 리스트 조회
-	int insertRejectList(int chatId,String memberId);// 채팅방 설정 추가(초대 거부)	
+	int insertRejectList(int chatId,String memberId);// 채팅방 설정 추가(초대 거부)
+	int isDuplicatedRoom(String userId,String memberId); // 1:1 채팅방 여부 
 }
