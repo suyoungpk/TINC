@@ -180,10 +180,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     method="POST"
                     data-id="${id}"
                     data-member="${member.id}"
-                    data-fileLink=""
-                    data-fileExtension=""
                   >
-                    <a href="">
+                    <input
+                      type="file"
+                      name="file"
+                      id="chattingFile"
+                      style="display:none;"
+                    />
+                    <a href="#" id="chattingFileSend">
                       <span><i class="far fa-folder-open"></i></span>
                       파일전송
                     </a>
@@ -407,6 +411,51 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           $(this).hide();
         });
       }
+    </script>
+
+    <script>
+      // UploadFiles.js에 넣으면 실행이 안되서 일단 빼둡니다.
+      $(document).ready(function() {
+        let fileLink, fileExtension;
+
+        $("#chattingFileSend").click(function() {
+          jQuery("#chattingFile").click();
+        });
+        $("#chattingFile").on("change", function() {
+          fileChange();
+        });
+        function fileChange() {
+          fileUpload();
+        }
+
+        function fileUpload(e) {
+          let file = $("#chattingFile")[0].files[0];
+
+          let form = $("#chattingFileForm")[0];
+          let formData = new FormData(form);
+          formData.append("file", file);
+
+          fileExtension = file.type.substring(0, file.type.indexOf("/", 0));
+
+          $.ajax({
+            url: "/chat/upload?id=" + id + "&memberId=" + memberId,
+            processData: false,
+            contentType: false,
+            data: formData,
+            dataType: "text",
+            type: "POST",
+            success: function(data) {
+              fileLink = "http://localhost:8080/resource/upload/" + data;
+              if (fileExtension == "image") {
+                socket.send(exeChat.imgMeg(fileLink));
+              } else {
+                socket.send(exeChat.fileMeg(fileLink));
+              }
+              $("#chattingFile").val("");
+            }
+          });
+        }
+      });
     </script>
   </body>
 </html>
