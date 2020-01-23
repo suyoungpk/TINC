@@ -14,7 +14,8 @@ public interface MemoCardService
 	List<MemoCard> getGroupMemoCardList(int groupListId);
 	MemoCard getById(int id);
 	
-
+	int getNewMcId();
+	
 	int insert(MemoCard memoCard);
 	int update(MemoCard memoCard);
 	int delete(int id);

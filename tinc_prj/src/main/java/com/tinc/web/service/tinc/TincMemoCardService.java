@@ -77,6 +77,13 @@ public class TincMemoCardService implements MemoCardService{
 		return memoCardDao.delete(id);
 	}
 
+	@Override
+	public int getNewMcId()
+	{
+		// TODO Auto-generated method stub
+		return memoCardDao.getNewMcId();
+	}
+
 	
 	
 }
