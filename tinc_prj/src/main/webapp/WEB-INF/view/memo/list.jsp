@@ -83,6 +83,7 @@
                 <div class="memo-card">
                     <div class="memo-card-title">
                         <input type="text" name="memo-card-title" value="">
+						<input type="hidden" name="memo-card-id" value="">
                     </div>
                     <div class="memo-card-content">
                         <textarea readonly class="memo-card-content-textarea" name="memo-card-content-textarea"></textarea>

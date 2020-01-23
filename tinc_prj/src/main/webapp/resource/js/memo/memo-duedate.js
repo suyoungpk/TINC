@@ -714,3 +714,9 @@ function getCookie() {
 		}
 	}
 }
+
+function delCookie() {
+	let expireDate = date.now() - 1;
+	document.cookie = "cardId=" + "; expires=" +
+		exprieDate.toGMTString() + "; path=/";
+}

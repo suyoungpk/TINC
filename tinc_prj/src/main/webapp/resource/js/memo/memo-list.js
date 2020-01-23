@@ -5,7 +5,6 @@ window.addEventListener("load", function () {
 })
 
 
-
 function showMemoCard() {
 	let pid = setInterval(function () {
 
@@ -93,8 +92,9 @@ function enterMemoCardTitle(Elem) {
 
 			request.onload = function () { // 요청완료 후 실행됨
 
-				// var list = JSON.parse(request.responseText);
-				// console.log(list);
+				let receivedData = JSON.parse(request.responseText);
+				console.log(receivedData);
+				$("input[name=\"memo-card-id\"]").val(receivedData.id);
 
 				console.log("post done");
 			};

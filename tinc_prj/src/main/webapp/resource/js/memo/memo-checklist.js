@@ -1,4 +1,4 @@
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
 	assignCheckListItemId();
 	/* 포커싱된 아이템 삭제 버튼 보이기 */
 	showCheckListItemDelBtn();
@@ -23,7 +23,7 @@ window.addEventListener("load", function() {
 function updateCheckListItemTitle() {
 	$('input[name="checklist-item-content"]')
 		.off("change")
-		.change(function(e) {
+		.change(function (e) {
 			e.preventDefault();
 			e.stopPropagation();
 
@@ -40,7 +40,7 @@ function updateCheckListItemTitle() {
 			let request = new XMLHttpRequest();
 			request.open("POST", "../../../../memo/update-item-title");
 			request.setRequestHeader("Content-Type", "application/json");
-			request.onload = function() {
+			request.onload = function () {
 				let returnedItemData = JSON.parse(request.responseText);
 				$(e.target).val(returnedItemData.title);
 				console.log("update item title done");
@@ -53,7 +53,7 @@ function updateCheckListItemTitle() {
 function deleteCheckListItem() {
 	$("button.memo-checklist-item-del")
 		.off("click")
-		.click(function(e) {
+		.click(function (e) {
 			console.log("del");
 			e.preventDefault();
 			e.stopPropagation();
@@ -68,7 +68,7 @@ function deleteCheckListItem() {
 			let request = new XMLHttpRequest();
 			request.open("POST", "../../../../memo/item-del");
 			request.setRequestHeader("Content-Type", "application/json");
-			request.onload = function() {
+			request.onload = function () {
 				deletedItem.parentNode.remove();
 				console.log("item delete done");
 			};
@@ -100,7 +100,7 @@ function showCheckListItemDelBtn() {
 	);
 
 	for (let i = 0; i < checkListItem.length; i++) {
-		$(checkListItem[i]).hover(function(e) {
+		$(checkListItem[i]).hover(function (e) {
 			if (e.type === "mouseenter") {
 				//console.log("mouseenter");
 				$(e.target.nextElementSibling).fadeIn();
@@ -126,7 +126,7 @@ function addCheckListItem() {
 	);
 
 	for (let i = 0; i < checkListAddItemBtn.length; i++) {
-		checkListAddItemBtn[i].onclick = function(e) {
+		checkListAddItemBtn[i].onclick = function (e) {
 			e.preventDefault();
 			e.stopPropagation();
 
@@ -143,9 +143,7 @@ function addCheckListItem() {
 			showCheckListItemDelBtn();
 			deleteCheckListItem();
 
-			let checkListItem = checkListAddItemBtn[
-				i
-			].parentNode.querySelectorAll("li");
+			let checkListItem = checkListAddItemBtn[i].parentNode.querySelectorAll("li");
 			let newCheckListItem = checkListItem[checkListItem.length - 2];
 
 			// 새로 만들어진 아이템의 타이틀 부분에 포커스 주기
@@ -156,7 +154,7 @@ function addCheckListItem() {
 				e.stopPropagation();
 			});
 			// 포커스를 잃으면 새로 생긴 아이템 데이터를 서버로 전송
-			newCheckListItemTitle.onblur = function(e) {
+			newCheckListItemTitle.onblur = function (e) {
 				e.preventDefault();
 				e.stopPropagation();
 
@@ -179,7 +177,7 @@ function addCheckListItem() {
 				let request = new XMLHttpRequest();
 				request.open("POST", "../../../../memo/new-item");
 				request.setRequestHeader("Content-Type", "application/json");
-				request.onload = function() {
+				request.onload = function () {
 					checkCompleteCheckListItem();
 					let newItem = JSON.parse(request.responseText);
 					newCheckListItem.querySelector(
@@ -199,7 +197,7 @@ function addCheckList() {
 		".memo-detail-checklist-button"
 	);
 
-	checkListButton.onclick = function(e) {
+	checkListButton.onclick = function (e) {
 		e.preventDefault();
 		e.stopPropagation();
 
@@ -242,7 +240,7 @@ function addCheckList() {
 			let request = new XMLHttpRequest();
 			request.open("POSt", "../../../../memo/add-checklist");
 			request.setRequestHeader("Content-Type", "application/json");
-			request.onload = function() {
+			request.onload = function () {
 				let responseData = JSON.parse(request.responseText);
 				//console.log(responseData);
 				newCheckListTitle.value = responseData.title;
@@ -329,7 +327,7 @@ function checkCompleteCheckListItem() {
 	);
 
 	for (let i = 0; i < checkListItemCompleteLabel.length; i++) {
-		checkListItemCompleteLabel[i].onclick = function(e) {
+		checkListItemCompleteLabel[i].onclick = function (e) {
 			//console.log(e.target);
 
 			let checkListItemId = $(e.target)
@@ -367,7 +365,7 @@ function updateCompleteCheckStatus(isChecked, cliId) {
 		checkStatus: isChecked
 	});
 
-	request.onload = function() {
+	request.onload = function () {
 		console.log(request.responseText);
 	};
 
@@ -412,7 +410,7 @@ function hideCompletedItem(target) {
 		.prev()
 		.val();
 
-	return new Promise(function(resolve, reject) {
+	return new Promise(function (resolve, reject) {
 		console.log(checkListHideStatus + "," + checkListId);
 		if (checkListHideStatus === "true") {
 			$(".memo-checklist-setting-btn-area > a:first-child i").removeClass(
@@ -437,7 +435,7 @@ function hideCompletedItem(target) {
 
 		$(".memo-checklist-setting-btn-area > a:first-child")
 			.off("click")
-			.on("click", function(e) {
+			.on("click", function (e) {
 				e.preventDefault();
 
 				if (checkListHideStatus === "false") {
@@ -489,7 +487,7 @@ function hideCompletedItem(target) {
 				let request = new XMLHttpRequest();
 				request.open("POST", "../../../../memo/update-hide");
 				request.setRequestHeader("Content-Type", "application/json");
-				request.onload = function(e) {
+				request.onload = function (e) {
 					console.log(request.responseText);
 				};
 				request.send(checkListHideData);
@@ -506,20 +504,20 @@ function showCheckListSettingPopup() {
 	);
 
 	for (let i = 0; i < checkListSettingElem.length; i++) {
-		checkListSettingElem[i].onclick = function(e) {
+		checkListSettingElem[i].onclick = function (e) {
 			// 체크리스트 삭제
-			deleteCheckList(e.target).then(function(resp) {
+			deleteCheckList(e.target).then(function (resp) {
 				console.log("resp:" + resp);
 				if (resp === true) {
 					$(".popup").fadeOut();
 					$(".mask").fadeOut();
 					$(".memo-checklist-setting-popup").fadeOut();
-					window.location.reload();
+					//window.location.reload();
 				}
 			});
 
 			// 완료된 아이템 숨기기
-			hideCompletedItem(e.target).then(function(resp) {
+			hideCompletedItem(e.target).then(function (resp) {
 				let hideStatusVal;
 				if (resp === "true") {
 					hideStatusVal = false;
@@ -537,7 +535,7 @@ function showCheckListSettingPopup() {
 
 			$(".memo-checklist-setting-btn-area btn-area > a:last-child")
 				.off("click")
-				.on("click", function(e) {
+				.on("click", function (e) {
 					$(".popup").fadeOut();
 					$(".mask").fadeOut();
 					$(".memo-checklist-setting-popup").fadeOut();
@@ -551,7 +549,7 @@ function deleteCheckList(target) {
 	$(".mask").fadeIn();
 	$(".memo-checklist-setting-popup").fadeIn();
 
-	return new Promise(function(resolve, reject) {
+	return new Promise(function (resolve, reject) {
 		$(".memo-checklist-setting-btn-area > a:last-child")
 			.off("click")
 			.click(e => {
@@ -568,7 +566,7 @@ function deleteCheckList(target) {
 				let request = new XMLHttpRequest();
 				request.open("POST", "../../../../memo/del-checklist");
 				request.setRequestHeader("Content-type", "text/plain");
-				request.onload = function() {
+				request.onload = function () {
 					console.log(request.responseText);
 					resolve(true);
 				};

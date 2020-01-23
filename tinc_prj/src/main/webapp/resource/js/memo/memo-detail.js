@@ -20,12 +20,31 @@ window.addEventListener("load", function () {
         $(".mask").fadeOut();
     });
 
+
+    // 메모 공유 페이지로 변경
     $("input.memo-detail-share-button").off("click").click((e) => {
         e.stopPropagation();
         e.preventDefault();
 
         let mcId = $(".memo-detail-title > input[name=\"memo-detail-id\"]").val();
         this.window.location.href = "../../../../memo/share?mcId=" + mcId;
+    });
+    
+    // 메모 삭제
+    $(".memo-detail-delete-button").off("click").click((e) => {
+        let mcId = $("input[name=\"memo-detail-id\"]").val();
+
+        let request = new XMLHttpRequest();
+        request.open("GET", "../../../../memo/del-memo-card/" + mcId);
+        request.onload = function () {
+            let receivedMsg = request.responseText; 
+        	console.log(receivedMsg);
+            
+        	if(receivedMsg === "del-memo-card success"){
+            	window.location.href = "../../../../memo/list";
+            }
+        };
+        request.send();
     });
 });
 
@@ -37,6 +56,7 @@ function cmaTextareaSize(bsize) { // 기본사이즈
     sTextarea.style.height = csize;
 }
 
+// 메모 변경 내용 저장
 function updateDetailData() {
 
     let memoCardId = $("input[name=\"memo-detail-id\"]").val();
@@ -61,7 +81,7 @@ function updateDetailData() {
     request.onload = function () {
         //console.log(request.responseText);
         if (request.responseText === "detail-update-success") {
-            window.location.reload();
+            //window.location.reload();
         }
     };
     request.send(detailData);

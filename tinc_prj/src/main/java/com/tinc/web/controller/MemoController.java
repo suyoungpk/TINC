@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -106,6 +108,7 @@ public class MemoController
 		return "memo/list";
 	}
 
+	@ResponseBody
 	@PostMapping("list")
 	public String list(@RequestBody String params, MemoCard memoCard)
 	{
@@ -133,12 +136,16 @@ public class MemoController
 		{
 			System.out.println(MemoCard.class + " insert error");
 		}
-
-		return "redirect:list";
+		
+		MemoCard tmpMemoCard = memoCardService.getById(memoCardService.getNewMcId());
+		String memoCardDate = gson.toJson(tmpMemoCard);
+		
+		return memoCardDate;
 	}
 
 	@GetMapping("detail")
-	public String detail(Model model, @RequestParam(name="cardId", defaultValue="0") int cardIdParam, HttpServletResponse resp)
+	public String detail(Model model, @RequestParam(name="cardId", defaultValue="0") int cardIdParam, 
+			HttpServletResponse resp, HttpServletRequest req)
 	{
 		int cardId = 0;	
 		cardId = cardIdParam;
@@ -152,6 +159,7 @@ public class MemoController
 		model.addAttribute("checkList", checkList);
 		model.addAttribute("checkListItemList", checkListItemList);
 		model.addAttribute("duedate", duedate);
+		
 		
 		Cookie cardIdCookie = new Cookie("cardId", String.valueOf(cardId));
 		cardIdCookie.setPath("/");
@@ -253,14 +261,14 @@ public class MemoController
 		CheckListItem checkListItem = checkListItemService.getById(cliId);
 		// db에더 불러온 아이템 정보에서 체크 상태만 업데이트
 		checkListItem.setCheckStatus(checkStatus);
+		
 		// 업데이트된 정보를 다시 cb에 저장
 		System.out.println("checkStatus"+checkListItem.toString());
 		int ret = checkListItemService.update(checkListItem);
 		if(ret <= 0)
 		{
 			return "update-checkstatus error";
-		}
-		
+		}		
 		String updatedCheckListItem = gson.toJson(checkListItem);
 		
 		return updatedCheckListItem;
@@ -575,5 +583,24 @@ public class MemoController
 		String gsfViewData = gson.toJson(gsfViewList);
 		
 		return gsfViewData;
+	}
+	
+	@ResponseBody
+	@GetMapping("del-memo-card/{mcId}")
+	public String delMemoCard(@PathVariable("mcId") String mcId)
+	{
+		int id = 0;
+		id = Integer.parseInt(mcId);
+		int ret = -1;
+		System.out.println(mcId);
+
+		ret = memoCardService.delete(id);
+		if (ret <= 0)
+		{
+			return "del-memo-card error";
+		}
+	
+
+		return "del-memo-card success";
 	}
 }
