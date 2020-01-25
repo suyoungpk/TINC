@@ -13,9 +13,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="../../../resource/js/memo/memo-list.js"></script>
+
 <link rel="stylesheet" href="../../../resource/css/common.css" />
 <link rel="stylesheet" href="../../../resource/css/memo/memo-list.css" />
-
 </head>
 
 <body>

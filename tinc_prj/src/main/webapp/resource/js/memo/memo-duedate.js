@@ -97,12 +97,12 @@ window.addEventListener("load", function (e) {
 
 	// deadline관련 함수들
 	this.setInterval(function (e) {
-		isDeadline();
+		if (cardId > 0) {
+			isDeadline();
+			changeDeadLineColor();
+		}
 	}, 100);
 
-	this.setInterval(function () {
-		changeDeadLineColor();
-	}, 100);
 
 	// duedate 데이터 있으면 표시
 	let duedate = $(".memo-detail-duedate > span").text();
@@ -224,7 +224,7 @@ function isDeadline() {
 	let deadline = new Date(tmpYear, tmpMonth, tmpDay, tmpHour, tmpMin);
 
 	let betweenDay = (deadline.getTime() - today) / 1000 / 60 / 60 / 24;
-	// console.log(betweenDay);
+	console.log(betweenDay);
 
 	if (betweenDay <= 7) {
 		isOverDue = true;
@@ -715,8 +715,8 @@ function getCookie() {
 	}
 }
 
-function delCookie() {
-	let expireDate = date.now() - 1;
-	document.cookie = "cardId=" + "; expires=" +
-		exprieDate.toGMTString() + "; path=/";
-}
+// function delCookie() {
+// 	let expireDate = date.now() - 1;
+// 	document.cookie = "cardId=" + "; expires=" +
+// 		expireDate.toGMTString() + "; path=/";
+// }

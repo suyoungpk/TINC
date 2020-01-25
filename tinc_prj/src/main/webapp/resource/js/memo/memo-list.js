@@ -16,6 +16,7 @@ function showMemoCard() {
 				let cardId = e.target.parentNode.previousElementSibling.children[1].value;
 				let url = "/memo/detail?cardId=" + cardId;
 				window.location.href = url;
+				//$("body").load(url);
 			});
 	}, 10);
 }
