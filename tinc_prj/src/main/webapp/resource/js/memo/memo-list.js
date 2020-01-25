@@ -15,8 +15,13 @@ function showMemoCard() {
 
 				let cardId = e.target.parentNode.previousElementSibling.children[1].value;
 				let url = "/memo/detail?cardId=" + cardId;
-				window.location.href = url;
-				//$("body").load(url);
+				//window.location.href = url;
+				$.get(url, function(data){
+					console.log(data);
+					let newDoc = document.open("memo/list", "replace");
+					newDoc.write(data);
+					newDoc.close();
+				});
 			});
 	}, 10);
 }

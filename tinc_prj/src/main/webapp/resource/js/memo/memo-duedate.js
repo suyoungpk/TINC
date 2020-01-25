@@ -63,7 +63,6 @@ window.addEventListener("load", function (e) {
 	// get cardId cookie
 	getCookie();
 
-
 	// 삭제 버튼 클릭시 창 fadeout
 	$(".memo-duedate-popup .memo-duedate-btn-area .cancel-btn")
 		.off("click")
@@ -98,6 +97,7 @@ window.addEventListener("load", function (e) {
 	// deadline관련 함수들
 	this.setInterval(function (e) {
 		if (cardId > 0) {
+			// dealine 일주일 전이면 빨간색으로 표시
 			isDeadline();
 			changeDeadLineColor();
 		}
@@ -115,7 +115,7 @@ window.addEventListener("load", function (e) {
 	let date = trimmedDueDate[3];
 	let time = trimmedDueDate[5];
 
-	// dealine 일주일 전이면 빨간색으로 표시
+
 	dateIn = date;
 	timeIn = time;
 
@@ -127,13 +127,29 @@ window.addEventListener("load", function (e) {
 			e.stopPropagation();
 			e.preventDefault();
 
-
 			$(".popup").fadeIn();
 			$(".mask").fadeIn();
 			$(".memo-duedate-popup").fadeIn();
 
+
+			// x 버튼 클릭시 실행
+			$(".duedate-close").off("click").click(function (e) {
+				e.preventDefault();
+				var duedateContainer = document.querySelector(
+					".memo-duedate-container"
+				)
+				for (let i = 0; i < duedateContainer.children.length; i++) {
+					$(duedateContainer.children).animate({ scrollTop: 0 });
+				}
+
+				$(".memo-duedate-popup").fadeOut();
+				$(".popup").fadeOut();
+				$(".mask").fadeOut();
+			});
+
 			// duedate 박스 생성 시작
 			createDueDateContainer(dateIn, timeIn);
+			console.log(newDueDate);
 
 			// duedate 설정 버튼 클릭 시
 			$(".memo-duedate-popup .memo-duedate-btn-area .ok-btn")
@@ -200,8 +216,6 @@ window.addEventListener("load", function (e) {
 		});
 
 });
-
-
 
 
 /* deadline 확인 */
@@ -321,7 +335,7 @@ function updateDueDateComplete(isCompleteIn) {
 	request.setRequestHeader('Content-Type', 'application/json');
 	request.onload = function () {
 		let receiveMsg = request.responseText;
-		console.log(receiveMsg);
+		//console.log(receiveMsg);
 		if (receiveMsg === "update-complete-status success") {
 			$(".memo-detail-duedate > input[name=\"duedate-complete\"]").val(isCompleteIn);
 		}
@@ -377,7 +391,7 @@ function createDueDateSpanTag(elem, div) {
 
 /* due-date 생성 함수 */
 function createDueDateContainer(dateIn, timeIn) {
-	console.log(dateIn + ", " + timeIn);
+	//console.log(dateIn + ", " + timeIn);
 	if (!dateIn && !timeIn) {
 		selectedYear = date.getFullYear();
 		selectedMonth = months[date.getMonth()];
@@ -436,7 +450,6 @@ function createDueDateContainer(dateIn, timeIn) {
 	// duedate 박스 클릭 핸들러
 	duedateClickHandler(duedateDaysDiv, duedateMonthDiv, duedateYearDiv,
 		duedateHourDiv, duedateMinDiv, (resp) => {
-
 			if (resp) {
 				recreateDays();
 			}
@@ -485,7 +498,7 @@ function initSelectDiv(duedateDaysDivIn, duedateMonthDivIn, duedateYearDivIn,
 }
 
 function selectCalenderDiv(selectDiv) {
-	if (!selectedDay && !selectedHour && !selectedMin) {
+	if (/*!selectedDay &&*/ !selectedHour && !selectedMin) {
 		for (var i = 0; i < selectDiv.children.length; i++) {
 			var divTop = selectDiv.children[i].getBoundingClientRect().top;
 			var divHeight = selectDiv.children[i].getBoundingClientRect()
@@ -504,9 +517,9 @@ function selectCalenderDiv(selectDiv) {
 				}
 
 				if (selectDiv === duedateMonthDiv) {
-					for (let i = 0; i < months.length; i++) {
-						if (selectDiv.children[i].innerText === months[i]) {
-							newDueDate[1] = ("0" + (i + 1)).slice(-2);
+					for (let j = 0; j < months.length; j++) {
+						if (selectDiv.children[i].innerText === months[j]) {
+							newDueDate[1] = ("0" + (j + 1)).slice(-2);
 							break;
 						}
 					}
@@ -514,6 +527,7 @@ function selectCalenderDiv(selectDiv) {
 
 				if (selectDiv === duedateDaysDiv) {
 					newDueDate[2] = selectDiv.children[i].innerText;
+					selectedDay = selectDiv.children[i].innerText;
 				}
 
 				if (selectDiv === duedateHourDiv) {
@@ -715,8 +729,3 @@ function getCookie() {
 	}
 }
 
-// function delCookie() {
-// 	let expireDate = date.now() - 1;
-// 	document.cookie = "cardId=" + "; expires=" +
-// 		expireDate.toGMTString() + "; path=/";
-// }

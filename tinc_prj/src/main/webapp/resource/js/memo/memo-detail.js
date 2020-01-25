@@ -89,7 +89,7 @@ function updateDetailData() {
 }
 
 function delCookie() {
-    let expireDate = date.now() - 1;
+    let expireDate = new Date(Date.now() - 1);
     document.cookie = "cardId=" + "; expires=" +
-        expireDate.toGMTString() + "; path=/";
+        expireDate.toUTCString() + "; path=/";
 }

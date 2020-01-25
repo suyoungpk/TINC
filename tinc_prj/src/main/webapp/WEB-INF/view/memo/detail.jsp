@@ -173,7 +173,7 @@
 				<div class="memo-duedate-btn-area btn-area">
 					<a href="#" class="cancel-btn btn">삭제</a> <a href="#" class="ok-btn btn">확인</a>
 				</div>
-				<a href="#" class="btn-close fas fa-times">닫기</a>
+				<a href="#" class="duedate-close btn-close fas fa-times">닫기</a>
 			</div>
 			<!-- popup-container -->
 		</div>
