@@ -60,10 +60,6 @@
 		) 
 	</select>
 	
-	<!-- <select id="searchFriendforAdding" resultType="com.tinc.web.entity.FriendSearchResults">
-		select * from FriendSearchResults where id like '%%'
-	</select> -->
-	
 	<select id="getListOfUserWhoHaveAddedMe" resultType="com.tinc.web.entity.Member">
 		select id, nickName, statusMsg, profileImg from Member where id in 
 		(
@@ -72,7 +68,7 @@
 	</select>
 	
 	<select id="getListOfUserWhoBlockedMe" resultType="com.tinc.web.entity.Member">
-		select id, memberId from BlackList where blackId=#{blackId}
+		select memberId from BlackList where blackId=#{blackId}
 	</select>
 	
 	<select id="getListOfUserIhaveblocked" resultType="com.tinc.web.entity.Member">
@@ -81,6 +77,25 @@
 			select blackId from BlackList where memberId=#{memberId}
 		) 
 	</select>
+	
+	<select id="searchFriendforAdding" parameterType="Map" resultType="com.tinc.web.entity.Member">
+      select * from Member where id not in 
+         (select * from(
+            select memberId 'id' from BlackList where blackId = #{item1}
+               UNION select blackId 'id' from BlackList where memberId = #{item2}
+               UNION select friendsId 'id' from FriendsList where memberId = #{item3}
+               UNION select id 'id' from Member where id = #{item4}
+         )as search)
+      and id like '%${item5}%'
+   </select>
+   
+   <select id="searchFriendsToAddToTheChat" parameterType="Map" resultType="com.tinc.web.entity.Member">
+   	select * from Member where id in 
+		(
+			select friendsId from FriendsList where memberId = #{item1}
+			 
+		) and id like '%${item2}%'
+   </select>
 	
 	<select id="findId" resultType="com.tinc.web.entity.Member">
 		select id from Member where email=#{email}; 

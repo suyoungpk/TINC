@@ -1,6 +1,7 @@
 package com.tinc.web.service.tinc;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -89,9 +90,9 @@ public class TincMemberService implements MemberService{
 	}
 
 	@Override
-	public List<Member> searchFriendforAdding(String id) {
+	public List<Member> searchFriendsforAdding(Map<String, String> item) {
 		// TODO Auto-generated method stub
-		return memberDao.searchFriendforAdding(id);
+		return memberDao.searchFriendsforAdding(item);
 	}
 
 	@Override
@@ -179,6 +180,16 @@ public class TincMemberService implements MemberService{
 	public boolean memoAlarm(String memoAlarm) {
 		// TODO Auto-generated method stub
 		return memberDao.memoAlarm(memoAlarm);
+	}
+	@Override
+	public List<Member> getListToExcludeFromSearch(String id) {
+		// TODO Auto-generated method stub
+		return memberDao.getListToExcludeFromSearch(id);
+	}
+	@Override
+	public List<Member> searchFriendsToAddToTheChat(Map<String, String> item) {
+		// TODO Auto-generated method stub
+		return memberDao.searchFriendsToAddToTheChat(item);
 	}
 
 }

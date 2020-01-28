@@ -40,7 +40,7 @@
             <div><p><b id="validate-id"></b></p></div>
          </div>   
          <div class="usable">
-            <div><input type="text" value="" id="name" name="nickName" placeholder="닉네임"/></div>
+            <div><input type="text" value="" id="nickName-input" name="nickName" placeholder="닉네임"/></div>
             <div><p><b id="validate-nickName"></b></p></div>
          </div>
          <div class="usable">
@@ -63,7 +63,7 @@
             
             <div class="agree-btn">
                 <input type="button" class="left-btn" value="취소"/>
-                <input type="submit" id="subimit" class="right-btn" value="가입"/>
+                <input type="submit" id="submit" class="right-btn" value="가입"/>
             </div>
          </form>
       </main><!-- container end -->
@@ -106,7 +106,7 @@
 							$("#validate-id").text("영문 + 숫자 4~12자로 입력하세요");
 							$("#validate-id").css("color", "#f0679e");
 							$("#id-input").css("border", "0.0625rem solid #f0679e");
-							$("#submit").attr("disabled", false);
+							$("#submit").attr("disabled", true);
 				
 						} else if(id == ""){
 							
@@ -122,54 +122,51 @@
 							$("#submit").attr("disabled", true);
 						}  */
 						
-					}
+					} 
 				}, error : function() {
 						console.log("실패");
 				}
 			});
 		});
-
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-  /*  window.addEventListener("load",function(){
+		
+    window.addEventListener("load",function(){
        var div = document.querySelector(".join");
-       var tid = null;
        
+       var idInput = document.querySelector("#id-input");
        var pwd1Input = document.querySelector("#pwd1-input");
        var pwd2Input = document.querySelector("#pwd2-input");
-       var idInput = document.querySelector("#id-input");
+       var nickNameInput = document.querySelector("#nickName-input");
        var emailInput = document.querySelector("#email-input");
        var phoneNumInput = document.querySelector("#phoneNum-input");
        
-
-       var validatePwd2 = document.querySelector("#validate-pwd2");
-       var validateId = document.querySelector("#validate-id");
        var validatePwd1 = document.querySelector("#validate-pwd1");
+       var validatePwd2 = document.querySelector("#validate-pwd2");
+       var validateNickName = document.querySelector("#validate-nickName");
        var validateEmail = document.querySelector("#validate-email");
        var validatePhone = document.querySelector("#validate-phone");
 
        var regExpPwd = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
        var regExpPhone = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
        var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+       var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+       
+       nickNameInput.oninput = function(e){
+           if(!(nickNameInput == "")){
+        	   nickNameInput.style.border =  "0.0625rem solid #7367f0";
+        	   validateNickName.style.color = "#f0679e";
+           }
+               
+       };
        
        pwd1Input.oninput = function(e){
            if(!regExpPwd.exec(pwd1Input.value)){
                pwd1Input.style.border =  "0.0625rem solid #f0679e";
-               validatePwd.style.color = "#f0679e";
-               validatePwd.innerText = "비밀번호가 유효하지 않습니다.";
+               validatePwd1.style.color = "#f0679e";
+               validatePwd1.innerText = "비밀번호가 유효하지 않습니다.";
            }else{ 
                pwd1Input.style.border =  "0.0625rem solid #7367f0";
-               validatePwd.style.color = "#7367f0";
-               validatePwd.innerText = "";
+               validatePwd1.style.color = "#7367f0";
+               validatePwd1.innerText = "";
            }
                
        };
@@ -177,27 +174,15 @@
        pwd2Input.oninput = function(e){
             if(pwd1Input.value != pwd2Input.value){
                 pwd2Input.style.border =  "0.0625rem solid #f0679e";
-                mismatchedState.style.color = "#f0679e";
-                mismatchedState.innerText = "비밀번호가 일치하지 않습니다.";
+                validatePwd2.style.color = "#f0679e";
+                validatePwd2.innerText = "비밀번호가 일치하지 않습니다.";
             }else{ 
                 pwd2Input.style.border =  "0.0625rem solid #7367f0";
-                mismatchedState.style.color = "#7367f0";
-                mismatchedState.innerText = "";
+                validatePwd2.style.color = "#7367f0";
+                validatePwd2.innerText = "";
             }
                 
         };
-
-       idInput.oninput = function(){
-           if(idInput.value != "ss"){
-               idInput.style.border  =  "0.0625rem solid #f0679e";
-               duplicatedState.style.color = "#f0679e";
-               duplicatedState.innerText = "사용불가능한 아이디입니다."
-           }else{
-               idInput.style.border =  "0.0625rem solid #7367f0";
-               duplicatedState.style.color = "#7367f0";
-               duplicatedState.innerText = "사용가능한 아이디입니다.";
-           }
-       };
 
        emailInput.oninput = function(){
            if(!regExpEmail.exec(emailInput.value)) {
@@ -224,7 +209,7 @@
         };
        
    });
-          var validateNickName = document.querySelector("#validate-nickName");
+         /*  var validateNickName = document.querySelector("#validate-nickName");
           var name = document.querySelector("#name");
         var frm = document.getElementById('frm');
         frm.addEventListener("submit", function(e){
@@ -236,7 +221,7 @@
              validateNickName.innerText = "닉네임을 입력하세요."
           } 
         });
-    */
+     */
    </script>
    
    
