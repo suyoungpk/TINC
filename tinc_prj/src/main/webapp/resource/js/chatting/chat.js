@@ -50,7 +50,6 @@ exeChat= {
 					let cnt=0;
 					let key = $("#searchChat").val();
 					
-					console.log(key);
 					for (var i = 0; i < data.length; i++){
 						let obj = data[i];
 						let con = obj.content;
@@ -59,7 +58,7 @@ exeChat= {
 							console.log(cutted);
 							let text = cutted[0];
 							for(var j=1;j<cutted.length;j++){
-								text+='<span class="focus" id="focus'+i+'">'+key+'</span>'+cutted[j];
+								text+='<span class="focus">'+key+'</span>'+cutted[j];
 							}
 							obj.content = text;
 							cnt++;
@@ -70,22 +69,44 @@ exeChat= {
 							if(nextObj.date != obj.date)
 								$(".chatting").append('<li class="info"><div>'+nextObj.date+'</div></li>');
 						}	
+						
 					}
 					if(cnt == 0)
 						openAlert("검색 결과가 없습니다.");
-					else if(cnt > 1){
-						
+					else if(cnt >= 1){
+						for(var i=0;i<cnt;i++)
+							$(".chatting li li").has(".focus").each(function(i){$(this).attr("id","focus"+i);});
+						location.href="#focus0";
+						let click = 0;
+						$(".searchBox .btn-up").click(function(){
+							click--;
+							location.href="#focus"+click;
+							if(click <= 1){
+								click=0;
+								$(this).attr('disabled', true);
+								$(".searchBox .btn-down").attr('disabled', false);
+							}							
+						});
+						$(".searchBox .btn-down").attr('disabled', false).click(function(){
+							
+							click++;
+							location.href="#focus"+click;
+							if(click >= cnt-1){
+								click = cnt-1; 
+								$(this).attr('disabled', true);
+							}
+							if(click != 0) $(".searchBox .btn-up").attr('disabled', false);
+						});
 					}			
 				
 				}  
 			 }).fail(function() {
 				 alert( "getJson error" );
 			 });
-			console.log($('#focus0').offset().top);
-			$(".container").animate({scrollTop:0},400);
+			
 		} else {
 			$("#searchChat").val("");
-			this.getChat();
+			this.getChat();			
 		}
 	},
 	
@@ -99,29 +120,34 @@ exeChat= {
 				$(".chatting").html("");
 				for (var i = 0; i < data.length; i++){
 					let obj = data[i];
-					chatParser.parseData(obj);
 					if(i != data.length-1){
+						chatParser.parseData(obj,false);
 						let nextObj = data[i+1];
 						if(nextObj.date != obj.date)
 							$(".chatting").append('<li class="info"><div>'+nextObj.date+'</div></li>');
-					}	
+					} else chatParser.parseData(obj);
 				}
+				$(".chattingBox .chatting").animate({scrollTop:$(".chattingBox .chatting")[0].scrollHeight},400);
 			}  
 		 }).fail(function() {
 			 alert( "getJson error" );
 		 });
 	},
-	getInviteMenu(){
-		$.get(this.getDataUrl(15),function(data){
-			//console.log(data);
-			let submenu = $("#setting").clone();
-			submenu.html(data).css({width:"0",opacity:0}).hide();
-			$("#setting").after(submenu);
-			submenu.show().animate({width:"100%",opacity:1},500);
+	
+	getInviteMenu(mode){
+		if(mode){
+			$.get(this.getDataUrl(15),function(data){
+				let submenu = $("#setting").clone();
+				submenu.addClass("clone");
+				submenu.html(data).css({width:"0",opacity:0}).hide();
+				$("#setting").after(submenu);
+				submenu.show().animate({width:"100%",opacity:1},500);
+			}).fail(function() {
+			    	alert(" getInviteMenu error" );
+		  	});
 			
-		}).fail(function() {
-		    	alert( "error" );
-	  	});
+		} 
+		else $("#setting.clone").animate({width:"0",opacity:0},500).delay(1000).remove();
 	},
 	rename(){
 		$.post(this.getDataUrl(5),{title:$("#chatTitle").val()});
@@ -243,6 +269,9 @@ exeChat= {
   		openAlert("방장권한이 위임 되었습니다.");
 		location.href=location.href;
 	},
+	invite(){
+		
+	},
 	textMeg(){
 		var byteChk = function(obj){
   			var targetVal = obj;
@@ -320,7 +349,7 @@ exeChat= {
   		
   		return JSON.stringify(message);  		
   	},
-	imgMeg(url){
+	imgMeg(name,url){
   		let message ={
   				type:"img",
   		  		chatId:this.chatId, // 채팅방 번호
@@ -331,12 +360,13 @@ exeChat= {
   		  		exitId :"", // 방 나간 아이디 
   		  		content:"", // 텍스트, 메모
   		  		contentMode : "", // 텍스트 길 경우 
+  		  		fileName:name,
   		  		sharefile:url // 공유된 파일 경로
   		};
   		
   		return JSON.stringify(message);  		
   	},
-	fileMeg(url){
+	fileMeg(name,url){
   		let message ={
   				type:"file",
   		  		chatId:this.chatId, // 채팅방 번호
@@ -347,6 +377,7 @@ exeChat= {
   		  		exitId :"", // 방 나간 아이디 
   		  		content:"", // 텍스트, 메모
   		  		contentMode : "", // 텍스트 길 경우 
+  		  		fileName:name,
   		  		sharefile:url // 공유된 파일 경로
   		};
   		
@@ -354,7 +385,7 @@ exeChat= {
   	}
 };
 let chatParser = {
-	parseData(data){
+	parseData(data,scroll){
 		let type = data.type;// no null 초대, 나가기, 강퇴, text, 이미지, 기타파일, 메모
 		let chatId = data.chatId; // no null 채팅방 번호
 		let memberId = data.memberId;  // no null 보낸 아이디
@@ -364,10 +395,11 @@ let chatParser = {
 		let exitId = data.exitId || ""; // 방 나간 아이디 
 		let content = data.content || ""; // 텍스트, 메모
 		let contentMode = data.contentMode || ""; // 텍스트 길 경우 
+		let fileName = data.fileName || "";
 		let sharefile = data.sharefile || ""; // 공유된 파일 경로
-		let date = data.date //no null 기록된 날자
-		let time = data.time //no null 시간
-		
+		let date = data.date; //no null 기록된 날자
+		let time = data.time; //no null 시간
+		let autoscroll = scroll || true;
 		var html ='';
 		switch(type){
 			case "exit": 
@@ -418,25 +450,28 @@ let chatParser = {
 				break;
 			case "img": 
 				if(memberId == exeChat.memberId){
-					html ='<li class="me"><div class="btnBox"><button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button></div><div class="megBox"><ul><li><div class="message imgBox"><img src="'
+					html ='<li class="me"><div class="btnBox"><button class="btn-share" onclick=""><i class="fas fa-external-link-alt">공유하기</i></button></div><div class="megBox"><ul><li><div class="message imgBox"><a href="'+
+						sharefile+'" download><img src="'
 	        			+sharefile+
-	    				'"><span class="date">'+time+'</span></div></li></ul></div></li>';
+	    				'"></a><span class="date">'+time+'</span></div></li></ul></div></li>';
 	    		} else{
 	    			
 	    			html ='<li class="member"><figure>'+img+'</figure><div class="megBox"><div class="name">'
 	    			+nickName+
-	    			'</div><ul><li><div class="message imgBox"><img src="'+sharefile+				
-	    						'"><span class="date">'+time+'</span></div></li></ul></div><div class="btnBox"><button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button></div></li>';
+	    			'</div><ul><li><div class="message imgBox"><a href="'+sharefile+'" download><img src="'+sharefile+				
+	    						'"></a><span class="date">'+time+'</span></div></li></ul></div><div class="btnBox"><button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button></div></li>';
 	    		}
 				break;
 			case "file": 
 				if(memberId == exeChat.memberId){
-					html ='<li class="me"><div class="btnBox"><button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button></div><div class="megBox"><ul><li><div class="message">파일공유<span class="date">'+time+'</span></div></li></ul></div></li>';
+					html ='<li class="me"><div class="btnBox"><button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button></div><div class="megBox"><ul><li><div class="message"><a href="'+sharefile+'" download><i class="fas fa-folder-open"></i> '
+						   +fileName+'</a><span class="date">'+time+'</span></div></li></ul></div></li>';
 	    		} else{
 	    			
 	    			html ='<li class="member"><figure>'+img+'</figure><div class="megBox"><div class="name">'
 	    			+nickName+
-	    			'</div><ul><li><div class="message">파일공유<span class="date">'+time+'</span></div></li></ul></div><div class="btnBox"><button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button></div></li>';
+	    			'</div><ul><li><div class="message"><a href="'+sharefile+'" download><i class="fas fa-folder-open"></i> '+sharefile
+	    			+'</a><span class="date">'+time+'</span></div></li></ul></div><div class="btnBox"><button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button></div></li>';
 	    		}
 				break;
 			
@@ -468,7 +503,6 @@ let chatParser = {
 			else if (charCode <= 0x00FFFF) return 3;
 			else return 4;
 		}
-		$(".chatting").append(html);
-		$(".container").animate({scrollTop:$(".container").height()},400);
+		$(".chatting").append(html);			
 	}
 }

@@ -16,11 +16,13 @@
            <i class="fas fa-cog"></i>
            <span>채팅방 설정</span>
         </li>
-        <div class="line"></div>
-        <li class="inviteFriend cursor">
-           <i class="fas fa-user"></i>
-           <span>친구 초대</span>
-        </li>
+        <c:if test="${auth eq '초대'}" >
+	        <div class="line"></div>
+	        <li class="inviteFriend cursor" onclick="exeChat.getInviteMenu(true);">
+	           <i class="fas fa-user"></i>
+	           <span>친구 초대</span>
+	        </li>
+        </c:if>
         <div class="line"></div>
         <li class="groupMemo cursor">
            <i class="far fa-file-alt"></i>
@@ -35,7 +37,7 @@
            	<!--  1:1채팅 사진 미설정 시 -->
 				 <c:forEach items="${list}" var="list">
 					<div>
-					 <a>
+					 <a onclick="exeChat.getMemberMenu('${list.id}')">
 					 	<figure>
 					 		<c:if test="${empty list.profileImg}">
 								<i class="fas fa-user"></i>

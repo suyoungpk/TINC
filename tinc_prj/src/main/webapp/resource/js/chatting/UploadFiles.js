@@ -17,9 +17,7 @@ $(document).ready(function() {
     // 콘솔에서 파일정보 확인
     fileExtension = file.type.substring(0, file.type.indexOf("/", 0));
 
-    fileLink = "http://localhost:8080/resource/upload/" + file.name;
-
-    $("#chattingFileForm").data("fileLink", fileLink);
+ 
     $("#chattingFileForm").data("fileExtension", fileExtension);
 
     // ajax로 전달할 폼 객체
@@ -36,6 +34,8 @@ $(document).ready(function() {
       contentType: false,
       success: function(data) {
         console.log(data);
+        fileLink = "/resource/upload/" + data;
+        $("#chattingFileForm").data("fileLink", fileLink);
       }
     });
   });

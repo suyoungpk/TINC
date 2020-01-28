@@ -9,10 +9,18 @@ public class ChatMessage {
 	String invitedId; // 초대된 아이디  
 	String exitId; // 방 나간 아이디 
 	String content; // 텍스트, 메모
-	String contentMode; // 텍스트 길 경우 
+	String contentMode; // 텍스트 길 경우
+	String fileName; // 파일이름
 	String sharefile; // 공유된 파일 경로
 	String date; // 기록된 날자
 	String time; // 시간 
+	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	public String getType() {
 		return type;
 	}

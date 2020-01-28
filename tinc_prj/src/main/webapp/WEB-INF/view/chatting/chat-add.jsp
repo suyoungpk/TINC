@@ -10,7 +10,6 @@
    </head>
    <body>
       <link rel="stylesheet" href="/resource/css/chatting/chat.css" />
-      <link rel="stylesheet" href="/resource/css/chatting/add.css" />
       <section class="wrapper">
          <nav class="gnb">
             <a href="#" title="메모장 이동">MEMO</a>
@@ -27,7 +26,7 @@
             <!-- chatlist -->
             <form action="add" method="post" name="frm">
             <!-- search -->
-             <div class="search">
+             <div class="search add">
                 <input type="text" placeholder="검색" name="userIdInput" id="searchKey"/>
                 <span class="searchSpan">
                    <label><span id="cnt">0</span> 명</label>
@@ -36,7 +35,7 @@
                 <input type="hidden" name="memberIds" />
              </div>
             <ul class="chatList add"></ul>
-            <div class="popup alert">
+            <div class="popup alert" id="add">
 		         <div class="popup-wrap alert">
 		            <button type="button" class="btn-close fas fa-times"></button>
 		            <div class="context">
@@ -57,7 +56,7 @@
       <script src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-  <script src="/resource/js/chatting/uiUtil.js"></script>
+  <script src="/resource/js/chatting/uiUtil.js"></script>	
   <script>
    var selectedList = new Set();
    	$(function(){   		

@@ -20,7 +20,10 @@ function popupOpen(popup){
 function popupClose(){
 	$(".mask,.popup").hide();
 }
-
+function openAlert(context){
+	$("#alert .context").text(context);
+	popupOpen("#alert");
+}
 function chkui(){
 	$(".chatList li label input").each(function(){
 	if($(this).is(":checked"))
