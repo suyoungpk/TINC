@@ -96,6 +96,7 @@
 		<div class="memo-list-bottom-wrapper">
 			<input type="button" name="memo-list" value="닫기">
 		</div>
+
 	</section>
 	<!-- wrapper end -->
 </body>

@@ -59,6 +59,8 @@ var timeIn;
 var cardId = 0;
 var initFlag = false;
 
+let tid;
+
 window.addEventListener("load", function (e) {
 	// get cardId cookie
 	getCookie();
@@ -95,7 +97,7 @@ window.addEventListener("load", function (e) {
 	duedateCheckBoxHandler();
 
 	// deadline관련 함수들
-	this.setInterval(function (e) {
+	tid = this.setInterval(function (e) {
 		if (cardId > 0) {
 			// dealine 일주일 전이면 빨간색으로 표시
 			isDeadline();
@@ -135,7 +137,7 @@ window.addEventListener("load", function (e) {
 			// x 버튼 클릭시 실행
 			$(".duedate-close").off("click").click(function (e) {
 				e.preventDefault();
-				var duedateContainer = document.querySelector(
+				var duedateContainer = documents.querySelector(
 					".memo-duedate-container"
 				)
 				for (let i = 0; i < duedateContainer.children.length; i++) {
@@ -149,7 +151,7 @@ window.addEventListener("load", function (e) {
 
 			// duedate 박스 생성 시작
 			createDueDateContainer(dateIn, timeIn);
-			console.log(newDueDate);
+			//console.log(newDueDate);
 
 			// duedate 설정 버튼 클릭 시
 			$(".memo-duedate-popup .memo-duedate-btn-area .ok-btn")

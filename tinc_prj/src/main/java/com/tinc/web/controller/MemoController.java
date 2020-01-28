@@ -592,7 +592,7 @@ public class MemoController
 		int id = 0;
 		id = Integer.parseInt(mcId);
 		int ret = -1;
-		System.out.println(mcId);
+		System.out.println("del-memo-card:" + mcId);
 
 		ret = memoCardService.delete(id);
 		if (ret <= 0)

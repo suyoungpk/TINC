@@ -16,6 +16,13 @@ window.addEventListener("load", function () {
     // 팝업창 'x'머튼 클릭시 모든 팝업창 닫기
     $("div.popup a.btn-close").off("click").click(() => {
         delCookie();
+        let url = "/memo/list";
+        $.get(url, function (data) {
+            //console.log(data);
+            let newDoc = document.open("memo/list", "replace");
+            newDoc.write(data);
+            newDoc.close();
+        });
         $(".popup-wrap").fadeOut();
         $(".popup").fadeOut();
         $(".mask").fadeOut();
@@ -28,7 +35,19 @@ window.addEventListener("load", function () {
         e.preventDefault();
 
         let mcId = $(".memo-detail-title > input[name=\"memo-detail-id\"]").val();
-        this.window.location.href = "../../../../memo/share?mcId=" + mcId;
+        //this.window.location.href = "../../../../memo/share?mcId=" + mcId;
+        let url = "/memo/share?mcId=" + mcId;
+        let oldUrl = window.location.pathname + window.location.search;
+
+
+        $.get(url, function (data) {
+            //console.log(tid);
+            clearTimeout(tid);
+            //console.log(data);
+            let newDoc = document.open(oldUrl, "replace");
+            newDoc.write(data);
+            newDoc.close();
+        });
     });
 
     // 메모 삭제
@@ -42,7 +61,15 @@ window.addEventListener("load", function () {
             console.log(receivedMsg);
             delCookie();
             if (receivedMsg === "del-memo-card success") {
-                window.location.href = "../../../../memo/list";
+                //window.location.href = "../../../../memo/list";
+                //let url = "/memo/list";
+                let url = window.location.pathname + window.location.search;
+                $.get(url, function (data) {
+                    //console.log(data);
+                    let newDoc = document.open(url, "replace");
+                    newDoc.write(data);
+                    newDoc.close();
+                });
             }
         };
         request.send();
