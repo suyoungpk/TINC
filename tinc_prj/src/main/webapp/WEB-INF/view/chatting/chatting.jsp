@@ -150,7 +150,7 @@
 			                      type="file"
 			                      name="file"
 			                      id="chattingFile"
-			                      style="display:none;"
+			                      style="display:none"
 			                    />
 							 <a href="#" id="chattingFileSend">
 				                      <span><i class="far fa-folder-open"></i></span>
@@ -293,22 +293,21 @@
           $("#chattingFile").click();
         });
         $("#chattingFile").on("change", function() {
-          fileChange();
+        	//alert("changed");
+        	fileUpload();
         });
         function fileChange() {
           fileUpload();
         }
-
         function fileUpload(e) {
           let file = $("#chattingFile")[0].files[0];
           let form = $("#chattingFileForm")[0];
           let formData = new FormData(form);
           formData.append("file", file);
-
           fileExtension = file.type.substring(0, file.type.indexOf("/", 0));
-
+			
           $.ajax({
-            url: "/chat/upload?id=" + exeChat.chatId + "&memberId=" + exeChat.memberId,
+            url: "upload?id=" + exeChat.chatId + "&memberId=" + exeChat.memberId,
             processData: false,
             contentType: false,
             data: formData,
@@ -316,12 +315,7 @@
             type: "POST",
             success: function(data) {
               fileLink = "/resource/upload/" + data;
-              if (fileExtension == "image") {
-                socket.send(exeChat.imgMeg(fileLink));
-              } else {
-                socket.send(exeChat.fileMeg(fileLink));
-              }
-              $("#chattingFile").val("");
+              parseFileData(fileLink,fileExtension,data);
             }
           });
         }
@@ -366,6 +360,15 @@
   		}
   		exeChat.rename();				  	
    }
+   function parseFileData(fileLink,fileExtension,fileName){
+	   //console.log(fileLink)
+       if (fileExtension == "image") {
+         socket.send(exeChat.imgMeg(fileName,fileLink));
+       } else {
+         socket.send(exeChat.fileMeg(fileName,fileLink));
+       }
+       $("#chattingFile").val("");           
+   }
  //util closeAside() closeSubAside()
    	function closeAside(){
 		$("#setting").animate({width:"0",opacity:0},500,function(){$(this).hide().html("");});
@@ -376,6 +379,7 @@
 	function closeSubAside(){
 		$("#subSetting").animate({width:"0",opacity:0},500,function(){$(this).hide()});
     }
+	
    </script> 
 </body>
 </html>

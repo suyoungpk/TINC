@@ -33,9 +33,9 @@ $(document).ready(function() {
       processData: false,
       contentType: false,
       success: function(data) {
-        console.log(data);
         fileLink = "/resource/upload/" + data;
         $("#chattingFileForm").data("fileLink", fileLink);
+        parseFileData(fileLink,fileExtension,data);
       }
     });
   });
