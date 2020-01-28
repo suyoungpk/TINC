@@ -1,6 +1,7 @@
 package com.tinc.web.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.tinc.web.entity.BlackList;
 import com.tinc.web.entity.FriendsList;
@@ -18,15 +19,18 @@ public interface MemberDao{
 	
 	int getFriendsListCount(String memberId); // 친구 수
 	Member get(String id); 
-	Member getMyProfile(String id); // 내 프로필 출력 
-	List<Member> getFriendsProfile(String memberId); // 친구 프로필 출력 
 	Member getFriend(String memberId);
-	List<Member> searchFriendforAdding(String id); // 추가할 친구 찾기
 	
-	List<Member> getListOfUserWhoHaveAddedMe(String friendsId); // 나를 추가한 사람 목록출력
-	List<Member> getListOfUserWhoBlockedMe(String blackId); // 나를 차단한 사람 목록출력
-	List<Member> getListOfUserIhaveblocked(String memberId); // 내가 차단한 사람 목록출력
-
+	Member getMyProfile(String id); // 내 프로필
+	List<Member> getFriendsProfile(String memberId); // 친구 프로필 
+	
+	List<Member> getListOfUserWhoHaveAddedMe(String friendsId); // 나를 추가한 사람 목록
+	List<Member> getListOfUserWhoBlockedMe(String blackId); // 나를 차단한 사람 목록
+	List<Member> getListOfUserIhaveblocked(String memberId); // 내가 차단한 사람 목록
+	List<Member> getListToExcludeFromSearch(String id); // 검색에서 제외할 유저목록
+	List<Member> searchFriendsforAdding(Map<String, String> item); // 추가할 친구찾기
+	List<Member> searchFriendsToAddToTheChat(Map<String, String> item); // 채팅에 추가할 친구찾기
+	
 	Member findId(String email); // 아이디 찾기 
 	String sendTemporaryPassword(String id, String email); // 임시비밀번호 발급
 	

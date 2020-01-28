@@ -1,6 +1,7 @@
 package com.tinc.web.dao.mybatis;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,9 +85,9 @@ public class MybatisMemberDao implements MemberDao{
 	}
 	
 	@Override
-	public List<Member> searchFriendforAdding(String id) {
+	public List<Member> searchFriendsforAdding(Map<String, String> item) {
 		// TODO Auto-generated method stub
-		return mapperDao.searchFriendforAdding(id);
+		return mapperDao.searchFriendsforAdding(item);
 	}
 	
 	@Override
@@ -161,6 +162,18 @@ public class MybatisMemberDao implements MemberDao{
 	public boolean memoAlarm(String memoAlarm) {
 		// TODO Auto-generated method stub
 		return mapperDao.memoAlarm(memoAlarm);
+	}
+
+	@Override
+	public List<Member> getListToExcludeFromSearch(String id) {
+		// TODO Auto-generated method stub
+		return mapperDao.getListToExcludeFromSearch(id);
+	}
+
+	@Override
+	public List<Member> searchFriendsToAddToTheChat(Map<String, String> item) {
+		// TODO Auto-generated method stub
+		return mapperDao.searchFriendsToAddToTheChat(item);
 	}
 	
 	   

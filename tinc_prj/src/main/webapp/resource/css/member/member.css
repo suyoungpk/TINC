@@ -21,15 +21,16 @@ input[type="tel"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing
 .join {text-align: center;}
 .join input[type="text"] {margin-top:0.9375rem;}
 .join input[type="password"] {margin-top:0.9375rem;}
+.join input[type="tel"] {margin-top:0.9375rem;}
 .join input::placeholder {color: #b2b2b2;}
 .join span {color: #7367f0; font-size: 0.8125rem;}
 .join .agree-btn {margin-top: 1.563rem;}
 .usable {position: relative;}
-.usable p b {position: absolute; font-size: 0.8125rem; color: #7367f0; bottom: 0.1875rem; right: 1.875rem;}
-.usable input[type="text"] {border: 0.0625rem solid #7367f0;}
-.unusable {position: relative;}
+.usable p b {position: absolute; font-size: 0.8125rem; bottom: 0.1875rem; right: 1.875rem;}
+/* .usable input[type="text"] {border: 0.0625rem solid #7367f0;} */
+/* .unusable {position: relative;}
 .unusable p b {position: absolute; font-size: 0.8125rem; color: #f0679e; bottom: 0.1875rem; right: 1.875rem;}
-.unusable input[type="text"] {border: 0.0625rem solid #f0679e;}
+.unusable input[type="text"] {border: 0.0625rem solid #f0679e;} */
 .login {margin-top: 3.125rem;}  
 
 .find input[type="text"] {margin-top: 1rem;}
@@ -71,6 +72,15 @@ input[type="tel"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing
 .friend-add .friend{ margin: 1.313rem 1.25rem 0.3125rem 1.25rem;}
 .friend-add .box {margin-top: 0.1875rem;}
 .friend-add .add-list {margin-top: 3.125rem;}
+
+#findBtn {width: 6.25rem; height: 1.813rem; font-size:0.9375rem; color:#fff; background-color: #7367f0; border-radius: 0.3125rem;}
+#child-flex1 {flex:1; margin-left: 1.25rem;}
+#child-flex2 {flex:1; text-align: right;  margin-top: 0.4375rem;}
+#friend{display: flex;margin: 1.313rem 1.25rem 0.3125rem 1.25rem;}
+#box {width: 2.5rem; height: 2.5rem; border-radius: 70%; overflow: hidden; margin-top: 0.1875rem;}
+#profile {width: 100%; height: 100%; object-fit: cover;}
+#p1 {color:#000; font-size: 0.9375rem;}
+#p2 {color:#515151; font-size: 0.8125rem;}
 
 .main body,html {background: linear-gradient(to top,#7579ff 0%, #b224ef 100%) !important } 
 .main div {text-align: center;}

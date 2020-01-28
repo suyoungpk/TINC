@@ -1,30 +1,28 @@
 package com.tinc.web.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tiles.autotag.core.runtime.annotation.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.tinc.web.entity.BlackList;
 import com.tinc.web.entity.FriendsList;
 import com.tinc.web.entity.Member;
@@ -100,8 +98,49 @@ public class MemberController {
 		return "member/friendSetting";
 		}
 	
+
+	@GetMapping("addFriend")
+	   public String addFriend() {
+	      
+	      return "member/addFriend";
+	   }
+	   
+	   @ResponseBody
+	   @RequestMapping(value="addFriend", method = RequestMethod.POST)
+	   public String addFriend(
+	         Principal principal, Model model, FriendsList friendsList,
+	         @RequestParam(name = "friendsId" , required = false) String friendsId,
+	         @RequestParam(name = "searchwords", required = false) String query)
+	      {
+	      String id = "qqqqq";
+	      friendsList.setMemberId(id);
+	      friendsList.setFriendsId(friendsId);
+	      System.out.println("friendsId"+friendsId);
+	      System.out.println("쿼리값"+query);
+	      Map<String, String> item = new HashMap<String, String>();
+	      item.put("item1", id); 
+	      item.put("item2", id);
+	      item.put("item3", id);
+	      item.put("item4", id);
+	      item.put("item5", query);
+	      model.addAttribute("id", "user1");
+	      List<Member> list = service.searchFriendsforAdding(item);
+	      //System.out.println(principal.getName());
+	      System.out.println("서비스결과"+list);
+	      Gson gson = new Gson();
+	      String searchwords = gson.toJson(list);
+	      System.out.println(searchwords);
+	      if(friendsId !=null)
+	      service.addFriend(friendsList);
+	      
+	      return searchwords;
+	   }
+	
 	@GetMapping("join")
 	public String join() {
+		
+		
+		
 		
 		return "member/join";
 	}
