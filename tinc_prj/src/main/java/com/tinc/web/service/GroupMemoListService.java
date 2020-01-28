@@ -7,7 +7,7 @@ import com.tinc.web.entity.GroupMemoList;
 public interface GroupMemoListService
 {	
 	List<GroupMemoList> getGroupMemoList(String mId);
-	GroupMemoList get(int id, String mId);
+	GroupMemoList get(int chatId, String mId);
 
 	int insert(GroupMemoList groupMemoList);
 	int update(GroupMemoList groupMemoList);	

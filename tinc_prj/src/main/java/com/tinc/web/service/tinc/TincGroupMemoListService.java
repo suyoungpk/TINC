@@ -24,10 +24,10 @@ public class TincGroupMemoListService implements GroupMemoListService {
 	}
 
 	@Override
-	public GroupMemoList get(int id, String mId)
+	public GroupMemoList get(int chatId, String mId)
 	{
 		// TODO Auto-generated method stub
-		return groupMemoListDao.get(id, mId);
+		return groupMemoListDao.get(chatId, mId);
 	}
 
 	@Override
