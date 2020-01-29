@@ -137,7 +137,7 @@ window.addEventListener("load", function (e) {
 			// x 버튼 클릭시 실행
 			$(".duedate-close").off("click").click(function (e) {
 				e.preventDefault();
-				var duedateContainer = documents.querySelector(
+				var duedateContainer = document.querySelector(
 					".memo-duedate-container"
 				)
 				for (let i = 0; i < duedateContainer.children.length; i++) {
