@@ -26,7 +26,7 @@
          <input type="hidden" value="${id}"/> 
          <div class="friend">
 	         <div class="box inline">  
-	         	<img src="${imgs}" alt="image" class="profile">
+	         	<img src="${myprofile.profileImg}" alt="image" class="profile">
 	         </div>
          	<div class="inline">
 	         	<p><b>${myprofile.nickName}</b></p>

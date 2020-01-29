@@ -10,6 +10,7 @@ import com.tinc.web.dao.MemberDao;
 import com.tinc.web.entity.BlackList;
 import com.tinc.web.entity.FriendsList;
 import com.tinc.web.entity.Member;
+import com.tinc.web.entity.MemberRole;
 import com.tinc.web.service.MemberService;
 
 @Service
@@ -18,11 +19,7 @@ public class TincMemberService implements MemberService{
 	@Autowired
 	private MemberDao memberDao;
 
-	@Override
-	public String getDefaultRole(String id)
-	{
-		return "member";
-	}
+
 	@Override
 	public int joinMember(Member member) {
 		// TODO Auto-generated method stub
@@ -190,6 +187,11 @@ public class TincMemberService implements MemberService{
 	public List<Member> searchFriendsToAddToTheChat(Map<String, String> item) {
 		// TODO Auto-generated method stub
 		return memberDao.searchFriendsToAddToTheChat(item);
+	}
+	@Override
+	public int addRole(MemberRole memberRole) {
+		// TODO Auto-generated method stub
+		return memberDao.addRole(memberRole);
 	}
 
 }

@@ -19,6 +19,11 @@
 		delete from Member where id = #{id}
 	</delete>
 	
+	<insert id="addRole" parameterType="com.tinc.web.entity.MemberRole">
+		insert into MemberRole(memberId, roleId) 
+			values(#{memberId}, #{roleId})
+	</insert>
+
 	<insert id="addFriend" parameterType="com.tinc.web.entity.FriendsList">
 		insert into FriendsList(memberId, friendsId) 
 			values(#{memberId}, #{friendsId})
@@ -54,7 +59,7 @@
 	</select>
 	
 	<select id="getFriendsProfile" resultType="com.tinc.web.entity.Member">
-		select nickName, statusMsg, profileImg from Member where id in 
+		select * from Member where id in 
 		(
 			select friendsId from FriendsList where memberId=#{memberId}
 		) 
@@ -78,7 +83,7 @@
 		) 
 	</select>
 	
-	<select id="searchFriendforAdding" parameterType="Map" resultType="com.tinc.web.entity.Member">
+	<select id="searchFriendsforAdding" parameterType="Map" resultType="com.tinc.web.entity.Member">
       select * from Member where id not in 
          (select * from(
             select memberId 'id' from BlackList where blackId = #{item1}

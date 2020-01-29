@@ -102,28 +102,54 @@
    
    <script>
    
-   $(function(){
+   $(function(){	
       $("input[name^='userWhoHaveAddedMe_addBtn']").on('click',function(e){ 
           $("input[name='friendsId']").val($(e.target).data('id'));
-          console.log($(e.target).data('id'));
-          $('#frm').submit();
-      });
-	$("input[name^='userWhoHaveAddedMe_blockBtn']").on('click',function(e){ 
-           $("input[name='friendsId']").val($(e.target).data('id'));
-           console.log($(e.target).data('id'));
-           $('#frm').submit();
-    }); 
-	$("input[name^='userIhaveblocked_addBtn']").on('click',function(e){ 
-           $("input[name='friendsId']").val($(e.target).data('id'));
-           console.log($(e.target).data('id'));
-           $('#frm').submit();
-    }); 
-	$("input[name^='userIhaveblocked_unBlockBtn']").on('click',function(e){ 
-           $("input[name='friendsId']").val($(e.target).data('id'));
-           console.log($(e.target).data('id'));
-           $('#frm').submit();
-    }); 
-   }); 
+          $("input[name='cmd']").val('userWhoHaveAddedMe-add');
+          console.log($("input[name='cmd']").val() + ":" + $("input[name='friendsId']").val());
+          var cmd = $("input[name='cmd']").val();
+          var friendsId = $("input[name='friendsId']").val();
+          $.post("${pageContext.request.contextPath}/member/friendSetting", {friendsId : friendsId, cmd : cmd});
+          $(e.target).parent().parent().remove();
+      });      
+   });      
+     
+   $(function(){	
+		$("input[name^='userWhoHaveAddedMe_blockBtn']").on('click',function(e){ 
+	        $("input[name='friendsId']").val($(e.target).data('id'));
+	        $("input[name='cmd']").val('userWhoHaveAddedMe-block');
+	        console.log($("input[name='cmd']").val() + ":" + $("input[name='friendsId']").val());
+	        var cmd = $("input[name='cmd']").val();
+	        var friendsId = $("input[name='friendsId']").val();
+	        $.post("${pageContext.request.contextPath}/member/friendSetting", {friendsId : friendsId, cmd : cmd});
+	        $(e.target).parent().parent().remove();
+	    }); 	
+   });
+	
+   $(function(){	
+   		$("input[name^='userIhaveblocked_addBtn']").on('click',function(e){ 
+        	$("input[name='friendsId']").val($(e.target).data('id'));
+        	$("input[name='cmd']").val('userIhaveblocked-add');
+	        console.log($("input[name='cmd']").val() + ":" + $("input[name='friendsId']").val());
+	        var cmd = $("input[name='cmd']").val();
+	        var friendsId = $("input[name='friendsId']").val();
+	        $.post("${pageContext.request.contextPath}/member/friendSetting", {friendsId : friendsId, cmd : cmd});
+	        $(e.target).parent().parent().remove();
+   		});
+   });
+   
+   $(function(){
+	   $("input[name^='userIhaveblocked_unBlockBtn']").on('click',function(e){ 
+	       $("input[name='friendsId']").val($(e.target).data('id'));
+	       $("input[name='cmd']").val('userIhaveblocked-unblock');
+	       console.log($("input[name='cmd']").val() + ":" + $("input[name='friendsId']").val());
+	       var cmd = $("input[name='cmd']").val();
+	       var friendsId = $("input[name='friendsId']").val();
+	       $.post("${pageContext.request.contextPath}/member/friendSetting", {friendsId : friendsId, cmd : cmd});
+	       $(e.target).parent().parent().remove(); 
+   		});
+   });
+  
 
    </script>
 </body>

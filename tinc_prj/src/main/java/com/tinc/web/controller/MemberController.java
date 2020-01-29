@@ -26,7 +26,10 @@ import com.google.gson.Gson;
 import com.tinc.web.entity.BlackList;
 import com.tinc.web.entity.FriendsList;
 import com.tinc.web.entity.Member;
+import com.tinc.web.entity.MemberRole;
+import com.tinc.web.entity.PrivateMemoList;
 import com.tinc.web.service.MemberService;
+import com.tinc.web.service.PrivateMemoListService;
 
 @Controller
 @RequestMapping("/member/")
@@ -36,6 +39,13 @@ public class MemberController {
 	private JavaMailSender mailSender;
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private PrivateMemoListService memoService;
+	
+	@GetMapping("/main")
+	   public String main() {
+	      return "main";
+	   }	
 	
 	@GetMapping("friendList")
 	public String friendList(Principal principal, Model model) {
@@ -62,16 +72,16 @@ public class MemberController {
 	}
 	
 	@PostMapping("friendSetting")
-	public String friendSetting(
-			@RequestParam(name = "memberId" , required = false) String memberId, 
+	public String friendSetting( 
 			@RequestParam(name = "friendsId" , required = false) String friendsId,
 			@RequestParam(name = "cmd" , required = false) String cmd,
 			FriendsList friendList, 
-			BlackList blackList) 
+			BlackList blackList,
+			Principal principal) 
 		{
+		String memberId = principal.getName();
 		System.out.println(memberId+","+friendsId);
 		String blackId = friendsId;
-		System.out.println(blackId);
 		
 		friendList.setMemberId(memberId);
 		friendList.setFriendsId(friendsId);
@@ -79,22 +89,25 @@ public class MemberController {
 		blackList.setBlackId(blackId);
 		
 		System.out.println(cmd);
-		switch (cmd) {
-		case "userIhaveblocked-add":
-			service.unblockUser(blackList);
-			service.addFriend(friendList);
-			break;
-		case "userIhaveblocked-unblock":
-			service.unblockUser(blackList);
-			break;
-		case "userWhoHaveAddedMe-add":
-			service.addFriend(friendList);
-			break;
-		case "userWhoHaveAddedMe-block":
-			service.unblockUser(blackList);
-			break;
+		if(friendsId != null || blackId!=null) {
+			switch (cmd) {
+			case "userIhaveblocked-add":
+				int result1 = service.unblockUser(blackList);
+				int result2 = service.addFriend(friendList);
+				System.out.println("result1:"+result1+"result2:"+result2);
+				break;
+			case "userIhaveblocked-unblock":
+				service.unblockUser(blackList);
+				break;
+			case "userWhoHaveAddedMe-add":
+				int result = service.addFriend(friendList);
+				System.out.println(result);
+				break;
+			case "userWhoHaveAddedMe-block":
+				service.blockUser(blackList);
+				break;
+			}
 		}
-		
 		return "member/friendSetting";
 		}
 	
@@ -105,43 +118,42 @@ public class MemberController {
 	      return "member/addFriend";
 	   }
 	   
-	   @ResponseBody
-	   @RequestMapping(value="addFriend", method = RequestMethod.POST)
-	   public String addFriend(
-	         Principal principal, Model model, FriendsList friendsList,
-	         @RequestParam(name = "friendsId" , required = false) String friendsId,
-	         @RequestParam(name = "searchwords", required = false) String query)
-	      {
-	      String id = "qqqqq";
+   @ResponseBody
+   @RequestMapping(value="addFriend", method = RequestMethod.POST)
+   public String addFriend(
+         Principal principal, Model model, FriendsList friendsList,
+         @RequestParam(name = "friendsId" , required = false) String friendsId,
+         @RequestParam(name = "searchwords", required = false) String query)
+      {
+      String id = principal.getName();
+      System.out.println(id);
+      System.out.println("쿼리값"+query);
+      Map<String, String> item = new HashMap<String, String>();
+      item.put("item1", id); 
+      item.put("item2", id);
+      item.put("item3", id);
+      item.put("item4", id);
+      item.put("item5", query);
+      model.addAttribute("id", "user1");
+      List<Member> list = service.searchFriendsforAdding(item);
+      //System.out.println(principal.getName());
+      System.out.println("서비스결과"+list);
+      Gson gson = new Gson();
+      String searchwords = gson.toJson(list);
+      System.out.println(searchwords);
+      if(friendsId !=null) {
 	      friendsList.setMemberId(id);
 	      friendsList.setFriendsId(friendsId);
 	      System.out.println("friendsId"+friendsId);
-	      System.out.println("쿼리값"+query);
-	      Map<String, String> item = new HashMap<String, String>();
-	      item.put("item1", id); 
-	      item.put("item2", id);
-	      item.put("item3", id);
-	      item.put("item4", id);
-	      item.put("item5", query);
-	      model.addAttribute("id", "user1");
-	      List<Member> list = service.searchFriendsforAdding(item);
-	      //System.out.println(principal.getName());
-	      System.out.println("서비스결과"+list);
-	      Gson gson = new Gson();
-	      String searchwords = gson.toJson(list);
-	      System.out.println(searchwords);
-	      if(friendsId !=null)
-	      service.addFriend(friendsList);
-	      
-	      return searchwords;
-	   }
+	      service.addFriend(friendsList);			
+      }
+      
+      return searchwords;
+   }
 	
 	@GetMapping("join")
 	public String join() {
-		
-		
-		
-		
+
 		return "member/join";
 	}
 	
@@ -150,7 +162,12 @@ public class MemberController {
 		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 		String encPassword = scpwd.encode(member.getPassword());
 		member.setPassword(encPassword);
-		service.joinMember(member);   
+		int result = service.joinMember(member);   
+		System.out.println("id:"+member.getId());
+		  if(result ==1) { 
+			  memoService.insert(new PrivateMemoList(member.getNickName(),member.getId())); 
+			  service.addRole(new MemberRole(member.getId(), "ROLE_MEMBER"));
+		  }
 		return "redirect:friendList";
 	}
 	

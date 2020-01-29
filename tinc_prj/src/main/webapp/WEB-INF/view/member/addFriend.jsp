@@ -120,8 +120,10 @@ function searchajax(){
                             console.log($("input[name='friendsId']").val());
                             var friendsId = $("input[name='friendsId']").val();
                          	$.post("${pageContext.request.contextPath}/member/addFriend", $("input[name='friendsId']").serialize());
+                         	//$("#friend").remove("input[name='friendsId']");
+                         	console.log($(e.target).parent().parent());
+                         	$(e.target).parent().parent().remove();
                          	
-                         	$('#friend').remove();
                          }); 
                          
                       }

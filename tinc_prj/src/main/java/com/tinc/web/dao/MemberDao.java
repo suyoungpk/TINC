@@ -6,12 +6,14 @@ import java.util.Map;
 import com.tinc.web.entity.BlackList;
 import com.tinc.web.entity.FriendsList;
 import com.tinc.web.entity.Member;
+import com.tinc.web.entity.MemberRole;
 
 public interface MemberDao{
 	int joinMember(Member member); // 회원가입
 	int editMember(Member member); // 회원정보수정 
 	int withdrawalMember(String id); // 회원탈퇴 
 	
+	int addRole(MemberRole memberRole); // role추가 
 	int addFriend(FriendsList friendList); // 친구추가 
 	int deleteFriend(FriendsList friendList); // 친구삭제(차단 하기 전) 
 	int blockUser(BlackList blackList); // 친구차단
@@ -30,7 +32,7 @@ public interface MemberDao{
 	List<Member> getListToExcludeFromSearch(String id); // 검색에서 제외할 유저목록
 	List<Member> searchFriendsforAdding(Map<String, String> item); // 추가할 친구찾기
 	List<Member> searchFriendsToAddToTheChat(Map<String, String> item); // 채팅에 추가할 친구찾기
-	
+
 	Member findId(String email); // 아이디 찾기 
 	String sendTemporaryPassword(String id, String email); // 임시비밀번호 발급
 	

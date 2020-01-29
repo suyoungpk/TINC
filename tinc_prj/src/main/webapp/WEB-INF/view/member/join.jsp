@@ -25,40 +25,31 @@
                <span class="right"></span>
             </div>
             
-            <!-- <div class="join">
-                <input type="text" value=""  placeholder="아이디"/>               
-                <input type="text" value=""  placeholder="닉네임"/>
-                <input type="password" value=""  placeholder="비밀번호"/>
-                <input type="password" value=""  placeholder="비밀번호 확인"/>
-                <input type="text" value=""  placeholder="이름"/>
-                <input type="text" value=""  placeholder="전화번호"/>
-                <input type="text" value=""  placeholder="이메일"/>
-            </div> -->
             <div class="join center">
-         <div class="usable">
-            <div><input type="text" id="id-input" value="" name="id" placeholder="아이디"/></div>
-            <div><p><b id="validate-id"></b></p></div>
-         </div>   
-         <div class="usable">
-            <div><input type="text" value="" id="nickName-input" name="nickName" placeholder="닉네임"/></div>
-            <div><p><b id="validate-nickName"></b></p></div>
-         </div>
-         <div class="usable">
-            <input type="password" id="pwd1-input" value="" name="password" placeholder="비밀번호"/>
-            <div><p><b id="validate-pwd1"></b></p></div>
-         </div>
-         <div class="usable">
-            <input type="password" id="pwd2-input" value="" name="password2" placeholder="비밀번호 확인"/>
-            <div><p><b id="validate-pwd2"></b></p></div>
-         </div>
-         <div class="usable">
-            <input type="tel" id="phoneNum-input" value="" name="phoneNum" placeholder="전화번호"/>
-            <div><p><b id="validate-phone"></b></p></div>
-         </div>
-         <div class="usable"> 
-            <input type="text" value="" id="email-input" name="email" placeholder="이메일"/>
-            <div><p><b id="validate-email"></b></p></div>
-         </div>
+	         <div class="usable">
+	            <div><input type="text" id="id-input" value="" name="id" placeholder="아이디"/></div>
+	            <div><p><b id="validate-id"></b></p></div>
+	         </div>   
+	         <div class="usable">
+	            <div><input type="text" value="" id="nickName-input" name="nickName" placeholder="닉네임"/></div>
+	            <div><p><b id="validate-nickName"></b></p></div>
+	         </div>
+	         <div class="usable">
+	            <input type="password" id="pwd1-input" value="" name="password" placeholder="비밀번호"/>
+	            <div><p><b id="validate-pwd1"></b></p></div>
+	         </div>
+	         <div class="usable">
+	            <input type="password" id="pwd2-input" value="" name="password2" placeholder="비밀번호 확인"/>
+	            <div><p><b id="validate-pwd2"></b></p></div>
+	         </div>
+	         <div class="usable">
+	            <input type="tel" id="phoneNum-input" value="" name="phoneNum" placeholder="전화번호"/>
+	            <div><p><b id="validate-phone"></b></p></div>
+	         </div>
+	         <div class="usable"> 
+	            <input type="text" value="" id="email-input" name="email" placeholder="이메일"/>
+	            <div><p><b id="validate-email"></b></p></div>
+	         </div>
          </div>
             
             <div class="agree-btn">
@@ -99,30 +90,34 @@
 						$("#validate-id").css("color", "#f0679e");
 						$("#id-input").css("border", "0.0625rem solid #f0679e");
 						$("#submit").attr("disabled", true);
-					 } else {
-						
-						if(idJ.test(this.id)){
-							// 0 : 아이디 길이 / 문자열 검사
-							$("#validate-id").text("영문 + 숫자 4~12자로 입력하세요");
-							$("#validate-id").css("color", "#f0679e");
-							$("#id-input").css("border", "0.0625rem solid #f0679e");
-							$("#submit").attr("disabled", true);
-				
-						} else if(id == ""){
-							
-							$('#validate-id').text('아이디를 입력해주세요 :)');
-							$('#validate-id').css('color', '#f0679e');
-							$("#id-input").css("border", "0.0625rem solid #f0679e");
-							$("#submit").attr("disabled", true);				
-							
-						} /* else {
+					 }else if (data == false && id != "" && idJ.test($('#id-input').val()) == false){
 							$('#validate-id').text("");
-							$('#validate-id').css('color', '#f0679e');
-							$("#id-input").css("border", "0.0625rem solid #f0679e");
-							$("#submit").attr("disabled", true);
-						}  */
-						
-					} 
+							$('#validate-id').css('color', '#7367f0');
+							$("#id-input").css("border", "0.0625rem solid #7367f0");
+							$("#submit").attr("disabled", false);
+						}else {
+							if(idJ.test($('#id-input').val())){
+								// 0 : 아이디 길이 / 문자열 검사
+								$("#validate-id").text("영문 + 숫자 4~12자로 입력하세요");
+								$("#validate-id").css("color", "#f0679e");
+								$("#id-input").css("border", "0.0625rem solid #f0679e");
+								$("#submit").attr("disabled", true);
+								console.log("reg"+idJ.test(id));
+							} else if(id == ""){
+								
+								$('#validate-id').text('아이디를 입력해주세요 :)');
+								$('#validate-id').css('color', '#f0679e');
+								$("#id-input").css("border", "0.0625rem solid #f0679e");
+								$("#submit").attr("disabled", true);				
+								
+							} /* else {
+								$('#validate-id').text("");
+								$('#validate-id').css('color', '#f0679e');
+								$("#id-input").css("border", "0.0625rem solid #f0679e");
+								$("#submit").attr("disabled", true);
+							}  */
+							
+							}
 				}, error : function() {
 						console.log("실패");
 				}
@@ -139,6 +134,8 @@
        var emailInput = document.querySelector("#email-input");
        var phoneNumInput = document.querySelector("#phoneNum-input");
        
+       
+       var validateId = document.querySelector("#validate-id");
        var validatePwd1 = document.querySelector("#validate-pwd1");
        var validatePwd2 = document.querySelector("#validate-pwd2");
        var validateNickName = document.querySelector("#validate-nickName");
@@ -208,20 +205,56 @@
            }
         };
        
-   });
-         /*  var validateNickName = document.querySelector("#validate-nickName");
-          var name = document.querySelector("#name");
-        var frm = document.getElementById('frm');
-        frm.addEventListener("submit", function(e){
-          if(document.getElementById('name').value.length === 0){
-               e.preventDefault();
-               //name.focus();
-             name.style.border  =  "0.0625rem solid #f0679e";
-             validateNickName.style.color = "#f0679e";
-             validateNickName.innerText = "닉네임을 입력하세요."
-          } 
-        });
-     */
+   });	   
+	   var idInput = document.querySelector("#id-input");
+	   var pwd1Input = document.querySelector("#pwd1-input");
+	   var pwd2Input = document.querySelector("#pwd2-input");
+	   var nickNameInput = document.querySelector("#nickName-input");
+	   var emailInput = document.querySelector("#email-input");
+	   var phoneNumInput = document.querySelector("#phoneNum-input");
+	   
+	   var validateId = document.querySelector("#validate-id");
+	   var validatePwd1 = document.querySelector("#validate-pwd1");
+	   var validatePwd2 = document.querySelector("#validate-pwd2");
+	   var validateNickName = document.querySelector("#validate-nickName");
+	   var validateEmail = document.querySelector("#validate-email");
+	   var validatePhone = document.querySelector("#validate-phone");
+	   
+	   var frm = document.getElementById('frm');
+	   frm.addEventListener("submit", function(e){
+	    if(idInput.value.length === 0){
+	        e.preventDefault();
+	        idInput.style.border  =  "0.0625rem solid #f0679e";
+	        validateId.style.color = "#f0679e";
+	        validateId.innerText = "아이디를 입력하세요."
+	    }else if(pwd1Input.value.length === 0){
+	    	e.preventDefault();
+	        pwd1Input.style.border  =  "0.0625rem solid #f0679e";
+	        validatePwd1.style.color = "#f0679e";
+	        validatePwd1.innerText = "비밀번호를 입력하세요."
+	    }else if(nickNameInput.value.length === 0){
+	    	e.preventDefault();
+	    	nickNameInput.style.border  =  "0.0625rem solid #f0679e";
+	    	validateNickName.style.color = "#f0679e";
+	    	validateNickName.innerText = "닉네임을 입력하세요."		    	
+	    }else if(pwd2Input.value.length === 0){
+	    	e.preventDefault();
+	        pwd2Input.style.border  =  "0.0625rem solid #f0679e";
+	        validatePwd2.style.color = "#f0679e";
+	        validatePwd2.innerText = "비밀번호를 확인하세요."	
+	    }else if(emailInput.value.length === 0){
+	    	e.preventDefault();
+	    	emailInput.style.border  =  "0.0625rem solid #f0679e";
+	    	validateEmail.style.color = "#f0679e";
+	    	validateEmail.innerText = "이메일을 입력하세요."	
+	    }else if(phoneNumInput.value.length === 0){
+	    	e.preventDefault();
+	    	phoneNumInput.style.border  =  "0.0625rem solid #f0679e";
+	    	validatePhone.style.color = "#f0679e";
+	    	validatePhone.innerText = "휴대폰번호를 입력하세요."	
+	    }
+	  });
+	   
    </script>
    
    

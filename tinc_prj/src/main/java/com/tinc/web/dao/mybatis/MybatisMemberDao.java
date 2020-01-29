@@ -11,6 +11,7 @@ import com.tinc.web.dao.MemberDao;
 import com.tinc.web.entity.BlackList;
 import com.tinc.web.entity.FriendsList;
 import com.tinc.web.entity.Member;
+import com.tinc.web.entity.MemberRole;
 
 @Repository
 public class MybatisMemberDao implements MemberDao{
@@ -175,6 +176,13 @@ public class MybatisMemberDao implements MemberDao{
 		// TODO Auto-generated method stub
 		return mapperDao.searchFriendsToAddToTheChat(item);
 	}
+
+	@Override
+	public int addRole(MemberRole memberRole) {
+		// TODO Auto-generated method stub
+		return mapperDao.addRole(memberRole);
+	}
+
 	
 	   
 	   
