@@ -161,7 +161,15 @@ function shareMemo() {
             request.onload = function () {
                 gsIdList = [];
                 fsIdList = [];
-                window.location.href = "../../../../memo/detail?cardId=" + mcId; // -> 테스트 끝나면 detail 페이지로 가는걸로 변경
+                //window.location.href = "../../../../memo/detail?cardId=" + mcId; // -> 테스트 끝나면 detail 페이지로 가는걸로 변경
+                let url = "/memo/detail?cardId=" + mcId;
+                let oldUrl = window.location.pathname + window.location.search;
+                $.get(url, function (data) {
+                    //console.log(data);
+                    let newDoc = document.open(oldUrl, "replace");
+                    newDoc.write(data);
+                    newDoc.close();
+                });
             }
             request.send(sendShareData);
         }

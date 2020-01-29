@@ -1,5 +1,6 @@
 window.addEventListener("load", function () {
 
+    // detail 내용 크기 자동 조절
     var memoDetailContentTextArea = document.querySelector(".memo-detail-content-textarea");
     var contentTextAreaHeight = memoDetailContentTextArea.getBoundingClientRect().height;
     cmaTextareaSize(contentTextAreaHeight);
@@ -13,16 +14,21 @@ window.addEventListener("load", function () {
         updateDetailData();
     });
 
-    // 팝업창 'x'머튼 클릭시 모든 팝업창 닫기
-    $("div.popup a.btn-close").off("click").click(() => {
+    // detail창 닫기 버튼
+    $("#memo-detail-close-icon").off("click").click((e) => {
         delCookie();
-        let url = "/memo/list";
+        //let url = "/memo/list";
+        let url = window.location.pathname + window.location.search;
         $.get(url, function (data) {
             //console.log(data);
-            let newDoc = document.open("memo/list", "replace");
+            let newDoc = document.open(url, "replace");
             newDoc.write(data);
             newDoc.close();
         });
+    });
+
+    // 팝업창 'x'머튼 클릭시 모든 팝업창 닫기
+    $("div.popup a.btn-close").off("click").click(() => {
         $(".popup-wrap").fadeOut();
         $(".popup").fadeOut();
         $(".mask").fadeOut();
@@ -38,7 +44,6 @@ window.addEventListener("load", function () {
         //this.window.location.href = "../../../../memo/share?mcId=" + mcId;
         let url = "/memo/share?mcId=" + mcId;
         let oldUrl = window.location.pathname + window.location.search;
-
 
         $.get(url, function (data) {
             //console.log(tid);
