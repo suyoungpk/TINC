@@ -8,7 +8,7 @@ import com.tinc.web.dao.DueDateDao;
 import com.tinc.web.entity.DueDate;
 
 @Repository
-public class MyBatisDueDateDao implements DueDateDao
+public class MybatisDueDateDao implements DueDateDao
 {
 	private SqlSession sqlSession;
 	private DueDateDao mapperDao;

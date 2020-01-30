@@ -11,7 +11,7 @@ import com.tinc.web.entity.CheckList;
 import com.tinc.web.entity.CheckListItem;
 
 @Repository
-public class MyBatisCheckListItemDao implements CheckListItemDao
+public class MybatisCheckListItemDao implements CheckListItemDao
 {
 	private SqlSession sqlSession;
 	private CheckListItemDao mapperDao;

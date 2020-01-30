@@ -37,9 +37,9 @@ function showPrivateShareList() {
 
                 let sharePic = cloneMemoShare.querySelector("div.memo-share-list-pic");
                 let newPic;
-                if (receivedData[i].profileImg != null) {
+                if (receivedData[i].profileImg !== "") {
                     newPic = document.createElement("img");
-                    newPic.src = "../../../resource/images/" + fsList[i].profileImg;
+                    newPic.src = "../../../resource/images/" + receivedData[i].profileImg;
                 }
                 else {
                     newPic = document.createElement("i");

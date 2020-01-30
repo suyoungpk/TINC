@@ -10,7 +10,7 @@ import com.tinc.web.dao.CheckListDao;
 import com.tinc.web.entity.CheckList;
 
 @Repository
-public class MyBatisCheckListDao implements CheckListDao
+public class MybatisCheckListDao implements CheckListDao
 {
 	private SqlSession sqlSession;
 	private CheckListDao mapperDao;

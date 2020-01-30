@@ -12,7 +12,7 @@ import com.tinc.web.entity.PrivateMemoList;
 
 
 @Repository
-public class MyBatisPrivateMemoListDao implements PrivateMemoListDao {
+public class MybatisPrivateMemoListDao implements PrivateMemoListDao {
 	private SqlSession sqlSession;
 	private PrivateMemoListDao mapperDao;
 	

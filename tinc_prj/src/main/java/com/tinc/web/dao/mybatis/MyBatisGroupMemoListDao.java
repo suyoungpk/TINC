@@ -10,7 +10,7 @@ import com.tinc.web.dao.GroupMemoListDao;
 import com.tinc.web.entity.GroupMemoList;
 
 @Repository
-public class MyBatisGroupMemoListDao implements GroupMemoListDao{
+public class MybatisGroupMemoListDao implements GroupMemoListDao{
 	
 	private SqlSession sqlSession;
 	private GroupMemoListDao mapperDao;

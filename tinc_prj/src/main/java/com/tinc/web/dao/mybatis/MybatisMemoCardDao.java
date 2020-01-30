@@ -10,7 +10,7 @@ import com.tinc.web.dao.MemoCardDao;
 import com.tinc.web.entity.MemoCard;
 
 @Repository
-public class MyBatisMemoCardDao implements MemoCardDao{
+public class MybatisMemoCardDao implements MemoCardDao{
 	
 	SqlSession sqlSession;
 	MemoCardDao mapperDao;

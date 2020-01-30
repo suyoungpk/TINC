@@ -10,7 +10,7 @@ import com.tinc.web.dao.FriendsShareFullViewDao;
 import com.tinc.web.entity.FriendsShareFullView;
 
 @Repository
-public class MyBatisFriendsShareFullViewDao implements FriendsShareFullViewDao
+public class MybatisFriendsShareFullViewDao implements FriendsShareFullViewDao
 {
 	private SqlSession sqlSession;
 	private FriendsShareFullViewDao mapperDao;

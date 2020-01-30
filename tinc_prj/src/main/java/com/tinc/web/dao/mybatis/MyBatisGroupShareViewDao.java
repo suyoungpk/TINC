@@ -10,7 +10,7 @@ import com.tinc.web.dao.GroupShareViewDao;
 import com.tinc.web.entity.GroupShareView;
 
 @Repository
-public class MyBatisGroupShareViewDao implements GroupShareViewDao
+public class MybatisGroupShareViewDao implements GroupShareViewDao
 {
 	
 	private SqlSession sqlSession;
