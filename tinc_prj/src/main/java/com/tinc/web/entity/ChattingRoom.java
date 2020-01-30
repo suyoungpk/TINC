@@ -8,7 +8,19 @@ public class ChattingRoom {
 	private String authority;
 	private String notice;
 	private String meg;
+	private boolean status;
 	
+	public ChattingRoom(int id, String memberId, String title, boolean owner, String authority, String notice,
+			String meg, boolean status) {
+		this.id = id;
+		this.memberId = memberId;
+		this.title = title;
+		this.owner = owner;
+		this.authority = authority;
+		this.notice = notice;
+		this.meg = meg;
+		this.status = status;
+	}
 	public ChattingRoom(String memberId, String title) {// for create room by owner
 		this.memberId = memberId;
 		this.title = title;
@@ -29,6 +41,13 @@ public class ChattingRoom {
 		this.authority = authority;
 		this.notice = notice;
 		this.meg = meg;
+	}
+	
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	public int getId() {
 		return id;

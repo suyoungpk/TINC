@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
     <div class="topBox">
        <div class="left">
           <button class="btn-back fas fa-chevron-left" onclick="exeChat.getInviteMenu(false)">뒤로가기</button>
@@ -23,4 +21,7 @@
     <ul class="chatList add"></ul>
     
     </form>
+  <script>
+   let pageMode="invite";
+  </script>
   <script src="/resource/js/chatting/chatInvite.js?version=1"></script>

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.tinc.web.dao.ChattingRoomDao">
  <select id="get" resultType="com.tinc.web.entity.ChattingRoom">
- 	SELECT * FROM ChattingRoom WHERE memberId = #{memberId}
+ 	SELECT * FROM ChattingRoom WHERE memberId = #{memberId} ORDER BY `status`= false desc, id desc
  </select>
  <select id="getChattingRoomId" resultType="int"> <!-- for createRoom -->
  	SELECT id FROM ChattingRoom WHERE memberId=#{memberId} AND owner=1 ORDER BY id DESC limit 1
@@ -31,7 +31,10 @@
  	UPDATE ChattingRoom SET title=#{title},owner=#{owner},authority=#{authority} WHERE memberId=#{memberId} and id=#{id}
  </update>
  <update id="updateLast">
- 	UPDATE ChattingRoom SET meg=#{meg} WHERE memberId=#{memberId} and id=#{id}
+ 	UPDATE ChattingRoom SET meg=#{meg}, `status`=false WHERE memberId=#{memberId} and id=#{id}
+ </update>
+ <update id="updateStatus">
+ 	UPDATE ChattingRoom SET `status`=true WHERE memberId=#{memberId} and id=#{id}
  </update>
  <delete id="delete" >
  	DELETE FROM ChattingRoom WHERE memberId=#{memberId} AND id=#{id}

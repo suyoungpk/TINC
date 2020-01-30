@@ -22,4 +22,5 @@ public interface ChattingRoomDao
 	int delete(@Param("id") int chatId,@Param("memberId") String memberId); // 채팅방 나가기 
 	int update(ChattingRoom chatroom);//권한 위임,방제 수정
 	int updateLast(@Param("id") int chatId, @Param("memberId") String memberId, @Param("meg") String meg);// 마지막 채팅 저장
+	int updateStatus(@Param("id") int chatId, @Param("memberId") String memberId);// 채팅 읽음 표시
 }

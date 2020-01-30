@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
    <head>
@@ -53,11 +52,15 @@
       </section>
       <!-- wrapper end -->
       <div class="mask"></div>
+      <script>
+       let pageMode="addChat";
+      </script>
       <script src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-  <script src="/resource/js/chatting/uiUtil.js"></script>	
-  <script>
+  <script src="/resource/js/chatting/uiUtil.js?version=1"></script>
+  <script src="/resource/js/chatting/chatInvite.js?version=1"></script>
+  <!-- <script>
    var selectedList = new Set();
    	$(function(){   		
    		initData();
@@ -114,7 +117,7 @@
   	}
   	
 	function initData(){
-		$.getJSON("/resource/data.json", function( data ) {
+		$.getJSON("./searchFriend", function( data ) {
    			if(!parseData(data)){
 	   		 	var nolist = '<li class="nolist">채팅할 친구가 없습니다.<br />친구를 추가해주세요</li>';
 			 	$(".chatList").html(nolist);
@@ -156,6 +159,6 @@
 	}
 	 	return true;
 	}
-   </script>
+   </script> -->
    </body>
 </html>

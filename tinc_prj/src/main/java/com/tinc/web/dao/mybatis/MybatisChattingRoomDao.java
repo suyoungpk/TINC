@@ -72,10 +72,17 @@ public class MybatisChattingRoomDao implements ChattingRoomDao{
 	public int updateLast(int chatId, String memberId, String meg) {
 		return mapperDao.updateLast(chatId,memberId,meg);
 	}
-
+	
+	@Override
+	public int updateStatus(int chatId, String memberId) {
+		return mapperDao.updateStatus(chatId,memberId);
+	}
+	
 	@Override
 	public List<Integer> getPersonalRooms() {
 		return mapperDao.getPersonalRooms();
 	}
+
+	
 
 }

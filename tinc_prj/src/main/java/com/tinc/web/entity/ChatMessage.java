@@ -14,7 +14,14 @@ public class ChatMessage {
 	String sharefile; // 공유된 파일 경로
 	String date; // 기록된 날자
 	String time; // 시간 
+	String title; // 메모 타이틀
 	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public String getFileName() {
 		return fileName;
 	}

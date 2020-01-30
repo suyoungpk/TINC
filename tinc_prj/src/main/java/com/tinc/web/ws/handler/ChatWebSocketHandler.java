@@ -57,7 +57,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler
 		JSONObject data = (JSONObject) obj;		
 			data.put("date",time1);
 			data.put("time",time2);
-		System.out.println(data);
+		//System.out.println(data);
 		ChatMessage chatMessage = objectMapper.readValue(data.toJSONString(), ChatMessage.class);
 		int roomId=chatMessage.getChatId();
 		//System.out.println(roomId);

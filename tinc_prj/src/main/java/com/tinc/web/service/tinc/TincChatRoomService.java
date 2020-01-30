@@ -38,7 +38,7 @@ public class TincChatRoomService {
     }
     public static <T> void sendMessage(int roomId, T message) {
         try {
-        	System.out.println("service 여기까진 되나");
+        	//System.out.println("service 여기까진 되나");
         	List<WebSocketSession> rooms = getChatRoomById(roomId);
     		for (WebSocketSession s:rooms) //objectMapper.writeValueAsString(message)
     			s.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));

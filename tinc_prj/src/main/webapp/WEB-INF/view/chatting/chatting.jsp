@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
-	<link rel="stylesheet" href="../../../resource/css/chatting/chat.css" >
+	<link rel="stylesheet" href="../../../resource/css/chatting/chat.css?version=1" >
 	<section class="wrapper"> 
 		<nav class="gnb"> 
 			<a href="#" title="메모장 이동" class="memo">MEMO</a>
@@ -33,90 +33,7 @@
 			</div>
 			<!-- chat-->			
 			<div class="chattingBox">
-				<ul class="chatting">
-					<!-- <li class="member">
-						<figure>
-							<img src="http://placehold.it/100x100" alt="">
-						</figure>
-						<div class="megBox">
-							<div class="name">Jessica</div>
-							<ul>
-								<li>
-									<div class="message">
-										안녕
-										<span class="date">13:50</span>							
-									</div>
-								</li>
-							</ul>
-							
-						</div>
-					</li>
-					<li class="info"><div>2019년 12월 12일</div></li>
-					<li class="info"><div><i class="fas fa-user-plus"></i> 회원님이 은선띠님을 초대했습니다</div></li>
-					<li class="me">
-						<div class="megBox">
-							<ul>
-								<li>
-									<div class="message">
-										ㅎㅇ
-										<span class="date">14:50</span>
-									</div>
-								</li>
-							</ul>							
-						</div>
-					</li>
-					<li class="member">
-						<figure>
-							<img src="http://placehold.it/100x100" alt="">
-						</figure>
-						<div class="megBox">
-							<div class="name">Jessica</div>
-							<ul>
-								<li>
-									<div class="message imgBox">
-										<img src="https://cafeptthumb-phinf.pstatic.net/20151221_149/ry2225_1450659220988LylbB_JPEG/51.jpg?type=w740" alt="">
-										<span class="date">13:50</span>							
-									</div>
-								</li>
-							</ul>							
-						</div>
-						<div class="btnBox">
-							<button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button>	
-						</div>
-					</li>
-					<li class="member">
-						<figure>
-							<img src="http://placehold.it/100x100" alt="">
-						</figure>
-						<div class="megBox">
-							<div class="name">Jessica</div>
-							<ul>
-								<li>
-									<div class="message">
-										별에도 봄이 패 그리워 사람들의 내 이름과, 계십니다. 별빛이 언덕 가득 가을로 계집애들의 내 까닭입니다 계 절이 소학교 차 노루, 듯합니다. 별이 멀듯이, 별 경, 지나가는 별 나는 무성 할 봅니다. 벌써 소녀들의 아무 하나 에 무덤 까닭입니다. 새겨지는 마리 아 별을 멀듯이, 밤이 이웃 있습니다. 사랑과 오면 불러 시와 지나가는 어머 니 노루, 봅니다. 흙으로 내일 않은 나 는...
-										<button class="btn-all">전체보기<span>&rsaquo;</span></button>
-										<span class="date">13:50</span>							
-									</div>									
-								</li>
-							</ul>							
-						</div>
-						<div class="btnBox">
-							<button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button>	
-						</div>
-					</li>
-					<li class="me">
-						<div class="megBox">
-							<ul>
-								<li>
-									<div class="message">
-										ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
-										<span class="date">14:50</span>
-									</div>
-								</li>
-							</ul>							
-						</div>
-					</li> -->
-				</ul>
+				<ul class="chatting"></ul>
 				<div class="popup alert popup-title">
 		         <div class="popup-wrap alert">
 		            <button type="button" class="btn-close fas fa-times"></button>
@@ -128,6 +45,34 @@
 		            </div>
 		         </div>
 		      </div>
+		      <!-- share 팝업 -->
+			  <div class="popup pop-share" id="pop-share-chat">
+					<nav>
+						<h1 class="hidden">채팅창 선택하기</h1>
+						<div class="topBox">
+							<div class="left"></div>
+							<div class="right">
+								<button type="button" class="btn-close fas fa-times" onclick="popupClose()">닫기</button>
+							</div>
+						</div>
+						<ul></ul>
+					</nav>
+				</div>
+				<div class="popup pop-share memo" id="pop-share-memo">
+					<nav>
+						<h1 class="hidden">메모 선택하기</h1>
+						<div class="topBox">
+							<div class="left">
+								<button type="button" class="btn-back fas fa-chevron-left" onclick="exeChat.getChatList(1)">뒤로가기</button>
+							</div>
+							<div class="right">
+								<button type="button" class="btn-close fas fa-times" onclick="popupClose()">닫기</button>
+							</div>
+						</div>
+						<ul></ul>
+					</nav>
+				</div>
+				<!-- <div class="mask2" id="innerMask"></div> -->
 				<div class="chatInput">
 					<button class="btn-top"><i class="fas fa-arrow-up">TOP</i></button>
 					<form action="">
@@ -159,7 +104,7 @@
 							 </form>							
 						</li>
 						<li>
-							<a href="">
+							<a href="#" onclick="exeChat.getChatList(1);">
 								<span><i class="far fa-file-alt"></i></span>
 								메모공유
 							</a>						
@@ -238,9 +183,9 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-   <script src="/resource/js/chatting/uiUtil.js"></script>
+   <script src="/resource/js/chatting/uiUtil.js?version=1"></script>
    <script src="/resource/js/chatting/chat.js?version=1"></script>
-   <script src="/resource/js/chatting/UploadFiles.js"></script>
+   <script src="/resource/js/chatting/UploadFiles.js?version=1"></script>
 <script>
 	let socket = null;
 	$(function(){
@@ -258,12 +203,9 @@
 			//console.log(e.data);
 			var obj = JSON.parse(e.data);
 			chatParser.parseData(obj);
+			$(".chattingBox .chatting").animate({scrollTop:$(".chattingBox .chatting")[0].scrollHeight},400);
 			exeChat.saveChat(e.data);
 		};
-	/* 	$(".memo").click(function(){
-			socket.send(exeChat.imgMeg("http://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/mt/2020/01/22/2020012209264741528_1.jpg"));
-			socket.send(exeChat.fileMeg("http://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/mt/2020/01/22/2020012209264741528_1.jpg"));
-		}); */
 		$("#send-meg").click(function(){
  			socket.send(exeChat.textMeg());
  			$("#sendChat").val("");
@@ -285,7 +227,6 @@
   		$(".topBox .btn-bar").click(function(){
   			exeChat.getMenu();
    		});
-  		
   		// upload
   		let fileLink, fileExtension;
 
@@ -296,9 +237,6 @@
         	//alert("changed");
         	fileUpload();
         });
-        function fileChange() {
-          fileUpload();
-        }
         function fileUpload(e) {
           let file = $("#chattingFile")[0].files[0];
           let form = $("#chattingFileForm")[0];
@@ -319,7 +257,6 @@
             }
           });
         }
-        
 	});
 	function completeFileUpload(type,name,url){
     	  switch(type){
@@ -333,6 +270,30 @@
   			var orgData = e.parentNode.dataset.content;
   			$("#megDetail .context").html(orgData);
   			popupOpen('#megDetail');
+	}
+	function invite(members){
+		for(var i=0;i<members.length;i++)
+			socket.send(exeChat.inviteMeg(members[i].nickName));
+	}
+	function shareToChat(data,id){
+		var data_  = JSON.parse(data);	
+		/*console.log(data_);
+		console.log("going to "+id);*/
+		 switch (data_.type) {
+		case "memo":
+			//console.log(exeChat.memoMeg(data_,id));
+			socket.send(exeChat.memoMeg(data_,id));
+			break;
+		case "img":
+			//console.log(exeChat.imgMeg(data_.fileName,data_.sharefile,id));
+			socket.send(exeChat.imgMeg(data_.fileName,data_.sharefile,id));
+			break;
+		case "file":
+			//console.log(exeChat.fileMeg(data_.fileName,data_.sharefile,id));
+			socket.send(exeChat.fileMeg(data_.fileName,data_.sharefile,id));
+			break;
+		} 
+		popupClose();
 	}
 	function exit(type){
 			switch (type) {

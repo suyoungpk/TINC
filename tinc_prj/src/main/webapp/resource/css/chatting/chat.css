@@ -35,6 +35,19 @@
 .chatList > li ul li.title{font-size:0.9375rem;color:#000}
 .chatList .nolist{position:absolute;width:100%;top:50%;left:0;color:#000;font-size:0.9375rem;text-align:center;padding:0;margin-top:-2.109375rem;}
 
+.chatList .ico_new{
+    display: inline-block;
+    font-size: .5rem;
+    background: #f00;
+    border-radius: 50%;
+    height: 1rem;
+    width: 1rem;
+    text-align: center;
+    color: #fff;
+    line-height: 1rem;
+    font-weight: bold;
+    vertical-align: middle;
+}
 .chattingBox {padding:3.6rem 0.8125rem 2.821875rem}
 .chattingBox .chatting{height:100%;overflow-y:auto}
 .chattingBox .chatting > li{display:flex;flex-direction:row;margin-top:1.171875rem;width:100%;}
@@ -92,12 +105,12 @@
 .chattingBox  .sendMenu li span{display:block;width:100%;height:2.8125rem;border-radius:1.40625rem;overflow:hidden;background:#ebeafd;text-align:center;line-height:2.8125rem}
 .chattingBox  .sendMenu li span i{font-size:1.28125rem;color:#818181;vertical-align: middle;}
 
-.chattingBox .mask{position:absolute}
+.chattingBox .mask2{position:absolute;z-index:0}
 
 .chatList.add li label {position:relative;cursor:pointer}
-.chatList.add li label input[type=checkbox]{display:none;position:absolute;top:0;left:0}
-              	
-.pop-share nav{margin-top:3.16rem}
+.chatList.add li label input[type=checkbox]{display:none;position:absolute;top:0;left:0}      	
+/* .pop-share.popup{top:3.16rem;height:100%;} */
+/* .pop-share nav{margin-top:3.16rem} */
 .pop-share nav .topBox{position: relative;top:0;background:none;overflow:hidden;justify-content:space-around;}
 .pop-share nav .topBox > *{width:50%}
 .pop-share nav .topBox .btn-close{font-size:1rem}

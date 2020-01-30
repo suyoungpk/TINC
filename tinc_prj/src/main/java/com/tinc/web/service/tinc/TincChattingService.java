@@ -62,6 +62,7 @@ public class TincChattingService implements ChattingService{
 		}
 		return chattingRoomDao.delete(chatId, memberId);
 	}
+	
 	@Override
 	public int rejectandexit(int chatId, String memberId) {// 채팅방 거부후 나가기
 		int ret = chattingRoomDao.delete(chatId, memberId);
@@ -70,6 +71,7 @@ public class TincChattingService implements ChattingService{
 		//System.out.println(ret1);
 		return 1;
 	}
+	
 	@Override
 	public void delAuth(int chatId, String memberId) { // 방장 위임
 		ChattingRoom chatRoomOwner = chattingRoomDao.getByOwner(chatId); // 방장정보
@@ -81,32 +83,43 @@ public class TincChattingService implements ChattingService{
 			chattingRoomDao.update(chatRoomMember);
 		}
 	}
+	
 	@Override
 	public int addInviteAuth(int chatId, String memberId) {
 		ChattingRoom chatRoom = chattingRoomDao.getByMember(chatId,memberId); // 위임할 멤버 정보
 		chatRoom.setAuthority("초대");
 		return chattingRoomDao.update(chatRoom);
 	}
+	
 	@Override
 	public int delInviteAuth(int chatId, String memberId) {
 		ChattingRoom chatRoom = chattingRoomDao.getByMember(chatId,memberId); // 수정할 멤버 정보
 		chatRoom.setAuthority(null);
 		return chattingRoomDao.update(chatRoom);
 	}
+	
 	@Override
 	public int chgTitle(int chatId, String memberId, String title) {
 		ChattingRoom chatRoom = chattingRoomDao.getByMember(chatId,memberId); // 멤버 채팅방 정보
 		chatRoom.setTitle(title);
 		return chattingRoomDao.update(chatRoom);
 	}
+	
 	@Override
 	public int getChattingRoomId(String ownerId) {
 		return chattingRoomDao.getChattingRoomId(ownerId);
 	}
+	
 	@Override
 	public int saveLast(int chatId, String memberId, String meg) {
 		return chattingRoomDao.updateLast(chatId,memberId,meg);
 	}
+	
+	@Override
+	public int chgStatus(int chatId, String memberId) {
+		return chattingRoomDao.updateStatus(chatId, memberId);
+	}
+	
 	@Override
 	public int isDuplicatedRoom(String userId, String memberId) {
 		List<Integer> roomList = chattingRoomDao.getPersonalRooms();
@@ -123,6 +136,7 @@ public class TincChattingService implements ChattingService{
 		}
 		return 0;
 	}
+	
 	@Override
 	public boolean isRejectList(int chatId, String memberId) { // 거부한 이력조회
 		return chattingRoomOptionDao.isonList(chatId, memberId);
@@ -133,5 +147,4 @@ public class TincChattingService implements ChattingService{
 		return chattingRoomOptionDao.insert(chatId, memberId);
 	}
 
-	
 }

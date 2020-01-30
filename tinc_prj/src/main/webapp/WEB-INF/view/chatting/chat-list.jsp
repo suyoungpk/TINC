@@ -9,8 +9,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
-	<link rel="stylesheet" type="text/css" href="/resource/css/chatting/chat.css" >
-	<link rel="stylesheet" type="text/css" href="/resource/css/bottomButton.css" >
+	<link rel="stylesheet" type="text/css" href="/resource/css/chatting/chat.css?vvvv" >
+	<link rel="stylesheet" type="text/css" href="/resource/css/bottomButton.css?vvvv" >
 	<section class="wrapper"> 
 		<nav class="gnb"> 
 			<a href="#" title="메모장 이동">MEMO</a>
@@ -51,7 +51,11 @@
 									</c:if>
 								</figure>								
 								<ul>
-									<li class="title">${list.title}</li>
+									<li class="title">${list.title}
+											<c:if test="${list.status eq false}">
+												<span class="ico_new">N</span>
+											</c:if>
+									</li>
 									<li>
 										<c:if test="${empty list.meg}">
 											메시지가 없습니다.

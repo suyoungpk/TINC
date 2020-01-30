@@ -4,7 +4,8 @@ let exeChat = {
 		memberId:"",
 		memberNick:"",
 		memberImg:"",
-		isOwner:false
+		isOwner:false,
+		data:{}
 };
 
 exeChat= {
@@ -17,7 +18,9 @@ exeChat= {
 		this.isOwner = JSON.parse(owner.toLowerCase());
 		//console.log(this.isOwner);
 	},
-
+	setData(){
+		this.data=chatParser.data;
+	},
 	getDataUrl(index){
 		let url = [
 				"/get", // 0 채팅 가져오기
@@ -35,7 +38,12 @@ exeChat= {
 				"/withdrawinviteright", //12 초대권한박탈
 				"/giveinviteright",// 13 초대권한부여
 				"/delauth", // 14 방장위임
-				"/invite" // 15 초대하기
+				"/inviteMenu", // 15 초대하기
+				"/chatlist", //16  방리스트 가져오기
+				"/memolist", //17 메모리스트 
+				"/searchFriend", //18 친구목록 가져오기 
+				"/invite", // 19 초대하기
+				"/shareMemotochat" // 20  메모채팅방에 공유하기
 				];
 		return this.chatId+url[index];
 	},
@@ -149,6 +157,7 @@ exeChat= {
 		} 
 		else $("#setting.clone").animate({width:"0",opacity:0},500).delay(1000).remove();
 	},
+	
 	rename(){
 		$.post(this.getDataUrl(5),{title:$("#chatTitle").val()});
 		openAlert("방제가 변경되었습니다.");
@@ -269,8 +278,67 @@ exeChat= {
   		openAlert("방장권한이 위임 되었습니다.");
 		location.href=location.href;
 	},
-	invite(){
+	invite(members){
+		$.post(this.getDataUrl(19),{memberIds:members},function(data){
+			//alert(data);
+			invite(data);
+		},'json');
+		this.getInviteMenu(false);
+		closeAside();
+		openAlert("초대되었습니다.");
+	},
+	getChatList(type,meg){
+		//alert(meg);
+		$.getJSON(this.getDataUrl(16),function(data){
+			$("#pop-share-chat ul").html("");
+			if(data.length<1)
+				$("#pop-share-chat ul").append('<li><a href="#" onclick="popupClose()">채팅방이 없습니다.</a></li>');
+			else{
+				for ( var i =0;i<data.length;i++)
+					$("#pop-share-chat ul").append(`<li>
+						<a href="#" onclick="exeChat.share(${type},${data[i].id},$(this).find('.data').val())">
+							<input type="hidden" class="data" value='${meg}'>
+							${data[i].title}
+						</a>
+						</li>`);
+			}
+		});
+		popupClose();
+		popupOpen("#pop-share-chat");
+		var winheg = $(window).height()-100;
+		$("#pop-share-chat nav ul").css({height:winheg,"overflow-y":"auto"});
+			
+	},
+	getMemoList(id){
+		$.post(this.getDataUrl(17),{memo:id},function(data){
+			$("#pop-share-memo ul").html("");
+			if(data.length<1)
+				$("#pop-share-memo ul").append('<li><a href="#" onclick="popupClose()">메모가 없습니다.</a></li>');
+			else{
+				for ( var i =0;i<data.length;i++)
+					$("#pop-share-memo ul").append(`<li><a href="#" onclick="shareToChat($(this).find('.data').val())"><input type="hidden" class="data" value='${JSON.stringify(data[i])}'>${data[i].title}</a></li>`);
+			}
+		},'json')
+			.done(function() {
+				popupOpen("#pop-share-memo");
+		  })
+		  	.fail(function() {
+		    alert( "error" );
+		  }); 
 		
+  		//openAlert("방장권한이 위임 되었습니다.");
+	},
+	share(type,id,data){
+		switch(type){
+			case 0: // 파일,메모 다른 채팅창에 보내기
+				popupClose();
+				shareToChat(data,id);
+				break; 
+			case 1:  // 내 메모 현재 채팅방에 공유하기
+				popupClose();
+				this.getMemoList(id);
+				break; 
+		};
 	},
 	textMeg(){
 		var byteChk = function(obj){
@@ -349,10 +417,10 @@ exeChat= {
   		
   		return JSON.stringify(message);  		
   	},
-	imgMeg(name,url){
+	imgMeg(name,url,receivedId){
   		let message ={
   				type:"img",
-  		  		chatId:this.chatId, // 채팅방 번호
+  		  		chatId:receivedId || this.chatId, // 채팅방 번호
   		  		memberId:this.memberId, // 보낸 아이디
   		  		nickName:this.memberNick, // 보낸 사람 닉네임
   		  		profileImg:this.memberImg,  // 보낸사람 프로필사진
@@ -366,10 +434,10 @@ exeChat= {
   		
   		return JSON.stringify(message);  		
   	},
-	fileMeg(name,url){
+	fileMeg(name,url,receivedId){
   		let message ={
   				type:"file",
-  		  		chatId:this.chatId, // 채팅방 번호
+  		  		chatId:receivedId || this.chatId, // 채팅방 번호
   		  		memberId:this.memberId, // 보낸 아이디
   		  		nickName:this.memberNick, // 보낸 사람 닉네임
   		  		profileImg:this.memberImg,  // 보낸사람 프로필사진
@@ -382,10 +450,47 @@ exeChat= {
   		};
   		
   		return JSON.stringify(message);  		
+  	},
+	inviteMeg(invitedNickName){
+  		let message ={
+  				type:"invited",
+  		  		chatId:this.chatId, // 채팅방 번호
+  		  		memberId:this.memberId, // 보낸 아이디
+  		  		nickName:this.memberNick, // 보낸 사람 닉네임
+  		  		profileImg:this.memberImg,  // 보낸사람 프로필사진
+  		  		invitedId :invitedNickName, // 초대된 아이디  
+  		  		exitId :"", // 방 나간 아이디 
+  		  		content:"", // 텍스트, 메모
+  		  		contentMode : "", // 텍스트 길 경우 
+  		  		fileName:"",
+  		  		sharefile:"" // 공유된 파일 경로
+  		};
+  		
+  		return JSON.stringify(message);  		
+  	},
+	memoMeg(data,receivedId){
+  		let message ={
+  				type:"memo",
+  		  		chatId:receivedId || this.chatId, // 채팅방 번호
+  		  		memberId:this.memberId, // 보낸 아이디
+  		  		nickName:this.memberNick, // 보낸 사람 닉네임
+  		  		profileImg:this.memberImg,  // 보낸사람 프로필사진
+  		  		invitedId :"", // 초대된 아이디  
+  		  		exitId :"", // 방 나간 아이디
+  		  		title:data.title, 
+  		  		content:data.content, // 텍스트, 메모
+  		  		contentMode : "", // 텍스트 길 경우 
+  		  		fileName:"",
+  		  		sharefile:"" // 공유된 파일 경로
+  		};
+  		
+  		return JSON.stringify(message);  		
   	}
 };
-let chatParser = {
-	parseData(data,scroll){
+let chatParser = {data:{}};
+chatParser = {
+	parseData(data){
+		this.data = data;
 		let type = data.type;// no null 초대, 나가기, 강퇴, text, 이미지, 기타파일, 메모
 		let chatId = data.chatId; // no null 채팅방 번호
 		let memberId = data.memberId;  // no null 보낸 아이디
@@ -393,6 +498,7 @@ let chatParser = {
 		let profileImg = data.profileImg || "";  // 보낸사람 프로필사진
 		let invitedId = data.invitedId || "";  // 초대된 아이디  
 		let exitId = data.exitId || ""; // 방 나간 아이디 
+		let title = data.title || ""; // 텍스트, 메모
 		let content = data.content || ""; // 텍스트, 메모
 		let contentMode = data.contentMode || ""; // 텍스트 길 경우 
 		let fileName = data.fileName || "";
@@ -409,12 +515,11 @@ let chatParser = {
 				html='<li class="info"><div>'+nickName+'회원님이 강퇴당하셨습니다.</div></li>';
 				break;
 			case "invited": 
-				html='<li class="info"><div><i class="fas fa-user-plus"></i>'+memberId+'회원님이 '+invitedId+'님을 초대했습니다</div></li>';
+				html='<li class="info"><div><i class="fas fa-user-plus"></i> '+memberId+'회원님이 '+invitedId+'님을 초대했습니다</div></li>';
 				break;
 			case "text": 
-				let img = "";
+				var img = '<img src="'+profileImg+'" alt="">';
 	    		if(profileImg == "") img = '<i class="fas fa-user"></i>';
-	    		else img = '<img src="'+profileImg+'" alt="">';
 	    		//console.log(cutByByte(content,360));
 	    		var cuttedContent;
 	    		if(contentMode=="cut")
@@ -446,33 +551,180 @@ let chatParser = {
 	    		}
 	    		break;
 			case "memo": 
-				
+				var img = '<img src="'+profileImg+'" alt="">';
+	    		if(profileImg == "") img = '<i class="fas fa-user"></i>';
+	    		
+	    		//console.log(cutByByte(content,360));
+	    		var cuttedContent;
+	    		if(contentMode=="cut")
+	    			cuttedContent = cutByByte(content,360)+"...";
+	    		
+	    		if(memberId == exeChat.memberId)
+	        		if(contentMode=="cut")
+	        			html =`<li class="me">
+		        					<div class="btnBox">
+		        						<input type="hidden" class="data" value='${JSON.stringify(data)}'>
+		        						<button type="button" class="btn-share" onclick="exeChat.getChatList(0,$(this).siblings('.data').val());">
+		        						<i class="fas fa-external-link-alt">공유하기</i></button>
+		        					</div>
+		        					<div class="megBox">
+		        						<ul>
+		        							<li>
+		        								<div class="message"  data-content="${content}">
+		        									<p><strong>${title}</strong></p>
+		        									${cuttedContent}
+			    									<button type="button" class="btn-all" onclick="viewAll(this)"><span>&lsaquo;</span>전체보기</button>
+			    									<span class="date">${time}</span>
+			    								</div>
+			    							</li>
+			    						</ul>
+			    					</div>
+			    				</li>`;
+	        		else
+	        			html =`<li class="me">
+		        					<div class="btnBox">
+		        						<input type="hidden" class="data" value='${JSON.stringify(data)}'>
+		        						<button type="button" class="btn-share" onclick="exeChat.getChatList(0,$(this).siblings('.data').val());">
+		        						<i class="fas fa-external-link-alt">공유하기</i></button>
+		        					</div>
+		        					<div class="megBox">
+		        						<ul>
+		        							<li>
+		        							<div class="message">
+		        								<p><strong>${title}</strong></p>
+		        								${content}
+			    								<span class="date">${time}</span>
+			    							</div>
+			    							</li>
+			    						</ul>
+			    					</div>
+			    				</li>`;
+	    		else
+	    			if(contentMode=="cut")
+	    				html =`<li class="member">
+		    					<figure>${img}</figure>
+		    					<div class="megBox">
+		    						<div class="name">${nickName}</div>
+		    						<ul>
+		    							<li>
+		    								<div class="message" data-content="${content}">
+		    									<p><strong>${title}</strong></p>
+		    									${cuttedContent}			
+			    								<button type="button" class="btn-all" onclick="viewAll(this)">전체보기<span>&rsaquo;</span></button>
+			    								<span class="date">'+time+'</span>
+			    							</div>
+			    						</li>
+			    					</ul>
+			    				</div>
+			    				<div class="btnBox">
+			    					<input type="hidden" class="data" value='${JSON.stringify(data)}'>
+			    					<button type="button" class="btn-share" onclick="exeChat.getChatList(0,$(this).siblings('.data').val());">
+			    					<i class="fas fa-external-link-alt">공유하기</i></button>
+			    				</div>
+	    					</li>`;
+	    			else
+    					html =`<li class="member">
+		    						<figure>${img}</figure>
+		    						<div class="megBox">
+		    							<div class="name">${nickName}</div>
+		    							<ul>
+		    								<li>
+		    									<div class="message">
+		    										<p><strong>${title}</strong></p>${content}
+		    										<span class="date">${time}</span>
+		    									</div>
+		    								</li>
+		    							</ul>
+		    						</div>
+		    						<div class="btnBox">
+		    							<input type="hidden" class="data" value='${JSON.stringify(data)}'>
+		    							<button type="button" class="btn-share" onclick="exeChat.getChatList(0,$(this).siblings('.data').val());">
+		    							<i class="fas fa-external-link-alt">공유하기</i></button>
+		    						</div>
+		    					</li>`;
+	    		
 				break;
 			case "img": 
-				if(memberId == exeChat.memberId){
-					html ='<li class="me"><div class="btnBox"><button class="btn-share" onclick=""><i class="fas fa-external-link-alt">공유하기</i></button></div><div class="megBox"><ul><li><div class="message imgBox"><a href="'+
-						sharefile+'" download><img src="'
-	        			+sharefile+
-	    				'"></a><span class="date">'+time+'</span></div></li></ul></div></li>';
-	    		} else{
-	    			
-	    			html ='<li class="member"><figure>'+img+'</figure><div class="megBox"><div class="name">'
-	    			+nickName+
-	    			'</div><ul><li><div class="message imgBox"><a href="'+sharefile+'" download><img src="'+sharefile+				
-	    						'"></a><span class="date">'+time+'</span></div></li></ul></div><div class="btnBox"><button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button></div></li>';
-	    		}
+				if(memberId == exeChat.memberId)
+					html =`<li class="me">
+							<div class="btnBox">
+								<input type="hidden" class="data" value='${JSON.stringify(data)}'>
+								<button type="button"class="btn-share" onclick="exeChat.getChatList(0,$(this).siblings('.data').val());">
+								<i class="fas fa-external-link-alt">공유하기</i></button>
+							</div>
+							<div class="megBox">
+								<ul>
+									<li>
+										<div class="message imgBox">
+											<a href="${sharefile}" download><img src="${sharefile}"></a>
+											<span class="date">${time}</span>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</li>`;
+	    		 else
+	    			html =`<li class="member">
+			    				<figure>${img}</figure>
+			    				<div class="megBox">
+			    					<div class="name">${nickName}</div>
+			    					<ul>
+			    						<li>
+			    							<div class="message imgBox">
+			    								<a href="${sharefile}" download><img src="${sharefile}"></a>
+			    								<span class="date">${time}</span>
+			    							</div>
+			    						</li>
+			    					</ul>
+			    				</div>
+			    				<div class="btnBox">
+			    					<input type="hidden" class="data" value='${JSON.stringify(data)}'>
+			    					<button type="button" class="btn-share" onclick="exeChat.getChatList(0,$(this).siblings('.data').val());">
+			    					<i class="fas fa-external-link-alt">공유하기</i></button>
+			    				</div>
+			    			</li>`;
+	    		
 				break;
 			case "file": 
-				if(memberId == exeChat.memberId){
-					html ='<li class="me"><div class="btnBox"><button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button></div><div class="megBox"><ul><li><div class="message"><a href="'+sharefile+'" download><i class="fas fa-folder-open"></i> '
-						   +fileName+'</a><span class="date">'+time+'</span></div></li></ul></div></li>';
-	    		} else{
-	    			
-	    			html ='<li class="member"><figure>'+img+'</figure><div class="megBox"><div class="name">'
-	    			+nickName+
-	    			'</div><ul><li><div class="message"><a href="'+sharefile+'" download><i class="fas fa-folder-open"></i> '+sharefile
-	    			+'</a><span class="date">'+time+'</span></div></li></ul></div><div class="btnBox"><button class="btn-share"><i class="fas fa-external-link-alt">공유하기</i></button></div></li>';
-	    		}
+				if(memberId == exeChat.memberId)
+					html =`<li class="me">
+							<div class="btnBox">
+								<input type="hidden" class="data" value='${JSON.stringify(data)}'>
+								<button type="button" class="btn-share" onclick="exeChat.getChatList(0,$(this).siblings('.data').val());">
+								<i class="fas fa-external-link-alt">공유하기</i></button>
+							</div>
+							<div class="megBox">
+								<ul>
+									<li>
+										<div class="message">
+											<a href="${sharefile}" download><i class="fas fa-folder-open"></i> ${fileName}</a>
+							   				<span class="date">${time}</span>
+							   			</div>
+							   		</li>
+							   </ul>
+							  </div>
+							</li>`;
+	    		 else
+	    			html =`<li class="member">
+		    					<figure>${img}</figure>
+		    					<div class="megBox">
+		    						<div class="name">${nickName}</div>
+		    						<ul>
+		    							<li>
+		    								<div class="message">
+		    									<a href="${sharefile}" download><i class="fas fa-download"></i> ${sharefile}</a>
+		    									<span class="date">${time}</span>
+		    								</div>
+		    							</li>
+		    						</ul>
+		    					</div>
+		    					<div class="btnBox">
+		    						<input type="hidden" class="data" value='${JSON.stringify(data)}'>
+		    						<button type="button" class="btn-share" onclick="exeChat.getChatList(0,$(this).siblings('.data').val());">
+		    							<i class="fas fa-external-link-alt">공유하기</i></button>
+		    					</div>
+		    				</li>`;
+	    		
 				break;
 			
 		}

@@ -21,6 +21,7 @@ public interface ChattingService {
 	int rejectandexit(int chatId,String memberId); // 채팅방 나가기 
 	int chgTitle(int chatId,String memberId,String title);//방제 수정
 	int saveLast(int chatId,String memberId,String meg);// 마지막 메시지 저장
+	int chgStatus(int chatId,String memberId);// 읽음 표시
 	
 	boolean isRejectList(int chatId,String memberId);// 거부 리스트 조회
 	int insertRejectList(int chatId,String memberId);// 채팅방 설정 추가(초대 거부)
