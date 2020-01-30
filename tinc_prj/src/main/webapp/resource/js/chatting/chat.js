@@ -417,7 +417,7 @@ exeChat= {
   		
   		return JSON.stringify(message);  		
   	},
-	imgMeg(name,url,receivedId){
+	imgMeg(name,url,size,receivedId){
   		let message ={
   				type:"img",
   		  		chatId:receivedId || this.chatId, // 채팅방 번호
@@ -429,12 +429,13 @@ exeChat= {
   		  		content:"", // 텍스트, 메모
   		  		contentMode : "", // 텍스트 길 경우 
   		  		fileName:name,
+  		  		fileSize:size,
   		  		sharefile:url // 공유된 파일 경로
   		};
   		
   		return JSON.stringify(message);  		
   	},
-	fileMeg(name,url,receivedId){
+	fileMeg(name,url,size,receivedId){
   		let message ={
   				type:"file",
   		  		chatId:receivedId || this.chatId, // 채팅방 번호
@@ -446,6 +447,7 @@ exeChat= {
   		  		content:"", // 텍스트, 메모
   		  		contentMode : "", // 텍스트 길 경우 
   		  		fileName:name,
+  		  		fileSize:size,
   		  		sharefile:url // 공유된 파일 경로
   		};
   		
@@ -463,6 +465,7 @@ exeChat= {
   		  		content:"", // 텍스트, 메모
   		  		contentMode : "", // 텍스트 길 경우 
   		  		fileName:"",
+  		  		fileSize:"",
   		  		sharefile:"" // 공유된 파일 경로
   		};
   		
@@ -481,6 +484,7 @@ exeChat= {
   		  		content:data.content, // 텍스트, 메모
   		  		contentMode : "", // 텍스트 길 경우 
   		  		fileName:"",
+  		  		fileSize:"",
   		  		sharefile:"" // 공유된 파일 경로
   		};
   		
@@ -506,6 +510,8 @@ chatParser = {
 		let date = data.date; //no null 기록된 날자
 		let time = data.time; //no null 시간
 		let autoscroll = scroll || true;
+		let size = data.fileSize/(1024*1024) || 0;
+		let sharefilesize = size.toFixed(2);
 		var html ='';
 		switch(type){
 			case "exit": 
@@ -697,7 +703,7 @@ chatParser = {
 								<ul>
 									<li>
 										<div class="message">
-											<a href="${sharefile}" download><i class="fas fa-folder-open"></i> ${fileName}</a>
+											<a href="${sharefile}" download><i class="fas fa-folder-open"></i> ${fileName}(${sharefilesize}MB)</a>
 							   				<span class="date">${time}</span>
 							   			</div>
 							   		</li>
@@ -712,7 +718,7 @@ chatParser = {
 		    						<ul>
 		    							<li>
 		    								<div class="message">
-		    									<a href="${sharefile}" download><i class="fas fa-download"></i> ${sharefile}</a>
+		    									<a href="${sharefile}" download><i class="fas fa-download"></i> ${sharefile}(${sharefilesize}MB)</a>
 		    									<span class="date">${time}</span>
 		    								</div>
 		    							</li>

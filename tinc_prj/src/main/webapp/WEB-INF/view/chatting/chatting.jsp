@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 </head>
 <body>
-	<link rel="stylesheet" href="../../../resource/css/chatting/chat.css?version=1" >
+	<link rel="stylesheet" href="../../../resource/css/chatting/chat.css?version=d" >
 	<section class="wrapper"> 
 		<nav class="gnb"> 
 			<a href="#" title="메모장 이동" class="memo">MEMO</a>
@@ -111,6 +111,10 @@
 						</li>
 					</ul>
 				</nav>
+				</div>
+				<div class="downProcess">
+					<p>파일 전송 중 (32%)</p>
+					<div class="bar"><span style="width:32%"></span></div>
 				</div>
 			</div>
 		</main><!-- container end -->
@@ -253,16 +257,16 @@
             type: "POST",
             success: function(data) {
               fileLink = "/resource/upload/" + data;
-              parseFileData(fileLink,fileExtension,data);
+              parseFileData(fileLink,fileExtension,data,file.size());
             }
           });
         }
 	});
-	function completeFileUpload(type,name,url){
+	function completeFileUpload(type,name,url,size){
     	  switch(type){
-    	  	case "image": socket.send(exeChat.imgMeg(name, url)); break;
+    	  	case "image": socket.send(exeChat.imgMeg(name, url,size)); break;
     	  	default : 
-    	  		socket.send(exeChat.fileMeg(name, url));
+    	  		socket.send(exeChat.fileMeg(name, url,size));
     	  		break;
     	  }
       }
@@ -286,11 +290,11 @@
 			break;
 		case "img":
 			//console.log(exeChat.imgMeg(data_.fileName,data_.sharefile,id));
-			socket.send(exeChat.imgMeg(data_.fileName,data_.sharefile,id));
+			socket.send(exeChat.imgMeg(data_.fileName,data_.sharefile,data_.fileSize,id));
 			break;
 		case "file":
 			//console.log(exeChat.fileMeg(data_.fileName,data_.sharefile,id));
-			socket.send(exeChat.fileMeg(data_.fileName,data_.sharefile,id));
+			socket.send(exeChat.fileMeg(data_.fileName,data_.sharefile,data_.fileSize,id));
 			break;
 		} 
 		popupClose();
@@ -321,12 +325,12 @@
   		}
   		exeChat.rename();				  	
    }
-   function parseFileData(fileLink,fileExtension,fileName){
+   function parseFileData(fileLink,fileExtension,fileName,fileSize){
 	   //console.log(fileLink)
        if (fileExtension == "image") {
-         socket.send(exeChat.imgMeg(fileName,fileLink));
+         socket.send(exeChat.imgMeg(fileName,fileLink,fileSize));
        } else {
-         socket.send(exeChat.fileMeg(fileName,fileLink));
+         socket.send(exeChat.fileMeg(fileName,fileLink,fileSize));
        }
        $("#chattingFile").val("");           
    }

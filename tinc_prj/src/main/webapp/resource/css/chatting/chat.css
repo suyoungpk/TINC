@@ -74,6 +74,9 @@
 .chattingBox .btn-share {display:inline-block;background:#dfdee8;border-radius:1.03125rem;width:2.0625rem;height:2.0625rem;text-align:center;vertical-align:middle;}
 .chattingBox .btn-share i{font-size:0.84375rem;color:#818181;width:0.84375rem;height:0.84375rem;line-height:100%;overflow:hidden}
 .chattingBox .chatting .megBox .message.imgBox{width:100%;/* border-radius:1.015625rem;overflow:hidden; */padding:0}
+.chattingBox .chatting .megBox .message a,
+.chattingBox .chatting .megBox .message a i{color:#818181}
+.chattingBox .chatting .megBox .message a{font-size:0.95rem}
 .chattingBox .imgBox img{display:block;width:100%;border-radius:1.015625rem}
 .chattingBox .btn-all{background:#7367f0;color:#cdcdcd;width:100%;text-align:left;font-size:0.8125rem;overflow:hidden;line-height:100%}
 .chattingBox .btn-all span{float:right;display:inline-block;font-size:2rem}

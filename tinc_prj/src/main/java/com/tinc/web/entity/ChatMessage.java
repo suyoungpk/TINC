@@ -11,11 +11,18 @@ public class ChatMessage {
 	String content; // 텍스트, 메모
 	String contentMode; // 텍스트 길 경우
 	String fileName; // 파일이름
+	String fileSize; // 파일이름
 	String sharefile; // 공유된 파일 경로
 	String date; // 기록된 날자
 	String time; // 시간 
 	String title; // 메모 타이틀
 	
+	public String getFileSize() {
+		return fileSize;
+	}
+	public void setFileSize(String fileSize) {
+		this.fileSize = fileSize;
+	}
 	public String getTitle() {
 		return title;
 	}
