@@ -81,8 +81,8 @@ public class MemoController
 	{
 
 		String mId = "";
-		//mId = principal.getName();
-		mId = "user2";
+		mId = principal.getName();
+		//mId = "user2";
 		
 		if(Integer.parseInt(crId) == 0)
 		{
@@ -448,8 +448,8 @@ public class MemoController
 	public String share(@RequestParam String mcId, Model model, Principal principal)
 	{
 		String mId = "";
-		mId = "user2";
-		//mId = principal.getName();
+		//mId = "user2";
+		mId = principal.getName();
 		
 		List<GroupShareFullView> gsfViewList = memoShareService.getGroupShareFullViewList(mId);
 		List<GroupShareMemberView> gsmViewList = memoShareService.getGroupShareMemberViewList();
@@ -465,8 +465,8 @@ public class MemoController
 	public String share(@RequestBody String shareParam, Principal principal, HttpServletRequest req)
 	{
 		String mId = "";
-		mId = "user2";
-		//mId = principal.getName();
+		//mId = "user2";
+		mId = principal.getName();
 		
 		Gson gson = new Gson();
 		Type paramMapType = new TypeToken<Map<String, Object>>() {}.getType();
@@ -556,8 +556,8 @@ public class MemoController
 	public String showPrivateShare(Principal principal)
 	{
 		String mId = "";
-		mId = "user2";
-		//mId = principal.getName();
+		//mId = "user2";
+		mId = principal.getName();
 		
 		Gson gson = new Gson();
 		
@@ -573,8 +573,8 @@ public class MemoController
 	public String showGroupShare(Principal principal)
 	{
 		String mId = "";
-		mId = "user2";
-		//mId = principal.getName();
+		//mId = "user2";
+		mId = principal.getName();
 		
 		List<GroupShareFullView> gsfViewList = 
 				memoShareService.getGroupShareFullViewList(mId);
