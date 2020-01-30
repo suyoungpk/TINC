@@ -8,12 +8,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/setting/setting.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- <script src="/resource/js/setting/setting.js"></script> -->
+<script src="/resource/js/setting/set.js"></script>
 </head>
 <body>
 	<section class="wrapper" id="setting-wrapper"> 
 		<nav class="gnb"> 
-			<a title="메모장 이동">MEMO</a>
+			<a title="메모장 이동" id="goMemo">MEMO</a>
 		</nav><!-- gnb end -->
 		<main class="container">
 
@@ -36,7 +36,7 @@
 					<button class="btn" id="logout-ok">확인</button>
 				</div>
 
-				<a class="btn-close fas fa-times">닫기</a>
+				<div class="btn-close fas fa-times">닫기</div>
 			</div><!-- popup-container -->
 		</div><!-- popup-wrap -->
 	</div><!-- popup -->

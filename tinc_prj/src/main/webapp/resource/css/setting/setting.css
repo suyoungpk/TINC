@@ -8,7 +8,6 @@
 #return {
     margin-left: 0.75rem;
     color: #b2b2b2;
-    
 }
 
 #setting-title{
@@ -19,19 +18,25 @@
     transform:translateX(-50%);
 }
 
-#myImage {
-    width: 6.875rem;
+#myProfileImage{
+	width: 6.875rem ;
     height: 6.875rem;
-    background: white /* url("/src/main/webapp/resource/images/profile.jpg") no-repeat */; 
+    background: url("/resource/images/profile.jpg") no-repeat;
     background-size: cover;
     border-radius: 50%;
     margin-top: 1.625rem;
-    margin-left: auto;
-    margin-right: auto;
     max-width: 6.875rem;
     max-height: 6.875rem;
-    top: 0; bottom: 0; left: 0; right: 0;
-    
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#myImage {
+   display:none;
 }
 
 #myId{
@@ -76,7 +81,7 @@
     text-align: left;
 }
 
-#setting-edit-email, #setting-edit-phone{
+#settingEditEmail, #settingEditPhone{
     float: right;
     text-align: right;
     vertical-align: middle;
@@ -141,11 +146,11 @@ div.open-set-checkbox{
 
 a { text-decoration:none ; color:#000000}
 
-#profile-img{
+/*---withdraw--------------------------------------*/
+#withdrawA2{
     display: none;
 }
 
-/*---withdraw--------------------------------------*/
 #withdraw-cancle, #withdraw-ok{
     margin-top : 0.625rem;
     margin-bottom: 1.188rem;
