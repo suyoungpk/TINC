@@ -10,10 +10,13 @@ $(document).ready(function() {
   // originalEvent : javascript의 이벤트
   $("body").on("drop", function(event) {
     event.preventDefault(); // 기본효과를 막음
+    var bar = $(".progress-bar");
+    var percent = $(".status");
     // 드래그된 파일의 정보
     let files = event.originalEvent.dataTransfer.files;
     // 첫번째 파일
     let file = files[0];
+
     // 콘솔에서 파일정보 확인
     fileExtension = file.type.substring(0, file.type.indexOf("/", 0));
 
@@ -24,8 +27,10 @@ $(document).ready(function() {
     // 폼 객체에 파일추가, append("변수명", 값)
     formData.append("file", file);
 
-    var bar = $(".progress-bar");
-    var percent = $(".status");
+    if (file.size > 1020 * 1020 * 100) {
+      percent.html("용량초과");
+      return;
+    }
     $.ajax({
       type: "post",
       url: "/chat/upload?id=" + id + "&memberId=" + memberId,
