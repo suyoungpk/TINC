@@ -122,58 +122,60 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           </div>
           <!-- <div class="mask2" id="innerMask"></div> -->
           <div class="chatInput">
-            <button class="btn-top"><i class="fas fa-arrow-up">TOP</i></button>
-            <form action="">
-              <button type="button" class="btn-add">
-                <i class="fas fa-plus">채팅메뉴</i>
-              </button>
-              <input type="text" class="chatInputBox" id="sendChat" />
-              <button
-                type="button"
-                id="send-meg"
-                class="btn-send fas fa-paper-plane"
-              >
-                보내기
-              </button>
-            </form>
-            <nav class="sendMenu" style="display:none">
-              <ul>
-                <li>
-                  <form
-                    action=""
-                    id="chattingFileForm"
-                    enctype="multipart/form-data"
-                    method="POST"
-                    data-id="${id}"
-                    data-member="${member.id}"
-                  >
-                    <input
-                      type="file"
-                      name="file"
-                      id="chattingFile"
-                      style="display:none"
-                    />
-                    <a href="#" id="chattingFileSend">
-                      <span><i class="far fa-folder-open"></i></span>
-                      파일전송
-                    </a>
-                  </form>
-                </li>
-                <li>
-                  <a href="#" onclick="exeChat.getChatList(1);">
-                    <span><i class="far fa-file-alt"></i></span>
-                    메모공유
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div class="downProcess">
-            <p class="status"></p>
-            <div class="bar">
-              <span class="progress-bar" style="width:0%"></span>
-            </div>
-          </div>
+          	<div>
+	        	<button class="btn-top"><i class="fas fa-arrow-up">TOP</i></button>
+	            <form action="">
+	              <button type="button" class="btn-add">
+	                <i class="fas fa-plus">채팅메뉴</i>
+	              </button>
+	              <input type="text" class="chatInputBox" id="sendChat" />
+	              <button
+	                type="button"
+	                id="send-meg"
+	                class="btn-send fas fa-paper-plane"
+	              >
+	                보내기
+	              </button>
+	            </form>
+	            <nav class="sendMenu" style="display:none">
+	              <ul>
+	                <li>
+	                  <form
+	                    action=""
+	                    id="chattingFileForm"
+	                    enctype="multipart/form-data"
+	                    method="POST"
+	                    data-id="${id}"
+	                    data-member="${member.id}"
+	                  >
+	                    <input
+	                      type="file"
+	                      name="file"
+	                      id="chattingFile"
+	                      style="display:none"
+	                    />
+	                    <a href="#" id="chattingFileSend">
+	                      <span><i class="far fa-folder-open"></i></span>
+	                      파일전송
+	                    </a>
+	                  </form>
+	                </li>
+	                <li>
+	                  <a href="#" onclick="exeChat.getChatList(1);">
+	                    <span><i class="far fa-file-alt"></i></span>
+	                    메모공유
+	                  </a>
+	                </li>
+	              </ul>
+	            </nav>
+	            <div class="downProcess">
+	            	<p class="status"></p>
+		            <div class="bar">
+		              <span class="progress-bar" style="width:0%"></span>
+		            </div>
+	          </div><!-- // downProcess -->
+          	</div>
+          </div><!-- // chatInput -->
         </div>
       </main>
       <!-- container end -->
