@@ -1,6 +1,6 @@
 $(document).ready(function(){
     $.ajax({
-        url: "/jsonTinc/friendList",
+        url: "/jsonTinc/member/friendList",
         dataType: "json",
         async: false,
         success : function(data){
@@ -74,7 +74,7 @@ $(document).ready(function(){
 
 
 	$.ajax({
-        url: "/jsonTinc/friendSetting",
+        url: "/jsonTinc/member/friendSetting",
         dataType: "json",
         async: false,
         success : function(data){
@@ -150,110 +150,105 @@ $(document).ready(function(){
 		}
 	});
 
+	$.ajax({
+        url: "/jsonTinc/setting",
+        dataType: "json",
+        async: false,
+        success : function(data){
+			console.log(data);
+			$("#content *").remove();
+			$("#content").append(
+				`<link rel="stylesheet" href="/resource/css/setting/setting.css">
+				<section class="wrapper"> 
+				<nav class="gnb"> 
+				   <a title="메모장 이동" id="goMemo">MEMO</a>
+				</nav><!-- gnb end -->
+				<main class="container">
+		  
+				   <div id="setting-head">
+					  <!-- <span class="fas fa-chevron-left" id="return"></span> -->
+					  <span id="setting-title">설정</span>
+				   </div>
+		  
+				   
+				   <!-- 프로필 이미지 -->
+				   <input type='file' accept='image/*' id='mpImg' style="display:none;">
+				   <div id="setMyImg">
+					   <img id='myProfileImage' src="/resource/images/profile.jpg">
+				   </div>
+		  
+				   
+				   <div><input id="myId" type="text" value="${data[0].nickName}"></div>
+				   <div><input id="myStatusMessage" type="text" placeholder="${data[0].statusMsg}" value=""></div>
+				   <form id="setting-edit-form">
+					  <div class="set-line">이메일
+						 <input id="settingEditEmail" type="text" placeholder="${data[0].email}" value="">
+					  </div>
+		  
+					  <div class="set-line">전화번호
+						 <input id="settingEditPhone" type="text" placeholder="${data[0].phoneNum}" value="">
+					  </div>
+		  
+					  <div>
+						 <div class="set-line" id="setting-edit-pwd">비밀번호 변경</div>
+					  </div>
+					  <div>
+						 <div class="set-line" id="setting-secession">탈퇴하기</div>
+					  </div>
+		  
+					  <div class="set-line">공개설정</div>
+						 <div class="set-line onOff-button">아이디
+							
+							<div id="idOpenCheckBox" class="open-set-checkbox"></div>
 
-	//-----addfriends----
-	function searchajax(){
-		var friendsId = 0;
-		$("#searchword").keyup(function(){
-			var words = $("#searchword").val();
-			if( words != ''){
-		   $('#add-list').html("");
-				$.ajax({
-					type: 'POST',
-					url: '${pageContext.request.contextPath}/member/addFriend',
-					data: {searchwords : words},
-					async : false,
-					success: function(result){
-					   if ( result.length > 0){
-						  console.log(result);
-						  var jsonObj = JSON.parse(result);
-						  
-						  console.log(jsonObj);
-						  console.log(jsonObj[0].id);
-						  console.log(jsonObj.length);
-						  
-						  for(key in jsonObj){
-							 var search='';
-							 search += `<div id='friend' data-id=`+jsonObj[key].id+`>
-							   <div id='box'>  
-								  <img src='../../../resource/images/5.png' alt='image1' id='profile'>
-							  </div>
-							   <div id='child-flex1'>
-								  <p id='p1'>`+jsonObj[key].id+`</p>
-								  <p id='p2'>`+jsonObj[key].nickName+`</p>
-							   </div>
-							   <div id='child-flex2'>
-								  <input type='button' id='findBtn' name="addBtn_${i}" data-id=`+jsonObj[key].id+` value='친구 추가'/>
-							   </div>
-							</div>`;
-							console.log(search);
-							 $('#add-list').append(search);
-							 if(jsonObj[key].id === undefined){
-								alert('aa');
-								$('#add-list').html("검색결과가 없습니다");
-							 } 
-							 $("input[name^='addBtn']").on('click',function(e){
-								$("input[name='friendsId']").val($(e.target).data('id'));
-								console.log($("input[name='friendsId']").val());
-								var friendsId = $("input[name='friendsId']").val();
-								 $.post("${pageContext.request.contextPath}/member/addFriend", $("input[name='friendsId']").serialize());
-								 
-								 $('#friend').remove();
-							 }); 
-							 
-						  }
-					   } else { $('#add-list').html(""); }
-					},
-					error: function(e) {console.log('error:' + e.status);}
-				});
-			} else{ $('#add-list').html(""); }
-		});
-	
-	}
-
-	$(document).ready(function(){
-		searchajax();
-		//$("#content *").remove();
-		$("#content").append(
-			`<link rel="stylesheet" href="/resource/css/member/member.css" >
-			<section class="wrapper"> 
-			<nav class="gnb"> 
-			<a href="#" title="메모장 이동">MEMO</a>
-			</nav>
-			<main class="container friend-add">
-			<form action="addFriend" method="post" id="frm">
-			<input type="hidden" name="id" value="user1"/>
-			<div class="menu">
-			<span class="left"></span>
-			<span class="center">친구 추가</span>
-			<span class="right" onclick="location.href='friendList'"><i class="fas fa-times"></i></span>
-			</div>
-			
-			<input type="hidden" name="friendsId" id="friendsId" value=""/>
-			<div class="inline" id="search">
-			<input type="text" value="" id="searchword" name="searchword" placeholder="아이디로 검색하세요"/>
-			<button type="button" class="fas fa-search"></button>
-			</div>
-			<div class="add-list" id="add-list">
-			</div> 
-			</form>
-			</main>
-			</section>`
-		);
-			
+						 </div>
+		  
+						 <div class="set-line onOff-button">전화번호
+							<div class="open-set-checkbox">
+							   <input type="checkbox" id="phoneCheckbox" class="set-checkbox" checked="${data[0].phoneNumOpen}"/>                  
+							   <label for="phoneCheckbox" class="set-check"></label>
+							</div>
+						 </div>
+		  
+						 <div class="set-line onOff-button">이메일
+							<div class="open-set-checkbox">
+							   <input type="checkbox" id="emailCheckbox" class="set-checkbox" checked="${data[0].emailOpen}"/>
+							   <label for="emailCheckbox" class="set-check"></label>
+							</div>
+						 </div>
+		  
+					  <div class="set-line">알림설정</div>
+						 <div class="set-line onOff-button">채팅방 알림
+							<div class="open-set-checkbox">
+							   <input type="checkbox" id="chattingCheckbox" class="set-checkbox" checked="${data[0].chattingAlarm}"/>
+							   <label for="chattingCheckbox" class="set-check"></label>
+							</div>   
+						 </div>
+		  
+						 <div class="set-line onOff-button">메모 알림
+							<div class="open-set-checkbox">
+							   <input type="checkbox" id="memoCheckbox" class="set-checkbox" checked="${data[0].memoAlarm}"/>
+							   <label for="memoCheckbox" class="set-check"></label>
+							</div>
+						 </div>
+						 
+					  <div id="set-logout">로그아웃</div>
+					  <div></div>
+				   </form>
+				</main>
+			 </section>`
+			)
+			if(data[0].idOpen == 0){
+				$("#idOpenCheckBox").append(
+					`<input type="checkbox" id="idCheckbox" class="set-checkbox"/>                  
+					<label for="idCheckbox" class="set-check"></label>`
+				)
+			} else if(data[0].idOpen == 1){
+				$("#idOpenCheckBox").append(
+					`<input type="checkbox" id="idCheckbox" class="set-checkbox" checked/>                  
+					<label for="idCheckbox" class="set-check"></label>`
+				)
+			}
+		}
 	});
-
-
-
-
-
-	// //----------
-	// $.ajax({
-	// 	url: "/jsonTinc/addFriend",
-	// 	dataType: "json",
-	// 	async: false,
-	// 	success : function(data){
-
-	// 	}
-	// });
 });

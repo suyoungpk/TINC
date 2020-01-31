@@ -15,7 +15,7 @@ import com.tinc.web.entity.Member;
 import com.tinc.web.service.MemberService;
 
 @Controller
-@RequestMapping("/jsonTinc/setting/")
+@RequestMapping("/jsonTinc/setting")
 public class SettingJSON {
 
 	@Autowired
