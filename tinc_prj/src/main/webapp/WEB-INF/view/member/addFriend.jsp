@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/common.css" >
 <link rel="stylesheet" href="../../../resource/css/bottomButton.css">
-<link rel="stylesheet" href="../../../resource/css/member/member.css?ss" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css?sxs" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
@@ -39,8 +39,8 @@
             </div> 
             
          <div class="bottombutton">
-            <button class="btn on">
-               <i class="fas fa-user" onclick="location.href='friendList'">친구목록</i>
+            <button type="button" class="btn on"  onclick="location.href='friendList'">
+               <i class="fas fa-user">친구목록</i>
                <!-- <i class="fas fa-user-plus">친구추가</i> -->
             </button>
             <button class="btn">

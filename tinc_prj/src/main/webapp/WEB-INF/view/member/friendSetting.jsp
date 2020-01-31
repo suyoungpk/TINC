@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/common.css" >
 <link rel="stylesheet" href="../../../resource/css/bottomButton.css">
-<link rel="stylesheet" href="../../../resource/css/member/member.css" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css?x" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
@@ -20,14 +20,15 @@
       <main class="container friend-setting">
          <form action="friendSetting" method="post">
          <div class="menu">
-         	<span class="left"><i class="fas fa-chevron-left"></i></span>
+         	<span class="left" onclick="location.href='friendList'"><i class="fas fa-chevron-left"></i></span>
             <span class="center">친구 설정</span>
             <span class="right"></span>
          </div>
          
-
+		 <div style="display: none" id="data">
          <input type="hidden" name="friendsId" value=""/>
          <input type="hidden" name="cmd" value=""/>
+         </div>
          <p class="block-friend">차단한 친구</p>
          <hr>
           <c:forEach var="userIhaveblocked" items="${userIhaveblocked}">
@@ -35,10 +36,17 @@
 	         <div class="box">  
 	         	<img src="../../../resource/images/5.png" alt="image1" class="profile">
 	         </div>
+	         <c:if test="${not empty userIhaveblocked.statusMsg}">
          	<div class="child-flex">
 	         	<p>${userIhaveblocked.nickName}</p>
 	         	<p>${userIhaveblocked.statusMsg}</p>
          	</div>
+         	</c:if>
+	         <c:if test="${empty userIhaveblocked.statusMsg}">
+         	<div class="child-flex empty">
+	         	<p>${userIhaveblocked.nickName}</p>
+         	</div>
+         	</c:if>
          	<div class="child-flex">
 	         	<input type="button" class="find-btn" value="추가" name="userIhaveblocked_addBtn_${var.index }" data-id="${userIhaveblocked.id}" />
 	         	<input type="button" class="find-btn" value="해제" name="userIhaveblocked_unBlockBtn_${var.index }" data-id="${userIhaveblocked.id}"/>
@@ -54,10 +62,17 @@
 	         <div class="box">  
 	         	<img src="../../../resource/images/8.png" alt="image1" class="profile">
 	         </div>
+	         <c:if test="${not empty userWhoHaveAddedMe.statusMsg}">
          	<div class="child-flex">
 	         	<p>${userWhoHaveAddedMe.nickName}</p>
 	         	<p>${userWhoHaveAddedMe.statusMsg}</p>
          	</div>
+         	</c:if>
+	         <c:if test="${empty userWhoHaveAddedMe.statusMsg}">
+         	<div class="child-flex empty">
+	         	<p>${userWhoHaveAddedMe.nickName}</p>
+         	</div>
+         	</c:if>
          	<div class="child-flex">
 	         	<input type="button" class="find-btn" value="추가" name="userWhoHaveAddedMe_addBtn_${var.index }" data-id="${userWhoHaveAddedMe.id}"/>
 	         	<input type="button" class="find-btn" value="차단" name="userWhoHaveAddedMe_blockBtn_${var.index }" data-id="${userWhoHaveAddedMe.id}"/>
@@ -100,8 +115,8 @@
    </div>
    <div class="mask"></div>
    
-   <script>
-   
+   <script type="text/javascript">
+ 
    $(function(){	
       $("input[name^='userWhoHaveAddedMe_addBtn']").on('click',function(e){ 
           $("input[name='friendsId']").val($(e.target).data('id'));

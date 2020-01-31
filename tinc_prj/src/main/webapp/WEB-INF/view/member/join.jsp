@@ -20,7 +20,7 @@
       <main class="container">
          <form method="post" id="frm">
             <div class="menu">
-               <span class="left"><i class="fas fa-chevron-left"></i></span>
+               <span class="left" onclick="location.href='login'"><i class="fas fa-chevron-left" ></i></span>
                <span class="center">회원가입</span>
                <span class="right"></span>
             </div>
@@ -53,7 +53,7 @@
          </div>
             
             <div class="agree-btn">
-                <input type="button" class="left-btn" value="취소"/>
+                <button type="button" class="left-btn"  onclick="location.href='login'">취소</button>
                 <input type="submit" id="submit" class="right-btn" value="가입"/>
             </div>
          </form>
@@ -90,7 +90,7 @@
 						$("#validate-id").css("color", "#f0679e");
 						$("#id-input").css("border", "0.0625rem solid #f0679e");
 						$("#submit").attr("disabled", true);
-					 }else if (data == false && id != "" && idJ.test($('#id-input').val()) == false){
+					 }else if (data == false && id != "" && idJ.test($('#id-input').val()) == true){
 							$('#validate-id').text("");
 							$('#validate-id').css('color', '#7367f0');
 							$("#id-input").css("border", "0.0625rem solid #7367f0");

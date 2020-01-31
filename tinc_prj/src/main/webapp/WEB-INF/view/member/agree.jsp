@@ -7,7 +7,7 @@
 <meta charset="utf-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/common.css" >
-<link rel="stylesheet" href="../../../resource/css/member/member.css" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css?x" >
 </head>
 <body>
    <section class="wrapper"> 
@@ -459,8 +459,8 @@
             </div>
             
             <div class="agree-btn">
-               <input type="button" class="left-btn" value="취소"/>
-               <input type="submit" class="right-btn" value="동의" onclick="location.href='join';" name="agree"/>
+               <button type="button" class="left-btn"  onclick="location.href='login';">취소</button>
+               <button type="button" class="right-btn" onclick="location.href='join';" name="agree">동의</button>
             </div>
          </form>
       </main><!-- container end -->

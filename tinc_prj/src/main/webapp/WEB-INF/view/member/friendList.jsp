@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/common.css" >
 <link rel="stylesheet" href="../../../resource/css/bottomButton.css">
-<link rel="stylesheet" href="../../../resource/css/member/member.css" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css?xxx" >
 </head>
 <body>
    <section class="wrapper"> 
@@ -21,35 +21,56 @@
          <div class="menu">
          	<span class="left"></span>
             <span class="center">친구</span>
-            <span class="right"><i class="fas fa-bars"></i></span>
+            <span class="right" onclick="location.href='friendSetting'"><i class="fas fa-bars"></i></span>
          </div>
          <input type="hidden" value="${id}"/> 
          <div class="friend">
 	         <div class="box inline">  
 	         	<img src="${myprofile.profileImg}" alt="image" class="profile">
 	         </div>
-         	<div class="inline">
+	         <c:if test="${not empty myprofile.statusMsg}">
+         	 <div class="inline">
 	         	<p><b>${myprofile.nickName}</b></p>
 	         	<p>${myprofile.statusMsg}</p>
+         	 </div>
+         	</c:if>
+         	<c:if test="${empty myprofile.statusMsg}">
+         	<div class="inline">
+	         	<p><b>${myprofile.nickName}</b></p>
          	</div>
+         	</c:if>
          </div>
 	     <hr>
-	     <p class="list-count">친구 ${friendListCount}</p>
+	     <c:if test="${0 ne friendListCount} }">
+	     	<p class="list-count">친구 ${friendListCount}</p>
+	     </c:if>
 	     <c:forEach var="friendsProfile" items="${friendsProfile}">
-	     <div class="list">
-	     <div class="friend">
-	         <div class="box inline">  
-	         	<img src="../../../resource/images/4.png" alt="image1" class="profile">
-	         </div>
-         	<div class="inline">
-	         	<p><b>${friendsProfile.nickName}</b></p>
-	         	<p>${friendsProfile.statusMsg}</p>
-         	</div>
-         </div>
-		 </div>
+		     <c:if test="${not empty friendsProfile}">
+			     <div class="list">
+			     <div class="friend">
+			         <div class="box inline">  
+			         	<img src="../../../resource/images/4.png" alt="image1" class="profile">
+			         </div>
+			        <c:if test="${not empty friendsProfile.statusMsg}">
+		         	<div class="inline">
+			         	<p><b>${friendsProfile.nickName}</b></p>
+			         	<p>${friendsProfile.statusMsg}</p>
+		         	</div>
+		         	</c:if>
+		         	<c:if test="${empty friendsProfile.statusMsg}">
+		         	<div class="inline empty">
+			         	<p><b>${friendsProfile.nickName}</b></p>
+		         	</div>
+		         	</c:if>
+		         </div>
+				 </div>
+			 </c:if>
 		 </c:forEach> 
+			 <c:if test="${empty friendsProfile}">
+			 	<p class="no-friend">아래의 친구 추가를<br>눌러 친구를 추가해 보세요.</p> 
+			 </c:if>
 		 <div class="bottombutton">
-			<button class="btn on">
+			<button type="button" class="btn on" onclick="location.href='addFriend'">
 				<!-- <i class="fas fa-user">친구목록</i>  -->
 				<i class="fas fa-user-plus">친구추가</i>
 			</button>
@@ -61,12 +82,12 @@
 					<i class="fas fa-plus"></i>
 				</span> -->
 			</button>
-			<button class="btn">
-				<i class="fas fa-cog" onclick="location.href='../setting/'setting">설정</i>
+			<button type="button" class="btn" onclick="location.href='../setting'">
+				<i class="fas fa-cog" >설정</i>
 			</button>
 		</div>
 	     
-	    <!--  <p class="no-friend">아래의 친구 추가를<br>눌러 친구를 추가해 보세요.</p> -->
+	    
          </form>
          
       </main><!-- container end -->

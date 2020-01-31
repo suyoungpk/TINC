@@ -8,10 +8,11 @@
 .center {text-align: center; flex: 2;}
 .right {text-align:right; margin-right: 0.6875rem; flex: 1; color: #b2b2b2;}
 .agreeform {height: 100%;}
-.agree {overflow-y: auto; white-space:pre-wrap; width: calc(100% - 1.5rem); height: calc(100% - 5.814rem); height: 100%; padding: 0.9375rem; box-sizing:border-box; background-color: #fff; margin: 1.125rem 0.75rem; overflow: scroll; font-size: 0.75rem;}
+.agree {overflow-y: auto; white-space:pre-wrap; width: calc(100% - 1.5rem); height: calc(100% - 9rem); padding: 0.9375rem; box-sizing:border-box; background-color: #fff; margin: 1.125rem 0.75rem; overflow: scroll; font-size: 0.75rem;}
 .text-center {text-align: center;}
 .inline{display: inline-block;}
-hr {border:0.0625rem solid #b2b2b2; width: calc(100% - 1.25rem); margin-left: 0.625rem;}
+.empty {padding: 8px 0; font-size: 15px;}
+hr {border:0.03125rem solid #b2b2b2; width: calc(100% - 1.25rem); margin-left: 0.625rem;}
 .flex {display: flex;}
 .child-flex {flex:1;}
 input[type="text"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing:border-box; color:#5e5e5e; height: 3.313rem; background: #fff; border-radius: 1.25rem;}
@@ -47,7 +48,7 @@ input[type="tel"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing
 .friend{margin: 1.313rem 1.25rem 0.3125rem 1.25rem; display: flex;}
 .friend-list .friend{ margin: 1.313rem 1.875rem 0.3125rem 1.875rem; display: flex;}
 .friend .inline:nth-child(2) {margin-left:1.25rem;}
-.friend p:first-child  {color:#000; font-size: 0.9375rem;}
+.friend p:first-child b {color:#000; font-size: 0.9375rem;}
 .friend p:nth-child(2) {color:#515151; font-size: 0.8125rem;}
 .no-friend {text-align: center; margin-top: 9.375rem;}
 .block-friend {margin: 1.25rem 2.375rem 0.625rem 2.375rem;}
@@ -74,7 +75,7 @@ input[type="tel"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing
 .friend-add .add-list {margin-top: 3.125rem;}
 
 #findBtn {width: 6.25rem; height: 1.813rem; font-size:0.9375rem; color:#fff; background-color: #7367f0; border-radius: 0.3125rem;}
-#child-flex1 {flex:1; margin-left: 1.25rem;}
+#child-flex1 {flex:1; margin-left: 1.25rem; overflow: hidden;}
 #child-flex2 {flex:1; text-align: right;  margin-top: 0.4375rem;}
 #friend{display: flex;margin: 1.313rem 1.25rem 0.3125rem 1.25rem;}
 #box {width: 2.5rem; height: 2.5rem; border-radius: 70%; overflow: hidden; margin-top: 0.1875rem;}
@@ -88,9 +89,10 @@ input[type="tel"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing
 .main div:nth-child(1) p {font-size: 2.5rem; color: #fff; letter-spacing :0.0625rem;} 
 .main div:nth-child(2) p {font-size: 0.8125rem; color: #fff;} 
 .main div:nth-child(3) {margin-top: 3.375rem;}
-.main div:nth-child(4) p {font-size: 0.8125rem; color: #fff;} 
+.main div:nth-child(4) p button{font-size: 0.8125rem; color: #fff;} 
 .main div:nth-child(5) {bottom: 0.625rem; position: fixed; margin: 0 auto; left: 0; right: 0;}
 .main div:nth-child(5) span {font-size: 0.8125rem; color: #fff;} 
+.main div:nth-child(5) span button{font-size: 0.8125rem; color: #fff;} 
 .main a:hover {font-size: 0.8125rem; color: #fff;}
 .main a:visited {font-size: 0.8125rem; color: #fff;}
 .main a:link {font-size: 0.8125rem; color: #fff;}

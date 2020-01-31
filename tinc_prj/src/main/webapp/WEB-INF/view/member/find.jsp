@@ -8,6 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/member/member.css" >
 <link rel="stylesheet" href="../../../resource/css/common.css" >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
    <section class="wrapper"> 
@@ -15,9 +16,9 @@
          <a href="#" title="메모장 이동">MEMO</a>
       </nav><!-- gnb end -->
       <main class="container">
-         <form action="find" method="post" onsubmit="openPwdPopUp()">
+         <form action="find" method="post">
 	         <div class="menu">
-	         	<span class="left"><i class="fas fa-chevron-left"></i></span>
+	         	<span class="left" onclick="location.href='login';"><i class="fas fa-chevron-left"></i></span>
 	            <span class="center">아이디/비밀번호 찾기</span>
 	            <span class="right"></span>
 	         </div>
@@ -27,23 +28,23 @@
                   <span>아이디 찾기</span>
                </div>
                <div class="text-center"> 
-	               <input type="text" name="email" value="" placeholder="이메일 입력"/>
-	               <input type="button" class="find-btn" value="아이디 찾기" onClick="openPopUp()"/>
+	               <input type="text" name="email"  value="" placeholder="이메일 입력"/>
+	               <input type="button" class="find-btn" id="findId" value="아이디 찾기"/>
 	            </div>
 	            <div>
                   <span>비밀번호 찾기</span>
                </div>
                <div  class="text-center">
 	               <input type="text" value="" name="id" placeholder="아이디 입력"/>
-	               <input type="text" value="" name="email" placeholder="이메일 입력"/>
-	               <input type="submit" class="find-btn" value="비밀번호 찾기"/>
+	               <input type="text" value="" name="email2" placeholder="이메일 입력"/>
+	               <input type="button" class="find-btn" id="findPwd" value="비밀번호 찾기"/>
 	            </div>
 	         </div>
 	         
-	         <div class="agree-btn">
-	         	<input type="button" class="left-btn" value="취소"/>
-	            <input type="button" class="right-btn" value="로그인"/>
-	         </div>
+	          <div class="agree-btn">
+	         	<button type="button" class="left-btn" onclick="location.href='login';">취소</button>
+	            <button type="button" class="right-btn" onclick="location.href='login';">로그인</button>
+	         </div> 
          </form>      
       </main><!-- container end -->
    </section><!-- wrapper end -->
@@ -51,17 +52,17 @@
 		<div class="popup-wrap">
 			<div class="popup-container">
 				<div class="context">
-				 <c:if test="${null ne user.id}">
-					<p>회원님의 아이디는 <b>${user.id}</b>입니다.</p>
-					</c:if>
-					<c:if test="${null eq user.id}">
+				 <%-- <c:if test="${null ne user.id}"> --%>
+					<p id="popup-text"></p>
+					<%-- </c:if> --%>
+					<%-- <c:if test="${null eq user.id}">
 					<p>아이디를 찾을 수 없습니다</p>
-					</c:if> 
+					</c:if>  --%>
 				</div><!-- context -->
-				<div class="btn-area">
+				<!-- <div class="btn-area">
 					<a href="" class="btn" onclick="closePopUp()">취소</a>
 					<a href="" class="btn" onclick="closePopUp()">확인</a>
-				</div>
+				</div> -->
 				<a href="" class="btn-close fas fa-times" onclick="closePopUp()">닫기</a>
 			</div><!-- popup-container -->
 		</div><!-- popup-wrap -->
@@ -79,10 +80,10 @@
 					
 					
 				</div><!-- context -->
-				<div class="btn-area">
+				<!-- <div class="btn-area">
 					<a href="" class="btn" onclick="closePwdPopUp()">취소</a>
 					<a href="" class="btn" onclick="closePwdPopUp()">확인</a>
-				</div>
+				</div> -->
 				<a href="" class="btn-close fas fa-times" onclick="closePwdPopUp()">닫기</a>
 			</div><!-- popup-container -->
 		</div><!-- popup-wrap -->
@@ -90,6 +91,33 @@
 	<div class="mask"></div>
 
    <script>
+   $(function(e){
+	   $("#findId").on('click',function(e){ 
+		   var email = $("input[name=email]").val();
+		   console.log(email);
+	   	   $.post("${pageContext.request.contextPath}/member/find", {email:email}, function(data){ 
+	   	    $('#popup-text').html("회원님의 아이디는 <b>"+data+"</b>입니다");
+		   if(email == "")
+			   $('#popup-text').html("아이디를 입력하세요");
+		   if(data == "")
+			   $('#popup-text').html("xxxxxxxx");
+	   	    
+	   	   });
+		   openPopUp();
+		   });
+   });
+   
+   $(function(e){
+	   $("#findPwd").on('click',function(e){ 
+		   var id =  $("input[name=id]").val();
+		   var email = $("input[name=email2]").val();
+		   console.log(id+email);
+	   	   $.post("${pageContext.request.contextPath}/member/find", {id:id, email:email});
+	   	   $('#popup-text').html("이메일이 전송되었습니다");
+		   openPopUp();
+	   });
+   });
+   
    function openPopUp() {
        document.getElementsByClassName("popup alert")[0].style.display = "block";
        document.getElementsByClassName("mask")[0].style.display = "block";

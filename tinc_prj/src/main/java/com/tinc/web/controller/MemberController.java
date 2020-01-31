@@ -80,8 +80,8 @@ public class MemberController {
 			Principal principal) 
 		{
 		String memberId = principal.getName();
-		System.out.println(memberId+","+friendsId);
 		String blackId = friendsId;
+		System.out.println(memberId+","+friendsId);
 		
 		friendList.setMemberId(memberId);
 		friendList.setFriendsId(friendsId);
@@ -126,21 +126,22 @@ public class MemberController {
          @RequestParam(name = "searchwords", required = false) String query)
       {
       String id = principal.getName();
-      System.out.println(id);
-      System.out.println("쿼리값"+query);
+      System.out.println("id:"+id+", query:"+query);
+      
       Map<String, String> item = new HashMap<String, String>();
       item.put("item1", id); 
       item.put("item2", id);
       item.put("item3", id);
       item.put("item4", id);
       item.put("item5", query);
-      model.addAttribute("id", "user1");
+      model.addAttribute("id", id);
+      
       List<Member> list = service.searchFriendsforAdding(item);
-      //System.out.println(principal.getName());
-      System.out.println("서비스결과"+list);
+      
       Gson gson = new Gson();
       String searchwords = gson.toJson(list);
       System.out.println(searchwords);
+      
       if(friendsId !=null) {
 	      friendsList.setMemberId(id);
 	      friendsList.setFriendsId(friendsId);
@@ -162,20 +163,25 @@ public class MemberController {
 		BCryptPasswordEncoder scpwd = new BCryptPasswordEncoder();
 		String encPassword = scpwd.encode(member.getPassword());
 		member.setPassword(encPassword);
+		
 		int result = service.joinMember(member);   
+		
 		System.out.println("id:"+member.getId());
 		  if(result ==1) { 
 			  memoService.insert(new PrivateMemoList(member.getNickName(),member.getId())); 
 			  service.addRole(new MemberRole(member.getId(), "ROLE_MEMBER"));
 		  }
+		  
 		return "redirect:friendList";
 	}
 	
 	@GetMapping("idCheck")
 	@ResponseBody
 	public String idCheck(@RequestParam(name = "id") String id) {
-		System.out.println(id);
-		System.out.println(service.isDuplicatedId(id));
+		
+		System.out.println("중복체크"+id);
+		System.out.println("중복체크결과"+service.isDuplicatedId(id));
+		
 		return service.isDuplicatedId(id);
 	}
 	
@@ -208,31 +214,38 @@ public class MemberController {
 		return "member/find";
 	}
 	
+	@ResponseBody
 	@PostMapping("find")
-	public String find(@RequestParam(name="email")String email, @RequestParam(name="id")String id, Model model)  throws MailException, MessagingException {
+	public String find(@RequestParam(name="email", required = false)String email, @RequestParam(name="id", required = false)String id, Model model)  throws MailException, MessagingException {
+		System.out.println(email);
 		System.out.println(service.findId(email));
-		model.addAttribute("user", service.findId(email));
 		
-		StringBuilder html = new StringBuilder();
-		html.append("<html>");
-		html.append("<body>");
-		html.append("<h1>"+id+"</h1>");		
-		//html.append("<img src=\"http://www.newlecture.com/resource/images/logo.png\">");
-		//html.append("<a href=\"http://www.newlecture.com/member/reset-pwd?id=newlec\">비번 재설정");
-		html.append("</body>");
-		html.append("</html>");
-		
-		MimeMessage message = mailSender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-		
-		helper.setFrom("yupddok@gmail.com");
-		helper.setTo(email);
-		helper.setText(html.toString(), true); //true안하면 utf8로안감
-		helper.setSubject("[TINC] 비밀번호 재설정 메일");
-		
-		mailSender.send(message);  //얘 객체생성하는 config파일 있어야됨 
-		
-		return "member/find";
+		String findedId = service.findId(email).getId();
+		System.out.println(service.findId(email).getId());
+		Gson gson = new Gson();
+    	String gsonfindedId = gson.toJson(findedId);
+    	
+		if(id != null && email != null) {
+			StringBuilder html = new StringBuilder();
+			html.append("<html>");
+			html.append("<body>");
+			html.append("<h1>"+id+"</h1>");		
+			//html.append("<img src=\"http://www.newlecture.com/resource/images/logo.png\">");
+			//html.append("<a href=\"http://www.newlecture.com/member/reset-pwd?id=newlec\">비번 재설정");
+			html.append("</body>");
+			html.append("</html>");
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+			
+			helper.setFrom("yupddok@gmail.com");
+			helper.setTo(email);
+			helper.setText(html.toString(), true); //true안하면 utf8로안감
+			helper.setSubject("[TINC] 비밀번호 재설정 메일");
+			
+			mailSender.send(message);  //얘 객체생성하는 config파일 있어야됨 
+		}
+		return gsonfindedId;
 	}
 	
 }

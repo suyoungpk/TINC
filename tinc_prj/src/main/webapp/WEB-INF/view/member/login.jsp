@@ -7,7 +7,7 @@
 <meta charset="utf-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/common.css" >
-<link rel="stylesheet" href="../../../resource/css/member/member.css" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css?x" >
 </head>
 <body>
          <form action="login" method="post">
@@ -27,12 +27,12 @@
 	         </div>
 	         
 	         <div>
-               <p>아이디/비밀번호 찾기</p>
+               <p><button type="button" onclick="location.href='find';">아이디/비밀번호 찾기</button></p>
             </div>
 	         
 	         <div>
                <span><i class="fas fa-chevron-up"></i></span><br>
-	         	<span><a href="#">회원가입</a></span> 	
+	         	<span><button type="button" onclick="location.href='join';">회원가입</button></span> 	
 	         </div>
          </form>
       </main><!-- container end -->

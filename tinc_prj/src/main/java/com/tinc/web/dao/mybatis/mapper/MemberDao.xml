@@ -68,8 +68,15 @@
 	<select id="getListOfUserWhoHaveAddedMe" resultType="com.tinc.web.entity.Member">
 		select id, nickName, statusMsg, profileImg from Member where id in 
 		(
+			select memberId from FriendsList where friendsId=#{friendsId} not in 
+			(
+				select friendsId from FriendsList where memberId=#{friendsId}
+			)
+		);
+		<!-- select id, nickName, statusMsg, profileImg from Member where id in 
+		(
 			select memberId from FriendsList where friendsId=#{friendsId}
-		) 
+		)  -->
 	</select>
 	
 	<select id="getListOfUserWhoBlockedMe" resultType="com.tinc.web.entity.Member">

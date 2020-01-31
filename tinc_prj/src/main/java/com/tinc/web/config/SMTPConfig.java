@@ -19,7 +19,7 @@ public class SMTPConfig
 		//mailSender.setHost("smtp.naver.com");
 		mailSender.setPort(587);
 		mailSender.setUsername("yupddok@gmail.com");
-		mailSender.setPassword("ac6164ac");
+		mailSender.setPassword("1Qowjddbs!");
 
 		Properties properties = new Properties();
 		properties.put("mail.transport.protocol", "smtp");
