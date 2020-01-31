@@ -41,7 +41,7 @@ public class SettingController {
    
    @PostMapping("")
    public String setting(Principal principal,
-         @RequestParam("myImage")String profileImg,
+         @RequestParam("myProfileImage")String profileImg,
          @RequestParam("myId")String nickName,
          @RequestParam("myStatusMessage")String statusMsg,
          @RequestParam("settingEditEmail")String email,

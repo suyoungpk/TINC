@@ -33,7 +33,7 @@
             <!-- context -->
             <div class="btn-area">
                <input type="button" class="btn" id="withdraw-cancle1" value="취소"/>
-               <input type="submit" class="btn" id="withdraw-ok1" value="확인"/>
+               <input type="button" class="btn" id="withdraw-ok1" value="확인"/>
             </div>
             <div class="btn-close fas fa-times">닫기</div>
          </form>

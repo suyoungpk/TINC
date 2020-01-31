@@ -1,17 +1,22 @@
-
-// $(function() {
-//    $("#myImage").on("change", function(){
-//        var files = !!this.files ? this.files : [];
-//        if (!files.length || !window.FileReader) return; 
-//        if (/^image/.test( files[0].type)){
-//            var reader = new FileReader();
-//            reader.readAsDataURL(files[0]); 
-//            reader.onloadend = function(){ 
-//            $('#myImage').css("background-image", "url("+this.result+")"); 
-//            };
-//        }
-//    });
-// });
+// ------프로필 사진 변경------------
+$(function(){
+    $("#myProfileImage").click(function(){
+        $("#mpImg").click().change(function(event){
+            console.log("hi1");
+            let input = event.target;
+            let reader = new FileReader();
+            console.log("hi2");
+            reader.onload = function(){
+                console.log("hi3");
+                let dataURL = reader.result;
+                let myProfileImage = document.getElementById('myProfileImage');
+                myProfileImage.src = dataURL;
+            }
+            console.log("hi4");
+            reader.readAsDataURL(input.files[0]);
+        })
+    })
+})
 
 $(function() {
     $("#withdraw-ok1").click(function(){
@@ -40,37 +45,31 @@ $(function(){
 
 $(function(){
     $(".btn-close").click(function(){
-        history.go(-1);
-    })
-})
-
-$(function(){
-    $("#return").click(function(){
-        history.go(-1);
+    	location.href="../setting";
     })
 })
 
 $(function(){
     $("#withdraw-cancle1").click(function(){
-        history.go(-1);
+    	location.href="../setting";
     })
 })
 
 $(function(){
     $("#withdraw-cancle2").click(function(){
-        history.go(-1);
+    	location.href="../setting";
     })
 })
 
 $(function(){
     $("#logout-cancle").click(function(){
-        history.go(-1);
+    	location.href="../setting";
     })
 })
 
 $(function(){
     $("#cancle-edit-pwd").click(function(){
-        history.go(-1);
+    	location.href="../setting";
     })
 })
 

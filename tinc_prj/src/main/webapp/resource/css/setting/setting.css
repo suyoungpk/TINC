@@ -18,10 +18,14 @@
     transform:translateX(-50%);
 }
 
+#setMyImg{
+    text-align: center;
+}
+
 #myProfileImage{
-	width: 6.875rem ;
+   width: 6.875rem ;
     height: 6.875rem;
-    background: url("/resource/images/profile.jpg") no-repeat;
+    background: no-repeat;
     background-size: cover;
     border-radius: 50%;
     margin-top: 1.625rem;
@@ -33,10 +37,6 @@
     right: 0;
     margin-right: auto;
     margin-left: auto;
-}
-
-#myImage {
-   display:none;
 }
 
 #myId{

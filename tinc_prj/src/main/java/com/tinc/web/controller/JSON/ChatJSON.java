@@ -57,6 +57,7 @@ public class ChatJSON {
 		
 		_list.add(gson.toJson(list));
 		_list.add(gson.toJson(type));
+		_list.add(gson.toJson(userId));
 		
 		cList = _list.toString();
 		

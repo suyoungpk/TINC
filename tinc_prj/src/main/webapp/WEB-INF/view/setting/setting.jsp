@@ -24,10 +24,13 @@
             <span id="setting-title">설정</span>
          </div>
 
-         <div id="myProfileImage">
-         	<input type="file" name="myImage"/>
-         </div><!-- myprofile.profileImg -->
          
+         <!-- 프로필 이미지 -->
+         <input type='file' accept='image/*' id='mpImg' style="display:none;">
+         <div id="setMyImg">
+		 	<img id='myProfileImage' src="/resource/images/profile.jpg">
+         </div>
+
          
          <div><input id="myId" type="text" value="${myprofile.nickName}"></div>
          <div><input id="myStatusMessage" type="text" placeholder="${myprofile.statusMsg}" value=""></div>
