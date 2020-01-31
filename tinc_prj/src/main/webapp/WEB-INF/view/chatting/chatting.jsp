@@ -402,6 +402,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           });
         }
       });
+      $(".status").click(function() {
+        $(this).html("");
+      });
       function completeFileUpload(type, name, url, size) {
         switch (type) {
           case "image":
@@ -424,7 +427,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       function shareToChat(data, id) {
         var data_ = JSON.parse(data);
         /*console.log(data_);
-          console.log("going to "+id);*/
+              console.log("going to "+id);*/
         switch (data_.type) {
           case "memo":
             //console.log(exeChat.memoMeg(data_,id));
