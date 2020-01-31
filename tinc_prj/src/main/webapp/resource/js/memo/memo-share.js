@@ -20,9 +20,10 @@ function showPrivateShareList() {
         let request = new XMLHttpRequest();
         request.open("GET", "../../../../memo/show-private-share");
         request.setRequestHeader("Content-Type", "application/json");
+
         request.onload = function () {
 
-            console.log(request.reponseText);
+            //console.log(request.reponseText);
             let receivedData = JSON.parse(request.responseText);
             let memoShareTemplate = document.querySelector("#memo-share-template");
             let memoShareContent = document.querySelector(".memo-share-list");
@@ -113,7 +114,7 @@ function showGroupShareList() {
 
 function getShareIds() {
     $(".memo-share-list-checkbox").off("click").click(function (e) {
-        console.log(e.target.checked);
+        //console.log(e.target.checked);
 
         if (e.target.checked === true) {
 
@@ -159,8 +160,16 @@ function shareMemo() {
             request.open("POST", "../../../../memo/share");
             request.setRequestHeader("Content-Type", "application/json");
             request.onload = function () {
+                if (request.responseText === "memo-share error") {
+                    console.log("memo-share error");
+                    return;
+                }
+
                 gsIdList = [];
                 fsIdList = [];
+
+                createCookie("isShared", true);
+
                 //window.location.href = "../../../../memo/detail?cardId=" + mcId; // -> 테스트 끝나면 detail 페이지로 가는걸로 변경
                 let url = "/memo/detail?cardId=" + mcId;
                 let oldUrl = window.location.pathname + window.location.search;
