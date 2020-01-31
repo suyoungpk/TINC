@@ -61,7 +61,7 @@
 											메시지가 없습니다.
 										</c:if>
 										<c:if test="${not empty list.meg}">
-											${list.meg}
+											<xmp>${list.meg}</xmp>
 										</c:if>
 									</li>
 								</ul>
