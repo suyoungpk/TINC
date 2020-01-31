@@ -25,7 +25,7 @@ var days = [];
 var hours = [];
 var mins = [];
 
-const date = new Date();
+var date = new Date();
 
 // duedate 한개 박스의 중앙 위치 찾기
 var duedateContainerOffset;
@@ -59,11 +59,11 @@ var timeIn;
 var cardId = 0;
 var initFlag = false;
 
-let tid;
+var tid;
 
 window.addEventListener("load", function (e) {
 	// get cardId cookie
-	getCookie();
+	getCookie("cardId");
 
 	// 삭제 버튼 클릭시 창 fadeout
 	$(".memo-duedate-popup .memo-duedate-btn-area .cancel-btn")
@@ -717,7 +717,7 @@ function recreateDays() {
 	}
 }
 
-function getCookie() {
+function getCookie(cname) {
 	var x, y; // x:key, y:value
 	var val = document.cookie.split(';');
 
@@ -725,7 +725,7 @@ function getCookie() {
 		x = val[i].substr(0, val[i].indexOf('='));
 		y = val[i].substr(val[i].indexOf('=') + 1);
 		x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
-		if (x === "cardId") {
+		if (x === cname) {
 			cardId = unescape(y); // unescape로 디코딩 후 값 리턴
 		}
 	}

@@ -114,6 +114,10 @@ public class TincMemoShareService implements MemoShareService
 	{
 		// TODO Auto-generated method stub
 		GroupMemoList groupMemoList = groupMemoListDao.get(gsId, mId);
+		if(groupMemoList == null)
+		{
+			return -1;
+		}
 		
 		MemoCard memoCard = memoCardDao.getById(mcId);
 		memoCard.setGroupListId(groupMemoList.getId());

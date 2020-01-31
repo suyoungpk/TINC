@@ -18,6 +18,7 @@
 <script src="../../../resource/js/memo/memo-duedate.js"></script>
 <script src="../../../resource/js/memo/memo-detail.js"></script>
 <script src="../../../resource/js/memo/memo-checklist.js"></script>
+<script src="../../../resource/js/memo/CookieUtil.js"></script>
 </head>
 
 <body>
@@ -136,8 +137,7 @@
 
 	<div class="popup" style="display: none">
 		<div class="memo-delete-popup popup-wrap"
-			style="width: 290px; left: 50%; transform: translate(-50%, 0); display: none;"
-		>
+			style="width: 290px; left: 50%; transform: translate(-50%, 0); display: none;">
 			<div class="popup-container">
 				<div class="context">
 					<p>삭제하시겠습니까?</p>
@@ -196,6 +196,15 @@
 			<!-- popup-container -->
 		</div>
 		<!-- popup-wrap -->
+
+		<div class="share-popup popup-wrap" style="display: none; min-height:5rem">
+			<div class="popup-container" style="top:15px;">
+				<div class="context" style="margin:auto 0;">
+					<p>메모 공유가 완료되었습니다...</p>
+				</div>				
+			</div>
+			<!-- popup-container -->
+		</div>
 	</div>
 	<!-- popup -->
 

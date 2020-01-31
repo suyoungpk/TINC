@@ -89,7 +89,6 @@ public class MemoController
 			List<PrivateMemoList> privateMemoList = PrivateMemoListService.getPrivateMemoList(mId);
 			List<GroupMemoList> groupMemoList = groupMemoListService.getGroupMemoList(mId);
 			List<MemoCard> memoCardList = memoCardService.getList();
-		
 			
 			model.addAttribute("privateMemoList", privateMemoList);
 			model.addAttribute("groupMemoList", groupMemoList);
@@ -481,7 +480,11 @@ public class MemoController
 			for(String gsId : gsIdList)
 			{
 				//System.out.println(mId + "," + gsId);
-				memoShareService.shareMemoToChattingRoom(mId, Integer.parseInt(gsId), mcId);
+				int ret = memoShareService.shareMemoToChattingRoom(mId, Integer.parseInt(gsId), mcId);
+				if(ret < 0)
+				{
+					return "memo-share error";
+				}
 			}
 		}
 		
@@ -494,7 +497,7 @@ public class MemoController
 				int crId = 0;
 				int cnt = 0;
 				cnt = memoShareService.hasPrivateChatRoom(mId, fsId);
-				System.out.println("cnt: " + cnt);
+				//System.out.println("cnt: " + cnt);
 				if(cnt < 1)
 				{
 					// 1. 1:1 채팅방 개설
@@ -502,7 +505,7 @@ public class MemoController
 					ChattingRoom newChattingRoom = new ChattingRoom(0, mId.toString(), title, true, "");
 					chattingService.createChattingRoom(newChattingRoom);//채팅 방 만들기
 					crId = chattingService.getChattingRoomId(mId); // 방장이 만든 채팅방 정보 가져오기			
-					System.out.println("crId: " + crId);
+					//System.out.println("crId: " + crId);
 					chattingService.inviteMember(crId, fsId);
 					mkFile(mId, crId, req);
 					mkFile(fsId, crId, req);

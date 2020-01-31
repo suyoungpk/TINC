@@ -31,7 +31,8 @@
 .chatList figure i{font-size:1.59375rem;color:#000;line-height:2.5rem}
 .chatList figure img{display:block;max-width:100%;min-height:100%}
 .chatList > li ul {width:calc(100% - 4.796875rem)}
-.chatList > li ul li{width:100%;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;font-size:0.8125rem;color:#515151;line-height:138%}
+.chatList > li ul li,
+.chatList > li ul li xmp{width:100%;text-overflow: ellipsis;overflow:hidden;white-space: nowrap;font-size:0.8125rem;color:#515151;line-height:138%}
 .chatList > li ul li.title{font-size:0.9375rem;color:#000}
 .chatList .nolist{position:absolute;width:100%;top:50%;left:0;color:#000;font-size:0.9375rem;text-align:center;padding:0;margin-top:-2.109375rem;}
 
@@ -70,7 +71,7 @@
 .chattingBox .chatting .member{text-align:left}
 .chattingBox .chatting .me{text-align:right}
 .chattingBox .chatting .focus{display:inline-block;background:yellow;color:#000}
-.chattingBox .btnBox{width:calc(20% - 2.84375rem);padding-left:0.8125rem;align-self:center;text-align:center}/*3.03125*/
+.chattingBox .btnBox{width:calc(20% - 2.84375rem);padding-left:0.8125rem;align-self:center;text-align:center;min-width:2.0625rem}/*3.03125*/
 .chattingBox .btn-share {display:inline-block;background:#dfdee8;border-radius:1.03125rem;width:2.0625rem;height:2.0625rem;text-align:center;vertical-align:middle;}
 .chattingBox .btn-share i{font-size:0.84375rem;color:#818181;width:0.84375rem;height:0.84375rem;line-height:100%;overflow:hidden}
 .chattingBox .chatting .megBox .message.imgBox{width:100%;/* border-radius:1.015625rem;overflow:hidden; */padding:0}

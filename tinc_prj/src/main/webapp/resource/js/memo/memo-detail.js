@@ -5,6 +5,22 @@ window.addEventListener("load", function () {
     var contentTextAreaHeight = memoDetailContentTextArea.getBoundingClientRect().height;
     cmaTextareaSize(contentTextAreaHeight);
 
+    // 메모 공유가 완료되면 완료 창 띄우기
+    if (getCookie2("isShared") === "true") {
+        $(".share-popup").fadeIn();
+        $(".popup").fadeIn();
+        $(".mask").fadeIn();
+
+        this.setTimeout(() => {
+            $(".share-popup").fadeOut();
+            $(".popup").fadeOut();
+            $(".mask").fadeOut();
+            delCookie("isShared");
+        }, 1000);
+    }
+    //this.console.log(getCookie2("cardId"));
+    //delCookie("isShared");
+
     // 메모의 타이틀과 내용이 변경되면 저장
     $(".memo-detail-title-text").change(() => {
         updateDetailData();
@@ -16,7 +32,7 @@ window.addEventListener("load", function () {
 
     // detail창 닫기 버튼
     $("#memo-detail-close-icon").off("click").click((e) => {
-        delCookie();
+        delCookie("cardId");
         //let url = "/memo/list";
         let url = window.location.pathname + window.location.search;
         $.get(url, function (data) {
@@ -64,7 +80,7 @@ window.addEventListener("load", function () {
         request.onload = function () {
             let receivedMsg = request.responseText;
             console.log(receivedMsg);
-            delCookie();
+            delCookie("cardId");
             if (receivedMsg === "del-memo-card success") {
                 //window.location.href = "../../../../memo/list";
                 //let url = "/memo/list";
@@ -120,8 +136,8 @@ function updateDetailData() {
     request.send(detailData);
 }
 
-function delCookie() {
-    let expireDate = new Date(Date.now() - 1);
-    document.cookie = "cardId=" + "; expires=" +
-        expireDate.toUTCString() + "; path=/";
-}
+// function delCookie() {
+//     let expireDate = new Date(Date.now() - 1);
+//     document.cookie = "cardId=" + "; expires=" +
+//         expireDate.toUTCString() + "; path=/";
+// }
