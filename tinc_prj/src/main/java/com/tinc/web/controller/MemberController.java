@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,10 +26,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.tinc.web.entity.BlackList;
+import com.tinc.web.entity.ChattingRoom;
 import com.tinc.web.entity.FriendsList;
 import com.tinc.web.entity.Member;
 import com.tinc.web.entity.MemberRole;
 import com.tinc.web.entity.PrivateMemoList;
+import com.tinc.web.service.ChattingService;
 import com.tinc.web.service.MemberService;
 import com.tinc.web.service.PrivateMemoListService;
 
@@ -41,8 +45,10 @@ public class MemberController {
 	private MemberService service;
 	@Autowired
 	private PrivateMemoListService memoService;
+	@Autowired
+	private ChattingService chattingService;
 	
-	@GetMapping("/main")
+	@GetMapping("main")
 	   public String main() {
 	      return "main";
 	   }	
@@ -52,7 +58,8 @@ public class MemberController {
 
 		String id = principal.getName();
 		System.out.println(id);
-
+		
+		model.addAttribute("id", id);
 		model.addAttribute("myprofile", service.getMyProfile(id));
 		model.addAttribute("friendsProfile", service.getFriendsProfile(id));
 		model.addAttribute("friendListCount", service.getFriendsListCount(id));
@@ -111,7 +118,8 @@ public class MemberController {
 		return "member/friendSetting";
 		}
 	
-
+	
+	
 	@GetMapping("addFriend")
 	   public String addFriend() {
 	      

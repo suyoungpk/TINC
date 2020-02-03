@@ -99,7 +99,7 @@ function searchajax(){
                          var search='';
                          search += `<div id='friend' data-id=`+jsonObj[key].id+`>
                            <div id='box'>  
-                              <img src='../../../resource/images/5.png' alt='image1' id='profile'>
+                              <img src='../../../resource/images/`+jsonObj[key].profileImg+`' alt='image1' id='profile'>
                           </div>
                            <div id='child-flex1'>
                               <p id='p1'>`+jsonObj[key].id+`</p>

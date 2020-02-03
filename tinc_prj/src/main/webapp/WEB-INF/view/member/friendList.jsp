@@ -7,9 +7,16 @@
 <title>메모와 채팅을 동시에, TINC</title>
 <meta charset="utf-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<link rel="stylesheet" href="../../../resource/css/common.css" >
+<link rel="stylesheet" href="../../../resource/css/common.css?x" >
 <link rel="stylesheet" href="../../../resource/css/bottomButton.css">
-<link rel="stylesheet" href="../../../resource/css/member/member.css?xxx" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css?xxxx" >
+<link rel="stylesheet" href="../../../resource/css/chatting/chat.css?x">
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script src="../../../resource/js/chatting/uiUtil.js"></script>
+
 </head>
 <body>
    <section class="wrapper"> 
@@ -23,10 +30,9 @@
             <span class="center">친구</span>
             <span class="right" onclick="location.href='friendSetting'"><i class="fas fa-bars"></i></span>
          </div>
-         <input type="hidden" value="${id}"/> 
          <div class="friend">
 	         <div class="box inline">  
-	         	<img src="${myprofile.profileImg}" alt="image" class="profile">
+	         	<img src="../../../resource/images/${myprofile.profileImg}" alt="image" class="profile" id="img" data-nickname="${myprofile.nickName}" data-statusmsg="${myprofile.statusMsg}" data-img="${myprofile.profileImg}" >
 	         </div>
 	         <c:if test="${not empty myprofile.statusMsg}">
          	 <div class="inline">
@@ -45,16 +51,17 @@
 	     	<p class="list-count">친구 ${friendListCount}</p>
 	     </c:if>
 	     <c:forEach var="friendsProfile" items="${friendsProfile}">
+	     <input type="hidden"  >
 		     <c:if test="${not empty friendsProfile}">
 			     <div class="list">
 			     <div class="friend">
 			         <div class="box inline">  
-			         	<img src="../../../resource/images/4.png" alt="image1" class="profile">
+			         	<img src="../../../resource/images/${friendsProfile.profileImg}" alt="image1" class="profile" id="img_${var_index}" data-nickname="${friendsProfile.nickName}" data-statusmsg="${friendsProfile.statusMsg}" data-img="${friendsProfile.profileImg}">
 			         </div>
 			        <c:if test="${not empty friendsProfile.statusMsg}">
 		         	<div class="inline">
-			         	<p><b>${friendsProfile.nickName}</b></p>
-			         	<p>${friendsProfile.statusMsg}</p>
+			         	<p id="nickName"><b>${friendsProfile.nickName}</b></p>
+			         	<p id="statusMsg">${friendsProfile.statusMsg}</p>
 		         	</div>
 		         	</c:if>
 		         	<c:if test="${empty friendsProfile.statusMsg}">
@@ -90,20 +97,56 @@
 	    
          </form>
          
-      </main><!-- container end -->
-   </section><!-- wrapper end -->
-   <div class="popup alert">
-      <div class="popup-wrap">
-         <div class="context">
-            <p>회원가입이 완료되었습니다.</p>
-         </div>
-         <div class="btn-area">
-            <a href="#" class="btn">취소</a>
-            <a href="#" class="btn">확인</a>
-         </div>
-         <a href="#" class="btn-close">닫기</a>
-      </div>
-   </div>
-   <div class="mask"></div>
+      </main>
+   </section>
+   
+   <div class="popup friendSetting">
+		<div class="popup-wrap">
+			<div class="popup-container">				
+				<div class="profile">
+					<figure>
+						<img id="popupImg" src="" alt="">
+					</figure>
+					<ul>
+						<li class="title" id="popId"></li>
+						<li id="popupStatusMsg"></li>
+					</ul>
+				</div>
+				<nav class="btn-area">
+					<ul >
+						<li>
+							<a href="#" class="btn">1:1채팅</a>
+							<a href="#" class="btn">차단</a>
+						</li>
+					</ul>
+				</nav>
+				<a href="#" class="btn-close fas fa-times" onclick="popupClose()">닫기</a>
+			</div>
+		</div>
+	</div>
+	<div class="mask"></div>
+	<script type="text/javascript">
+	
+		
+	$('[id^=img]').on('click',function(e){ 
+		$('.popup').css("display", "block");
+		$('.mask').css("display", "block");
+		
+		var fileName = $(e.target).data('img');
+		$('#popupImg').attr("src", "../../../resource/images/"+fileName);
+		$('#popId').html($(e.target).data('nickname'));
+		$('#popupStatusMsg').html($(e.target).data('statusmsg'));
+	});
+		
+	$('#img').on('click',function(e){ 
+		$('.popup').css("display", "block");
+		$('.mask').css("display", "block");
+		
+		var fileName = $(e.target).data('img');
+		$('#popupImg').attr("src", "../../../resource/images/"+fileName);
+		$('#popId').html($(e.target).data('nickname'));
+		$('#popupStatusMsg').html($(e.target).data('statusmsg'));
+	});
+	</script>
 </body>
 </html>

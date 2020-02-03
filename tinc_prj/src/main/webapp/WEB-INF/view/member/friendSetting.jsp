@@ -34,7 +34,7 @@
           <c:forEach var="userIhaveblocked" items="${userIhaveblocked}">
          <div class="flex friend">
 	         <div class="box">  
-	         	<img src="../../../resource/images/5.png" alt="image1" class="profile">
+	         	<img src="../../../resource/images/${userIhaveblocked.profileImg}" alt="image1" class="profile">
 	         </div>
 	         <c:if test="${not empty userIhaveblocked.statusMsg}">
          	<div class="child-flex">
@@ -60,7 +60,7 @@
          <c:forEach var="userWhoHaveAddedMe" items="${userWhoHaveAddedMe}">
          <div class="flex friend">
 	         <div class="box">  
-	         	<img src="../../../resource/images/8.png" alt="image1" class="profile">
+	         	<img src="../../../resource/images/${userWhoHaveAddedMe.profileImg}" alt="image1" class="profile">
 	         </div>
 	         <c:if test="${not empty userWhoHaveAddedMe.statusMsg}">
          	<div class="child-flex">
