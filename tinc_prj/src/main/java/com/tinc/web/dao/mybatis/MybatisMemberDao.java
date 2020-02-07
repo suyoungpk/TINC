@@ -115,11 +115,7 @@ public class MybatisMemberDao implements MemberDao{
 		return mapperDao.findId(email);
 	}
 	
-	@Override
-	public String sendTemporaryPassword(String id, String email) {
-		// TODO Auto-generated method stub
-		return mapperDao.sendTemporaryPassword(id, email);
-	}
+	
 
 	@Override
 	public Member getFriend(String memberId) {
@@ -181,6 +177,12 @@ public class MybatisMemberDao implements MemberDao{
 	public int addRole(MemberRole memberRole) {
 		// TODO Auto-generated method stub
 		return mapperDao.addRole(memberRole);
+	}
+
+	@Override
+	public Member findPwd(Member member) {
+		// TODO Auto-generated method stub
+		return mapperDao.findPwd(member);
 	}
 
 	

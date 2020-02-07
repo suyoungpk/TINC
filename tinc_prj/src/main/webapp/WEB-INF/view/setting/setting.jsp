@@ -25,27 +25,43 @@
          </div>
          
          <!-- 프로필 이미지 -->
+         <form 
+         action=""
+         id="settingFileForm"
+         enctype="multipart/form-data"
+         method="POST">
          <input type='file' accept='image/*' id='mpImg' style="display:none;">
          <div id="setMyImg">
-		 	<img id='myProfileImage' src="/resource/images/profile.jpg">
-         </div>
          
-         <div><input id="myId" type="text" value="${myprofile.nickName}"></div>
-         <div><input id="myStatusMessage" type="text" placeholder="${myprofile.statusMsg}" value=""></div>
+         <c:if test="${not empty myprofile.profileImg}">
+		 	<img id='myProfileImage' src="/resource/images/${myprofile.profileImg}">
+         </c:if>
+         
+         <c:if test="${empty myprofile.profileImg}">
+		 	<img id='myProfileImage' src="/resource/images/profile.jpg}">
+         </c:if>
+         
+         </div>
+         </form>
+         
+
+         <div><input id="myId" class="changeMyprofile" type="text" value="${myprofile.nickName}"></div>
+         <div><input id="myStatusMessage" class="changeMyprofile" type="text" placeholder="${myprofile.statusMsg}" value=""></div>
+
          <form id="setting-edit-form">
             <div class="set-line">이메일
-               <input id="settingEditEmail" type="text" placeholder="${myprofile.email}" value="">
+               <input id="settingEditEmail" class="changeMyprofile" type="text" placeholder="${myprofile.email}" value="">
             </div>
 
             <div class="set-line">전화번호
-               <input id="settingEditPhone" type="text" placeholder="${myprofile.phoneNum}" value="">
+               <input id="settingEditPhone" class="changeMyprofile" type="text" placeholder="${myprofile.phoneNum}" value="">
             </div>
 
             <div>
-               <div class="set-line" id="setting-edit-pwd">비밀번호 변경</div>
+               <div class="set-line changeMyprofile" id="setting-edit-pwd">비밀번호 변경</div>
             </div>
             <div>
-               <div class="set-line" id="setting-secession">탈퇴하기</div>
+               <div class="set-line changeMyprofile" id="setting-secession">탈퇴하기</div>
             </div>
 
             <div class="set-line">공개설정</div>
@@ -53,10 +69,10 @@
                   <div class="open-set-checkbox">
                   
                   <c:if test="${myprofile.idOpen == 0}">
-                     <input type="checkbox" id="idCheckbox" class="set-checkbox">                  
+                     <input type="checkbox" id="idCheckbox" class="set-checkbox changeMyprofile" >                  
                   </c:if>
                   <c:if test="${myprofile.idOpen == 1}">
-                     <input type="checkbox" id="idCheckbox" class="set-checkbox" checked>                  
+                     <input type="checkbox" id="idCheckbox" class="set-checkbox changeMyprofile" checked>                  
                   </c:if>
                      <label for="idCheckbox" class="set-check"></label>
                   </div>
@@ -66,11 +82,11 @@
                   <div class="open-set-checkbox">
                   
                   <c:if test="${myprofile.phoneNumOpen == 0}">
-                     <input type="checkbox" id="phoneCheckbox" class="set-checkbox">                  
+                     <input type="checkbox" id="phoneCheckbox" class="set-checkbox changeMyprofile">                  
                   </c:if>
                   
                   <c:if test="${myprofile.phoneNumOpen == 1}">
-                     <input type="checkbox" id="phoneCheckbox" class="set-checkbox" checked>                  
+                     <input type="checkbox" id="phoneCheckbox" class="set-checkbox changeMyprofile" checked>                  
                   </c:if>
                      <label for="phoneCheckbox" class="set-check"></label>
                   </div>
@@ -80,11 +96,11 @@
                   <div class="open-set-checkbox">
                   
                   <c:if test="${myprofile.emailOpen == 0}">
-                     <input type="checkbox" id="emailCheckbox" class="set-checkbox">                  
+                     <input type="checkbox" id="emailCheckbox" class="set-checkbox changeMyprofile">                  
                   </c:if>
                   
                   <c:if test="${myprofile.emailOpen == 1}">
-                     <input type="checkbox" id="emailCheckbox" class="set-checkbox" checked>                  
+                     <input type="checkbox" id="emailCheckbox" class="set-checkbox changeMyprofile" checked>                  
                   </c:if>
                      <label for="emailCheckbox" class="set-check"></label>
                   </div>
@@ -95,11 +111,11 @@
                   <div class="open-set-checkbox">
                   
                   <c:if test="${myprofile.chattingAlarm == 0}">
-                     <input type="checkbox" id="chattingCheckbox" class="set-checkbox">
+                     <input type="checkbox" id="chattingCheckbox" class="set-checkbox changeMyprofile">
                   </c:if>
                   
                   <c:if test="${myprofile.chattingAlarm == 1}">
-                     <input type="checkbox" id="chattingCheckbox" class="set-checkbox" checked>
+                     <input type="checkbox" id="chattingCheckbox" class="set-checkbox changeMyprofile" checked>
                   </c:if>
                      <label for="chattingCheckbox" class="set-check"></label>
                   </div>   
@@ -109,11 +125,11 @@
                   <div class="open-set-checkbox">
                   
                   <c:if test="${myprofile.memoAlarm == 0}">
-                     <input type="checkbox" id="memoCheckbox" class="set-checkbox">
+                     <input type="checkbox" id="memoCheckbox" class="set-checkbox changeMyprofile">
                   </c:if>
                   
                   <c:if test="${myprofile.memoAlarm == 1}">
-                     <input type="checkbox" id="memoCheckbox" class="set-checkbox" checked>
+                     <input type="checkbox" id="memoCheckbox" class="set-checkbox changeMyprofile" checked>
                   </c:if>
                      <label for="memoCheckbox" class="set-check"></label>
                   </div>

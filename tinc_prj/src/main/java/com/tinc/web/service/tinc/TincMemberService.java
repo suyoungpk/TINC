@@ -116,11 +116,6 @@ public class TincMemberService implements MemberService{
 		return memberDao.findId(email);
 	}
 
-	@Override
-	public String sendTemporaryPassword(String id, String email) {
-		// TODO Auto-generated method stub
-		return memberDao.sendTemporaryPassword(id, email);
-	}
 
 	@Override
 	public Member get(String id) {
@@ -192,6 +187,12 @@ public class TincMemberService implements MemberService{
 	public int addRole(MemberRole memberRole) {
 		// TODO Auto-generated method stub
 		return memberDao.addRole(memberRole);
+	}
+
+	@Override
+	public Member findPwd(Member member) {
+		// TODO Auto-generated method stub
+		return memberDao.findPwd(member);
 	}
 
 }

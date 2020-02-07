@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,17 +28,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.tinc.web.dao.MemberDao;
 import com.tinc.web.entity.ChattingRoom;
 import com.tinc.web.entity.CheckList;
 import com.tinc.web.entity.CheckListItem;
 import com.tinc.web.entity.DueDate;
 import com.tinc.web.entity.FriendsShareFullView;
-import com.tinc.web.entity.FriendsShareView;
 import com.tinc.web.entity.GroupMemoList;
 import com.tinc.web.entity.GroupShareFullView;
 import com.tinc.web.entity.GroupShareMemberView;
-import com.tinc.web.entity.GroupShareView;
 import com.tinc.web.entity.MemoCard;
 import com.tinc.web.entity.PrivateMemoList;
 import com.tinc.web.service.ChattingService;
@@ -47,7 +43,6 @@ import com.tinc.web.service.CheckListItemService;
 import com.tinc.web.service.CheckListService;
 import com.tinc.web.service.DueDateService;
 import com.tinc.web.service.GroupMemoListService;
-import com.tinc.web.service.MemberService;
 import com.tinc.web.service.MemoCardService;
 import com.tinc.web.service.MemoShareService;
 import com.tinc.web.service.PrivateMemoListService;
@@ -71,8 +66,6 @@ public class MemoController
 	@Autowired
 	private MemoShareService memoShareService;
 	@Autowired
-	private MemberService memberService;
-	@Autowired
 	private ChattingService chattingService;
 	
 	
@@ -82,7 +75,6 @@ public class MemoController
 
 		String mId = "";
 		mId = principal.getName();
-		//mId = "user2";
 		
 		if(Integer.parseInt(crId) == 0)
 		{
@@ -104,7 +96,8 @@ public class MemoController
 			model.addAttribute("memoCardList", memoCardList);
 		}
 
-		return "memo/list";
+//		return "memo/list";
+		return "main";
 	}
 
 	@ResponseBody
@@ -447,7 +440,6 @@ public class MemoController
 	public String share(@RequestParam String mcId, Model model, Principal principal)
 	{
 		String mId = "";
-		//mId = "user2";
 		mId = principal.getName();
 		
 		List<GroupShareFullView> gsfViewList = memoShareService.getGroupShareFullViewList(mId);
@@ -464,7 +456,6 @@ public class MemoController
 	public String share(@RequestBody String shareParam, Principal principal, HttpServletRequest req)
 	{
 		String mId = "";
-		//mId = "user2";
 		mId = principal.getName();
 		
 		Gson gson = new Gson();
@@ -474,6 +465,7 @@ public class MemoController
 	
 		Integer mcId = Integer.parseInt((String) paramMap.get("mcId"));
 		
+		@SuppressWarnings("unchecked")
 		List<String> gsIdList = (List<String>) paramMap.get("gsIdList"); 
 		if(!gsIdList.isEmpty())
 		{
@@ -488,6 +480,7 @@ public class MemoController
 			}
 		}
 		
+		@SuppressWarnings("unchecked")
 		List<String> fsIdList = (List<String>) paramMap.get("fsIdList");
 		if(!fsIdList.isEmpty())
 		{
@@ -559,7 +552,6 @@ public class MemoController
 	public String showPrivateShare(Principal principal)
 	{
 		String mId = "";
-		//mId = "user2";
 		mId = principal.getName();
 		
 		Gson gson = new Gson();
@@ -576,7 +568,6 @@ public class MemoController
 	public String showGroupShare(Principal principal)
 	{
 		String mId = "";
-		//mId = "user2";
 		mId = principal.getName();
 		
 		List<GroupShareFullView> gsfViewList = 

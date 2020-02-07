@@ -1,3 +1,5 @@
+var detailCloseTid;
+
 window.addEventListener("load", function () {
 
     // detail 내용 크기 자동 조절
@@ -6,41 +8,42 @@ window.addEventListener("load", function () {
     cmaTextareaSize(contentTextAreaHeight);
 
     // 메모 공유가 완료되면 완료 창 띄우기
-    if (getCookie2("isShared") === "true") {
+    if (getCookie("isShared") === "true") {
         $(".share-popup").fadeIn();
         $(".popup").fadeIn();
         $(".mask").fadeIn();
 
-        this.setTimeout(() => {
+        detailCloseTid = this.setTimeout(() => {
             $(".share-popup").fadeOut();
             $(".popup").fadeOut();
             $(".mask").fadeOut();
             delCookie("isShared");
         }, 1000);
     }
-    //this.console.log(getCookie2("cardId"));
-    //delCookie("isShared");
 
-    // 메모의 타이틀과 내용이 변경되면 저장
+
+    // 메모 내용이 변경되면 저장
     $(".memo-detail-title-text").change(() => {
         updateDetailData();
     });
-
+    // 타이틀 내용이 변경되면 저장
     $(".memo-detail-content-textarea").change(() => {
         updateDetailData();
     });
 
     // detail창 닫기 버튼
     $("#memo-detail-close-icon").off("click").click((e) => {
+        this.clearTimeout(detailCloseTid);
+        this.clearInterval(tid);
         delCookie("cardId");
-        //let url = "/memo/list";
-        let url = window.location.pathname + window.location.search;
-        $.get(url, function (data) {
-            //console.log(data);
-            let newDoc = document.open(url, "replace");
-            newDoc.write(data);
-            newDoc.close();
-        });
+        let url = "/memo/list";
+         $.get(url, function (data) {
+             //console.log(data);
+             let newDoc = document.open(url, "replace");
+             newDoc.write(data);
+             newDoc.close();
+             history.pushState(null, null, url);
+         });
     });
 
     // 팝업창 'x'머튼 클릭시 모든 팝업창 닫기
@@ -57,7 +60,6 @@ window.addEventListener("load", function () {
         e.preventDefault();
 
         let mcId = $(".memo-detail-title > input[name=\"memo-detail-id\"]").val();
-        //this.window.location.href = "../../../../memo/share?mcId=" + mcId;
         let url = "/memo/share?mcId=" + mcId;
         let oldUrl = window.location.pathname + window.location.search;
 
@@ -68,28 +70,32 @@ window.addEventListener("load", function () {
             let newDoc = document.open(oldUrl, "replace");
             newDoc.write(data);
             newDoc.close();
+            history.pushState(null, null, url);
         });
     });
 
     // 메모 삭제
     $(".memo-detail-delete-button").off("click").click((e) => {
-        let mcId = $("input[name=\"memo-detail-id\"]").val();
+        this.clearTimeout(detailCloseTid);
+        this.clearInterval(tid);
 
+        let mcId = $("input[name=\"memo-detail-id\"]").val();
         let request = new XMLHttpRequest();
+
         request.open("GET", "../../../../memo/del-memo-card/" + mcId);
         request.onload = function () {
             let receivedMsg = request.responseText;
-            console.log(receivedMsg);
+            //console.log(receivedMsg);
             delCookie("cardId");
             if (receivedMsg === "del-memo-card success") {
-                //window.location.href = "../../../../memo/list";
-                //let url = "/memo/list";
-                let url = window.location.pathname + window.location.search;
+                let url = "/memo/list";
+
                 $.get(url, function (data) {
                     //console.log(data);
                     let newDoc = document.open(url, "replace");
                     newDoc.write(data);
                     newDoc.close();
+                    history.pushState(null, null, url);
                 });
             }
         };
@@ -128,16 +134,8 @@ function updateDetailData() {
     request.setRequestHeader('Content-Type', 'application/json');
 
     request.onload = function () {
-        //console.log(request.responseText);
-        if (request.responseText === "detail-update-success") {
-            //window.location.reload();
-        }
+        console.log(request.responseText);
+        if (request.responseText === "detail-update-success") { }
     };
     request.send(detailData);
 }
-
-// function delCookie() {
-//     let expireDate = new Date(Date.now() - 1);
-//     document.cookie = "cardId=" + "; expires=" +
-//         expireDate.toUTCString() + "; path=/";
-// }

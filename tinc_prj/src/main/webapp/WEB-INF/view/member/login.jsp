@@ -32,7 +32,7 @@
 	         
 	         <div>
                <span><i class="fas fa-chevron-up"></i></span><br>
-	         	<span><button type="button" onclick="location.href='join';">회원가입</button></span> 	
+	         	<span><button type="button" onclick="location.href='agree';">회원가입</button></span> 	
 	         </div>
          </form>
       </main><!-- container end -->

@@ -17,6 +17,7 @@
 }
 
 .close-button-wrapper>i {
+  color: #b2b2b2;
   position: absolute;
   right: 20%;
   top: 30%;
@@ -32,7 +33,7 @@
   width: 93%;
   height: 9%;
   margin: 0 3.61%;
-  border: 2px solid rgb(95, 92, 162);
+  border: 2px solid #7367f1;
   border-radius: 0.625rem 0.625rem;
   background: #ffffff;
   position: relative;
@@ -54,7 +55,7 @@
   height: 38.25%;
   margin: 0 3.61%;
   margin-top: 1.06%;
-  border: 2px solid rgb(95, 92, 162);
+  border: 2px solid #7367f1;
   border-radius: 0.625rem 0.625rem;
   background: #ffffff;
   overflow-y: scroll;
@@ -78,7 +79,7 @@
   margin: 0 3.61%;
   margin-top: 1.06%;
   padding: 0.3% 0;
-  border: 2px solid rgb(95, 92, 162);
+  border: 2px solid #7367f1;
   border-radius: 0.625rem 0.625rem;
   background: #ffffff;
   position: relative;
@@ -106,7 +107,7 @@
   margin: 0 3.61%;
   margin-top: 1.06%;
   padding: 0.3% 0;
-  border: 2px solid rgb(95, 92, 162);
+  border: 2px solid #7367f1;
   border-radius: 0.625rem 0.625rem;
   background: #ffffff;
   position: relative;
@@ -134,7 +135,7 @@
   margin: 0 3.61%;
   margin-top: 1.06%;
   padding: 0.3% 0;
-  border: 2px solid rgb(95, 92, 162);
+  border: 2px solid #7367f1;
   border-radius: 0.625rem 0.625rem;
   background: #ffffff;
   position: relative;
@@ -181,7 +182,7 @@
   margin: 0 3.61%;
   margin-top: 1.06%;
   padding: 0.3% 0;
-  border: 2px solid rgb(95, 92, 162);
+  border: 2px solid #7367f1;
   border-radius: 0.625rem 0.625rem;
   background: #ffffff;
   position: relative;

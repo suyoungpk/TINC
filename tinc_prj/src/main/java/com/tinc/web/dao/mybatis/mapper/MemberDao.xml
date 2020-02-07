@@ -11,8 +11,9 @@
 	
 	<update id="editMember" parameterType="com.tinc.web.entity.Member">
 		update Member 
-		set nickname = #{nickName}, password=#{password}, phoneNum=#{phoneNum}, email=#{email} 
-		where id = #{id}
+      set nickname = #{nickName}, password=#{password}, phoneNum=#{phoneNum}, email=#{email}, 
+      statusMsg=#{statusMsg}, profileImg=#{profileImg}, emailOpen=#{emailOpen},phoneNumOpen=#{phoneNumOpen},idOpen=#{idOpen},chattingAlarm=#{chattingAlarm},memoAlarm=#{memoAlarm}
+      where id = #{id}
 	</update>
 	
 	<delete id="withdrawalMember" parameterType="com.tinc.web.entity.Member">

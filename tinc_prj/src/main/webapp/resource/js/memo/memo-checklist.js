@@ -507,7 +507,7 @@ function showCheckListSettingPopup() {
 		checkListSettingElem[i].onclick = function (e) {
 			// 체크리스트 삭제
 			deleteCheckList(e.target).then(function (resp) {
-				console.log("resp:" + resp);
+				//console.log("resp:" + resp);
 				if (resp === true) {
 					$(".popup").fadeOut();
 					$(".mask").fadeOut();
@@ -555,20 +555,25 @@ function deleteCheckList(target) {
 			.click(e => {
 				e.preventDefault();
 
-				let clId = $(target)
-					.parent()
-					.parent()
-					.parent()
-					.prev()
-					.val();
-				//console.log(clId);
+				let clId = $(target).parent().parent().parent()
+					.prev().val();
+				console.log(clId);
 
 				let request = new XMLHttpRequest();
 				request.open("POST", "../../../../memo/del-checklist");
 				request.setRequestHeader("Content-type", "text/plain");
 				request.onload = function () {
 					console.log(request.responseText);
-					resolve(true);
+					if (request.responseText === "delete checklist success") {
+						$(target).parent().parent().parent().prev()
+							.remove();
+						$(target).parent().parent().parent()
+							.remove();
+						resolve(true);
+					}
+					else {
+						resolve(false);
+					}
 				};
 				request.send(clId);
 			});

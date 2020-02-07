@@ -1,4 +1,3 @@
-var shareOpt = 0;
 var gsIdList = [];
 var fsIdList = [];
 
@@ -7,6 +6,20 @@ window.addEventListener("load", function () {
     getShareIds();
     showPrivateShareList();
     showGroupShareList();
+
+    // 공유창의 'x'버튼을 누르면 메모카드 디테일로 돌아간다
+    $(".memo-share-visual > div:first-child > i").off("click").click((e) => {
+        let mcId = $("input[name=\"memo-card-id\"]").val();
+        let url = "/memo/detail?cardId=" + mcId;
+        let oldUrl = window.location.pathname + window.location.search;
+
+        $.get(url, function (data) {
+            let newDoc = document.open(oldUrl, "replace");
+            newDoc.write(data);
+            newDoc.close();
+            history.pushState(null, null, url);
+        });
+    });
 })
 
 
@@ -83,24 +96,26 @@ function showGroupShareList() {
             memoShareContent.innerHTML = "";
 
             for (let i = 0; i < receivedData.length; i++) {
-                let cloneMemoShare = document.importNode(memoShareTemplate.content, true);
+                if (receivedData[i].chattingRoomTitle.indexOf(",") == -1) {
+                    let cloneMemoShare = document.importNode(memoShareTemplate.content, true);
 
-                let idInput = cloneMemoShare.querySelector("input[type=\"hidden\"]");
-                idInput.name = "share-chatting-room-id";
-                idInput.value = receivedData[i].chattingRoomId;
+                    let idInput = cloneMemoShare.querySelector("input[type=\"hidden\"]");
+                    idInput.name = "share-chatting-room-id";
+                    idInput.value = receivedData[i].chattingRoomId;
 
-                let sharePic = cloneMemoShare.querySelector("div.memo-share-list-pic");
-                let newPic = document.createElement("i");
-                newPic.className = "fas fa-users";
-                sharePic.append(newPic);
+                    let sharePic = cloneMemoShare.querySelector("div.memo-share-list-pic");
+                    let newPic = document.createElement("i");
+                    newPic.className = "fas fa-users";
+                    sharePic.append(newPic);
 
-                let nickNameInput = cloneMemoShare.querySelector("input[name=\"memo-share-list-content-top\"]");
-                nickNameInput.value = receivedData[i].chattingRoomTitle;
-                let statusMsgInput = cloneMemoShare.querySelector("input[name=\"memo-share-list-content-bottom\"]");
-                statusMsgInput.value = "";
+                    let nickNameInput = cloneMemoShare.querySelector("input[name=\"memo-share-list-content-top\"]");
+                    nickNameInput.value = receivedData[i].chattingRoomTitle;
+                    let statusMsgInput = cloneMemoShare.querySelector("input[name=\"memo-share-list-content-bottom\"]");
+                    statusMsgInput.value = "";
 
-                memoShareContent.append(cloneMemoShare);
+                    memoShareContent.append(cloneMemoShare);
 
+                }
             }
 
             shareMemo();
@@ -144,10 +159,12 @@ function getShareIds() {
 }
 
 function shareMemo() {
+
     let mcId = $(".memo-share-content > input[name=\"memo-card-id\"]").val();
 
-    $(".memo-share-visual > div > i").off("click").click(function (e) {
-        if (shareOpt == 0) {
+    $(".memo-share-visual > div:last-child > i").off("click").click(function (e) {
+        console.log(gsIdList.length + "," + fsIdList.length);
+        if (gsIdList.length > 0 || fsIdList.length > 0) {
             let mcId = $("input[name=\"memo-card-id\"]").val();
             let sendShareData = JSON.stringify({
                 mcId: mcId,
@@ -170,7 +187,6 @@ function shareMemo() {
 
                 createCookie("isShared", true);
 
-                //window.location.href = "../../../../memo/detail?cardId=" + mcId; // -> 테스트 끝나면 detail 페이지로 가는걸로 변경
                 let url = "/memo/detail?cardId=" + mcId;
                 let oldUrl = window.location.pathname + window.location.search;
                 $.get(url, function (data) {
@@ -178,9 +194,15 @@ function shareMemo() {
                     let newDoc = document.open(oldUrl, "replace");
                     newDoc.write(data);
                     newDoc.close();
+                    history.pushState(null, null, url);
                 });
             }
             request.send(sendShareData);
+        }
+        else {
+            $(".mask").fadeIn().delay(500).fadeOut();
+            $(".popup").fadeIn().delay(500).fadeOut();
+            $(".no-share-list-popup").fadeIn().delay(500).fadeOut();
         }
     });
 }

@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/common.css" >
 <link rel="stylesheet" href="../../../resource/css/bottomButton.css">
-<link rel="stylesheet" href="../../../resource/css/member/member.css?sxs" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css?sxss" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
@@ -37,6 +37,9 @@
             </div>
            <div class="add-list" id="add-list">
             </div> 
+            <div id="anno" style="display:none">
+			추가							
+		</div>
             
          <div class="bottombutton">
             <button type="button" class="btn on"  onclick="location.href='friendList'">
@@ -79,6 +82,7 @@ function searchajax(){
 	var friendsId=0;
     $("#searchword").keyup(function(){
         var words = $("#searchword").val();
+        let x = 0;
         if( words != ''){
        $('#add-list').html("");
             $.ajax({
@@ -123,10 +127,17 @@ function searchajax(){
                          	//$("#friend").remove("input[name='friendsId']");
                          	console.log($(e.target).parent().parent());
                          	$(e.target).parent().parent().remove();
-                         	
+                         	x = 1;
                          }); 
+                         	
                          
                       }
+                      $("input[name^='addBtn']").on('click',function(e){
+	                      if(x == 1){
+							x=0;                    	  
+                			$(function(){infobox('친구가 추가되었습니다.');});
+	                      }
+                      }); 
                    } else { $('#add-list').html(""); }
                 },
                 error: function(e) {console.log('error:' + e.status);}
@@ -135,6 +146,12 @@ function searchajax(){
     });
 
 }
+
+function infobox(txt){
+	$("#anno").html(txt);
+	$("#anno").fadeIn().delay(2000).fadeOut();
+}
+
 
 </script>
 </html>

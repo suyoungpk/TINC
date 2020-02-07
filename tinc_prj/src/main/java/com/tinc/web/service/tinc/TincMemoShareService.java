@@ -102,8 +102,11 @@ public class TincMemoShareService implements MemoShareService
 		}
 		
 		DueDate duedate = dueDateDao.getByCardId(mcId);
-		duedate.setCardId(newMcId);
-		dueDateDao.insert(duedate);
+		if(duedate != null)
+		{
+			duedate.setCardId(newMcId);
+			dueDateDao.insert(duedate);
+		}
 		
 		return 0;
 	}
@@ -143,8 +146,11 @@ public class TincMemoShareService implements MemoShareService
 		}
 		
 		DueDate duedate = dueDateDao.getByCardId(mcId);
-		duedate.setCardId(newMcId);
-		dueDateDao.insert(duedate);
+		if(duedate != null)
+		{
+			duedate.setCardId(newMcId);
+			dueDateDao.insert(duedate);
+		}
 		
 		return 0;
 	}

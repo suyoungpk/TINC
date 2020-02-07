@@ -43,7 +43,7 @@
 								<i class="fas fa-user"></i>
 							</c:if>
 		                    <c:if test="${not empty list.profileImg}">
-		                   	 	<img src="${list.profileImg}" alt="" />
+		                   	 	<img src="/resource/images/${list.profileImg}" alt="" />
 		                    </c:if>
 		                 </figure>
 		                 <ul>

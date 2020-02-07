@@ -89,7 +89,7 @@ $(function(){
 		else
 			for (var i =0;i<data.length;i++) {
 				
-				let img = '<img src="'+data[i].profileImg+'" alt="" />';
+				let img = '<img src="/resource/images/'+data[i].profileImg+'" alt="" />';
 			
 				if(!data[i].profileImg || data[i].profileImg == "") 
 					img='<i class="fas fa-user"></i>';

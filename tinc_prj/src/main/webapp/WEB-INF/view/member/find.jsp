@@ -6,7 +6,7 @@
 <title>메모와 채팅을 동시에, TINC</title>
 <meta charset="utf-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<link rel="stylesheet" href="../../../resource/css/member/member.css" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css?xxx" >
 <link rel="stylesheet" href="../../../resource/css/common.css" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
@@ -45,6 +45,9 @@
 	         	<button type="button" class="left-btn" onclick="location.href='login';">취소</button>
 	            <button type="button" class="right-btn" onclick="location.href='login';">로그인</button>
 	         </div> 
+	         <div id="anno" style="display:none">
+				추가							
+			</div>
          </form>      
       </main><!-- container end -->
    </section><!-- wrapper end -->
@@ -52,69 +55,57 @@
 		<div class="popup-wrap">
 			<div class="popup-container">
 				<div class="context">
-				 <%-- <c:if test="${null ne user.id}"> --%>
 					<p id="popup-text"></p>
-					<%-- </c:if> --%>
-					<%-- <c:if test="${null eq user.id}">
-					<p>아이디를 찾을 수 없습니다</p>
-					</c:if>  --%>
 				</div><!-- context -->
-				<!-- <div class="btn-area">
+				 <div class="btn-area">
 					<a href="" class="btn" onclick="closePopUp()">취소</a>
 					<a href="" class="btn" onclick="closePopUp()">확인</a>
-				</div> -->
+				</div> 
 				<a href="" class="btn-close fas fa-times" onclick="closePopUp()">닫기</a>
 			</div><!-- popup-container -->
 		</div><!-- popup-wrap -->
 	</div><!-- popup -->
 	<div class="mask"></div>
 	
-	<div class="popup alert">
-		<div class="popup-wrap">
-			<div class="popup-container">
-				<div class="context">
-				
-					<p>이메일이 전송됐습니다.</p>
-					
-					
-					
-					
-				</div><!-- context -->
-				<!-- <div class="btn-area">
-					<a href="" class="btn" onclick="closePwdPopUp()">취소</a>
-					<a href="" class="btn" onclick="closePwdPopUp()">확인</a>
-				</div> -->
-				<a href="" class="btn-close fas fa-times" onclick="closePwdPopUp()">닫기</a>
-			</div><!-- popup-container -->
-		</div><!-- popup-wrap -->
-	</div><!-- popup -->
-	<div class="mask"></div>
-
+	
    <script>
    $(function(e){
 	   $("#findId").on('click',function(e){ 
 		   var email = $("input[name=email]").val();
-		   console.log(email);
-	   	   $.post("${pageContext.request.contextPath}/member/find", {email:email}, function(data){ 
-	   	    $('#popup-text').html("회원님의 아이디는 <b>"+data+"</b>입니다");
-		   if(email == "")
-			   $('#popup-text').html("아이디를 입력하세요");
-		   if(data == "")
-			   $('#popup-text').html("xxxxxxxx");
-	   	    
-	   	   });
-		   openPopUp();
-		   });
+		   if(email == ""){
+			   e.preventDefault();
+			   $(function(){infobox('이메일을 입력하세요.');});
+		   }else{
+		   	   $.post("${pageContext.request.contextPath}/member/find", {email:email}, function(data){ 
+				   if(data.length==0){
+					   $(function(){infobox('존재하지 않는 회원입니다.');});
+				   }else{
+				   	    openPopUp();
+				   	    $('#popup-text').html("회원님의 아이디는 <b>"+data+"</b>입니다");
+				   }
+		   	   },"json");
+		   }
+	   });
    });
    
    $(function(e){
 	   $("#findPwd").on('click',function(e){ 
 		   var id =  $("input[name=id]").val();
 		   var email = $("input[name=email2]").val();
-		   console.log(id+email);
-	   	   $.post("${pageContext.request.contextPath}/member/find", {id:id, email:email});
-	   	   $('#popup-text').html("이메일이 전송되었습니다");
-		   openPopUp();
+		   if(id=="" || email == ""){
+			   e.preventDefault();
+			   $(function(){infobox('아이디와 이메일을 입력하세요.');});
+		   }else{
+		   	   $.post("${pageContext.request.contextPath}/member/find", {id:id, email:email}, function(data){ 
+		   		   console.log(data);
+				   if(data.length==0){
+					   $(function(){infobox('존재하지 않는 회원입니다.');});
+				   }else{
+					   $(function(){infobox('이메일이 전송되었습니다.');});
+				   }
+		   	   },"json");
+		   	   
+		   }
 	   });
    });
    
@@ -129,17 +120,11 @@
        document.getElementsByClassName("mask")[0].style.display = "none";
      
    }
-   function openPwdPopUp() {
-       document.getElementsByClassName("popup alert")[1].style.display = "block";
-       document.getElementsByClassName("mask")[1].style.display = "block";
-       
-   }
-
-   function closePwdPopUp() {
-       document.getElementsByClassName("popup alert")[1].style.display = "none";
-       document.getElementsByClassName("mask")[1].style.display = "none";
-     
-   }
+   
+   function infobox(txt){
+		$("#anno").html(txt);
+		$("#anno").fadeIn().delay(2000).fadeOut();
+	}
    </script>
 </body>
 </html>

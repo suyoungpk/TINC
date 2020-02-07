@@ -46,7 +46,7 @@
 											<i class="fas fa-user"></i>
 										</c:if>
 										<c:if test="${not empty type[i].img}">
-											<img src="${type[i].img}" alt="#">
+											<img src="/resource/images/${type[i].img}" alt="#">
 										</c:if>
 									</c:if>
 								</figure>								

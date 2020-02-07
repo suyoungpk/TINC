@@ -8,7 +8,7 @@ function delCookie(cname) {
     document.cookie = cname + "=; expires=" + expireDate + "; path=/memo";
 }
 
-function getCookie2(cname) {
+function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');

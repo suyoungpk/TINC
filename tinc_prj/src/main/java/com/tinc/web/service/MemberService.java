@@ -33,7 +33,7 @@ public interface MemberService{
 	List<Member> searchFriendsToAddToTheChat(Map<String, String> item); // 채팅에 추가할 친구찾기
 
 	Member findId(String email); // 아이디 찾기 
-	String sendTemporaryPassword(String id, String email); // 임시비밀번호 발급
+	Member findPwd(Member member); // 비밀번호 찾기
 	
 	boolean isValidMember(String id, String password); // 로그인 
 	String isDuplicatedId(String id); // 중복id 

@@ -7,7 +7,7 @@
 <meta charset="utf-8" >
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/common.css" >
-<link rel="stylesheet" href="../../../resource/css/member/member.css" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css?xx" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js"></script>  -->
 
@@ -20,7 +20,7 @@
       <main class="container">
          <form method="post" id="frm">
             <div class="menu">
-               <span class="left" onclick="location.href='login'"><i class="fas fa-chevron-left" ></i></span>
+               <span class="left" onclick="location.href='agree'"><i class="fas fa-chevron-left" ></i></span>
                <span class="center">회원가입</span>
                <span class="right"></span>
             </div>
@@ -53,7 +53,7 @@
          </div>
             
             <div class="agree-btn">
-                <button type="button" class="left-btn"  onclick="location.href='login'">취소</button>
+                <button type="button" class="left-btn"  onclick="location.href='agree'">취소</button>
                 <input type="submit" id="submit" class="right-btn" value="가입"/>
             </div>
          </form>
@@ -90,13 +90,14 @@
 						$("#validate-id").css("color", "#f0679e");
 						$("#id-input").css("border", "0.0625rem solid #f0679e");
 						$("#submit").attr("disabled", true);
-					 }else if (data == false && id != "" && idJ.test($('#id-input').val()) == true){
+					 }else if (data == false && id != "" && idJ.test(id) == true){
 							$('#validate-id').text("");
 							$('#validate-id').css('color', '#7367f0');
 							$("#id-input").css("border", "0.0625rem solid #7367f0");
 							$("#submit").attr("disabled", false);
+							console.log("reg"+idJ.test(id));
 						}else {
-							if(idJ.test($('#id-input').val())){
+							if(idJ.test(id) == false){
 								// 0 : 아이디 길이 / 문자열 검사
 								$("#validate-id").text("영문 + 숫자 4~12자로 입력하세요");
 								$("#validate-id").css("color", "#f0679e");
@@ -104,7 +105,6 @@
 								$("#submit").attr("disabled", true);
 								console.log("reg"+idJ.test(id));
 							} else if(id == ""){
-								
 								$('#validate-id').text('아이디를 입력해주세요 :)');
 								$('#validate-id').css('color', '#f0679e');
 								$("#id-input").css("border", "0.0625rem solid #f0679e");
@@ -134,7 +134,6 @@
        var emailInput = document.querySelector("#email-input");
        var phoneNumInput = document.querySelector("#phoneNum-input");
        
-       
        var validateId = document.querySelector("#validate-id");
        var validatePwd1 = document.querySelector("#validate-pwd1");
        var validatePwd2 = document.querySelector("#validate-pwd2");
@@ -142,15 +141,21 @@
        var validateEmail = document.querySelector("#validate-email");
        var validatePhone = document.querySelector("#validate-phone");
 
+       var regExpNickName = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,10}$/;
        var regExpPwd = /(?=.*\d{1,50})(?=.*[~`!@#$%\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}$/;
        var regExpPhone = /^01(?:0|1|[6-9])-(?:\d{3}|\d{4})-\d{4}$/;
        var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
        var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
        
        nickNameInput.oninput = function(e){
-           if(!(nickNameInput == "")){
+    	   if(!regExpNickName.exec(nickNameInput.value)){
+    		   nickNameInput.style.border =  "0.0625rem solid #f0679e";
+    		   validateNickName.style.color = "#f0679e";
+    		   validateNickName.innerText = "2~10자의 한글,영문,숫자로 입력하세요.";
+           }else{ 
         	   nickNameInput.style.border =  "0.0625rem solid #7367f0";
-        	   validateNickName.style.color = "#f0679e";
+        	   validateNickName.style.color = "#7367f0";
+        	   validateNickName.innerText = "";
            }
                
        };
@@ -256,7 +261,5 @@
 	  });
 	   
    </script>
-   
-   
 </body>
 </html>

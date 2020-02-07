@@ -91,7 +91,8 @@ public class Chatting {
 		}
 		model.addAttribute("list", list); // 채팅목록 전달 
 		model.addAttribute("type", type); // 채팅타입 전달 
-		return "chatting/chat-list";
+//		return "chatting/chat-list";
+		return "main";
 	}
 	
 	@GetMapping("add")

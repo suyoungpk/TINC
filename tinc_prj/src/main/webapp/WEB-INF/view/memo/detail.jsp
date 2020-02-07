@@ -200,7 +200,7 @@
 		<div class="share-popup popup-wrap" style="display: none; min-height:5rem">
 			<div class="popup-container" style="top:15px;">
 				<div class="context" style="margin:auto 0;">
-					<p>메모 공유가 완료되었습니다...</p>
+					<p>메모 공유가 완료되었습니다</p>
 				</div>				
 			</div>
 			<!-- popup-container -->

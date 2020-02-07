@@ -20,12 +20,13 @@ input[type="password"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-s
 input[type="tel"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing:border-box; color:#5e5e5e; height: 3.313rem; background: #fff; border-radius: 1.25rem;}
 
 .join {text-align: center;}
+.join #frm {height:100%;}
 .join input[type="text"] {margin-top:0.9375rem;}
 .join input[type="password"] {margin-top:0.9375rem;}
 .join input[type="tel"] {margin-top:0.9375rem;}
 .join input::placeholder {color: #b2b2b2;}
 .join span {color: #7367f0; font-size: 0.8125rem;}
-.join .agree-btn {margin-top: 1.563rem;}
+/* .join .agree-btn {margin-top: 1.563rem;} */
 .usable {position: relative;}
 .usable p b {position: absolute; font-size: 0.8125rem; bottom: 0.1875rem; right: 1.875rem;}
 /* .usable input[type="text"] {border: 0.0625rem solid #7367f0;} */
@@ -100,3 +101,10 @@ input[type="tel"] {width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing
 .main input[type="text"] {color: #fff; text-align: center; margin-bottom: 0.625rem; margin-bottom: 0.625rem; padding:0 0.9375rem; box-sizing:border-box; background: #000; background-color: rgba( 0, 0, 0, 0.2 ); border-radius: 2.5rem;}
 .main input[type="password"] {color: #fff; text-align: center; margin-bottom: 0.625rem; margin-bottom: 0.625rem; padding:0 0.9375rem; box-sizing:border-box; background: #000; background-color: rgba( 0, 0, 0, 0.2 ); border-radius: 2.5rem;}
 .main input[type="submit"] {margin-bottom: 0.625rem; width: calc(100% - 1.641rem); padding:0 0.9375rem; box-sizing:border-box; color:#000; height: 3.313rem; background: #fff; border-radius: 2.5rem;}
+
+#anno{position:absolute;top:0;left:0;width:100%;background:#ebeafd;color:#7367f0;text-align:center;font-size:1em;line-height:3em;height:3em}
+
+/* background:rgba(0,0,0,.75) #ebeafd*/
+
+
+

@@ -63,13 +63,12 @@ var tid;
 
 window.addEventListener("load", function (e) {
 	// get cardId cookie
-	getCookie("cardId");
+	cardId = getCookie("cardId");
 
 	// 삭제 버튼 클릭시 창 fadeout
 	$(".memo-duedate-popup .memo-duedate-btn-area .cancel-btn")
 		.off("click")
 		.click(function () {
-
 			let request = new XMLHttpRequest();
 			request.open("POST", "../../../../memo/del-duedate");
 			request.setRequestHeader('Content-Type', 'application/json');
@@ -151,7 +150,6 @@ window.addEventListener("load", function (e) {
 
 			// duedate 박스 생성 시작
 			createDueDateContainer(dateIn, timeIn);
-			//console.log(newDueDate);
 
 			// duedate 설정 버튼 클릭 시
 			$(".memo-duedate-popup .memo-duedate-btn-area .ok-btn")
@@ -206,7 +204,6 @@ window.addEventListener("load", function (e) {
 								duedateYearDiv, duedateHourDiv, duedateMinDiv
 							);
 						}
-
 					}
 					request.send(sendDueDate);
 
@@ -509,8 +506,6 @@ function selectCalenderDiv(selectDiv) {
 
 			if (divMidPos >= duedateContainerMinOffset &&
 				divMidPos <= duedateContainerMaxOffset) {
-				selectDiv.children[i].style.borderTop = "2px ridge #D8D8D8";
-				selectDiv.children[i].style.borderBottom = "2px ridge #D8D8D8";
 				selectDiv.children[i].style.color = "#000000";
 				selectDiv.children[i].scrollIntoView({ block: "center" });
 
@@ -550,9 +545,6 @@ function selectCalenderDiv(selectDiv) {
 
 			if (selectDiv === duedateDaysDiv) {
 				if (selectDiv.children[i].innerText === selectedDay) {
-					selectDiv.children[i].style.borderTop = "2px ridge #D8D8D8";
-					selectDiv.children[i].style.borderBottom =
-						"2px ridge #D8D8D8";
 					selectDiv.children[i].style.color = "#000000";
 					selectDiv.children[i].scrollIntoView({ block: "center" });
 				} else {
@@ -563,9 +555,6 @@ function selectCalenderDiv(selectDiv) {
 
 			if (selectDiv === duedateMonthDiv) {
 				if (selectDiv.children[i].innerText === selectedMonth) {
-					selectDiv.children[i].style.borderTop = "2px ridge #D8D8D8";
-					selectDiv.children[i].style.borderBottom =
-						"2px ridge #D8D8D8";
 					selectDiv.children[i].style.color = "#000000";
 					selectDiv.children[i].scrollIntoView({ block: "center" });
 				} else {
@@ -576,9 +565,6 @@ function selectCalenderDiv(selectDiv) {
 
 			if (selectDiv === duedateYearDiv) {
 				if (selectDiv.children[i].innerText === selectedYear) {
-					selectDiv.children[i].style.borderTop = "2px ridge #D8D8D8";
-					selectDiv.children[i].style.borderBottom =
-						"2px ridge #D8D8D8";
 					selectDiv.children[i].style.color = "#000000";
 					selectDiv.children[i].scrollIntoView({ block: "center" });
 				} else {
@@ -589,9 +575,6 @@ function selectCalenderDiv(selectDiv) {
 
 			if (selectDiv === duedateHourDiv) {
 				if (selectDiv.children[i].innerText === selectedHour) {
-					selectDiv.children[i].style.borderTop = "2px ridge #D8D8D8";
-					selectDiv.children[i].style.borderBottom =
-						"2px ridge #D8D8D8";
 					selectDiv.children[i].style.color = "#000000";
 					selectDiv.children[i].scrollIntoView({ block: "center" });
 				} else {
@@ -602,9 +585,6 @@ function selectCalenderDiv(selectDiv) {
 
 			if (selectDiv === duedateMinDiv) {
 				if (selectDiv.children[i].innerText === selectedMin) {
-					selectDiv.children[i].style.borderTop = "2px ridge #D8D8D8";
-					selectDiv.children[i].style.borderBottom =
-						"2px ridge #D8D8D8";
 					selectDiv.children[i].style.color = "#000000";
 					selectDiv.children[i].scrollIntoView({ block: "center" });
 				} else {
@@ -645,12 +625,9 @@ function duedateClickHandler(duedateDaysDiv, duedateMonthDiv,
 
 function duedateClickFunc(selectDiv) {
 	return new Promise((resolve, reject) => {
-
 		$(selectDiv).off("click").click(function (e) {
 			for (let i = 0; i < selectDiv.children.length; i++) {
 				if (e.target === selectDiv.children[i]) {
-					selectDiv.children[i].style.borderTop = "2px ridge #D8D8D8";
-					selectDiv.children[i].style.borderBottom = "2px ridge #D8D8D8";
 					selectDiv.children[i].style.color = "#000000";
 					selectDiv.children[i].scrollIntoView({ behavior: "smooth", block: "center" });
 
@@ -706,27 +683,10 @@ function recreateDays() {
 
 	for (let i = 0; i < duedateDaysDiv.children.length; i++) {
 		if (duedateDaysDiv.children[i].innerText === selectedDay) {
-			duedateDaysDiv.children[i].style.borderTop = "2px ridge #D8D8D8";
-			duedateDaysDiv.children[i].style.borderBottom =
-				"2px ridge #D8D8D8";
 			duedateDaysDiv.children[i].style.color = "#000000";
 		} else {
 			duedateDaysDiv.children[i].style.border = "";
 			duedateDaysDiv.children[i].style.color = "#5e5e5e";
-		}
-	}
-}
-
-function getCookie(cname) {
-	var x, y; // x:key, y:value
-	var val = document.cookie.split(';');
-
-	for (var i = 0; i < val.length; i++) {
-		x = val[i].substr(0, val[i].indexOf('='));
-		y = val[i].substr(val[i].indexOf('=') + 1);
-		x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
-		if (x === cname) {
-			cardId = unescape(y); // unescape로 디코딩 후 값 리턴
 		}
 	}
 }

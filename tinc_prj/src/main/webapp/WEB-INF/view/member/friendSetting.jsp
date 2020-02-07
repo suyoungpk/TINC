@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="../../../resource/css/common.css" >
 <link rel="stylesheet" href="../../../resource/css/bottomButton.css">
-<link rel="stylesheet" href="../../../resource/css/member/member.css?x" >
+<link rel="stylesheet" href="../../../resource/css/member/member.css?xssxx" >
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <body>
@@ -79,6 +79,9 @@
          	</div>
          </div>
          </c:forEach>
+         <div id="anno" style="display:none">
+			추가							
+		</div>
          
 	     <div class="bottombutton">
 			<button class="btn on">
@@ -116,7 +119,7 @@
    <div class="mask"></div>
    
    <script type="text/javascript">
- 
+  
    $(function(){	
       $("input[name^='userWhoHaveAddedMe_addBtn']").on('click',function(e){ 
           $("input[name='friendsId']").val($(e.target).data('id'));
@@ -126,6 +129,7 @@
           var friendsId = $("input[name='friendsId']").val();
           $.post("${pageContext.request.contextPath}/member/friendSetting", {friendsId : friendsId, cmd : cmd});
           $(e.target).parent().parent().remove();
+          $(function(){infobox('친구가 추가되었습니다.');});
       });      
    });      
      
@@ -138,6 +142,7 @@
 	        var friendsId = $("input[name='friendsId']").val();
 	        $.post("${pageContext.request.contextPath}/member/friendSetting", {friendsId : friendsId, cmd : cmd});
 	        $(e.target).parent().parent().remove();
+	        $(function(){infobox('차단 되었습니다.');});
 	    }); 	
    });
 	
@@ -150,7 +155,10 @@
 	        var friendsId = $("input[name='friendsId']").val();
 	        $.post("${pageContext.request.contextPath}/member/friendSetting", {friendsId : friendsId, cmd : cmd});
 	        $(e.target).parent().parent().remove();
+	        $(function(){infobox('친구가 추가되었습니다.');});
+			
    		});
+	       
    });
    
    $(function(){
@@ -162,8 +170,17 @@
 	       var friendsId = $("input[name='friendsId']").val();
 	       $.post("${pageContext.request.contextPath}/member/friendSetting", {friendsId : friendsId, cmd : cmd});
 	       $(e.target).parent().parent().remove(); 
+	       $(function(){infobox('차단이 해제되었습니다.');});
    		});
+	   
    });
+   
+  function infobox(txt){
+		$("#anno").html(txt);
+		$("#anno").fadeIn().delay(2000).fadeOut();
+	}
+   
+  
   
 
    </script>

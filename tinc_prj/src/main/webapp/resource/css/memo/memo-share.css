@@ -3,7 +3,15 @@
     position: relative;
 }
 
-.memo-share-visual>div {
+.memo-share-visual>div:first-child {
+    width: 9.23%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    text-align: center;
+}
+
+.memo-share-visual>div:last-child {
     width: 9.23%;
     height: 100%;
     position: absolute;
@@ -13,7 +21,7 @@
 
 .memo-share-visual>div>i {
     color: #ffffff;
-    font-size: 1.1rem;
+    font-size: 1.2em;
 }
 
 .memo-share-visual>div>i:active {
@@ -40,7 +48,8 @@ ul.memo-share-list {
 }
 
 ul.memo-share-list>li {
-    height: 12%;
+    /*height: 12%;*/
+    height: 52.219px;
     border-bottom: 1px solid rgb(139, 139, 139);
     padding: 1% 0;
     display: flex;

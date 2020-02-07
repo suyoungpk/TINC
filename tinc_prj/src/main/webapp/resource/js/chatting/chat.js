@@ -200,7 +200,7 @@ exeChat= {
   			let hasAuth = Boolean(data.hasAuth);
   			let img = "";
     		if(profileImg == "") img = '<i class="fas fa-user"></i>';
-    		else img = '<img src="'+profileImg+'" alt="">';
+    		else img = '<img src="/resource/images/'+profileImg+'" alt="">';
     		$("#friendSetting .profile").html('');
     		var html = '<figure>'+img
     		+'</figure><ul><li class="title">'+nickName
@@ -524,7 +524,7 @@ chatParser = {
 				html='<li class="info"><div><i class="fas fa-user-plus"></i> '+memberId+'회원님이 '+invitedId+'님을 초대했습니다</div></li>';
 				break;
 			case "text": 
-				var img = '<img src="'+profileImg+'" alt="">';
+				var img = '<img src="/resource/images/'+profileImg+'" alt="">';
 	    		if(profileImg == "") img = '<i class="fas fa-user"></i>';
 	    		//console.log(cutByByte(content,360));
 	    		var cuttedContent;
@@ -557,7 +557,7 @@ chatParser = {
 	    		}
 	    		break;
 			case "memo": 
-				var img = '<img src="'+profileImg+'" alt="">';
+				var img = '<img src="/resource/images/'+profileImg+'" alt="">';
 	    		if(profileImg == "") img = '<i class="fas fa-user"></i>';
 	    		
 	    		//console.log(cutByByte(content,360));

@@ -20,6 +20,9 @@
 <body>
 	<section class="wrapper">
 		<div class="memo-share-visual">
+			<div>				
+				<i class="fas fa-times"></i>
+			</div>
 			<div>
 				<i class="fas fa-paper-plane"></i>
 			</div>
@@ -42,7 +45,7 @@
 								<i class="fas fa-user"></i>
 								</c:if>
 								<c:if test="${not empty gsm.profileImg}">
-								 <img src="../../../resource/images/${gs.profileImg}">
+								 <img src="../../../resource/images/${gsm.profileImg}">
 								</c:if>
 								</c:if>
 								</c:forEach>
@@ -110,6 +113,19 @@
 	</section>
 	<!-- wrapper end -->
 
+	<div class="popup" style="display: none">
+		<div class="no-share-list-popup popup-wrap" style="display: none; min-height:5rem">
+			<div class="popup-container" style="top:15px;">
+				<div class="context" style="margin:auto 0;">
+					<p>선택된 항목이 없습니다</p>
+				</div>				
+			</div>
+			<!-- popup-container -->
+		</div>
+	</div>
+	<!-- popup -->
+
+	<div class="mask" style="display: none; position: fixed;"></div>
 </body>
 
 </html>
